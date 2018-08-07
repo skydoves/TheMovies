@@ -3,7 +3,7 @@ package com.skydoves.themovies.view.ui.main
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.skydoves.themovies.BuildConfig
-import com.skydoves.themovies.api.TheMovieService
+import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.models.DiscoverResponse
 import timber.log.Timber
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import javax.inject.Inject
  */
 
 class MainActivityViewModel @Inject
-constructor(private val theMovieService: TheMovieService): ViewModel() {
+constructor(private val theDiscoverService: TheDiscoverService): ViewModel() {
 
     var posters: MutableLiveData<DiscoverResponse> = MutableLiveData()
 
@@ -23,7 +23,7 @@ constructor(private val theMovieService: TheMovieService): ViewModel() {
     }
 
     fun fetchDiscovers() {
-        theMovieService.fetchDiscover(BuildConfig.TMDB_API_KEY).observeForever {
+        theDiscoverService.fetchDiscover(BuildConfig.TMDB_API_KEY).observeForever {
             posters.value = it?.body
         }
     }

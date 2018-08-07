@@ -10,7 +10,7 @@ import retrofit2.http.Query
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-interface TheMovieService {
+interface TheDiscoverService {
     @GET("/3/discover/tv")
     fun fetchDiscover(@Query("api_key") apiKey: String): LiveData<ApiResponse<DiscoverResponse>>
 }

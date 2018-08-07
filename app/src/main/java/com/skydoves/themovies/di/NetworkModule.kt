@@ -3,7 +3,7 @@ package com.skydoves.themovies.di
 import android.support.annotation.NonNull
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.skydoves.themovies.api.LiveDataCallAdapterFactory
-import com.skydoves.themovies.api.TheMovieService
+import com.skydoves.themovies.api.TheDiscoverService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -40,7 +40,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTheMovieService(@NonNull retrofit: Retrofit): TheMovieService {
-        return retrofit.create(TheMovieService::class.java)
+    fun provideDiscoverService(@NonNull retrofit: Retrofit): TheDiscoverService {
+        return retrofit.create(TheDiscoverService::class.java)
     }
 }

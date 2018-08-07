@@ -15,10 +15,11 @@ buildscript {
         retrofitVersion = '2.3.0'
         okhttpVersion = '3.11.0'
         gsonVersion = '2.8.2'
-        timberVersion = '4.6.0'
+        timberVersion = '4.7.0'
         memoryLeakVersion = '1.5.4'
         stethoVersion = '1.5.0'
         glideVersion = '4.7.1'
+        mockWebServerVersion = '3.9.0'
         junitVersion = '4.12'
     }
 
