@@ -6,6 +6,6 @@ package com.skydoves.themovies.models
  */
 
 data class DiscoverResponse(val page: Int,
-                            val results: List<Poster>,
-                            val total_results: Long,
-                            val total_pages: Long)
+                            val results: List<Tv>,
+                            val total_results: Int,
+                            val total_pages: Int)
