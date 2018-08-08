@@ -22,10 +22,20 @@ class TheDiscoverServiceTest: APITest<TheDiscoverService>() {
     }
 
     @Throws(IOException::class)
-    @Test fun tvTest() {
+    @Test fun fetchMovieListTest() {
+        enqueueResponse("/tmdb_movie.json")
+        val response = LiveDataTestUtil.getValue(service.fetchDiscoverMovie(BuildConfig.TMDB_API_KEY))
+        assertThat(response.body?.results?.get(0)?.id, `is`(164558))
+        assertThat(response.body?.total_results, `is`(61))
+        assertThat(response.body?.total_pages, `is`(4))
+    }
+
+    @Throws(IOException::class)
+    @Test fun fetchTvListTest() {
         enqueueResponse("/tmdb_tv.json")
-        val response = LiveDataTestUtil.getValue(service.fetchDiscover(BuildConfig.TMDB_API_KEY))
-        assertThat(response.body?.total_results, `is`(74881L))
-        assertThat(response.body?.total_pages, `is`(3745L))
+        val response = LiveDataTestUtil.getValue(service.fetchDiscoverTv(BuildConfig.TMDB_API_KEY))
+        assertThat(response.body?.results?.get(0)?.id, `is`(61889))
+        assertThat(response.body?.total_results, `is`(61470))
+        assertThat(response.body?.total_pages, `is`(3074))
     }
 }
