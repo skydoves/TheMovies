@@ -1,6 +1,7 @@
 package com.skydoves.themovies.view.ui.main
 
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.skydoves.themovies.BuildConfig
 import com.skydoves.themovies.api.TheDiscoverService
@@ -23,7 +24,7 @@ constructor(private val theDiscoverService: TheDiscoverService): ViewModel() {
     }
 
     fun fetchDiscovers() {
-        theDiscoverService.fetchDiscover(BuildConfig.TMDB_API_KEY).observeForever {
+        theDiscoverService.fetchDiscoverTv(BuildConfig.TMDB_API_KEY).observeForever {
             posters.value = it?.body
         }
     }
