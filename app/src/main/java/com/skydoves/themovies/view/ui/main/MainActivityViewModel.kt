@@ -20,13 +20,14 @@ class MainActivityViewModel @Inject
 constructor(private val repository: DiscoverRepository): ViewModel() {
 
     var pageLiveData: MutableLiveData<Int> = MutableLiveData()
-    val posters: LiveData<Resource<List<Movie>>>
+    val movieListLiveData: LiveData<Resource<List<Movie>>>
 
     init {
         Timber.d("injection MainActivityViewModel")
 
-        posters = Transformations.switchMap(pageLiveData) {
-            repository.loadMovies(1)
+        movieListLiveData = Transformations.switchMap(pageLiveData) {
+            pageLiveData.value?.let { repository.loadMovies(it) } ?:
+                    AbsentLiveData.create()
         }
     }
 }

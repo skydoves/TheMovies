@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.skydoves.themovies.R
 import com.skydoves.themovies.factory.AppViewModelFactory
+import com.skydoves.themovies.models.Movie
+import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.Status
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -26,9 +30,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.posters.observe(this, Observer {
-            textView.text = it.toString()
-        })
+        initializeUI()
+        observeViewModels()
+    }
+
+    private fun initializeUI() {
         viewModel.pageLiveData.value = 1
+    }
+
+    private fun observeViewModels() {
+        viewModel.movieListLiveData.observe(this, Observer { it?.let { updateMovieList(it) }})
+    }
+
+    private fun updateMovieList(resource: Resource<List<Movie>>) {
+        when(resource.status) {
+            Status.SUCCESS -> { textView.text = resource.data.toString() }
+            Status.ERROR -> toast(resource.message.toString())
+            Status.LOADING -> { }
+        }
     }
 }

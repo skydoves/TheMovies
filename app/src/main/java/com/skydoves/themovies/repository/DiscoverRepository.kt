@@ -44,7 +44,7 @@ constructor(val discoverService: TheDiscoverService, val movieDao: MovieDao, val
             }
 
             override fun fetchService(): LiveData<ApiResponse<DiscoverMovieResponse>> {
-                return discoverService.fetchDiscoverMovie(BuildConfig.TMDB_API_KEY)
+                return discoverService.fetchDiscoverMovie(apiKey = BuildConfig.TMDB_API_KEY, page = page)
             }
 
             override fun onFetchFailed(message: String?) {

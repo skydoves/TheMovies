@@ -21,7 +21,7 @@ internal constructor() {
     init {
         Timber.d("Injection NetworkBoundRepository")
         result.postValue(Resource.loading(null))
-        val loadedFromDB = loadFromDb()
+        val loadedFromDB = this.loadFromDb()
         result.addSource(loadedFromDB) { data ->
             result.removeSource(loadedFromDB)
             if (shouldFetch(data)) {
@@ -42,8 +42,7 @@ internal constructor() {
                         response.body?.let {
                             saveFetchData(it)
                             val loaded = loadFromDb()
-                            result.addSource(loaded) { newData ->
-                                newData?.let {
+                            result.addSource(loaded) { newData -> newData?.let {
                                     setValue(Resource.success(newData))
                                 }
                             }

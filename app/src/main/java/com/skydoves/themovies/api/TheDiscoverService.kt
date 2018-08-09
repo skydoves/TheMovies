@@ -14,8 +14,8 @@ import retrofit2.http.Query
 
 interface TheDiscoverService {
     @GET("/3/discover/movie")
-    fun fetchDiscoverMovie(@Query("api_key") @NonNull apiKey: String): LiveData<ApiResponse<DiscoverMovieResponse>>
+    fun fetchDiscoverMovie(@Query("api_key") @NonNull apiKey: String, @Query("page") page: Int): LiveData<ApiResponse<DiscoverMovieResponse>>
 
     @GET("/3/discover/tv")
-    fun fetchDiscoverTv(@Query("api_key") @NonNull apiKey: String): LiveData<ApiResponse<DiscoverTvResponse>>
+    fun fetchDiscoverTv(@Query("api_key") @NonNull apiKey: String, @Query("page") page: Int): LiveData<ApiResponse<DiscoverTvResponse>>
 }
