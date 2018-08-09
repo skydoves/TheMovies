@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeUI() {
-        viewModel.pageLiveData.value = 1
+        viewModel.moviePageLiveData.value = 1
     }
 
     private fun observeViewModels() {

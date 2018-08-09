@@ -12,21 +12,21 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Developed by skydoves on 2018-08-07.®
+ * Developed by skydoves on 2018-08-07.
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
 class MainActivityViewModel @Inject
 constructor(private val repository: DiscoverRepository): ViewModel() {
 
-    var pageLiveData: MutableLiveData<Int> = MutableLiveData()
+    var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
     val movieListLiveData: LiveData<Resource<List<Movie>>>
 
     init {
         Timber.d("injection MainActivityViewModel")
 
-        movieListLiveData = Transformations.switchMap(pageLiveData) {
-            pageLiveData.value?.let { repository.loadMovies(it) } ?:
+        movieListLiveData = Transformations.switchMap(moviePageLiveData) {
+            moviePageLiveData.value?.let { repository.loadMovies(it) } ?:
                     AbsentLiveData.create()
         }
     }
