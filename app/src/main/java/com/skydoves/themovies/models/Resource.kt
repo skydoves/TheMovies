@@ -10,7 +10,7 @@ package com.skydoves.themovies.models
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-class Resource<out T>(val status: Status, val data: T?, val message: String?, val fetchStatus: FetchStatus) {
+class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 
     override fun equals(o: Any?): Boolean {
         if (this === o) {
@@ -44,21 +44,16 @@ class Resource<out T>(val status: Status, val data: T?, val message: String?, va
     }
 
     companion object {
-        private var fetchStatus = FetchStatus()
-
         fun <T> success(data: T?): Resource<T> {
-            fetchStatus = FetchStatus(false, true, false)
-            return Resource(Status.SUCCESS, data, null, fetchStatus)
+            return Resource(Status.SUCCESS, data, null)
         }
 
         fun <T> error(msg: String, data: T?): Resource<T> {
-            fetchStatus = FetchStatus(false, false, true)
-            return Resource(Status.ERROR, data, msg, fetchStatus)
+            return Resource(Status.ERROR, data, msg)
         }
 
         fun <T> loading(data: T?): Resource<T> {
-            fetchStatus = FetchStatus(true, false, false)
-            return Resource(Status.LOADING, data, null, fetchStatus)
+            return Resource(Status.LOADING, data, null)
         }
     }
 }
