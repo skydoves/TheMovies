@@ -3,7 +3,7 @@ package com.skydoves.themovies.api
 import android.arch.lifecycle.LiveData
 import android.support.annotation.NonNull
 import com.skydoves.themovies.models.DiscoverMovieResponse
-import com.skydoves.themovies.models.DiscoverResponse
+import com.skydoves.themovies.models.DiscoverTvResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,5 +17,5 @@ interface TheDiscoverService {
     fun fetchDiscoverMovie(@Query("api_key") @NonNull apiKey: String): LiveData<ApiResponse<DiscoverMovieResponse>>
 
     @GET("/3/discover/tv")
-    fun fetchDiscoverTv(@Query("api_key") @NonNull apiKey: String): LiveData<ApiResponse<DiscoverResponse>>
+    fun fetchDiscoverTv(@Query("api_key") @NonNull apiKey: String): LiveData<ApiResponse<DiscoverTvResponse>>
 }

@@ -1,4 +1,4 @@
-package com.skydoves.themovies.room
+package com.skydoves.themovies.utils
 
 import android.arch.persistence.room.TypeConverter
 import com.google.gson.Gson
