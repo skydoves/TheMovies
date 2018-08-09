@@ -1,31 +1,32 @@
 package com.skydoves.themovies.view.ui.main
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.skydoves.themovies.models.Movie
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.repository.DiscoverRepository
+import com.skydoves.themovies.utils.AbsentLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Developed by skydoves on 2018-08-07.
+ * Developed by skydoves on 2018-08-07.®
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
 class MainActivityViewModel @Inject
-constructor(): ViewModel() {
+constructor(private val repository: DiscoverRepository): ViewModel() {
 
-    var posters: MutableLiveData<Resource<List<Movie>>> = MutableLiveData()
+    var pageLiveData: MutableLiveData<Int> = MutableLiveData()
+    val posters: LiveData<Resource<List<Movie>>>
 
     init {
         Timber.d("injection MainActivityViewModel")
-    }
 
-    fun fetchDiscovers() {
-/*        Transformations.map(discoverRepository.loadMovies(0)) {
-            posters.value = it
-        }*/
+        posters = Transformations.switchMap(pageLiveData) {
+            repository.loadMovies(1)
+        }
     }
 }

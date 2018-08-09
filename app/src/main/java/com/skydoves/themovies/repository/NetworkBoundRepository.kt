@@ -50,6 +50,7 @@ internal constructor() {
                         }
                     }
                     false -> {
+                        result.removeSource(loadedFromDB)
                         onFetchFailed(response.message)
                         response.message?.let {
                             result.addSource<ResultType>(loadedFromDB) {

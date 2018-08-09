@@ -29,6 +29,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.posters.observe(this, Observer {
             textView.text = it.toString()
         })
-        viewModel.fetchDiscovers()
+        viewModel.pageLiveData.value = 1
     }
 }

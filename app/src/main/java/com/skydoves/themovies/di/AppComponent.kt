@@ -1,5 +1,6 @@
 package com.skydoves.themovies.di
 
+import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -23,7 +24,7 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: DaggerApplication): AppComponent.Builder
+        fun application(application: Application): AppComponent.Builder
         fun build(): AppComponent
     }
     override fun inject(instance: DaggerApplication)
