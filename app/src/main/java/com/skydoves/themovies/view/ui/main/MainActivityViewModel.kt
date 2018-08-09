@@ -3,9 +3,9 @@ package com.skydoves.themovies.view.ui.main
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import com.skydoves.themovies.BuildConfig
-import com.skydoves.themovies.api.TheDiscoverService
-import com.skydoves.themovies.models.DiscoverResponse
+import com.skydoves.themovies.models.Movie
+import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.repository.DiscoverRepository
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,17 +15,17 @@ import javax.inject.Inject
  */
 
 class MainActivityViewModel @Inject
-constructor(private val theDiscoverService: TheDiscoverService): ViewModel() {
+constructor(): ViewModel() {
 
-    var posters: MutableLiveData<DiscoverResponse> = MutableLiveData()
+    var posters: MutableLiveData<Resource<List<Movie>>> = MutableLiveData()
 
     init {
         Timber.d("injection MainActivityViewModel")
     }
 
     fun fetchDiscovers() {
-        theDiscoverService.fetchDiscoverTv(BuildConfig.TMDB_API_KEY).observeForever {
-            posters.value = it?.body
-        }
+/*        Transformations.map(discoverRepository.loadMovies(0)) {
+            posters.value = it
+        }*/
     }
 }
