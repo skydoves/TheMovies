@@ -58,6 +58,7 @@ dependencies {
 
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.anko:anko:$ankoVersion"
 
     // architecture components
     implementation "android.arch.lifecycle:extensions:$archCompomentVersion"

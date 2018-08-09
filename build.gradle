@@ -10,6 +10,7 @@ buildscript {
         // application dependencies
         supportLibraryVersion = '27.1.1'
         kotlinVersion = '1.2.50'
+        ankoVersion = '0.10.1'
         archCompomentVersion = '1.1.1'
         daggerVersion = '2.16'
         retrofitVersion = '2.3.0'
