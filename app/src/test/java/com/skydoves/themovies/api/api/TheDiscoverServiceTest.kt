@@ -1,6 +1,7 @@
-package com.skydoves.themovies.api
+package com.skydoves.themovies.api.api
 
 import com.skydoves.themovies.BuildConfig
+import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.utils.LiveDataTestUtil
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -13,7 +14,7 @@ import java.io.IOException
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class TheDiscoverServiceTest: APITest<TheDiscoverService>() {
+class TheDiscoverServiceTest: ApiAbstract<TheDiscoverService>() {
 
     private lateinit var service: TheDiscoverService
 

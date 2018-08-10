@@ -1,6 +1,7 @@
-package com.skydoves.themovies.api
+package com.skydoves.themovies.api.api
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import com.skydoves.themovies.api.LiveDataCallAdapterFactory
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
@@ -23,7 +24,7 @@ import java.nio.charset.StandardCharsets
  */
 
 @RunWith(JUnit4::class)
-abstract class APITest<T> {
+abstract class ApiAbstract<T> {
     @Rule
     @JvmField val instantExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 

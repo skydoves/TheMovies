@@ -30,7 +30,7 @@ class ApiResponse<T> {
 
         if (response.isSuccessful) {
             this.body = response.body()
-            this.message = response.message()
+            this.message = null
             this.isFailure = false
         } else {
             var errorMessage: String? = null
