@@ -1,0 +1,72 @@
+package com.skydoves.themovies.api.repository
+
+import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.whenever
+import com.skydoves.themovies.BuildConfig
+import com.skydoves.themovies.api.TheDiscoverService
+import com.skydoves.themovies.api.api.ApiUtil.successCall
+import com.skydoves.themovies.models.DiscoverMovieResponse
+import com.skydoves.themovies.models.Movie
+import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.repository.DiscoverRepository
+import com.skydoves.themovies.room.MovieDao
+import com.skydoves.themovies.room.TvDao
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+
+/**
+ * Developed by skydoves on 2018-08-10.
+ * Copyright (c) 2018 skydoves rights reserved.
+ */
+
+@RunWith(JUnit4::class)
+class DiscoverRepositoryTest {
+
+    private lateinit var repository: DiscoverRepository
+    private val movieDao = mock<MovieDao>()
+    private val tvDao = mock<TvDao>()
+    private val service = mock<TheDiscoverService>()
+
+    @Rule @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+
+    @Before
+    fun init() {
+        repository = DiscoverRepository(service, movieDao, tvDao)
+    }
+
+    @Test
+    fun loadMovieListFromNetwork() {
+        val loadFromDB = MutableLiveData<List<Movie>>()
+        whenever(movieDao.getMovieList(1)).thenReturn(loadFromDB)
+
+        val mockResponse = DiscoverMovieResponse(1, emptyList(), 100, 10)
+        val call = successCall(mockResponse)
+        whenever(service.fetchDiscoverMovie(BuildConfig.TMDB_API_KEY, 1)).thenReturn(call)
+
+        val data = repository.loadMovies(1)
+        verify(movieDao).getMovieList(1)
+        verifyNoMoreInteractions(service)
+
+        val observer = mock<Observer<Resource<List<Movie>>>>()
+        data.observeForever(observer)
+        verifyNoMoreInteractions(service)
+        verify(observer).onChanged(Resource.loading(null))
+        val updatedData = MutableLiveData<List<Movie>>()
+        whenever(movieDao.getMovieList(1)).thenReturn(updatedData)
+
+        loadFromDB.postValue(null)
+        verify(service).fetchDiscoverMovie(BuildConfig.TMDB_API_KEY, 1)
+        verify(movieDao).insertMovie(mockResponse.results)
+
+        updatedData.postValue(mockResponse.results)
+        verify(observer).onChanged(Resource.success(mockResponse.results))
+    }
+}
