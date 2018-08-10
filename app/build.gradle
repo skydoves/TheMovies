@@ -54,6 +54,7 @@ android {
 dependencies {
     // support library
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
 
     // kotlin
@@ -83,6 +84,9 @@ dependencies {
     // glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // adapter
+    implementation "com.github.skydoves:baserecyclerviewadapter:$baseAdapterVersion"
 
     // debugging
     implementation "com.jakewharton.timber:timber:$timberVersion"

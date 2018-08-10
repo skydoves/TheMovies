@@ -7,7 +7,6 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
-import com.skydoves.themovies.BuildConfig
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.api.api.ApiUtil.successCall
 import com.skydoves.themovies.models.DiscoverMovieResponse
@@ -49,7 +48,7 @@ class DiscoverRepositoryTest {
 
         val mockResponse = DiscoverMovieResponse(1, emptyList(), 100, 10)
         val call = successCall(mockResponse)
-        whenever(service.fetchDiscoverMovie(BuildConfig.TMDB_API_KEY, 1)).thenReturn(call)
+        whenever(service.fetchDiscoverMovie(1)).thenReturn(call)
 
         val data = repository.loadMovies(1)
         verify(movieDao).getMovieList(1)
@@ -63,7 +62,7 @@ class DiscoverRepositoryTest {
         whenever(movieDao.getMovieList(1)).thenReturn(updatedData)
 
         loadFromDB.postValue(null)
-        verify(service).fetchDiscoverMovie(BuildConfig.TMDB_API_KEY, 1)
+        verify(service).fetchDiscoverMovie(1)
         verify(movieDao).insertMovie(mockResponse.results)
 
         updatedData.postValue(mockResponse.results)

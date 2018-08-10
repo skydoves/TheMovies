@@ -3,6 +3,7 @@ package com.skydoves.themovies.di
 import android.support.annotation.NonNull
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.skydoves.themovies.api.LiveDataCallAdapterFactory
+import com.skydoves.themovies.api.RequestInterceptor
 import com.skydoves.themovies.api.TheDiscoverService
 import dagger.Module
 import dagger.Provides
@@ -22,6 +23,7 @@ class NetworkModule {
     @Singleton
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
+                .addInterceptor(RequestInterceptor())
                 .addNetworkInterceptor(StethoInterceptor())
                 .build()
     }

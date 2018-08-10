@@ -63,6 +63,10 @@ data class Movie(var page: Int,
         writeFloat(vote_average)
     }
 
+    fun getPosterUrl(): String {
+        return "http://image.tmdb.org/t/p/w342$poster_path"
+    }
+
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Movie> = object : Parcelable.Creator<Movie> {

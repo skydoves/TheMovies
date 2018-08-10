@@ -20,6 +20,7 @@ buildscript {
         memoryLeakVersion = '1.5.4'
         stethoVersion = '1.5.0'
         glideVersion = '4.7.1'
+        baseAdapterVersion = '0.1.0'
         mockWebServerVersion = '3.9.0'
         mockitoKotlinVersion = '2.0.0-RC1'
         junitVersion = '4.12'
