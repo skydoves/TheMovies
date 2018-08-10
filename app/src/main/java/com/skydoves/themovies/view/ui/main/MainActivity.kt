@@ -11,7 +11,6 @@ import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeUI() {
-        viewModel.moviePageLiveData.value = 1
+        viewModel.moviePageLiveData.value = 4
     }
 
     private fun observeViewModels() {
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateMovieList(resource: Resource<List<Movie>>) {
         when(resource.status) {
             Status.SUCCESS -> { textView.text = resource.data.toString() }
-            Status.ERROR -> toast(resource.message.toString())
+            Status.ERROR -> { textView.text = resource.errorEnvelope?.status_message }
             Status.LOADING -> { }
         }
     }
