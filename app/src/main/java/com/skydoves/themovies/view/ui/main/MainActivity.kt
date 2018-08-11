@@ -1,15 +1,13 @@
 package com.skydoves.themovies.view.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.skydoves.themovies.R
-import com.skydoves.themovies.factory.AppViewModelFactory
-import com.skydoves.themovies.models.Movie
-import com.skydoves.themovies.models.Resource
-import com.skydoves.themovies.models.Status
-import dagger.android.AndroidInjection
+import com.skydoves.themovies.utils.MainNavigationUtil
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -18,34 +16,24 @@ import javax.inject.Inject
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
-    @Inject lateinit var viewModelFactory: AppViewModelFactory
-
-    private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java) }
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initializeUI()
-        observeViewModels()
     }
 
     private fun initializeUI() {
-        viewModel.moviePageLiveData.value = 1
+        main_viewpager.adapter = MainPagerAdapter(supportFragmentManager)
+        MainNavigationUtil.setComponents(this, main_viewpager, main_bottom_navigation)
     }
 
-    private fun observeViewModels() {
-        viewModel.movieListLiveData.observe(this, Observer { it?.let { updateMovieList(it) }})
-    }
-
-    private fun updateMovieList(resource: Resource<List<Movie>>) {
-        when(resource.status) {
-            Status.SUCCESS -> { textView.text = resource.data.toString() }
-            Status.ERROR -> { textView.text = resource.errorEnvelope?.status_message }
-            Status.LOADING -> { }
-        }
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return fragmentInjector
     }
 }
