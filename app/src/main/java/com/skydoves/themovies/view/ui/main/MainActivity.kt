@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.skydoves.themovies.R
 import com.skydoves.themovies.utils.MainNavigationUtil
+import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private fun initializeUI() {
         main_viewpager.adapter = MainPagerAdapter(supportFragmentManager)
+        main_viewpager.offscreenPageLimit = 3
         MainNavigationUtil.setComponents(this, main_viewpager, main_bottom_navigation)
     }
 

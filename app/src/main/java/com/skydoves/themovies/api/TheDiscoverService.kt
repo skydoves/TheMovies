@@ -23,7 +23,7 @@ interface TheDiscoverService {
      *
      *  @return [DiscoverMovieResponse] response
      */
-    @GET("/3/discover/movie")
+    @GET("/3/discover/movie?language=en")
     fun fetchDiscoverMovie(@Query("page") page: Int): LiveData<ApiResponse<DiscoverMovieResponse>>
 
     /**
@@ -35,6 +35,6 @@ interface TheDiscoverService {
      *
      *  @return [DiscoverTvResponse] response
      */
-    @GET("/3/discover/tv")
+    @GET("/3/discover/tv?language=en")
     fun fetchDiscoverTv(@Query("page") page: Int): LiveData<ApiResponse<DiscoverTvResponse>>
 }
