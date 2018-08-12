@@ -4,7 +4,7 @@ buildscript {
     ext {
         // sdk and tools
         compileSdkVersion = 27
-        minSdkVersion = 15
+        minSdkVersion = 16
         targetSdkVersion = 27
 
         // application dependencies
@@ -19,7 +19,8 @@ buildscript {
         timberVersion = '4.7.0'
         memoryLeakVersion = '1.5.4'
         stethoVersion = '1.5.0'
-        glideVersion = '4.7.1'
+        glideVersion = '4.6.1'
+        glidePaletteVersion = '2.1.2'
         baseAdapterVersion = '0.1.0'
         navigationBarVersion = '1.2.5'
         mockWebServerVersion = '3.9.0'

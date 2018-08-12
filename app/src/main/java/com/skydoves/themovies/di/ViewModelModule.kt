@@ -13,6 +13,7 @@ import dagger.multibindings.IntoMap
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("unused")
 @Module
 internal abstract class ViewModelModule {
     @Binds

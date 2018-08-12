@@ -9,6 +9,7 @@ import dagger.android.ContributesAndroidInjector
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("unused")
 @Module
 abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [MainActivityFragmentModule::class])
