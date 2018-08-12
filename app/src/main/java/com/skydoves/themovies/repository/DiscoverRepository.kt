@@ -1,9 +1,9 @@
 package com.skydoves.themovies.repository
 
 import android.arch.lifecycle.LiveData
-import com.skydoves.themovies.BuildConfig
 import com.skydoves.themovies.api.ApiResponse
 import com.skydoves.themovies.api.TheDiscoverService
+import com.skydoves.themovies.mappers.MovieResponseMapper
 import com.skydoves.themovies.models.DiscoverMovieResponse
 import com.skydoves.themovies.models.Movie
 import com.skydoves.themovies.models.Resource
@@ -27,7 +27,7 @@ constructor(val discoverService: TheDiscoverService, val movieDao: MovieDao, val
     }
 
     fun loadMovies(page: Int): LiveData<Resource<List<Movie>>> {
-        return object : NetworkBoundRepository<List<Movie>, DiscoverMovieResponse>() {
+        return object : NetworkBoundRepository<List<Movie>, DiscoverMovieResponse, MovieResponseMapper>() {
             override fun saveFetchData(items: DiscoverMovieResponse) {
                 for(item in items.results) {
                     item.page = page
@@ -49,6 +49,10 @@ constructor(val discoverService: TheDiscoverService, val movieDao: MovieDao, val
 
             override fun onFetchFailed(message: String?) {
                 Timber.d("onFetchFailed $message")
+            }
+
+            override fun mapper(): MovieResponseMapper {
+                return MovieResponseMapper()
             }
         }.asLiveData()
     }

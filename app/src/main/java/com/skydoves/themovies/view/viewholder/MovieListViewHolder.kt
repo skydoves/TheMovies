@@ -38,7 +38,6 @@ class MovieListViewHolder(view: View, private val delegate: Delegate): BaseViewH
             movie.poster_path?.let {
                 Glide.with(context)
                         .load(Api.getPosterPath(it))
-                        .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
                         .listener(GlidePalette.with(Api.getPosterPath(it))
                                 .use(BitmapPalette.Profile.VIBRANT)
                                 .intoBackground(item_poster_palette)

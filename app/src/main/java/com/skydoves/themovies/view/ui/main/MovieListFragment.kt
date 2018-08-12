@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.models.Movie
 import com.skydoves.themovies.models.Resource
@@ -32,6 +33,7 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
     private lateinit var viewModel: MainActivityViewModel
 
     private val adapter = MovieListAdapter(this)
+    private lateinit var paginator: RecyclerViewPaginator
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.main_fragment_movie, container, false)
@@ -53,6 +55,13 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
     private fun initializeUI() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 2)
+        paginator = RecyclerViewPaginator(
+                recyclerView = recyclerView,
+                isLoading = { viewModel.movieListLiveData.value?.status == Status.LOADING },
+                loadMore = { loadMore(it) },
+                onLast =  { viewModel.movieListLiveData.value?.onLastPage!! }
+        )
+        paginator.currentPage = 1
     }
 
     private fun observeViewModels() {
