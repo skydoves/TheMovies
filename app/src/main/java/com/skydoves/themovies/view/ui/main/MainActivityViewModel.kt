@@ -29,7 +29,5 @@ constructor(private val repository: DiscoverRepository): ViewModel() {
             moviePageLiveData.value?.let { repository.loadMovies(it) } ?:
                     AbsentLiveData.create()
         }
-
-
     }
 }

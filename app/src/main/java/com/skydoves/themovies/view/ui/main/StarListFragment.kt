@@ -12,7 +12,7 @@ import com.skydoves.themovies.R
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class StarListFramgment: Fragment() {
+class StarListFragment: Fragment() {
     private lateinit var rootView: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

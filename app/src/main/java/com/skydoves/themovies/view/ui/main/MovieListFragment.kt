@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,10 @@ import com.skydoves.themovies.R
 import com.skydoves.themovies.models.Movie
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
+import com.skydoves.themovies.view.adapter.MovieListAdapter
+import com.skydoves.themovies.view.viewholder.MovieListViewHolder
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.main_fragment_movie.*
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -22,10 +26,12 @@ import javax.inject.Inject
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MovieListFragment : Fragment() {
+class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: MainActivityViewModel
+
+    private val adapter = MovieListAdapter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.main_fragment_movie, container, false)
@@ -33,7 +39,7 @@ class MovieListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeViewModels()
+        initializeUI()
     }
 
     override fun onAttach(context: Context?) {
@@ -44,6 +50,11 @@ class MovieListFragment : Fragment() {
         observeViewModels()
     }
 
+    private fun initializeUI() {
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+    }
+
     private fun observeViewModels() {
         viewModel.movieListLiveData.observe(this, Observer { it?.let { updateMovieList(it) }})
         viewModel.moviePageLiveData.postValue(1)
@@ -51,9 +62,17 @@ class MovieListFragment : Fragment() {
 
     private fun updateMovieList(resource: Resource<List<Movie>>) {
         when(resource.status) {
-            Status.SUCCESS -> { toast("success!!") }
-            Status.ERROR -> { }
+            Status.SUCCESS -> adapter.addMovieList(resource)
+            Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
             Status.LOADING -> { }
         }
+    }
+
+    private fun loadMore(page: Int) {
+        viewModel.moviePageLiveData.postValue(page)
+    }
+
+    override fun onItemClick(movie: Movie) {
+        toast("${movie.title}")
     }
 }
