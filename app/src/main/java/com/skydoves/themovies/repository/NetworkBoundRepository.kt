@@ -36,7 +36,6 @@ internal constructor() {
 
     private fun fetchFromNetwork(loadedFromDB: LiveData<ResultType>) {
         val apiResponse = fetchService()
-        result.addSource(loadedFromDB) { newData -> setValue(Resource.loading(newData))}
         result.addSource(apiResponse) { response ->
             response?.let {
                 when(response.isSuccessful) {

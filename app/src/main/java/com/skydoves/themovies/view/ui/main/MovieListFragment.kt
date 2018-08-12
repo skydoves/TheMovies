@@ -5,14 +5,11 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.models.Movie
@@ -65,7 +62,6 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
                 onLast =  { viewModel.movieListLiveData.value?.onLastPage!! }
         )
         paginator.currentPage = 1
-        paginator.setThreshold(4)
     }
 
     private fun observeViewModels() {
@@ -77,13 +73,11 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
         when(resource.status) {
             Status.SUCCESS -> adapter.addMovieList(resource)
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> { Snackbar.make(recyclerView, "loading...", Toast.LENGTH_SHORT).show() }
+            Status.LOADING -> { }
         }
-        Log.e("Test", resource.status.toString())
     }
 
     private fun loadMore(page: Int) {
-        Log.e("Test", "loadMore : $page")
         viewModel.moviePageLiveData.postValue(page)
     }
 

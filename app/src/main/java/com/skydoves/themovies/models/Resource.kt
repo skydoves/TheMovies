@@ -2,6 +2,7 @@
 package com.skydoves.themovies.models
 
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 
 /**
  * Developed by skydoves on 2018-08-09.
@@ -18,8 +19,11 @@ class Resource<out T>(val status: Status, val data: T?, val message: String?, va
 
     init {
         message?.let {
-            val gson = Gson()
-            errorEnvelope = gson.fromJson(message, ErrorEnvelope::class.java) as ErrorEnvelope
+            try {
+                val gson = Gson()
+                errorEnvelope = gson.fromJson(message, ErrorEnvelope::class.java) as ErrorEnvelope
+            } catch (e: JsonSyntaxException) {
+            }
         }
     }
 
