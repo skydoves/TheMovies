@@ -12,7 +12,7 @@ import com.google.gson.Gson
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+class Resource<out T>(val status: Status, val data: T?, val message: String?, val onLastPage: Boolean) {
 
     var errorEnvelope: ErrorEnvelope? = null
 
@@ -55,16 +55,16 @@ class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     }
 
     companion object {
-        fun <T> success(data: T?): Resource<T> {
-            return Resource(status = Status.SUCCESS, data =  data, message =  null)
+        fun <T> success(data: T?, onLastPage: Boolean): Resource<T> {
+            return Resource(status = Status.SUCCESS, data =  data, message =  null, onLastPage = false)
         }
 
         fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(status = Status.ERROR, data = data, message = msg)
+            return Resource(status = Status.ERROR, data = data, message = msg, onLastPage = true)
         }
 
         fun <T> loading(data: T?): Resource<T> {
-            return Resource(status = Status.LOADING, data = data, message = null)
+            return Resource(status = Status.LOADING, data = data, message = null, onLastPage = false)
         }
     }
 }

@@ -5,6 +5,8 @@ import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
 import com.skydoves.themovies.api.ApiResponse
+import com.skydoves.themovies.mappers.NetworkResponseMapper
+import com.skydoves.themovies.models.NetworkResponseModel
 import com.skydoves.themovies.models.Resource
 import timber.log.Timber
 
@@ -13,7 +15,7 @@ import timber.log.Timber
  * Copyright (c) 2018 skydoves All rights reserved.
  */
 
-abstract class NetworkBoundRepository<ResultType, RequestType>
+abstract class NetworkBoundRepository<ResultType, RequestType: NetworkResponseModel, Mapper: NetworkResponseMapper<RequestType>>
 internal constructor() {
 
     private val result: MediatorLiveData<Resource<ResultType>> = MediatorLiveData()
@@ -27,7 +29,7 @@ internal constructor() {
             if (shouldFetch(data)) {
                 fetchFromNetwork(loadedFromDB)
             } else {
-                result.addSource<ResultType>(loadedFromDB) { newData -> setValue(Resource.success(newData)) }
+                result.addSource<ResultType>(loadedFromDB) { newData -> setValue(Resource.success(newData, false)) }
             }
         }
     }
@@ -43,7 +45,7 @@ internal constructor() {
                             saveFetchData(it)
                             val loaded = loadFromDb()
                             result.addSource(loaded) { newData -> newData?.let {
-                                    setValue(Resource.success(newData))
+                                    setValue(Resource.success(newData, mapper().onLastPage(response.body)))
                                 }
                             }
                         }
@@ -81,6 +83,9 @@ internal constructor() {
 
     @MainThread
     protected abstract fun fetchService(): LiveData<ApiResponse<RequestType>>
+
+    @MainThread
+    protected abstract fun mapper(): Mapper
 
     @MainThread
     protected abstract fun onFetchFailed(message: String?)
