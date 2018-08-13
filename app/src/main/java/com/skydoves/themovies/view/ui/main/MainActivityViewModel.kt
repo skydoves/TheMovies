@@ -6,6 +6,7 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.skydoves.themovies.models.Movie
 import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.Tv
 import com.skydoves.themovies.repository.DiscoverRepository
 import com.skydoves.themovies.utils.AbsentLiveData
 import timber.log.Timber
@@ -19,15 +20,31 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject
 constructor(private val repository: DiscoverRepository): ViewModel() {
 
-    var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
-    val movieListLiveData: LiveData<Resource<List<Movie>>>
+    private var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val movieListLiveData: LiveData<Resource<List<Movie>>>
+
+    private var tvPageLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val tvListLiveData: LiveData<Resource<List<Tv>>>
 
     init {
         Timber.d("injection MainActivityViewModel")
 
         movieListLiveData = Transformations.switchMap(moviePageLiveData) {
             moviePageLiveData.value?.let { repository.loadMovies(it) } ?:
-                    AbsentLiveData.create()
+            AbsentLiveData.create()
+        }
+
+        tvListLiveData = Transformations.switchMap(tvPageLiveData) {
+            tvPageLiveData.value?.let { repository.loadTvs(it) } ?:
+            AbsentLiveData.create()
         }
     }
+
+    fun getMovieListObservable() = movieListLiveData
+    fun getMovieListValues() = getMovieListObservable().value
+    fun postMoviePage(page: Int) = moviePageLiveData.postValue(page)
+
+    fun getTvListObservable() = tvListLiveData
+    fun getTvListValues() = getTvListObservable().value
+    fun postTvPage(page: Int) = tvPageLiveData.postValue(page)
 }

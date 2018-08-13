@@ -49,7 +49,7 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
         super.onAttach(context)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
-        observeViewModels()
+        observeViewModel()
     }
 
     private fun initializeUI() {
@@ -57,16 +57,16 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         paginator = RecyclerViewPaginator(
                 recyclerView = recyclerView,
-                isLoading = { viewModel.movieListLiveData.value?.status == Status.LOADING },
+                isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
                 loadMore = { loadMore(it) },
-                onLast =  { viewModel.movieListLiveData.value?.onLastPage!! }
+                onLast =  { viewModel.getMovieListValues()?.onLastPage!! }
         )
         paginator.currentPage = 1
     }
 
-    private fun observeViewModels() {
-        viewModel.movieListLiveData.observe(this, Observer { it?.let { updateMovieList(it) }})
-        viewModel.moviePageLiveData.postValue(1)
+    private fun observeViewModel() {
+        viewModel.getMovieListObservable().observe(this, Observer { it?.let { updateMovieList(it) }})
+        viewModel.postMoviePage(1)
     }
 
     private fun updateMovieList(resource: Resource<List<Movie>>) {
@@ -78,7 +78,7 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
     }
 
     private fun loadMore(page: Int) {
-        viewModel.moviePageLiveData.postValue(page)
+        viewModel.postMoviePage(page)
     }
 
     override fun onItemClick(movie: Movie) {
