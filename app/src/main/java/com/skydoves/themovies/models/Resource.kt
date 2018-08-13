@@ -23,6 +23,7 @@ class Resource<out T>(val status: Status, val data: T?, val message: String?, va
                 val gson = Gson()
                 errorEnvelope = gson.fromJson(message, ErrorEnvelope::class.java) as ErrorEnvelope
             } catch (e: JsonSyntaxException) {
+                errorEnvelope = ErrorEnvelope(400, message, false)
             }
         }
     }
