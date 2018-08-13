@@ -4,9 +4,8 @@ import android.arch.lifecycle.LiveData
 import com.skydoves.themovies.api.ApiResponse
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.mappers.MovieResponseMapper
-import com.skydoves.themovies.models.DiscoverMovieResponse
-import com.skydoves.themovies.models.Movie
-import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.mappers.TvResponseMapper
+import com.skydoves.themovies.models.*
 import com.skydoves.themovies.room.MovieDao
 import com.skydoves.themovies.room.TvDao
 import timber.log.Timber
@@ -47,12 +46,43 @@ constructor(val discoverService: TheDiscoverService, val movieDao: MovieDao, val
                 return discoverService.fetchDiscoverMovie(page = page)
             }
 
+            override fun mapper(): MovieResponseMapper {
+                return MovieResponseMapper()
+            }
+
             override fun onFetchFailed(message: String?) {
                 Timber.d("onFetchFailed $message")
             }
+        }.asLiveData()
+    }
 
-            override fun mapper(): MovieResponseMapper {
-                return MovieResponseMapper()
+    fun loadTvs(page: Int): LiveData<Resource<List<Tv>>> {
+        return object : NetworkBoundRepository<List<Tv>, DiscoverTvResponse, TvResponseMapper>() {
+            override fun saveFetchData(items: DiscoverTvResponse) {
+                for(item in items.results) {
+                    item.page = page
+                }
+                tvDao.insertTv(tvs = items.results)
+            }
+
+            override fun shouldFetch(data: List<Tv>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+
+            override fun loadFromDb(): LiveData<List<Tv>> {
+                return tvDao.getTvList(page_ = page)
+            }
+
+            override fun fetchService(): LiveData<ApiResponse<DiscoverTvResponse>> {
+                return discoverService.fetchDiscoverTv(page = page)
+            }
+
+            override fun mapper(): TvResponseMapper {
+                return TvResponseMapper()
+            }
+
+            override fun onFetchFailed(message: String?) {
+                Timber.d("oFetchFailed $message")
             }
         }.asLiveData()
     }

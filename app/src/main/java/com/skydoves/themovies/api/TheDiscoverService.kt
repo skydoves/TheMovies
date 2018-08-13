@@ -35,6 +35,6 @@ interface TheDiscoverService {
      *
      *  @return [DiscoverTvResponse] response
      */
-    @GET("/3/discover/tv?language=en")
+    @GET("/3/discover/tv?language=en&sort_by=popularity.desc")
     fun fetchDiscoverTv(@Query("page") page: Int): LiveData<ApiResponse<DiscoverTvResponse>>
 }
