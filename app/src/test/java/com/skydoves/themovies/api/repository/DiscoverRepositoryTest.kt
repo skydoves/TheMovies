@@ -9,9 +9,7 @@ import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.api.api.ApiUtil.successCall
-import com.skydoves.themovies.models.DiscoverMovieResponse
-import com.skydoves.themovies.models.Movie
-import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.*
 import com.skydoves.themovies.repository.DiscoverRepository
 import com.skydoves.themovies.room.MovieDao
 import com.skydoves.themovies.room.TvDao
@@ -66,6 +64,35 @@ class DiscoverRepositoryTest {
         verify(movieDao).insertMovie(mockResponse.results)
 
         updatedData.postValue(mockResponse.results)
-        verify(observer).onChanged(Resource.success(mockResponse.results))
+        verify(observer).onChanged(Resource.success(mockResponse.results, false))
+    }
+
+    @Test
+    fun loadTvListFromNetwork() {
+        val loadFromDb = MutableLiveData<List<Tv>>()
+        whenever(tvDao.getTvList(1)).thenReturn(loadFromDb)
+
+        val mockResponse = DiscoverTvResponse(1, emptyList(), 100, 10)
+        val call = successCall(mockResponse)
+        whenever(service.fetchDiscoverTv(1)).thenReturn(call)
+
+        val data = repository.loadTvs(1)
+        verify(tvDao).getTvList(1)
+        verifyNoMoreInteractions(service)
+
+        val observer = mock<Observer<Resource<List<Tv>>>>()
+        data.observeForever(observer)
+        verifyNoMoreInteractions(service)
+        verify(observer).onChanged(Resource.loading(null))
+        val updateData = MutableLiveData<List<Tv>>()
+        whenever(tvDao.getTvList(1)).thenReturn(updateData)
+
+        loadFromDb.postValue(null)
+        verify(service).fetchDiscoverTv(1)
+        verify(tvDao).insertTv(mockResponse.results)
+
+        updateData.postValue(mockResponse.results)
+        verify(observer).onChanged(Resource.success(mockResponse.results, false))
+
     }
 }
