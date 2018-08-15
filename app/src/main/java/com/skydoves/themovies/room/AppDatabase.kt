@@ -6,7 +6,6 @@ import android.arch.persistence.room.TypeConverters
 import com.skydoves.themovies.models.Movie
 import com.skydoves.themovies.models.Person
 import com.skydoves.themovies.models.Tv
-import com.skydoves.themovies.utils.IgnoreModelConverter
 import com.skydoves.themovies.utils.IntegerListConverter
 import com.skydoves.themovies.utils.StringListConverter
 
@@ -16,7 +15,7 @@ import com.skydoves.themovies.utils.StringListConverter
  */
 
 @Database(entities = [(Movie::class), (Tv::class), (Person::class)], version = 3, exportSchema = false)
-@TypeConverters(value = [(StringListConverter::class), (IntegerListConverter::class), ( IgnoreModelConverter::class)])
+@TypeConverters(value = [(StringListConverter::class), (IntegerListConverter::class)])
 abstract class AppDatabase: RoomDatabase() {
     abstract fun movieDao(): MovieDao
     abstract fun tvDao(): TvDao

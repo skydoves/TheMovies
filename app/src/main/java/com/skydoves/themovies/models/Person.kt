@@ -11,10 +11,9 @@ import android.os.Parcelable
 
 @Entity(tableName = "People", primaryKeys = ["id"])
 data class Person(var page: Int,
-                  val profile_path: String,
+                  val profile_path: String?,
                   val adult: Boolean,
                   val id: Int,
-                  val known_for: Any,
                   val name: String,
                   val popularity: Float) : Parcelable {
     constructor(source: Parcel) : this(
@@ -22,7 +21,6 @@ data class Person(var page: Int,
             source.readString(),
             1 == source.readInt(),
             source.readInt(),
-            source.readParcelable<IgnoreModel>(IgnoreModel::class.java.classLoader),
             source.readString(),
             source.readFloat()
     )
@@ -34,7 +32,6 @@ data class Person(var page: Int,
         writeString(profile_path)
         writeInt((if (adult) 1 else 0))
         writeInt(id)
-        writeParcelable(known_for as IgnoreModel, 0)
         writeString(name)
         writeFloat(popularity)
     }
