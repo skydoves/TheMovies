@@ -20,7 +20,7 @@ import javax.inject.Inject
  */
 
 class MainActivityViewModel @Inject
-constructor(private val repository: DiscoverRepository, private val peopleRepository: PeopleRepository): ViewModel() {
+constructor(private val discoverRepository: DiscoverRepository, private val peopleRepository: PeopleRepository): ViewModel() {
 
     private var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
     private val movieListLiveData: LiveData<Resource<List<Movie>>>
@@ -35,12 +35,12 @@ constructor(private val repository: DiscoverRepository, private val peopleReposi
         Timber.d("injection MainActivityViewModel")
 
         movieListLiveData = Transformations.switchMap(moviePageLiveData) {
-            moviePageLiveData.value?.let { repository.loadMovies(it) } ?:
+            moviePageLiveData.value?.let { discoverRepository.loadMovies(it) } ?:
             AbsentLiveData.create()
         }
 
         tvListLiveData = Transformations.switchMap(tvPageLiveData) {
-            tvPageLiveData.value?.let { repository.loadTvs(it) } ?:
+            tvPageLiveData.value?.let { discoverRepository.loadTvs(it) } ?:
             AbsentLiveData.create()
         }
 
