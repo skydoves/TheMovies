@@ -9,7 +9,7 @@ import android.os.Parcelable
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-@Entity(primaryKeys = ["id"])
+@Entity(tableName = "People", primaryKeys = ["id"])
 data class Person(var page: Int,
                   val profile_path: String,
                   val adult: Boolean,
@@ -22,7 +22,7 @@ data class Person(var page: Int,
             source.readString(),
             1 == source.readInt(),
             source.readInt(),
-            source.readParcelable<ExposeModel>(ExposeModel::class.java.classLoader),
+            source.readParcelable<IgnoreModel>(IgnoreModel::class.java.classLoader),
             source.readString(),
             source.readFloat()
     )
@@ -34,7 +34,7 @@ data class Person(var page: Int,
         writeString(profile_path)
         writeInt((if (adult) 1 else 0))
         writeInt(id)
-        writeParcelable(known_for as ExposeModel, 0)
+        writeParcelable(known_for as IgnoreModel, 0)
         writeString(name)
         writeFloat(popularity)
     }

@@ -8,7 +8,7 @@ import android.os.Parcelable
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-data class ExposeModel(val tag: String) : Parcelable {
+data class IgnoreModel(val tag: String) : Parcelable {
     constructor(source: Parcel) : this(
             source.readString()
     )
@@ -21,9 +21,9 @@ data class ExposeModel(val tag: String) : Parcelable {
 
     companion object {
         @JvmField
-        val CREATOR: Parcelable.Creator<ExposeModel> = object : Parcelable.Creator<ExposeModel> {
-            override fun createFromParcel(source: Parcel): ExposeModel = ExposeModel(source)
-            override fun newArray(size: Int): Array<ExposeModel?> = arrayOfNulls(size)
+        val CREATOR: Parcelable.Creator<IgnoreModel> = object : Parcelable.Creator<IgnoreModel> {
+            override fun createFromParcel(source: Parcel): IgnoreModel = IgnoreModel(source)
+            override fun newArray(size: Int): Array<IgnoreModel?> = arrayOfNulls(size)
         }
     }
 }
