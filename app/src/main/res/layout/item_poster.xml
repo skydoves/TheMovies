@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="290dp"
     android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackground"
     tools:background="@color/background"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -12,7 +13,7 @@
         android:layout_height="240dp"
         android:scaleType="fitXY"
         tools:src="@drawable/ic_star_white_24dp"/>
-    
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
