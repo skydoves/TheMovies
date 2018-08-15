@@ -5,9 +5,11 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.skydoves.themovies.models.Movie
+import com.skydoves.themovies.models.Person
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Tv
 import com.skydoves.themovies.repository.DiscoverRepository
+import com.skydoves.themovies.repository.PeopleRepository
 import com.skydoves.themovies.utils.AbsentLiveData
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,13 +20,16 @@ import javax.inject.Inject
  */
 
 class MainActivityViewModel @Inject
-constructor(private val repository: DiscoverRepository): ViewModel() {
+constructor(private val repository: DiscoverRepository, private val peopleRepository: PeopleRepository): ViewModel() {
 
     private var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
     private val movieListLiveData: LiveData<Resource<List<Movie>>>
 
     private var tvPageLiveData: MutableLiveData<Int> = MutableLiveData()
     private val tvListLiveData: LiveData<Resource<List<Tv>>>
+
+    private var peoplePageLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val peopleLiveData: LiveData<Resource<List<Person>>>
 
     init {
         Timber.d("injection MainActivityViewModel")
@@ -38,6 +43,11 @@ constructor(private val repository: DiscoverRepository): ViewModel() {
             tvPageLiveData.value?.let { repository.loadTvs(it) } ?:
             AbsentLiveData.create()
         }
+
+        peopleLiveData = Transformations.switchMap(peoplePageLiveData) {
+            peoplePageLiveData.value?.let { peopleRepository.loadPeople(it) } ?:
+            AbsentLiveData.create()
+        }
     }
 
     fun getMovieListObservable() = movieListLiveData
@@ -47,4 +57,8 @@ constructor(private val repository: DiscoverRepository): ViewModel() {
     fun getTvListObservable() = tvListLiveData
     fun getTvListValues() = getTvListObservable().value
     fun postTvPage(page: Int) = tvPageLiveData.postValue(page)
+
+    fun getPeopleObservable() = peopleLiveData
+    fun getPeopleValues() = getPeopleObservable().value
+    fun postPeoplePage(page: Int) = peoplePageLiveData.postValue(page)
 }

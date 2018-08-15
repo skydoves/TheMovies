@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room
 import android.support.annotation.NonNull
 import com.skydoves.themovies.room.AppDatabase
 import com.skydoves.themovies.room.MovieDao
+import com.skydoves.themovies.room.PeopleDao
 import com.skydoves.themovies.room.TvDao
 import dagger.Module
 import dagger.Provides
@@ -33,5 +34,11 @@ class PersistentModule {
     @Singleton
     fun provideTvDao(@NonNull database: AppDatabase): TvDao {
         return database.tvDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providePeopleDao(@NonNull database: AppDatabase): PeopleDao {
+        return database.peopleDao()
     }
 }
