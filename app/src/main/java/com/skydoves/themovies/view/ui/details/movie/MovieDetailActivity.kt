@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.skydoves.themovies.R
-import com.skydoves.themovies.models.Movie
+import com.skydoves.themovies.models.entity.Movie
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.toolbar_default.*
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.skydoves.themovies.models
+package com.skydoves.themovies.models.entity
 
 import android.arch.persistence.room.Entity
 import android.os.Parcel

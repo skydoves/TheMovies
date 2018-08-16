@@ -1,9 +1,8 @@
 package com.skydoves.themovies.api
 
 import android.arch.lifecycle.LiveData
-import android.support.annotation.NonNull
-import com.skydoves.themovies.models.DiscoverMovieResponse
-import com.skydoves.themovies.models.DiscoverTvResponse
+import com.skydoves.themovies.models.network.DiscoverMovieResponse
+import com.skydoves.themovies.models.network.DiscoverTvResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

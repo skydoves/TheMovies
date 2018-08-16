@@ -11,6 +11,10 @@ import com.skydoves.themovies.api.PeopleService
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.api.api.ApiUtil
 import com.skydoves.themovies.models.*
+import com.skydoves.themovies.models.entity.Movie
+import com.skydoves.themovies.models.entity.Person
+import com.skydoves.themovies.models.entity.Tv
+import com.skydoves.themovies.models.network.DiscoverMovieResponse
 import com.skydoves.themovies.repository.DiscoverRepository
 import com.skydoves.themovies.repository.PeopleRepository
 import com.skydoves.themovies.room.MovieDao

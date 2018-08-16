@@ -1,7 +1,7 @@
 package com.skydoves.themovies.db
 
 import android.support.test.runner.AndroidJUnit4
-import com.skydoves.themovies.models.Person
+import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.utils.LiveDataTestUtil
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockPerson
 import org.hamcrest.CoreMatchers.`is`

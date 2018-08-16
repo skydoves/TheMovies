@@ -5,7 +5,7 @@ import com.skydoves.baserecyclerviewadapter.BaseAdapter
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.baserecyclerviewadapter.SectionRow
 import com.skydoves.themovies.R
-import com.skydoves.themovies.models.Person
+import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.view.viewholder.PeopleViewHolder
 

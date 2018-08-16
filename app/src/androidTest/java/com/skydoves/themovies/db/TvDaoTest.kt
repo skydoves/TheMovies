@@ -1,6 +1,6 @@
 package com.skydoves.themovies.db
 
-import com.skydoves.themovies.models.Tv
+import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.utils.LiveDataTestUtil
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockTv
 import org.hamcrest.CoreMatchers
