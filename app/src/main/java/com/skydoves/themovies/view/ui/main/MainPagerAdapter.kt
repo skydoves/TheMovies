@@ -15,7 +15,7 @@ class MainPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
         when(position) {
             0 -> return MovieListFragment()
             1 -> return TvListFragment()
-            else -> return StarListFragment()
+            else -> return PersonListFragment()
         }
     }
 

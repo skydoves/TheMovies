@@ -18,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/item_person_profile"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
                 android:scaleType="fitXY"
                 android:layout_marginTop="20dp"
@@ -34,11 +34,11 @@
                 android:textSize="17sp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
                 android:layout_marginBottom="20dp"
+                android:gravity="center"
                 tools:text="title"/>
-
         </RelativeLayout>
-
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

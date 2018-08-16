@@ -16,9 +16,11 @@ import com.skydoves.themovies.models.Movie
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.view.adapter.MovieListAdapter
+import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
 import com.skydoves.themovies.view.viewholder.MovieListViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -82,6 +84,6 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
     }
 
     override fun onItemClick(movie: Movie) {
-        toast("${movie.title}")
+        startActivity<MovieDetailActivity>("movie" to movie)
     }
 }

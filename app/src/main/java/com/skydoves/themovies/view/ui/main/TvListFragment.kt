@@ -16,9 +16,11 @@ import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.Tv
 import com.skydoves.themovies.view.adapter.TvListAdapter
+import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -82,6 +84,6 @@ class TvListFragment: Fragment(), TvListViewHolder.Delegate {
     }
 
     override fun onItemClick(tv: Tv) {
-        toast("${tv.name}")
+        startActivity<TvDetailActivity>("tv" to tv)
     }
 }

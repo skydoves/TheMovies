@@ -1,7 +1,7 @@
 package com.skydoves.themovies.di
 
 import com.skydoves.themovies.view.ui.main.MovieListFragment
-import com.skydoves.themovies.view.ui.main.StarListFragment
+import com.skydoves.themovies.view.ui.main.PersonListFragment
 import com.skydoves.themovies.view.ui.main.TvListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -22,5 +22,5 @@ abstract class MainActivityFragmentModule {
     abstract fun contributeTvListFragment(): TvListFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeStarFragment(): StarListFragment
+    abstract fun contributePersonListFragment(): PersonListFragment
 }

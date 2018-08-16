@@ -16,9 +16,11 @@ import com.skydoves.themovies.models.Person
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.view.adapter.PeopleAdapter
+import com.skydoves.themovies.view.ui.details.person.PersonDetailActivity
 import com.skydoves.themovies.view.viewholder.PeopleViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -27,7 +29,7 @@ import javax.inject.Inject
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class StarListFragment: Fragment(), PeopleViewHolder.Delegate {
+class PersonListFragment: Fragment(), PeopleViewHolder.Delegate {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: MainActivityViewModel
@@ -80,6 +82,6 @@ class StarListFragment: Fragment(), PeopleViewHolder.Delegate {
     }
 
     override fun onItemClick(person: Person) {
-        toast(person.name)
+        startActivity<PersonDetailActivity>("person" to person)
     }
 }
