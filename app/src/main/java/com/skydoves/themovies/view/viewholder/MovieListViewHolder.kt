@@ -2,13 +2,11 @@ package com.skydoves.themovies.view.viewholder
 
 import android.view.View
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.github.florent37.glidepalette.BitmapPalette
 import com.github.florent37.glidepalette.GlidePalette
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.themovies.api.Api
-import com.skydoves.themovies.models.Movie
+import com.skydoves.themovies.models.entity.Movie
 import kotlinx.android.synthetic.main.item_poster.view.*
 
 /**

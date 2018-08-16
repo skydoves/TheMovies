@@ -3,9 +3,9 @@ package com.skydoves.themovies.repository
 import android.arch.lifecycle.LiveData
 import com.skydoves.themovies.api.ApiResponse
 import com.skydoves.themovies.api.PeopleService
-import com.skydoves.themovies.mappers.PeopleResponsMapper
+import com.skydoves.themovies.mappers.PeopleResponseMapper
 import com.skydoves.themovies.models.PeopleResponse
-import com.skydoves.themovies.models.Person
+import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.room.PeopleDao
 import timber.log.Timber
@@ -27,7 +27,7 @@ constructor(val peopleService: PeopleService, val peopleDao: PeopleDao)
     }
 
     fun loadPeople(page: Int): LiveData<Resource<List<Person>>> {
-        return object : NetworkBoundRepository<List<Person>, PeopleResponse, PeopleResponsMapper>() {
+        return object : NetworkBoundRepository<List<Person>, PeopleResponse, PeopleResponseMapper>() {
             override fun saveFetchData(items: PeopleResponse) {
                 for(item in items.results) {
                     item.page = page
@@ -47,8 +47,8 @@ constructor(val peopleService: PeopleService, val peopleDao: PeopleDao)
                 return peopleService.fetchPopularPeople(page = page)
             }
 
-            override fun mapper(): PeopleResponsMapper {
-                return PeopleResponsMapper()
+            override fun mapper(): PeopleResponseMapper {
+                return PeopleResponseMapper()
             }
 
             override fun onFetchFailed(message: String?) {

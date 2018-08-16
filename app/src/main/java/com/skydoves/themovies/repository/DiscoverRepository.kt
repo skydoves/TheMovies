@@ -6,6 +6,10 @@ import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.mappers.MovieResponseMapper
 import com.skydoves.themovies.mappers.TvResponseMapper
 import com.skydoves.themovies.models.*
+import com.skydoves.themovies.models.entity.Movie
+import com.skydoves.themovies.models.entity.Tv
+import com.skydoves.themovies.models.network.DiscoverMovieResponse
+import com.skydoves.themovies.models.network.DiscoverTvResponse
 import com.skydoves.themovies.room.MovieDao
 import com.skydoves.themovies.room.TvDao
 import timber.log.Timber

@@ -3,6 +3,7 @@ package com.skydoves.themovies.models
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.skydoves.themovies.models.network.ErrorEnvelope
 
 /**
  * Developed by skydoves on 2018-08-09.

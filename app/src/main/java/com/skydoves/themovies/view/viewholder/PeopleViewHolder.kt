@@ -5,7 +5,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.themovies.api.Api
-import com.skydoves.themovies.models.Person
+import com.skydoves.themovies.models.entity.Person
 import kotlinx.android.synthetic.main.item_person.view.*
 
 /**
