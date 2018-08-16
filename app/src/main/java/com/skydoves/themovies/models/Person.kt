@@ -11,7 +11,7 @@ import android.os.Parcelable
 
 @Entity(tableName = "People", primaryKeys = ["id"])
 data class Person(var page: Int,
-                  val profile_path: String,
+                  val profile_path: String?,
                   val adult: Boolean,
                   val id: Int,
                   val name: String,
