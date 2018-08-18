@@ -10,11 +10,14 @@ import com.skydoves.themovies.api.MovieService
 import com.skydoves.themovies.api.api.ApiUtil.successCall
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.network.KeywordListResponse
+import com.skydoves.themovies.models.network.VideoListResponse
 import com.skydoves.themovies.repository.MovieRepository
 import com.skydoves.themovies.room.MovieDao
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockKeywordList
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockMovie
+import com.skydoves.themovies.utils.MockTestUtil.Companion.mockVideoList
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -57,6 +60,27 @@ class MovieRepositoryTest {
 
         val updatedMovie = mockMovie()
         updatedMovie.keywords = mockKeywordList()
+        verify(movieDao).updateMovie(updatedMovie)
+    }
+
+    @Test fun loadVideoListFromNetwork() {
+        val loadFromDB = mockMovie()
+        whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
+
+        val mockResponse = VideoListResponse(123, mockVideoList())
+        val call = successCall(mockResponse)
+        whenever(service.fetchVideos(123)).thenReturn(call)
+
+        val data = repository.loadVideoList(123)
+        verify(movieDao).getMovie(123)
+        verifyNoMoreInteractions(service)
+
+        val observer = mock<Observer<Resource<List<Video>>>>()
+        data.observeForever(observer)
+        verify(observer).onChanged(Resource.success(mockVideoList(), false))
+
+        val updatedMovie = mockMovie()
+        updatedMovie.videos = mockVideoList()
         verify(movieDao).updateMovie(updatedMovie)
     }
 }

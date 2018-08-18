@@ -1,6 +1,7 @@
 package com.skydoves.themovies.utils
 
 import com.skydoves.themovies.models.Keyword
+import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
@@ -17,10 +18,16 @@ class MockTestUtil {
         fun mockPerson() = Person(1, "", false, 123, "", 0f)
         fun mockKeywordList(): List<Keyword> {
             val keywords = ArrayList<Keyword>()
-            keywords.add( Keyword(100, "keyword0"))
-            keywords.add( Keyword(101, "keyword1"))
-            keywords.add( Keyword(102, "keyword2"))
+            keywords.add(Keyword(100, "keyword0"))
+            keywords.add(Keyword(101, "keyword1"))
+            keywords.add(Keyword(102, "keyword2"))
             return keywords
+        }
+        fun mockVideoList(): List<Video> {
+            val videos = ArrayList<Video>()
+            videos.add(Video("123", "video0", "", "", 0, ""))
+            videos.add(Video("123", "video0", "", "", 0, ""))
+            return videos
         }
     }
 }

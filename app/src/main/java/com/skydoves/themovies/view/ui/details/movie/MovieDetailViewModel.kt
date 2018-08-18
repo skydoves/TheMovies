@@ -6,6 +6,7 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.repository.MovieRepository
 import com.skydoves.themovies.utils.AbsentLiveData
 import timber.log.Timber
@@ -22,6 +23,9 @@ constructor(val repository: MovieRepository): ViewModel() {
     private val keywordPageLiveData: MutableLiveData<Int> = MutableLiveData()
     private val keywordListLiveData: LiveData<Resource<List<Keyword>>>
 
+    private val videoPageLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val videoListLiveData: LiveData<Resource<List<Video>>>
+
     init {
         Timber.d("Injection MovieDetailViewModel")
 
@@ -29,9 +33,18 @@ constructor(val repository: MovieRepository): ViewModel() {
             keywordPageLiveData.value?.let { repository.loadKeywordList(it) } ?:
                     AbsentLiveData.create()
         }
+
+        videoListLiveData = Transformations.switchMap(videoPageLiveData) {
+            videoPageLiveData.value?.let { repository.loadVideoList(it) } ?:
+                    AbsentLiveData.create()
+        }
     }
 
     fun getKeywordListObservable() = keywordListLiveData
     fun getKeywordListValues() = getKeywordListObservable().value
-    fun postMoviePage(page: Int) = keywordPageLiveData.postValue(page)
+    fun postKeywordPage(page: Int) = keywordPageLiveData.postValue(page)
+
+    fun getVideoListObservable() = videoListLiveData
+    fun getVideoListValues() = getVideoListObservable().value
+    fun postVideoPage(page: Int) = videoPageLiveData.postValue(page)
 }
