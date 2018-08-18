@@ -21,43 +21,43 @@ import javax.inject.Inject
 class MovieDetailViewModel @Inject
 constructor(val repository: MovieRepository): ViewModel() {
 
-    private val keywordPageLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val keywordIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val keywordListLiveData: LiveData<Resource<List<Keyword>>>
 
-    private val videoPageLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val videoIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val videoListLiveData: LiveData<Resource<List<Video>>>
 
-    private val reviewPageLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val reviewIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val reviewListLiveData: LiveData<Resource<List<Review>>>
 
     init {
         Timber.d("Injection MovieDetailViewModel")
 
-        keywordListLiveData = Transformations.switchMap(keywordPageLiveData) {
-            keywordPageLiveData.value?.let { repository.loadKeywordList(it) } ?:
+        keywordListLiveData = Transformations.switchMap(keywordIdLiveData) {
+            keywordIdLiveData.value?.let { repository.loadKeywordList(it) } ?:
                     AbsentLiveData.create()
         }
 
-        videoListLiveData = Transformations.switchMap(videoPageLiveData) {
-            videoPageLiveData.value?.let { repository.loadVideoList(it) } ?:
+        videoListLiveData = Transformations.switchMap(videoIdLiveData) {
+            videoIdLiveData.value?.let { repository.loadVideoList(it) } ?:
                     AbsentLiveData.create()
         }
 
-        reviewListLiveData = Transformations.switchMap(reviewPageLiveData) {
-            reviewPageLiveData.value?.let { repository.loadReviewsList(it) } ?:
+        reviewListLiveData = Transformations.switchMap(reviewIdLiveData) {
+            reviewIdLiveData.value?.let { repository.loadReviewsList(it) } ?:
                     AbsentLiveData.create()
         }
     }
 
     fun getKeywordListObservable() = keywordListLiveData
     fun getKeywordListValues() = getKeywordListObservable().value
-    fun postKeywordPage(page: Int) = keywordPageLiveData.postValue(page)
+    fun postKeywordId(id: Int) = keywordIdLiveData.postValue(id)
 
     fun getVideoListObservable() = videoListLiveData
     fun getVideoListValues() = getVideoListObservable().value
-    fun postVideoPage(page: Int) = videoPageLiveData.postValue(page)
+    fun postVideoId(id: Int) = videoIdLiveData.postValue(id)
 
     fun getReviewListObservable() = reviewListLiveData
     fun getReviewListValues() = getReviewListObservable().value
-    fun postReviewPage(page: Int) = reviewPageLiveData.postValue(page)
+    fun postReviewId(id: Int) = reviewIdLiveData.postValue(id)
 }
