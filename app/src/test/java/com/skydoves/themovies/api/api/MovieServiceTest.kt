@@ -38,4 +38,13 @@ class MovieServiceTest: ApiAbstract<MovieService>() {
         assertThat(response.body?.results?.get(0)?.id, `is`("533ec654c3a36854480003eb"))
         assertThat(response.body?.results?.get(0)?.key, `is`("SUXWAEX2jlg"))
     }
+
+    @Throws(IOException::class)
+    @Test fun fetchMovieReviewsTest() {
+        enqueueResponse("/tmdb_movie_reviews.json")
+        val response = LiveDataTestUtil.getValue(service.fetchReviews(1))
+        assertThat(response.body?.id, `is`(297761))
+        assertThat(response.body?.results?.get(0)?.id, `is`("57a814dc9251415cfb00309a"))
+        assertThat(response.body?.results?.get(0)?.author, `is`("Frank Ochieng"))
+    }
 }
