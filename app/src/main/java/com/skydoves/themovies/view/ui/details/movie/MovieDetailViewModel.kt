@@ -6,6 +6,7 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.repository.MovieRepository
 import com.skydoves.themovies.utils.AbsentLiveData
@@ -26,6 +27,9 @@ constructor(val repository: MovieRepository): ViewModel() {
     private val videoPageLiveData: MutableLiveData<Int> = MutableLiveData()
     private val videoListLiveData: LiveData<Resource<List<Video>>>
 
+    private val reviewPageLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val reviewListLiveData: LiveData<Resource<List<Review>>>
+
     init {
         Timber.d("Injection MovieDetailViewModel")
 
@@ -38,6 +42,11 @@ constructor(val repository: MovieRepository): ViewModel() {
             videoPageLiveData.value?.let { repository.loadVideoList(it) } ?:
                     AbsentLiveData.create()
         }
+
+        reviewListLiveData = Transformations.switchMap(reviewPageLiveData) {
+            reviewPageLiveData.value?.let { repository.loadReviewsList(it) } ?:
+                    AbsentLiveData.create()
+        }
     }
 
     fun getKeywordListObservable() = keywordListLiveData
@@ -47,4 +56,8 @@ constructor(val repository: MovieRepository): ViewModel() {
     fun getVideoListObservable() = videoListLiveData
     fun getVideoListValues() = getVideoListObservable().value
     fun postVideoPage(page: Int) = videoPageLiveData.postValue(page)
+
+    fun getReviewListObservable() = reviewListLiveData
+    fun getReviewListValues() = getReviewListObservable().value
+    fun postReviewPage(page: Int) = reviewPageLiveData.postValue(page)
 }

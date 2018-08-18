@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import com.skydoves.themovies.R
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import dagger.android.AndroidInjection
@@ -45,6 +46,9 @@ class MovieDetailActivity : AppCompatActivity() {
 
         viewModel.getVideoListObservable().observe(this, Observer { it?.let { updateVideoList(it) } })
         viewModel.postVideoPage(getMovieFromIntent().id)
+
+        viewModel.getReviewListObservable().observe(this, Observer { it?.let { updateReviewList(it) } })
+        viewModel.postReviewPage(getMovieFromIntent().id)
     }
 
     private fun updateKeywordList(resource: Resource<List<Keyword>>) {
@@ -52,6 +56,10 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun updateVideoList(resource: Resource<List<Video>>) {
+        toast(resource.data.toString())
+    }
+
+    private fun updateReviewList(resource: Resource<List<Review>>) {
         toast(resource.data.toString())
     }
 
