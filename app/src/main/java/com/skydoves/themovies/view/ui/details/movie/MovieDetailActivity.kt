@@ -5,15 +5,19 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
+import com.bumptech.glide.Glide
 import com.skydoves.themovies.R
+import com.skydoves.themovies.api.Api
+import com.skydoves.themovies.extension.requestGlideListener
+import com.skydoves.themovies.extension.simpleToolbarWithHome
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.toolbar_default.*
-import org.jetbrains.anko.toast
+import kotlinx.android.synthetic.main.activity_movie_detail.*
 import javax.inject.Inject
 
 /**
@@ -36,8 +40,12 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun initializeUI() {
-        toolbar_home.setOnClickListener { onBackPressed() }
-        toolbar_title.text = getMovieFromIntent().title
+        simpleToolbarWithHome(movie_detail_toolbar, getMovieFromIntent().title)
+        getMovieFromIntent().backdrop_path?.let {
+            Glide.with(this).load(Api.getBackdropPath(it))
+                    .listener(requestGlideListener(movie_detail_poster))
+                    .into(movie_detail_poster)
+        }
     }
 
     private fun observeViewModel() {
@@ -52,18 +60,23 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun updateKeywordList(resource: Resource<List<Keyword>>) {
-        toast(resource.data.toString())
+
     }
 
     private fun updateVideoList(resource: Resource<List<Video>>) {
-        toast(resource.data.toString())
+
     }
 
     private fun updateReviewList(resource: Resource<List<Review>>) {
-        toast(resource.data.toString())
+
     }
 
     private fun getMovieFromIntent(): Movie {
         return intent.getParcelableExtra("movie") as Movie
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == android.R.id.home) onBackPressed()
+        return false
     }
 }
