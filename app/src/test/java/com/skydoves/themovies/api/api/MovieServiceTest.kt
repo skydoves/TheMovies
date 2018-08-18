@@ -29,4 +29,13 @@ class MovieServiceTest: ApiAbstract<MovieService>() {
         assertThat(response.body?.keywords?.get(0)?.id, `is`(825))
         assertThat(response.body?.keywords?.get(0)?.name, `is`("support group"))
     }
+
+    @Throws(IOException::class)
+    @Test fun fetchMovieVideosTest() {
+        enqueueResponse("/tmdb_movie_videos.json")
+        val response = LiveDataTestUtil.getValue(service.fetchVideos(1))
+        assertThat(response.body?.id, `is`(550))
+        assertThat(response.body?.results?.get(0)?.id, `is`("533ec654c3a36854480003eb"))
+        assertThat(response.body?.results?.get(0)?.key, `is`("SUXWAEX2jlg"))
+    }
 }
