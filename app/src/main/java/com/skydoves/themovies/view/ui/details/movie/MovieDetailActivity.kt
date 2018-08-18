@@ -42,13 +42,13 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         viewModel.getKeywordListObservable().observe(this, Observer { it?.let { updateKeywordList(it)} })
-        viewModel.postKeywordPage(getMovieFromIntent().id)
+        viewModel.postKeywordId(getMovieFromIntent().id)
 
         viewModel.getVideoListObservable().observe(this, Observer { it?.let { updateVideoList(it) } })
-        viewModel.postVideoPage(getMovieFromIntent().id)
+        viewModel.postVideoId(getMovieFromIntent().id)
 
         viewModel.getReviewListObservable().observe(this, Observer { it?.let { updateReviewList(it) } })
-        viewModel.postReviewPage(getMovieFromIntent().id)
+        viewModel.postReviewId(getMovieFromIntent().id)
     }
 
     private fun updateKeywordList(resource: Resource<List<Keyword>>) {
