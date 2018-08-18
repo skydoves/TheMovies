@@ -1,4 +1,7 @@
-package com.skydoves.themovies.models
+package com.skydoves.themovies.models.network
+
+import com.skydoves.themovies.models.NetworkResponseModel
+import com.skydoves.themovies.models.entity.Tv
 
 /**
  * Developed by skydoves on 2018-08-07.

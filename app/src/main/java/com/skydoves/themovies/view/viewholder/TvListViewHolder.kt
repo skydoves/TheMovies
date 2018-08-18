@@ -6,7 +6,7 @@ import com.github.florent37.glidepalette.BitmapPalette
 import com.github.florent37.glidepalette.GlidePalette
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.themovies.api.Api
-import com.skydoves.themovies.models.Tv
+import com.skydoves.themovies.models.entity.Tv
 import kotlinx.android.synthetic.main.item_poster.view.*
 
 /**

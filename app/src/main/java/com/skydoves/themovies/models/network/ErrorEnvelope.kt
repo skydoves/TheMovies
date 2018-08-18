@@ -1,4 +1,4 @@
-package com.skydoves.themovies.models
+package com.skydoves.themovies.models.network
 
 /**
  * Developed by skydoves on 2018-08-10.

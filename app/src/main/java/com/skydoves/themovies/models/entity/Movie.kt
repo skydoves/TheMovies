@@ -1,8 +1,11 @@
-package com.skydoves.themovies.models
+package com.skydoves.themovies.models.entity
 
 import android.arch.persistence.room.Entity
 import android.os.Parcel
 import android.os.Parcelable
+import com.skydoves.themovies.models.Keyword
+import com.skydoves.themovies.models.Review
+import com.skydoves.themovies.models.Video
 
 /**
  * Developed by skydoves on 2018-08-08.
@@ -11,6 +14,9 @@ import android.os.Parcelable
 
 @Entity(primaryKeys = [("id")])
 data class Movie(var page: Int,
+                 var keywords: List<Keyword>? = ArrayList(),
+                 var videos: List<Video>? = ArrayList(),
+                 var reviews: List<Review>? = ArrayList(),
                  val poster_path: String?,
                  val adult: Boolean,
                  val overview: String,
@@ -27,6 +33,9 @@ data class Movie(var page: Int,
                  val vote_average: Float) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
+            ArrayList<Keyword>().apply { source.readList(this, Keyword::class.java.classLoader) },
+            ArrayList<Video>().apply { source.readList(this, Video::class.java.classLoader) },
+            ArrayList<Review>().apply { source.readList(this, Review::class.java.classLoader) },
             source.readString(),
             1 == source.readInt(),
             source.readString(),
@@ -47,6 +56,9 @@ data class Movie(var page: Int,
 
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
         writeInt(page)
+        writeList(keywords)
+        writeList(videos)
+        writeList(reviews)
         writeString(poster_path)
         writeInt((if (adult) 1 else 0))
         writeString(overview)
@@ -61,10 +73,6 @@ data class Movie(var page: Int,
         writeInt(vote_count)
         writeInt((if (video) 1 else 0))
         writeFloat(vote_average)
-    }
-
-    fun getPosterUrl(): String {
-        return "http://image.tmdb.org/t/p/w342$poster_path"
     }
 
     companion object {

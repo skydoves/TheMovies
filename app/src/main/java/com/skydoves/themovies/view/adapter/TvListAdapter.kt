@@ -6,7 +6,7 @@ import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.baserecyclerviewadapter.SectionRow
 import com.skydoves.themovies.R
 import com.skydoves.themovies.models.Resource
-import com.skydoves.themovies.models.Tv
+import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
 
 /**

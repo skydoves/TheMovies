@@ -1,8 +1,11 @@
-package com.skydoves.themovies.models
+package com.skydoves.themovies.models.entity
 
 import android.arch.persistence.room.Entity
 import android.os.Parcel
 import android.os.Parcelable
+import com.skydoves.themovies.models.Keyword
+import com.skydoves.themovies.models.Review
+import com.skydoves.themovies.models.Video
 
 /**
  * Developed by skydoves on 2018-08-07.
@@ -11,6 +14,9 @@ import android.os.Parcelable
 
 @Entity(primaryKeys = [("id")])
 data class Tv(var page: Int,
+              var keywords: List<Keyword>? = ArrayList(),
+              var videos: List<Video>? = ArrayList(),
+              var reviews: List<Review>? = ArrayList(),
               val poster_path: String,
               val popularity: Float,
               val id: Int,
@@ -26,6 +32,9 @@ data class Tv(var page: Int,
               val original_name: String) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
+            ArrayList<Keyword>().apply { source.readList(this, Keyword::class.java.classLoader) },
+            ArrayList<Video>().apply { source.readList(this, Video::class.java.classLoader) },
+            ArrayList<Review>().apply { source.readList(this, Review::class.java.classLoader) },
             source.readString(),
             source.readFloat(),
             source.readInt(),
@@ -45,6 +54,9 @@ data class Tv(var page: Int,
 
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
         writeInt(page)
+        writeList(keywords)
+        writeList(videos)
+        writeList(reviews)
         writeString(poster_path)
         writeFloat(popularity)
         writeInt(id)

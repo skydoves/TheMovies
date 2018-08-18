@@ -3,6 +3,8 @@ package com.skydoves.themovies.di
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.skydoves.themovies.factory.AppViewModelFactory
+import com.skydoves.themovies.repository.MovieRepository
+import com.skydoves.themovies.view.ui.details.movie.MovieDetailViewModel
 import com.skydoves.themovies.view.ui.main.MainActivityViewModel
 import dagger.Binds
 import dagger.Module
@@ -20,6 +22,11 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainActivityViewModel::class)
     internal abstract fun bindMainActivityViewModels(mainActivityViewModel: MainActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MovieDetailViewModel::class)
+    internal abstract fun bindMovieDetailViewModel(movieDetailViewModel: MovieDetailViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory

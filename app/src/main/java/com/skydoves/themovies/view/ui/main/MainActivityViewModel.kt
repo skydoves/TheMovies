@@ -4,10 +4,10 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import com.skydoves.themovies.models.Movie
-import com.skydoves.themovies.models.Person
+import com.skydoves.themovies.models.entity.Movie
+import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.Resource
-import com.skydoves.themovies.models.Tv
+import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.repository.DiscoverRepository
 import com.skydoves.themovies.repository.PeopleRepository
 import com.skydoves.themovies.utils.AbsentLiveData

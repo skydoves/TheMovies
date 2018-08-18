@@ -1,6 +1,6 @@
 package com.skydoves.themovies.mappers
 
-import com.skydoves.themovies.models.DiscoverTvResponse
+import com.skydoves.themovies.models.network.DiscoverTvResponse
 import timber.log.Timber
 
 /**

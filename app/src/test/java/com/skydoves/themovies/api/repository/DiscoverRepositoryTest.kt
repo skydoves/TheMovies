@@ -10,6 +10,10 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.api.api.ApiUtil.successCall
 import com.skydoves.themovies.models.*
+import com.skydoves.themovies.models.entity.Movie
+import com.skydoves.themovies.models.entity.Tv
+import com.skydoves.themovies.models.network.DiscoverMovieResponse
+import com.skydoves.themovies.models.network.DiscoverTvResponse
 import com.skydoves.themovies.repository.DiscoverRepository
 import com.skydoves.themovies.room.MovieDao
 import com.skydoves.themovies.room.TvDao
@@ -61,7 +65,7 @@ class DiscoverRepositoryTest {
 
         loadFromDB.postValue(null)
         verify(service).fetchDiscoverMovie(1)
-        verify(movieDao).insertMovie(mockResponse.results)
+        verify(movieDao).insertMovieList(mockResponse.results)
 
         updatedData.postValue(mockResponse.results)
         verify(observer).onChanged(Resource.success(mockResponse.results, false))

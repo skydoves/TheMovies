@@ -12,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
-import com.skydoves.themovies.models.Movie
+import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.view.adapter.MovieListAdapter
