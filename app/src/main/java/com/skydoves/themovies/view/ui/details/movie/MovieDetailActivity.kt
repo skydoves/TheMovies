@@ -1,12 +1,17 @@
 package com.skydoves.themovies.view.ui.details.movie
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.skydoves.themovies.R
+import com.skydoves.themovies.models.Keyword
+import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Movie
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.toolbar_default.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -17,6 +22,7 @@ import javax.inject.Inject
 class MovieDetailActivity : AppCompatActivity() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(MovieDetailViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -24,11 +30,21 @@ class MovieDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movie_detail)
 
         initializeUI()
+        observeViewModel()
     }
 
     private fun initializeUI() {
         toolbar_home.setOnClickListener { onBackPressed() }
         toolbar_title.text = getMovieFromIntent().title
+    }
+
+    private fun observeViewModel() {
+        viewModel.getKeywordListObservable().observe(this, Observer { it?.let { updateKeywordList(it)} })
+        viewModel.postMoviePage(getMovieFromIntent().id)
+    }
+
+    private fun updateKeywordList(resource: Resource<List<Keyword>>) {
+        toast(resource.data.toString())
     }
 
     private fun getMovieFromIntent(): Movie {
