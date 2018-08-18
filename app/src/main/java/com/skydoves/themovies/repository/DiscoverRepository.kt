@@ -36,7 +36,7 @@ constructor(val discoverService: TheDiscoverService, val movieDao: MovieDao, val
                 for(item in items.results) {
                     item.page = page
                 }
-                movieDao.insertMovie(movies = items.results)
+                movieDao.insertMovieList(movies = items.results)
             }
 
             override fun shouldFetch(data: List<Movie>?): Boolean {

@@ -65,7 +65,7 @@ class DiscoverRepositoryTest {
 
         loadFromDB.postValue(null)
         verify(service).fetchDiscoverMovie(1)
-        verify(movieDao).insertMovie(mockResponse.results)
+        verify(movieDao).insertMovieList(mockResponse.results)
 
         updatedData.postValue(mockResponse.results)
         verify(observer).onChanged(Resource.success(mockResponse.results, false))
