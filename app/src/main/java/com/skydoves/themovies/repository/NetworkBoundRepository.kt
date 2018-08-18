@@ -11,7 +11,7 @@ import com.skydoves.themovies.models.Resource
 import timber.log.Timber
 
 /**
- * Created by skydoves on 2018. 3. 6.
+ * Created by skydoves on 2018. 8. 9.
  * Copyright (c) 2018 skydoves All rights reserved.
  */
 
@@ -22,11 +22,11 @@ internal constructor() {
 
     init {
         Timber.d("Injection NetworkBoundRepository")
-        result.postValue(Resource.loading(null))
         val loadedFromDB = this.loadFromDb()
         result.addSource(loadedFromDB) { data ->
             result.removeSource(loadedFromDB)
             if (shouldFetch(data)) {
+                result.postValue(Resource.loading(null))
                 fetchFromNetwork(loadedFromDB)
             } else {
                 result.addSource<ResultType>(loadedFromDB) { newData -> setValue(Resource.success(newData, false)) }
