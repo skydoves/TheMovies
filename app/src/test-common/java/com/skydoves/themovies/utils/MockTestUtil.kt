@@ -1,6 +1,7 @@
 package com.skydoves.themovies.utils
 
 import com.skydoves.themovies.models.Keyword
+import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
@@ -28,6 +29,12 @@ class MockTestUtil {
             videos.add(Video("123", "video0", "", "", 0, ""))
             videos.add(Video("123", "video0", "", "", 0, ""))
             return videos
+        }
+        fun mockReviewList(): List<Review> {
+            val reviews = ArrayList<Review>()
+            reviews.add(Review("123", "", "", ""))
+            reviews.add(Review("123", "", "", ""))
+            return reviews
         }
     }
 }
