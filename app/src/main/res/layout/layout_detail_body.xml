@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background">
+
+    <TextView
+        android:id="@+id/detail_body_trailers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:text="Trailers"
+        android:layout_marginTop="23dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+    
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/detail_body_recyclerView_trailers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -12,13 +33,20 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:text="Trailers"
+        android:text="Summary"
         android:layout_marginTop="23dp"/>
 
-
+    <TextView
+        android:id="@+id/detail_body_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="12dp"
+        tools:text="Summary"/>
 
     <co.lujun.androidtagview.TagContainerLayout
-        android:id="@+id/detail_header_tags"
+        android:id="@+id/detail_body_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -29,6 +57,31 @@
         app:tag_horizontal_padding="5dp"
         app:tag_vertical_padding="6dp"
         app:tag_clickable="false"
-        app:tag_theme="pure_cyan" />
+        app:tag_theme="none"
+        app:tag_background_color="@color/colorPrimary"
+        app:tag_border_color="@color/colorPrimary"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/detail_body_reviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:text="Reviews"
+        android:layout_marginTop="23dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/detail_body_recyclerView_reviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"
+        android:layout_marginBottom="10dp"
+        tools:visibility="visible"/>
 
 </LinearLayout>
