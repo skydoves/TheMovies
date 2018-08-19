@@ -9,8 +9,8 @@ object Api {
     private val YOUTUBE = "YouTube"
     private const val BASE_POSTER_PATH = "http://image.tmdb.org/t/p/w342"
     private const val BASE_BACKDROP_PATH = "http://image.tmdb.org/t/p/w780"
-    private const val YOUTUBE_VIDEO_URL = "http://www.youtube.com/watch?v=%1"
-    private const val YOUTUBE_THUMBNAIL_URL = "http://img.youtube.com/vi/%1"
+    private const val YOUTUBE_VIDEO_URL = "http://www.youtube.com/watch?v="
+    private const val YOUTUBE_THUMBNAIL_URL = "http://img.youtube.com/vi/"
 
     fun getPosterPath(posterPath: String): String {
         return BASE_POSTER_PATH + posterPath
@@ -25,6 +25,6 @@ object Api {
     }
 
     fun getYoutubeThumbnailPath(thumbnailPath: String): String {
-        return YOUTUBE_THUMBNAIL_URL + thumbnailPath + "/0.jpg"
+        return YOUTUBE_THUMBNAIL_URL + thumbnailPath + "/default.jpg"
     }
 }
