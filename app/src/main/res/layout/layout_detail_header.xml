@@ -10,7 +10,7 @@
         android:id="@+id/detail_header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="26sp"
+        android:textSize="27sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:maxEms="12"

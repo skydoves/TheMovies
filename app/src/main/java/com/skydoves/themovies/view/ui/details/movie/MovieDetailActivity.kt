@@ -12,14 +12,14 @@ import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.observeLiveData
 import com.skydoves.themovies.extension.requestGlideListener
 import com.skydoves.themovies.extension.simpleToolbarWithHome
-import com.skydoves.themovies.models.Keyword
-import com.skydoves.themovies.models.Resource
-import com.skydoves.themovies.models.Review
-import com.skydoves.themovies.models.Video
+import com.skydoves.themovies.models.*
 import com.skydoves.themovies.models.entity.Movie
+import com.skydoves.themovies.utils.KeywordListMapper
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_movie_detail.*
+import kotlinx.android.synthetic.main.layout_detail_body.*
 import kotlinx.android.synthetic.main.layout_detail_header.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -70,7 +70,11 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun updateKeywordList(resource: Resource<List<Keyword>>) {
-
+        when(resource.status) {
+            Status.SUCCESS -> detail_header_tags.tags = KeywordListMapper.mapToStringList(resource.data!!)
+            Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
+            Status.LOADING -> { }
+        }
     }
 
     private fun updateVideoList(resource: Resource<List<Video>>) {

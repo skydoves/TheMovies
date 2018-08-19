@@ -98,6 +98,7 @@ dependencies {
 
     // custom view
     implementation "devlight.io:navigationtabbar:$navigationBarVersion"
+    implementation "co.lujun:androidtagview:$androidTagViewVersion"
 
     // unit test
     testImplementation "junit:junit:$junitVersion"

@@ -53,6 +53,8 @@
 
             <include layout="@layout/layout_detail_header"/>
 
+            <include layout="@layout/layout_detail_body"/>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
