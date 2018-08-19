@@ -1,6 +1,5 @@
 package com.skydoves.themovies.view.ui.main
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -12,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
+import com.skydoves.themovies.extension.observeLiveData
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.entity.Tv
@@ -67,7 +67,7 @@ class TvListFragment: Fragment(), TvListViewHolder.Delegate {
     }
 
     private fun observeViewModel() {
-        viewModel.getTvListObservable().observe(this, Observer { it?.let { updateTvList(it) } })
+        observeLiveData(viewModel.getTvListObservable()) { updateTvList(it) }
         viewModel.postTvPage(1)
     }
 

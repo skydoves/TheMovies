@@ -1,6 +1,5 @@
 package com.skydoves.themovies.view.ui.main
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -12,9 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
-import com.skydoves.themovies.models.entity.Movie
+import com.skydoves.themovies.extension.observeLiveData
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
+import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.MovieListAdapter
 import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
 import com.skydoves.themovies.view.viewholder.MovieListViewHolder
@@ -67,7 +67,7 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
     }
 
     private fun observeViewModel() {
-        viewModel.getMovieListObservable().observe(this, Observer { it?.let { updateMovieList(it) }})
+        observeLiveData(viewModel.getMovieListObservable()) { updateMovieList(it) }
         viewModel.postMoviePage(1)
     }
 
