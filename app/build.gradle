@@ -99,6 +99,7 @@ dependencies {
     // custom view
     implementation "devlight.io:navigationtabbar:$navigationBarVersion"
     implementation "co.lujun:androidtagview:$androidTagViewVersion"
+    implementation "com.ms-square:expandableTextView:$expandableTextViewVersion"
 
     // unit test
     testImplementation "junit:junit:$junitVersion"

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:id="@+id/item_review_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        tools:text="title"/>
+
+    <com.ms.square.android.expandabletextview.ExpandableTextView
+        android:id="@+id/item_review_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:animAlphaStart="1"
+        app:maxCollapsedLines="4"
+        app:animDuration="200"
+        app:expandDrawable="@drawable/ic_keyboard_arrow_down_white_24dp"
+        app:collapseDrawable="@drawable/ic_keyboard_arrow_up_white_24dp">
+
+        <TextView
+            android:id="@id/expandable_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="sans-serif-light"
+            android:lineSpacingMultiplier="1.2"
+            android:background="?android:attr/selectableItemBackground"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="content"/>
+
+        <ImageButton
+            android:id="@id/expand_collapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:layout_gravity="right|bottom"
+            android:background="?android:attr/selectableItemBackground"/>
+    </com.ms.square.android.expandabletextview.ExpandableTextView>
+</LinearLayout>
