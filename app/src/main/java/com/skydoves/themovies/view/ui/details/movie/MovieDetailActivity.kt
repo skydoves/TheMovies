@@ -15,6 +15,7 @@ import com.skydoves.themovies.extension.*
 import com.skydoves.themovies.models.*
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.utils.KeywordListMapper
+import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.themovies.view.viewholder.VideoListViewHolder
 import dagger.android.AndroidInjection
@@ -35,6 +36,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(MovieDetailViewModel::class.java) }
 
     private val videoAdapter by lazy { VideoListAdapter(this) }
+    private val reviewAdapter by lazy { ReviewListAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -63,6 +65,10 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
         detail_body_recyclerView_trailers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detail_body_recyclerView_trailers.adapter = videoAdapter
         detail_body_summary.text = getMovieFromIntent().overview
+        detail_body_recyclerView_reviews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        detail_body_recyclerView_reviews.adapter = reviewAdapter
+        detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
+        detail_body_recyclerView_reviews.setHasFixedSize(true)
     }
 
     private fun observeViewModel() {
@@ -108,6 +114,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     private fun updateReviewList(resource: Resource<List<Review>>) {
         when(resource.status) {
             Status.SUCCESS -> {
+                reviewAdapter.addReviewList(resource)
 
                 if(resource.data?.isNotEmpty()!!) {
                     detail_body_reviews.visible()

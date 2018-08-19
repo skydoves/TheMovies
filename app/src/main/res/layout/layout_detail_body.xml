@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:paddingBottom="10dp">
 
     <TextView
         android:id="@+id/detail_body_trailers"
@@ -51,7 +52,6 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="15dp"
-        app:container_background_color="@color/background800"
         app:container_enable_drag="false"
         app:tag_text_color="@color/white"
         app:tag_horizontal_padding="5dp"
@@ -60,6 +60,8 @@
         app:tag_theme="none"
         app:tag_background_color="@color/colorPrimary"
         app:tag_border_color="@color/colorPrimary"
+        app:container_background_color="@color/background800"
+        app:container_border_color="@color/background800"
         android:visibility="gone"
         tools:visibility="visible"/>
 
@@ -81,7 +83,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:visibility="gone"
-        android:layout_marginBottom="10dp"
         tools:visibility="visible"/>
 
 </LinearLayout>
