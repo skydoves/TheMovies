@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:layout_alignParentTop="true">
+    android:layout_alignParentTop="true"
+    android:fitsSystemWindows="false">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -19,7 +20,6 @@
             android:layout_height="match_parent"
             android:background="@color/background"
             app:expandedTitleGravity="top|left"
-            app:expandedTitleMarginStart="54dp"
             app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleTextAppearance="@style/CollapsedExpandedTitleText">
@@ -28,7 +28,6 @@
                 android:id="@+id/movie_detail_poster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"/>
 
@@ -48,12 +47,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:layout_marginTop="10dp">
 
-            <TextView
-                android:id="@+id/testTextView"
-                android:layout_width="match_parent"
-                android:layout_height="1200dp" />
+            <include layout="@layout/layout_detail_header"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

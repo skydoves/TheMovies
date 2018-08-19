@@ -1,6 +1,5 @@
 package com.skydoves.themovies.view.ui.details.movie
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,6 +8,8 @@ import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.skydoves.themovies.R
 import com.skydoves.themovies.api.Api
+import com.skydoves.themovies.extension.applyToolbarMargin
+import com.skydoves.themovies.extension.observeLiveData
 import com.skydoves.themovies.extension.requestGlideListener
 import com.skydoves.themovies.extension.simpleToolbarWithHome
 import com.skydoves.themovies.models.Keyword
@@ -18,6 +19,7 @@ import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_movie_detail.*
+import kotlinx.android.synthetic.main.layout_detail_header.*
 import javax.inject.Inject
 
 /**
@@ -40,22 +42,30 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun initializeUI() {
+        applyToolbarMargin(movie_detail_toolbar)
         simpleToolbarWithHome(movie_detail_toolbar, getMovieFromIntent().title)
         getMovieFromIntent().backdrop_path?.let {
             Glide.with(this).load(Api.getBackdropPath(it))
                     .listener(requestGlideListener(movie_detail_poster))
                     .into(movie_detail_poster)
+        } ?: let {
+            Glide.with(this).load(Api.getBackdropPath(getMovieFromIntent().poster_path!!))
+                    .listener(requestGlideListener(movie_detail_poster))
+                    .into(movie_detail_poster)
         }
+        detail_header_title.text = getMovieFromIntent().title
+        detail_header_release.text = "Release Date : ${getMovieFromIntent().release_date}"
+        detail_header_star.rating = getMovieFromIntent().vote_average / 2
     }
 
     private fun observeViewModel() {
-        viewModel.getKeywordListObservable().observe(this, Observer { it?.let { updateKeywordList(it)} })
+        observeLiveData(viewModel.getKeywordListObservable()) { updateKeywordList(it) }
         viewModel.postKeywordId(getMovieFromIntent().id)
 
-        viewModel.getVideoListObservable().observe(this, Observer { it?.let { updateVideoList(it) } })
+        observeLiveData(viewModel.getVideoListObservable()) { updateVideoList(it) }
         viewModel.postVideoId(getMovieFromIntent().id)
 
-        viewModel.getReviewListObservable().observe(this, Observer { it?.let { updateReviewList(it) } })
+        observeLiveData(viewModel.getReviewListObservable()) { updateReviewList(it) }
         viewModel.postReviewId(getMovieFromIntent().id)
     }
 

@@ -19,9 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ui.details.movie.MovieDetailActivity" />
-        <activity android:name=".view.ui.details.tv.TvDetailActivity" />
-        <activity android:name=".view.ui.details.person.PersonDetailActivity"></activity>
+        <activity
+            android:name=".view.ui.details.movie.MovieDetailActivity"
+            android:theme="@style/DetailTheme"/>
+        <activity
+            android:name=".view.ui.details.tv.TvDetailActivity"
+            android:theme="@style/DetailTheme"/>
+        <activity
+            android:name=".view.ui.details.person.PersonDetailActivity"
+            android:theme="@style/DetailTheme"/>
     </application>
 
 </manifest>
