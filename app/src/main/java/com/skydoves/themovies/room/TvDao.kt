@@ -1,10 +1,7 @@
 package com.skydoves.themovies.room
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.skydoves.themovies.models.entity.Tv
 
 /**
@@ -16,6 +13,12 @@ import com.skydoves.themovies.models.entity.Tv
 interface TvDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTv(tvs: List<Tv>)
+
+    @Update
+    fun updateTv(tv: Tv)
+
+    @Query("SELECT * FROM Tv WHERE id = :id_")
+    fun getTv(id_: Int): Tv
 
     @Query("SELECT * FROM Tv WHERE page = :page_")
     fun getTvList(page_: Int) : LiveData<List<Tv>>
