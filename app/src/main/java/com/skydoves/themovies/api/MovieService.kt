@@ -18,7 +18,7 @@ interface MovieService {
      *
      * Get the keywords that have been added to a movie.
      *
-     * @param [id] Specify the id of movie keywords.
+     * @param [id] Specify the id of movie id.
      *
      * @return [KeywordListResponse] response
      */
@@ -30,7 +30,7 @@ interface MovieService {
      *
      * Get the videos that have been added to a movie.
      *
-     * @param [id] Specify the id of movie keywords.
+     * @param [id] Specify the id of movie id.
      *
      * @return [VideoListResponse] response
      */
@@ -42,7 +42,7 @@ interface MovieService {
      *
      * Get the user reviews for a movie.
      *
-     * @param [id] Specify the id of movie keywords.
+     * @param [id] Specify the id of movie id.
      *
      * @return [ReviewListResponse] response
      */

@@ -35,7 +35,7 @@ class VideoListViewHolder(val view: View, private val delegate: Delegate): BaseV
             Glide.with(context)
                     .load(Api.getYoutubeThumbnailPath(video.key))
                     .listener(GlidePalette.with(Api.getYoutubeThumbnailPath(video.key))
-                            .use(BitmapPalette.Profile.MUTED_LIGHT)
+                            .use(BitmapPalette.Profile.VIBRANT)
                             .intoBackground(item_video_palette)
                             .crossfade(true))
                     .into(item_video_cover)
