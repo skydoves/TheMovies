@@ -1,4 +1,4 @@
-package com.skydoves.themovies.view.ui.details.movie
+package com.skydoves.themovies.view.ui.details.tv
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -8,18 +8,18 @@ import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
-import com.skydoves.themovies.repository.MovieRepository
+import com.skydoves.themovies.repository.TvRepository
 import com.skydoves.themovies.utils.AbsentLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Developed by skydoves on 2018-08-18.
+ * Developed by skydoves on 2018-08-21.
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MovieDetailViewModel @Inject
-constructor(val repository: MovieRepository): ViewModel() {
+class TvDetailViewModel @Inject
+constructor(private val repository: TvRepository): ViewModel() {
 
     private val keywordIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val keywordListLiveData: LiveData<Resource<List<Keyword>>>
@@ -31,21 +31,20 @@ constructor(val repository: MovieRepository): ViewModel() {
     private val reviewListLiveData: LiveData<Resource<List<Review>>>
 
     init {
-        Timber.d("Injection MovieDetailViewModel")
+        Timber.d("Injection TvDetailViewModel")
 
         keywordListLiveData = Transformations.switchMap(keywordIdLiveData) {
-            keywordIdLiveData.value?.let { repository.loadKeywordList(it) } ?:
-                    AbsentLiveData.create()
+            keywordIdLiveData.value?.let { repository.loadKeywordList(it) }
+                    ?: AbsentLiveData.create()
         }
 
         videoListLiveData = Transformations.switchMap(videoIdLiveData) {
-            videoIdLiveData.value?.let { repository.loadVideoList(it) } ?:
-                    AbsentLiveData.create()
+            videoIdLiveData.value?.let { repository.loadVideoList(it) } ?: AbsentLiveData.create()
         }
 
         reviewListLiveData = Transformations.switchMap(reviewIdLiveData) {
-            reviewIdLiveData.value?.let { repository.loadReviewsList(it) } ?:
-                    AbsentLiveData.create()
+            reviewIdLiveData.value?.let { repository.loadReviewsList(it) }
+                    ?: AbsentLiveData.create()
         }
     }
 
