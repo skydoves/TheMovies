@@ -54,4 +54,10 @@ class NetworkModule {
     fun provideMovieService(@NonNull retrofit: Retrofit): MovieService {
         return retrofit.create(MovieService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideTvService(@NonNull retrofit: Retrofit): TvService {
+        return retrofit.create(TvService::class.java)
+    }
 }
