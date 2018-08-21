@@ -9,7 +9,7 @@ import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.themovies.api.PeopleService
 import com.skydoves.themovies.api.api.ApiUtil.successCall
-import com.skydoves.themovies.models.PeopleResponse
+import com.skydoves.themovies.models.network.PeopleResponse
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.repository.PeopleRepository

@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import com.skydoves.themovies.api.ApiResponse
 import com.skydoves.themovies.api.PeopleService
 import com.skydoves.themovies.mappers.PeopleResponseMapper
-import com.skydoves.themovies.models.PeopleResponse
+import com.skydoves.themovies.models.network.PeopleResponse
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.room.PeopleDao
