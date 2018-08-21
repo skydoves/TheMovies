@@ -16,7 +16,7 @@ class MockTestUtil {
     companion object {
         fun mockMovie() = Movie(1, emptyList(), emptyList(), emptyList(), "", false, "", "", ArrayList(), 123, "", "", "", "", 0f, 0, false, 0f)
         fun mockTv() = Tv(1, emptyList(), emptyList(), emptyList(), "", 0f, 123, "", 0f, "", "", ArrayList(), ArrayList(), "", 1, "", "")
-        fun mockPerson() = Person(1, "", false, 123, "", 0f)
+        fun mockPerson() = Person(1, null, "", false, 123, "", 0f)
         fun mockKeywordList(): List<Keyword> {
             val keywords = ArrayList<Keyword>()
             keywords.add(Keyword(100, "keyword0"))

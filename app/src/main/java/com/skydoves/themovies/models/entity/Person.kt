@@ -1,8 +1,10 @@
 package com.skydoves.themovies.models.entity
 
+import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.os.Parcel
 import android.os.Parcelable
+import com.skydoves.themovies.models.network.PersonDetail
 
 /**
  * Developed by skydoves on 2018-08-15.
@@ -11,6 +13,7 @@ import android.os.Parcelable
 
 @Entity(tableName = "People", primaryKeys = ["id"])
 data class Person(var page: Int,
+                  @Embedded val personDetail: PersonDetail? = null,
                   val profile_path: String?,
                   val adult: Boolean,
                   val id: Int,
@@ -18,6 +21,7 @@ data class Person(var page: Int,
                   val popularity: Float) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
+            source.readParcelable<PersonDetail>(PersonDetail::class.java.classLoader),
             source.readString(),
             1 == source.readInt(),
             source.readInt(),
@@ -29,6 +33,7 @@ data class Person(var page: Int,
 
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
         writeInt(page)
+        writeParcelable(personDetail, 0)
         writeString(profile_path)
         writeInt((if (adult) 1 else 0))
         writeInt(id)
