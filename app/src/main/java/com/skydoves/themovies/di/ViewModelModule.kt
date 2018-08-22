@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.skydoves.themovies.factory.AppViewModelFactory
 import com.skydoves.themovies.view.ui.details.movie.MovieDetailViewModel
+import com.skydoves.themovies.view.ui.details.person.PersonDetailViewModel
 import com.skydoves.themovies.view.ui.details.tv.TvDetailViewModel
 import com.skydoves.themovies.view.ui.main.MainActivityViewModel
 import dagger.Binds
@@ -32,6 +33,11 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TvDetailViewModel::class)
     internal abstract fun bindTvDetailViewModel(tvDetailViewModel: TvDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PersonDetailViewModel::class)
+    internal abstract fun bindPersonDetailViewModel(personDetailViewModel: PersonDetailViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory
