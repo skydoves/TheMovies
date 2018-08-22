@@ -59,11 +59,11 @@ class DiscoverRepositoryTest {
         val observer = mock<Observer<Resource<List<Movie>>>>()
         data.observeForever(observer)
         verifyNoMoreInteractions(service)
-        verify(observer).onChanged(Resource.loading(null))
         val updatedData = MutableLiveData<List<Movie>>()
         whenever(movieDao.getMovieList(1)).thenReturn(updatedData)
 
         loadFromDB.postValue(null)
+        verify(observer).onChanged(Resource.loading(null))
         verify(service).fetchDiscoverMovie(1)
         verify(movieDao).insertMovieList(mockResponse.results)
 
@@ -87,11 +87,11 @@ class DiscoverRepositoryTest {
         val observer = mock<Observer<Resource<List<Tv>>>>()
         data.observeForever(observer)
         verifyNoMoreInteractions(service)
-        verify(observer).onChanged(Resource.loading(null))
         val updateData = MutableLiveData<List<Tv>>()
         whenever(tvDao.getTvList(1)).thenReturn(updateData)
 
         loadFromDb.postValue(null)
+        verify(observer).onChanged(Resource.loading(null))
         verify(service).fetchDiscoverTv(1)
         verify(tvDao).insertTv(mockResponse.results)
 

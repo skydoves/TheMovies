@@ -13,7 +13,7 @@ import com.skydoves.themovies.models.network.PersonDetail
 
 @Entity(tableName = "People", primaryKeys = ["id"])
 data class Person(var page: Int,
-                  @Embedded val personDetail: PersonDetail? = null,
+                  @Embedded var personDetail: PersonDetail? = null,
                   val profile_path: String?,
                   val adult: Boolean,
                   val id: Int,
