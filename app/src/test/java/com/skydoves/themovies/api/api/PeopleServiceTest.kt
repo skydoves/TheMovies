@@ -29,4 +29,13 @@ class PeopleServiceTest: ApiAbstract<PeopleService>() {
         assertThat(response.body?.total_pages, `is`(984))
         assertThat(response.body?.total_results, `is`(19671))
     }
+
+    @Throws(IOException::class)
+    @Test fun fetchPersonDetail() {
+        enqueueResponse("tmdb_person.json")
+        val response = LiveDataTestUtil.getValue(service.fetchPersonDetail(123))
+        assertThat(response.body?.birthday, `is`("1963-12-18"))
+        assertThat(response.body?.known_for_department, `is`("Acting"))
+        assertThat(response.body?.place_of_birth, `is`("Shawnee, Oklahoma, USA"))
+    }
 }

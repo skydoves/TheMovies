@@ -11,7 +11,7 @@ import com.skydoves.themovies.models.NetworkResponseModel
 
 data class PersonDetail(val birthday: String,
                         val known_for_department: String,
-                        val deathday: String,
+                        val place_of_birth: String,
                         val also_known_se: List<String>,
                         val biography: String) : Parcelable, NetworkResponseModel {
     constructor(source: Parcel) : this(
@@ -27,7 +27,7 @@ data class PersonDetail(val birthday: String,
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
         writeString(birthday)
         writeString(known_for_department)
-        writeString(deathday)
+        writeString(place_of_birth)
         writeStringList(also_known_se)
         writeString(biography)
     }
