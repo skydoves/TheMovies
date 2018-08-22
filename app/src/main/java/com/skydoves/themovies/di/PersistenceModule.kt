@@ -17,7 +17,7 @@ import javax.inject.Singleton
  */
 
 @Module
-class PersistentModule {
+class PersistenceModule {
     @Provides
     @Singleton
     fun provideDatabase(@NonNull application: Application): AppDatabase {
