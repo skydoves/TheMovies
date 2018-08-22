@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -12,8 +13,80 @@
         android:layout_height="wrap_content">
 
         <include
-            android:id="@+id/detail_toolbar"
             layout="@layout/toolbar_default"/>
     </android.support.design.widget.AppBarLayout>
 
-</RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/background800"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/person_detail_profile"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"/>
+
+                    <TextView
+                        android:id="@+id/person_detail_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="23sp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="7dp"/>
+
+                    <TextView
+                        android:id="@+id/person_detail_biography"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:layout_marginBottom="10dp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <co.lujun.androidtagview.TagContainerLayout
+                android:id="@+id/detail_person_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                app:container_border_radius="6dp"
+                app:container_enable_drag="false"
+                app:tag_text_color="@color/white"
+                app:tag_horizontal_padding="5dp"
+                app:tag_vertical_padding="6dp"
+                app:tag_clickable="false"
+                app:tag_theme="none"
+                app:tag_background_color="@color/colorPrimary"
+                app:tag_border_color="@color/colorPrimary"
+                app:container_background_color="@color/background800"
+                app:container_border_color="@color/background800"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

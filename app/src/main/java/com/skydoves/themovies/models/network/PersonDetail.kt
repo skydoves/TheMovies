@@ -12,7 +12,7 @@ import com.skydoves.themovies.models.NetworkResponseModel
 data class PersonDetail(val birthday: String,
                         val known_for_department: String,
                         val place_of_birth: String,
-                        val also_known_se: List<String>,
+                        val also_known_as: List<String>,
                         val biography: String) : Parcelable, NetworkResponseModel {
     constructor(source: Parcel) : this(
             source.readString(),
@@ -28,7 +28,7 @@ data class PersonDetail(val birthday: String,
         writeString(birthday)
         writeString(known_for_department)
         writeString(place_of_birth)
-        writeStringList(also_known_se)
+        writeStringList(also_known_as)
         writeString(biography)
     }
 

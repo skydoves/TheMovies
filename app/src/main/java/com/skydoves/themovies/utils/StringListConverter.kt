@@ -17,7 +17,7 @@ open class StringListConverter {
     }
 
     @TypeConverter
-    fun fromList(list: List<String>): String {
+    fun fromList(list: List<String>?): String {
         val gson = Gson()
         return gson.toJson(list)
     }
