@@ -23,7 +23,9 @@
                 android:layout_centerHorizontal="true"
                 android:scaleType="fitXY"
                 android:layout_marginTop="20dp"
-                tools:src="@drawable/ic_live_tv_white_24dp"/>
+                android:transitionName="@string/transition_profile"
+                tools:src="@drawable/ic_live_tv_white_24dp"
+                tools:targetApi="LOLLIPOP"/>
 
             <TextView
                 android:id="@+id/item_person_name"

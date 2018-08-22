@@ -43,7 +43,10 @@
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="20dp"
+                        android:transitionName="@string/transition_profile"
+                        tools:src="@drawable/ic_live_tv_white_24dp"
+                        tools:targetApi="LOLLIPOP"/>
 
                     <TextView
                         android:id="@+id/person_detail_name"

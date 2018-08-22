@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_person.view.*
 class PeopleViewHolder(val view: View, private val delegate: Delegate): BaseViewHolder(view) {
 
     interface Delegate {
-        fun onItemClick(person: Person)
+        fun onItemClick(person: Person, view: View)
     }
 
     private lateinit var person: Person
@@ -42,7 +42,7 @@ class PeopleViewHolder(val view: View, private val delegate: Delegate): BaseView
     }
 
     override fun onClick(p0: View?) {
-        delegate.onItemClick(person)
+        delegate.onItemClick(person, itemView.item_person_profile)
     }
 
     override fun onLongClick(p0: View?) = false

@@ -81,7 +81,9 @@ class PersonListFragment: Fragment(), PeopleViewHolder.Delegate {
         viewModel.postPeoplePage(page)
     }
 
-    override fun onItemClick(person: Person) {
-        startActivity<PersonDetailActivity>("person" to person)
+    override fun onItemClick(person: Person, view: View) {
+        activity?.let {
+            PersonDetailActivity.startActivity(this, it, person, view)
+        } ?: startActivity<PersonDetailActivity>("person" to person)
     }
 }
