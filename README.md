@@ -1,9 +1,29 @@
 # TheMovies
 ![license](https://img.shields.io/badge/license-MIT%20License-blue.svg) <br><br>
-A simple project for The Movie DB based on Kotlin MVVM clean architecture and material design & animations.
+A simple project for [The Movie DB](https://www.themoviedb.org) based on Kotlin MVVM clean architecture and material design & animations.<br> This project developed based on [TDD](https://en.wikipedia.org/wiki/Test-driven_development).
 
 ![gif0](https://user-images.githubusercontent.com/24237865/44523477-f6681180-a714-11e8-8f48-2dd3ca7cc8c0.gif) 
 ![gif1](https://user-images.githubusercontent.com/24237865/44523478-f6681180-a714-11e8-9597-c885977fe136.gif)
+
+## How to build on your project
+Add your API key in local.properties file.
+```xml
+tmdb_api_key=YOUR_API_KEY
+```
+
+## Development process
+Based on Test-driven development.<br>
+1. API Service -> API Service Unit Test with api response mock files
+2. DAO -> DAO Unit Test
+3. Repository -> Repository Unit Test
+4. ViewModel -> ViewModel Unit Test
+5. DI & Refactoring
+6. Implmentating UI & Layouts <br><br>
+![tdd](https://user-images.githubusercontent.com/24237865/44525064-b572fb80-a71a-11e8-9930-e77cde96561f.png)
+
+## Architecture
+Based on mvvm architecture and repository pattern.<br><br>
+![architecture](https://user-images.githubusercontent.com/24237865/44525736-e9e7b700-a71c-11e8-8045-42c4478dd67e.png)
 
 ## Specs & Open-source libraries
 - Minimum SDK 16
