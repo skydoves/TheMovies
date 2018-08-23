@@ -2,8 +2,8 @@
 ![license](https://img.shields.io/badge/license-MIT%20License-blue.svg) <br><br>
 A simple project for The Movie DB based on Kotlin MVVM clean architecture and material design & animations.
 
-![gif0](https://github.com/skydoves/TheMovies/blob/master/images/gif0.gif) 
-![gif1](https://github.com/skydoves/TheMovies/blob/master/images/gif1.gif)
+![gif0](https://user-images.githubusercontent.com/24237865/44523477-f6681180-a714-11e8-8f48-2dd3ca7cc8c0.gif) 
+![gif1](https://user-images.githubusercontent.com/24237865/44523478-f6681180-a714-11e8-9597-c885977fe136.gif)
 
 ## Specs & Open-source libraries
 - Minimum SDK 16
