@@ -1,0 +1,53 @@
+// Android Gradle Plugin out of the box only supports code coverage for instrumentation espresso) tests.
+// This add support for unit tests as well.
+
+def fileFilter = [
+        '**/R.class',
+        '**/R$*.class',
+        '**/BuildConfig.*',
+        '**/Manifest*.*',
+        'android/**/*.*',
+        'com/android/**/*.class',
+
+        //Dagger 2
+        '**/*Dagger*Component*.*',
+        '**/*Module.*',
+        '**/*Module$*.*',
+        '**/*MembersInjector*.*',
+        '**/*_Factory*.*',
+        '**/*Provide*Factory*.*',
+
+        //Room
+        '**/AppDatabase.class',
+
+        //Classes I intentionally don't want to test
+        '**/api/*',
+        '**/di/*.*',
+        '**/models/*',
+        '**/*Activity.*',
+        '**/*Fragment.*',
+        '**/*Adapter.*',
+        '**/*ViewHolder*.*',
+        '**/extension/*.*',
+        '**/factory/*.*',
+        '**/utils/*.*',
+        '**/mappers/*.*',
+        '**/TheMoviesApplication.class',
+]
+
+task coverageReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports"
+
+    def coverageSourceDirs = "$project.projectDir/src/main/kotlin"
+
+    classDirectories = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
+
+    sourceDirectories = files(coverageSourceDirs)
+    executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
