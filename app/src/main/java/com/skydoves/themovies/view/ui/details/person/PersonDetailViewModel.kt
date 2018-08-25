@@ -17,7 +17,7 @@ import javax.inject.Inject
  */
 
 class PersonDetailViewModel @Inject
-constructor(val repository: PeopleRepository): ViewModel() {
+constructor(private val repository: PeopleRepository): ViewModel() {
 
     private val personIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val personLiveData: LiveData<Resource<PersonDetail>>

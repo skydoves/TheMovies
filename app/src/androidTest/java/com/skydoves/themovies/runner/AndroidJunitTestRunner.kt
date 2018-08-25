@@ -3,6 +3,7 @@ package com.skydoves.themovies.runner
 import android.app.Application
 import android.content.Context
 import android.support.test.runner.AndroidJUnitRunner
+import com.skydoves.themovies.TestTheMoviesApplication
 
 /**
  * Developed by skydoves on 2018-08-10.

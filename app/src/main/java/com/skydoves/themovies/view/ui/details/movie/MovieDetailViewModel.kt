@@ -19,7 +19,7 @@ import javax.inject.Inject
  */
 
 class MovieDetailViewModel @Inject
-constructor(val repository: MovieRepository): ViewModel() {
+constructor(private val repository: MovieRepository): ViewModel() {
 
     private val keywordIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val keywordListLiveData: LiveData<Resource<List<Keyword>>>

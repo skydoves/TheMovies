@@ -1,4 +1,4 @@
-package com.skydoves.themovies.runner
+package com.skydoves.themovies
 
 import android.app.Application
 
