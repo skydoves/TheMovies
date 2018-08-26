@@ -1,6 +1,6 @@
 # TheMovies
 ![license](https://img.shields.io/badge/license-MIT%20License-blue.svg) 
-[![Build Status](https://travis-ci.org/skydoves/TheMovies.svg?branch=master)](https://travis-ci.org/skydoves/TheMovies) <br><br>
+[![Build Status](https://travis-ci.org/skydoves/TheMovies.svg?branch=master)](https://travis-ci.org/skydoves/TheMovies) <br>
 
 A simple project for [The Movie DB](https://www.themoviedb.org) based on Kotlin MVVM clean architecture and material design & animations.<br>
 
