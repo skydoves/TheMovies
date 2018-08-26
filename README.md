@@ -1,11 +1,13 @@
 # TheMovies
-![license](https://img.shields.io/badge/license-MIT%20License-blue.svg) <br><br>
-A simple project for [The Movie DB](https://www.themoviedb.org) based on Kotlin MVVM clean architecture and material design & animations.<br> This project developed based on [TDD](https://en.wikipedia.org/wiki/Test-driven_development).
+![license](https://img.shields.io/badge/license-MIT%20License-blue.svg) 
+[![Build Status](https://travis-ci.org/skydoves/TheMovies.svg?branch=master)](https://travis-ci.org/skydoves/TheMovies) <br><br>
+
+A simple project for [The Movie DB](https://www.themoviedb.org) based on Kotlin MVVM clean architecture and material design & animations.<br>
 
 ![gif0](https://user-images.githubusercontent.com/24237865/44523477-f6681180-a714-11e8-8f48-2dd3ca7cc8c0.gif) 
 ![gif1](https://user-images.githubusercontent.com/24237865/44523478-f6681180-a714-11e8-9597-c885977fe136.gif)
 
-## How to build on your project
+## How to build on your environment
 Add your API key in local.properties file.
 ```xml
 tmdb_api_key=YOUR_API_KEY
