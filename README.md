@@ -46,6 +46,9 @@ Based on mvvm architecture and repository pattern.<br><br>
 - Custom Views [NavigationTabBar](https://github.com/Devlight/NavigationTabBar), [AndroidTagView](https://github.com/whilu/AndroidTagView),
 [ExpandableTextView](https://github.com/Manabu-GT/ExpandableTextView)
 
+## Posting
+[Medium - Android MVVM Architecture Components using The Movie Database API](https://medium.com/@skydoves/android-mvvm-architecture-components-using-the-movie-database-api-8fbab128d7)
+
 # License
 ```xml
 The MIT License (MIT)
