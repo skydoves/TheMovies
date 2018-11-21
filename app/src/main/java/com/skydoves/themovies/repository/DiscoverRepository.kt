@@ -1,6 +1,6 @@
 package com.skydoves.themovies.repository
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.skydoves.themovies.api.ApiResponse
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.mappers.MovieResponseMapper

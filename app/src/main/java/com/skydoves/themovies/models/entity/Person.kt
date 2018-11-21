@@ -1,7 +1,7 @@
 package com.skydoves.themovies.models.entity
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
+import androidx.room.Embedded
+import androidx.room.Entity
 import android.os.Parcel
 import android.os.Parcelable
 import com.skydoves.themovies.models.network.PersonDetail

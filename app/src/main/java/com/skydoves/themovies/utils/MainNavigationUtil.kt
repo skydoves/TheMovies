@@ -2,8 +2,8 @@ package com.skydoves.themovies.utils
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
+import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import com.skydoves.themovies.R
 import devlight.io.library.ntb.NavigationTabBar
 

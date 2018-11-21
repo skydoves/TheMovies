@@ -1,6 +1,6 @@
 package com.skydoves.themovies.api
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.skydoves.themovies.models.network.PeopleResponse
 import com.skydoves.themovies.models.network.PersonDetail
 import retrofit2.http.GET

@@ -1,7 +1,7 @@
 package com.skydoves.themovies.di
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.skydoves.themovies.factory.AppViewModelFactory
 import com.skydoves.themovies.view.ui.details.movie.MovieDetailViewModel
 import com.skydoves.themovies.view.ui.details.person.PersonDetailViewModel

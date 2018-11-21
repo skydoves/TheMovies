@@ -1,8 +1,8 @@
 package com.skydoves.themovies.room
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverters
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv

@@ -1,6 +1,6 @@
 package com.skydoves.themovies.db
 
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.runner.AndroidJUnit4
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.utils.LiveDataTestUtil
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockMovie

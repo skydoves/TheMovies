@@ -1,6 +1,6 @@
 package com.skydoves.themovies.models.entity
 
-import android.arch.persistence.room.Entity
+import androidx.room.Entity
 import android.os.Parcel
 import android.os.Parcelable
 import com.skydoves.themovies.models.Keyword

@@ -1,8 +1,8 @@
 package com.skydoves.themovies.db
 
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import com.skydoves.themovies.room.AppDatabase
 import org.junit.After
 import org.junit.Before

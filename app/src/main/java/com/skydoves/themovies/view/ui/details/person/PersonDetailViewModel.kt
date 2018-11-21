@@ -1,9 +1,9 @@
 package com.skydoves.themovies.view.ui.details.person
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.network.PersonDetail
 import com.skydoves.themovies.repository.PeopleRepository

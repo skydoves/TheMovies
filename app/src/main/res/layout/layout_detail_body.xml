@@ -20,7 +20,7 @@
         android:visibility="gone"
         tools:visibility="visible"/>
     
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detail_body_recyclerView_trailers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
         android:visibility="gone"
         tools:visibility="visible"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detail_body_recyclerView_reviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

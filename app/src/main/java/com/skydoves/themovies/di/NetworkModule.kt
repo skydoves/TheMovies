@@ -1,6 +1,6 @@
 package com.skydoves.themovies.di
 
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.skydoves.themovies.api.*
 import dagger.Module

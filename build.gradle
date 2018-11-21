@@ -8,10 +8,13 @@ buildscript {
         targetSdkVersion = 28
 
         // application dependencies
-        supportLibraryVersion = '28.0.0'
+        androidxVersion = '1.0.0'
+        accompatVersion = '1.0.2'
+        materialVersion = '1.1.0-alpha01'
         kotlinVersion = '1.2.71'
         ankoVersion = '0.10.1'
-        archCompomentVersion = '1.1.1'
+        archCompomentVersion = '2.0.0'
+        roomVersion = '2.1.0-alpha02'
         daggerVersion = '2.16'
         retrofitVersion = '2.3.0'
         okhttpVersion = '3.11.0'

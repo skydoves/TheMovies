@@ -7,14 +7,14 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <include
             layout="@layout/toolbar_default"/>
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/background800"
@@ -68,7 +68,7 @@
                         android:padding="10dp"
                         android:layout_marginBottom="10dp"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <co.lujun.androidtagview.TagContainerLayout
                 android:id="@+id/detail_person_tags"
