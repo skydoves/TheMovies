@@ -110,9 +110,11 @@ class PersonDetailActivity : AppCompatActivity() {
         fun startActivity(fragment: Fragment, activity: FragmentActivity, person: Person, view: View) {
             if (activity.checkIsMaterialVersion()) {
                 val intent = Intent(activity, PersonDetailActivity::class.java)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, ViewCompat.getTransitionName(view))
-                intent.putExtra("person", person)
-                activity.startActivityFromFragment(fragment, intent, intent_requestCode, options.toBundle())
+                ViewCompat.getTransitionName(view)?.let {
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)
+                    intent.putExtra("person", person)
+                    activity.startActivityFromFragment(fragment, intent, intent_requestCode, options.toBundle())
+                }
             } else {
                 activity.startActivityForResult<PersonDetailActivity>(intent_requestCode, "person" to person)
             }
