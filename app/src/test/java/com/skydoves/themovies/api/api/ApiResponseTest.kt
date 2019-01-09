@@ -17,7 +17,8 @@ import retrofit2.Response
 @RunWith(JUnit4::class)
 class ApiResponseTest {
 
-    @Test fun exception() {
+    @Test
+    fun exception() {
         val exception = Exception("foo")
         val apiResponse = ApiResponse<String>(exception)
         assertThat(apiResponse.isSuccessful, `is`(false))
@@ -26,7 +27,8 @@ class ApiResponseTest {
         assertThat(apiResponse.message, `is`("foo"))
     }
 
-    @Test fun success() {
+    @Test
+    fun success() {
         val apiResponse = ApiResponse(Response.success("foo"))
         assertThat(apiResponse.isSuccessful, `is`(true))
         assertThat(apiResponse.code, `is`(200))

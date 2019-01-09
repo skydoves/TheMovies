@@ -19,7 +19,7 @@ import javax.inject.Inject
  */
 
 class TvDetailViewModel @Inject
-constructor(private val repository: TvRepository): ViewModel() {
+constructor(private val repository: TvRepository) : ViewModel() {
 
     private val keywordIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val keywordListLiveData: LiveData<Resource<List<Keyword>>>

@@ -19,7 +19,7 @@ import javax.inject.Inject
  */
 
 class MovieDetailViewModel @Inject
-constructor(private val repository: MovieRepository): ViewModel() {
+constructor(private val repository: MovieRepository) : ViewModel() {
 
     private val keywordIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val keywordListLiveData: LiveData<Resource<List<Keyword>>>
@@ -34,18 +34,17 @@ constructor(private val repository: MovieRepository): ViewModel() {
         Timber.d("Injection MovieDetailViewModel")
 
         keywordListLiveData = Transformations.switchMap(keywordIdLiveData) {
-            keywordIdLiveData.value?.let { repository.loadKeywordList(it) } ?:
-                    AbsentLiveData.create()
+            keywordIdLiveData.value?.let { repository.loadKeywordList(it) }
+                    ?: AbsentLiveData.create()
         }
 
         videoListLiveData = Transformations.switchMap(videoIdLiveData) {
-            videoIdLiveData.value?.let { repository.loadVideoList(it) } ?:
-                    AbsentLiveData.create()
+            videoIdLiveData.value?.let { repository.loadVideoList(it) } ?: AbsentLiveData.create()
         }
 
         reviewListLiveData = Transformations.switchMap(reviewIdLiveData) {
-            reviewIdLiveData.value?.let { repository.loadReviewsList(it) } ?:
-                    AbsentLiveData.create()
+            reviewIdLiveData.value?.let { repository.loadReviewsList(it) }
+                    ?: AbsentLiveData.create()
         }
     }
 

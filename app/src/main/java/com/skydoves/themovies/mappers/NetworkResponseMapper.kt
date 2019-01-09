@@ -7,6 +7,6 @@ import com.skydoves.themovies.models.NetworkResponseModel
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-interface NetworkResponseMapper<in FROM: NetworkResponseModel> {
+interface NetworkResponseMapper<in FROM : NetworkResponseModel> {
     fun onLastPage(response: FROM): Boolean
 }

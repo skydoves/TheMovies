@@ -32,7 +32,7 @@ constructor(val peopleService: PeopleService, val peopleDao: PeopleDao)
     fun loadPeople(page: Int): LiveData<Resource<List<Person>>> {
         return object : NetworkBoundRepository<List<Person>, PeopleResponse, PeopleResponseMapper>() {
             override fun saveFetchData(items: PeopleResponse) {
-                for(item in items.results) {
+                for (item in items.results) {
                     item.page = page
                 }
                 peopleDao.insertPeople(items.results)
@@ -74,7 +74,7 @@ constructor(val peopleService: PeopleService, val peopleDao: PeopleDao)
 
             override fun loadFromDb(): LiveData<PersonDetail> {
                 val person = peopleDao.getPerson(id_ = id)
-                val data : MutableLiveData<PersonDetail> = MutableLiveData()
+                val data: MutableLiveData<PersonDetail> = MutableLiveData()
                 data.value = person.personDetail
                 return data
             }

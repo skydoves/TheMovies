@@ -35,7 +35,9 @@ class PeopleRepositoryTest {
     private val peopleDao = mock<PeopleDao>()
     private val service = mock<PeopleService>()
 
-    @Rule @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+    @Rule
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {

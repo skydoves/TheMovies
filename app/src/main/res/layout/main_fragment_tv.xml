@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        tools:listitem="@layout/item_poster"/>
+        tools:listitem="@layout/item_poster" />
 
 </RelativeLayout>

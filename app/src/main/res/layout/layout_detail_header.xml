@@ -3,39 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/detail_header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxEms="12"
+        android:singleLine="true"
+        android:textColor="@color/white"
         android:textSize="27sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:maxEms="12"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:gravity="center"
-        tools:text="Star Wars: The Last Jedi"/>
+        tools:text="Star Wars: The Last Jedi" />
 
     <TextView
         android:id="@+id/detail_header_release"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:textColor="@color/white"
-        android:gravity="center"
         android:layout_marginTop="6dp"
-        tools:text="Release Date :"/>
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        tools:text="Release Date :" />
 
     <RatingBar
         android:id="@+id/detail_header_star"
+        style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/ratingBarStyleSmall"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        tools:rating="3.5f"/>
+        tools:rating="3.5f" />
 
 </LinearLayout>

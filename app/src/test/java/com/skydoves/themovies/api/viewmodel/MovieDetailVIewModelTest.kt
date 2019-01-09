@@ -44,7 +44,8 @@ class MovieDetailVIewModelTest {
     private val service = mock<MovieService>()
 
     @Rule
-    @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {

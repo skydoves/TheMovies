@@ -13,16 +13,18 @@ import java.io.IOException
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MovieServiceTest: ApiAbstract<MovieService>() {
+class MovieServiceTest : ApiAbstract<MovieService>() {
 
     private lateinit var service: MovieService
 
-    @Before fun initService() {
+    @Before
+    fun initService() {
         this.service = createService(MovieService::class.java)
     }
 
     @Throws(IOException::class)
-    @Test fun fetchMovieKeywordsTest() {
+    @Test
+    fun fetchMovieKeywordsTest() {
         enqueueResponse("/tmdb_movie_keywords.json")
         val response = LiveDataTestUtil.getValue(service.fetchKeywords(1))
         assertThat(response.body?.id, `is`(550))
@@ -31,7 +33,8 @@ class MovieServiceTest: ApiAbstract<MovieService>() {
     }
 
     @Throws(IOException::class)
-    @Test fun fetchMovieVideosTest() {
+    @Test
+    fun fetchMovieVideosTest() {
         enqueueResponse("/tmdb_movie_videos.json")
         val response = LiveDataTestUtil.getValue(service.fetchVideos(1))
         assertThat(response.body?.id, `is`(550))
@@ -40,7 +43,8 @@ class MovieServiceTest: ApiAbstract<MovieService>() {
     }
 
     @Throws(IOException::class)
-    @Test fun fetchMovieReviewsTest() {
+    @Test
+    fun fetchMovieReviewsTest() {
         enqueueResponse("/tmdb_movie_reviews.json")
         val response = LiveDataTestUtil.getValue(service.fetchReviews(1))
         assertThat(response.body?.id, `is`(297761))

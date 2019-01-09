@@ -42,7 +42,8 @@ class TvDetailViewModelTest {
     private val service = mock<TvService>()
 
     @Rule
-    @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {

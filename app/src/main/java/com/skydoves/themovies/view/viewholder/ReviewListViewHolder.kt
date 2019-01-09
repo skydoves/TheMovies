@@ -10,12 +10,12 @@ import kotlinx.android.synthetic.main.item_review.view.*
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class ReviewListViewHolder(val view: View): BaseViewHolder(view) {
+class ReviewListViewHolder(val view: View) : BaseViewHolder(view) {
 
     private lateinit var review: Review
 
     override fun bindData(data: Any) {
-        if(data is Review) {
+        if (data is Review) {
             review = data
             drawItem()
         }

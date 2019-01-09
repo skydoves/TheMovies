@@ -43,7 +43,7 @@ class ApiResponse<T> {
             }
 
             errorMessage?.apply {
-                if(isNullOrEmpty() || trim { it <= ' ' }.isEmpty()) {
+                if (isNullOrEmpty() || trim { it <= ' ' }.isEmpty()) {
                     errorMessage = response.message()
                 }
             }

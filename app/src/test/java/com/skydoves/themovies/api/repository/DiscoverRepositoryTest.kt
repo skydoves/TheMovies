@@ -9,7 +9,7 @@ import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.api.api.ApiUtil.successCall
-import com.skydoves.themovies.models.*
+import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.models.network.DiscoverMovieResponse
@@ -36,7 +36,9 @@ class DiscoverRepositoryTest {
     private val tvDao = mock<TvDao>()
     private val service = mock<TheDiscoverService>()
 
-    @Rule @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+    @Rule
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {

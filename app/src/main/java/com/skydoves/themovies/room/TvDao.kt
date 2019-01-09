@@ -21,5 +21,5 @@ interface TvDao {
     fun getTv(id_: Int): Tv
 
     @Query("SELECT * FROM Tv WHERE page = :page_")
-    fun getTvList(page_: Int) : LiveData<List<Tv>>
+    fun getTvList(page_: Int): LiveData<List<Tv>>
 }

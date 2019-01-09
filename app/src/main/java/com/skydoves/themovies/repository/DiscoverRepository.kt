@@ -5,7 +5,7 @@ import com.skydoves.themovies.api.ApiResponse
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.mappers.MovieResponseMapper
 import com.skydoves.themovies.mappers.TvResponseMapper
-import com.skydoves.themovies.models.*
+import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.models.network.DiscoverMovieResponse
@@ -33,7 +33,7 @@ constructor(val discoverService: TheDiscoverService, val movieDao: MovieDao, val
     fun loadMovies(page: Int): LiveData<Resource<List<Movie>>> {
         return object : NetworkBoundRepository<List<Movie>, DiscoverMovieResponse, MovieResponseMapper>() {
             override fun saveFetchData(items: DiscoverMovieResponse) {
-                for(item in items.results) {
+                for (item in items.results) {
                     item.page = page
                 }
                 movieDao.insertMovieList(movies = items.results)
@@ -64,7 +64,7 @@ constructor(val discoverService: TheDiscoverService, val movieDao: MovieDao, val
     fun loadTvs(page: Int): LiveData<Resource<List<Tv>>> {
         return object : NetworkBoundRepository<List<Tv>, DiscoverTvResponse, TvResponseMapper>() {
             override fun saveFetchData(items: DiscoverTvResponse) {
-                for(item in items.results) {
+                for (item in items.results) {
                     item.page = page
                 }
                 tvDao.insertTv(tvs = items.results)

@@ -1,8 +1,8 @@
 package com.skydoves.themovies.di
 
 import android.app.Application
-import androidx.room.Room
 import androidx.annotation.NonNull
+import androidx.room.Room
 import com.skydoves.themovies.room.AppDatabase
 import com.skydoves.themovies.room.MovieDao
 import com.skydoves.themovies.room.PeopleDao

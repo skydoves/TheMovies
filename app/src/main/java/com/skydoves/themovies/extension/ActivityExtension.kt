@@ -3,16 +3,16 @@ package com.skydoves.themovies.extension
 import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.os.Build
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.view.ViewAnimationUtils
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.skydoves.themovies.R
 
 /**
@@ -27,7 +27,7 @@ fun Activity.circularRevealedAtCenter(view: View) {
     val cy = (view.top + view.bottom) / 2
     val finalRadius = Math.max(view.width, view.height)
 
-    if(checkIsMaterialVersion() && view.isAttachedToWindow) {
+    if (checkIsMaterialVersion() && view.isAttachedToWindow) {
         val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, finalRadius.toFloat())
         view.visible()
         view.setBackgroundColor(ContextCompat.getColor(this, R.color.background))
@@ -37,7 +37,7 @@ fun Activity.circularRevealedAtCenter(view: View) {
 }
 
 fun Activity.requestGlideListener(view: View): RequestListener<Drawable> {
-    return object: RequestListener<Drawable> {
+    return object : RequestListener<Drawable> {
         override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
             return false
         }
@@ -59,7 +59,7 @@ fun AppCompatActivity.simpleToolbarWithHome(toolbar: Toolbar, title_: String = "
 }
 
 fun AppCompatActivity.applyToolbarMargin(toolbar: Toolbar) {
-    if(checkIsMaterialVersion()) {
+    if (checkIsMaterialVersion()) {
         toolbar.layoutParams = (toolbar.layoutParams as CollapsingToolbarLayout.LayoutParams).apply {
             topMargin = getStatusBarSize()
         }

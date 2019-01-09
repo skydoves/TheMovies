@@ -7,7 +7,7 @@ import com.skydoves.themovies.models.network.PersonDetail
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class PersonDetailResponseMapper: NetworkResponseMapper<PersonDetail> {
+class PersonDetailResponseMapper : NetworkResponseMapper<PersonDetail> {
     override fun onLastPage(response: PersonDetail): Boolean {
         return true
     }

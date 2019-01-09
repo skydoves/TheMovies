@@ -7,7 +7,7 @@ import com.skydoves.themovies.models.network.KeywordListResponse
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class KeywordResponseMapper: NetworkResponseMapper<KeywordListResponse> {
+class KeywordResponseMapper : NetworkResponseMapper<KeywordListResponse> {
     override fun onLastPage(response: KeywordListResponse): Boolean {
         return true
     }

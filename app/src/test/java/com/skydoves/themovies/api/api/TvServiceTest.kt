@@ -14,16 +14,18 @@ import java.io.IOException
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class TvServiceTest: ApiAbstract<TvService>() {
+class TvServiceTest : ApiAbstract<TvService>() {
 
     private lateinit var service: TvService
 
-    @Before fun initService() {
+    @Before
+    fun initService() {
         this.service = createService(TvService::class.java)
     }
 
     @Throws(IOException::class)
-    @Test fun fetchTvKeywordsTest() {
+    @Test
+    fun fetchTvKeywordsTest() {
         enqueueResponse("/tmdb_movie_keywords.json")
         val response = LiveDataTestUtil.getValue(service.fetchKeywords(1))
         assertThat(response.body?.id, CoreMatchers.`is`(550))
@@ -33,7 +35,8 @@ class TvServiceTest: ApiAbstract<TvService>() {
 
 
     @Throws(IOException::class)
-    @Test fun fetchTvVideosTest() {
+    @Test
+    fun fetchTvVideosTest() {
         enqueueResponse("/tmdb_movie_videos.json")
         val response = LiveDataTestUtil.getValue(service.fetchVideos(1))
         assertThat(response.body?.id, `is`(550))
@@ -42,7 +45,8 @@ class TvServiceTest: ApiAbstract<TvService>() {
     }
 
     @Throws(IOException::class)
-    @Test fun fetchTvReviewsTest() {
+    @Test
+    fun fetchTvReviewsTest() {
         enqueueResponse("/tmdb_movie_reviews.json")
         val response = LiveDataTestUtil.getValue(service.fetchReviews(1))
         assertThat(response.body?.id, `is`(297761))

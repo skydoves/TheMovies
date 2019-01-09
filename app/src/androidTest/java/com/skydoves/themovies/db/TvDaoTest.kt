@@ -17,9 +17,10 @@ import org.junit.runners.JUnit4
  */
 
 @RunWith(JUnit4::class)
-class TvDaoTest: DbTest() {
+class TvDaoTest : DbTest() {
 
-    @Test fun insertAndRead() {
+    @Test
+    fun insertAndRead() {
         val tvList = ArrayList<Tv>()
         val tv = mockTv()
         tvList.add(tv)
@@ -30,7 +31,8 @@ class TvDaoTest: DbTest() {
         MatcherAssert.assertThat(loadFromDB.id, CoreMatchers.`is`(123))
     }
 
-    @Test fun updateAndReadTest() {
+    @Test
+    fun updateAndReadTest() {
         val tvList = ArrayList<Tv>()
         val tv = mockTv()
         tvList.add(tv)

@@ -37,7 +37,8 @@ class PersonDetailViewModelTest {
     private val service = mock<PeopleService>()
 
     @Rule
-    @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {

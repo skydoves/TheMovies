@@ -1,4 +1,3 @@
-
 package com.skydoves.themovies.utils
 
 import androidx.lifecycle.LiveData

@@ -8,7 +8,7 @@ import timber.log.Timber
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class TvResponseMapper: NetworkResponseMapper<DiscoverTvResponse> {
+class TvResponseMapper : NetworkResponseMapper<DiscoverTvResponse> {
     override fun onLastPage(response: DiscoverTvResponse): Boolean {
         Timber.d("loadPage : ${response.page}/${response.total_pages}")
         return response.page > response.total_pages

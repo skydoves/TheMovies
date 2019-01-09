@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
-import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.repository.DiscoverRepository
 import com.skydoves.themovies.repository.PeopleRepository
@@ -20,7 +20,7 @@ import javax.inject.Inject
  */
 
 class MainActivityViewModel @Inject
-constructor(private val discoverRepository: DiscoverRepository, private val peopleRepository: PeopleRepository): ViewModel() {
+constructor(private val discoverRepository: DiscoverRepository, private val peopleRepository: PeopleRepository) : ViewModel() {
 
     private var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
     private val movieListLiveData: LiveData<Resource<List<Movie>>>
@@ -35,18 +35,17 @@ constructor(private val discoverRepository: DiscoverRepository, private val peop
         Timber.d("injection MainActivityViewModel")
 
         movieListLiveData = Transformations.switchMap(moviePageLiveData) {
-            moviePageLiveData.value?.let { discoverRepository.loadMovies(it) } ?:
-            AbsentLiveData.create()
+            moviePageLiveData.value?.let { discoverRepository.loadMovies(it) }
+                    ?: AbsentLiveData.create()
         }
 
         tvListLiveData = Transformations.switchMap(tvPageLiveData) {
-            tvPageLiveData.value?.let { discoverRepository.loadTvs(it) } ?:
-            AbsentLiveData.create()
+            tvPageLiveData.value?.let { discoverRepository.loadTvs(it) } ?: AbsentLiveData.create()
         }
 
         peopleLiveData = Transformations.switchMap(peoplePageLiveData) {
-            peoplePageLiveData.value?.let { peopleRepository.loadPeople(it) } ?:
-            AbsentLiveData.create()
+            peoplePageLiveData.value?.let { peopleRepository.loadPeople(it) }
+                    ?: AbsentLiveData.create()
         }
     }
 

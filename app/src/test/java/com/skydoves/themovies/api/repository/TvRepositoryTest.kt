@@ -38,14 +38,17 @@ class TvRepositoryTest {
     private val tvDao = mock<TvDao>()
     private val service = mock<TvService>()
 
-    @Rule @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+    @Rule
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {
         repository = TvRepository(service, tvDao)
     }
 
-    @Test fun loadKeywordListFromNetwork() {
+    @Test
+    fun loadKeywordListFromNetwork() {
         val loadFromDB = mockTv()
         whenever(tvDao.getTv(123)).thenReturn(loadFromDB)
 
@@ -66,7 +69,8 @@ class TvRepositoryTest {
         verify(tvDao).updateTv(updatedTv)
     }
 
-    @Test fun loadVideoListFromNetwork() {
+    @Test
+    fun loadVideoListFromNetwork() {
         val loadFromDB = mockTv()
         whenever(tvDao.getTv(123)).thenReturn(loadFromDB)
 
@@ -87,11 +91,12 @@ class TvRepositoryTest {
         verify(tvDao).updateTv(updatedTv)
     }
 
-    @Test fun loadReviewListFromNetwork() {
+    @Test
+    fun loadReviewListFromNetwork() {
         val loadFromDB = mockTv()
         whenever(tvDao.getTv(123)).thenReturn(loadFromDB)
 
-        val mockResponse = ReviewListResponse(123, 1, MockTestUtil.mockReviewList(),100, 100)
+        val mockResponse = ReviewListResponse(123, 1, MockTestUtil.mockReviewList(), 100, 100)
         val call = ApiUtil.successCall(mockResponse)
         whenever(service.fetchReviews(123)).thenReturn(call)
 

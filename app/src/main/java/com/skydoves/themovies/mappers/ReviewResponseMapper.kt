@@ -7,7 +7,7 @@ import com.skydoves.themovies.models.network.ReviewListResponse
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class ReviewResponseMapper: NetworkResponseMapper<ReviewListResponse> {
+class ReviewResponseMapper : NetworkResponseMapper<ReviewListResponse> {
     override fun onLastPage(response: ReviewListResponse): Boolean {
         return true
     }

@@ -17,7 +17,7 @@ import javax.inject.Inject
  */
 
 class PersonDetailViewModel @Inject
-constructor(private val repository: PeopleRepository): ViewModel() {
+constructor(private val repository: PeopleRepository) : ViewModel() {
 
     private val personIdLiveData: MutableLiveData<Int> = MutableLiveData()
     private val personLiveData: LiveData<Resource<PersonDetail>>
@@ -26,8 +26,8 @@ constructor(private val repository: PeopleRepository): ViewModel() {
         Timber.d("Injection : PersonDetailViewModel")
 
         personLiveData = Transformations.switchMap(personIdLiveData) {
-            personIdLiveData.value?.let { repository.loadPersonDetail(it) } ?:
-                    AbsentLiveData.create()
+            personIdLiveData.value?.let { repository.loadPersonDetail(it) }
+                    ?: AbsentLiveData.create()
         }
     }
 

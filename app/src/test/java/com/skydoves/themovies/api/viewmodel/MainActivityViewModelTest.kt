@@ -10,7 +10,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.themovies.api.PeopleService
 import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.api.api.ApiUtil
-import com.skydoves.themovies.models.*
+import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
@@ -46,7 +46,8 @@ class MainActivityViewModelTest {
     private val peopleService = mock<PeopleService>()
 
     @Rule
-    @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {

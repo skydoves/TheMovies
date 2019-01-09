@@ -9,10 +9,10 @@ import androidx.fragment.app.FragmentPagerAdapter
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MainPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
+class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        when(position) {
+        when (position) {
             0 -> return MovieListFragment()
             1 -> return TvListFragment()
             else -> return PersonListFragment()

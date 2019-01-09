@@ -1,13 +1,13 @@
 package com.skydoves.themovies.view.ui.details.movie
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.skydoves.themovies.R
 import com.skydoves.themovies.api.Api
@@ -32,7 +32,8 @@ import javax.inject.Inject
 
 class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(MovieDetailViewModel::class.java) }
 
     private val videoAdapter by lazy { VideoListAdapter(this) }
@@ -83,46 +84,49 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     }
 
     private fun updateKeywordList(resource: Resource<List<Keyword>>) {
-        when(resource.status) {
+        when (resource.status) {
             Status.SUCCESS -> {
                 detail_body_tags.tags = KeywordListMapper.mapToStringList(resource.data!!)
 
-                if(resource.data.isNotEmpty()) {
+                if (resource.data.isNotEmpty()) {
                     detail_body_tags.visible()
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> { }
+            Status.LOADING -> {
+            }
         }
     }
 
     private fun updateVideoList(resource: Resource<List<Video>>) {
-        when(resource.status) {
+        when (resource.status) {
             Status.SUCCESS -> {
                 videoAdapter.addVideoList(resource)
 
-                if(resource.data?.isNotEmpty()!!) {
+                if (resource.data?.isNotEmpty()!!) {
                     detail_body_trailers.visible()
                     detail_body_recyclerView_trailers.visible()
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> { }
+            Status.LOADING -> {
+            }
         }
     }
 
     private fun updateReviewList(resource: Resource<List<Review>>) {
-        when(resource.status) {
+        when (resource.status) {
             Status.SUCCESS -> {
                 reviewAdapter.addReviewList(resource)
 
-                if(resource.data?.isNotEmpty()!!) {
+                if (resource.data?.isNotEmpty()!!) {
                     detail_body_reviews.visible()
                     detail_body_recyclerView_reviews.visible()
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> { }
+            Status.LOADING -> {
+            }
         }
     }
 
@@ -131,7 +135,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.itemId == android.R.id.home) onBackPressed()
+        if (item?.itemId == android.R.id.home) onBackPressed()
         return false
     }
 

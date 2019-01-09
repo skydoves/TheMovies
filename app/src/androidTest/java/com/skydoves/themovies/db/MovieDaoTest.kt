@@ -15,9 +15,10 @@ import org.junit.runner.RunWith
  */
 
 @RunWith(AndroidJUnit4::class)
-class MovieDaoTest: DbTest() {
+class MovieDaoTest : DbTest() {
 
-    @Test fun insertAndReadTest() {
+    @Test
+    fun insertAndReadTest() {
         val movieList = ArrayList<Movie>()
         val movie = mockMovie()
         movieList.add(movie)
@@ -28,7 +29,8 @@ class MovieDaoTest: DbTest() {
         assertThat(loadFromDB.id, `is`(123))
     }
 
-    @Test fun updateAndReadTest() {
+    @Test
+    fun updateAndReadTest() {
         val movieList = ArrayList<Movie>()
         val movie = mockMovie()
         movieList.add(movie)

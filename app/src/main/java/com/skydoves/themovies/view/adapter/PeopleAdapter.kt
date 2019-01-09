@@ -5,8 +5,8 @@ import com.skydoves.baserecyclerviewadapter.BaseAdapter
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.baserecyclerviewadapter.SectionRow
 import com.skydoves.themovies.R
-import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.view.viewholder.PeopleViewHolder
 
 /**
@@ -14,7 +14,7 @@ import com.skydoves.themovies.view.viewholder.PeopleViewHolder
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class PeopleAdapter(val delegate: PeopleViewHolder.Delegate): BaseAdapter() {
+class PeopleAdapter(val delegate: PeopleViewHolder.Delegate) : BaseAdapter() {
 
     init {
         addSection(ArrayList<Person>())

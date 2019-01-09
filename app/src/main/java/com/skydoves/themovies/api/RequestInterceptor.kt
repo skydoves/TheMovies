@@ -9,7 +9,7 @@ import okhttp3.Response
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-internal class RequestInterceptor: Interceptor {
+internal class RequestInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val originalUrl = originalRequest.url()

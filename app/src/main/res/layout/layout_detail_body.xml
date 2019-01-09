@@ -4,78 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background"
+    android:orientation="vertical"
     android:paddingBottom="10dp">
 
     <TextView
         android:id="@+id/detail_body_trailers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="Trailers"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:text="Trailers"
-        android:layout_marginTop="23dp"
         android:visibility="gone"
-        tools:visibility="visible"/>
-    
+        tools:visibility="visible" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detail_body_recyclerView_trailers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        android:layout_marginTop="23dp"
         android:text="Summary"
-        android:layout_marginTop="23dp"/>
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/detail_body_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:textColor="@color/white"
         android:layout_marginTop="12dp"
-        tools:text="Summary"/>
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        tools:text="Summary" />
 
     <co.lujun.androidtagview.TagContainerLayout
         android:id="@+id/detail_body_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_marginTop="15dp"
-        app:container_enable_drag="false"
-        app:tag_text_color="@color/white"
-        app:tag_horizontal_padding="5dp"
-        app:tag_vertical_padding="6dp"
-        app:tag_clickable="false"
-        app:tag_theme="none"
-        app:tag_background_color="@color/colorPrimary"
-        app:tag_border_color="@color/colorPrimary"
+        android:padding="10dp"
+        android:visibility="gone"
         app:container_background_color="@color/background800"
         app:container_border_color="@color/background800"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        app:container_enable_drag="false"
+        app:tag_background_color="@color/colorPrimary"
+        app:tag_border_color="@color/colorPrimary"
+        app:tag_clickable="false"
+        app:tag_horizontal_padding="5dp"
+        app:tag_text_color="@color/white"
+        app:tag_theme="none"
+        app:tag_vertical_padding="6dp"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/detail_body_reviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="Reviews"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:text="Reviews"
-        android:layout_marginTop="23dp"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detail_body_recyclerView_reviews"
@@ -83,6 +83,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
 </LinearLayout>

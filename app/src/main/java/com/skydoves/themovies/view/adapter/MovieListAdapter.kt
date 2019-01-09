@@ -5,8 +5,8 @@ import com.skydoves.baserecyclerviewadapter.BaseAdapter
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.baserecyclerviewadapter.SectionRow
 import com.skydoves.themovies.R
-import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.viewholder.MovieListViewHolder
 
 /**
@@ -14,7 +14,7 @@ import com.skydoves.themovies.view.viewholder.MovieListViewHolder
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MovieListAdapter(private val delegate: MovieListViewHolder.Delegate): BaseAdapter() {
+class MovieListAdapter(private val delegate: MovieListViewHolder.Delegate) : BaseAdapter() {
 
     init {
         addSection(ArrayList<Movie>())

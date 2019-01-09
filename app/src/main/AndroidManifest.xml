@@ -21,10 +21,10 @@
         </activity>
         <activity
             android:name=".view.ui.details.movie.MovieDetailActivity"
-            android:theme="@style/DetailTheme"/>
+            android:theme="@style/DetailTheme" />
         <activity
             android:name=".view.ui.details.tv.TvDetailActivity"
-            android:theme="@style/DetailTheme"/>
+            android:theme="@style/DetailTheme" />
         <activity android:name=".view.ui.details.person.PersonDetailActivity" />
     </application>
 

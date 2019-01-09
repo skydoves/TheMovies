@@ -14,7 +14,7 @@ import com.skydoves.themovies.view.viewholder.ReviewListViewHolder
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class ReviewListAdapter: BaseAdapter() {
+class ReviewListAdapter : BaseAdapter() {
 
     init {
         addSection(ArrayList<Review>())

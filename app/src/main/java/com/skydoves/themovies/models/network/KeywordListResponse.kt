@@ -9,4 +9,4 @@ import com.skydoves.themovies.models.NetworkResponseModel
  */
 
 data class KeywordListResponse(val id: Int,
-                               val keywords: List<Keyword>): NetworkResponseModel
+                               val keywords: List<Keyword>) : NetworkResponseModel

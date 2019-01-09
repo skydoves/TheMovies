@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_margin="5dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -21,26 +21,26 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
-                android:scaleType="fitXY"
                 android:layout_marginTop="20dp"
+                android:scaleType="fitXY"
                 android:transitionName="@string/transition_profile"
                 tools:src="@drawable/ic_live_tv_white_24dp"
-                tools:targetApi="LOLLIPOP"/>
+                tools:targetApi="LOLLIPOP" />
 
             <TextView
                 android:id="@+id/item_person_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="17sp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginRight="7dp"
                 android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
-                tools:text="title"/>
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                tools:text="title" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

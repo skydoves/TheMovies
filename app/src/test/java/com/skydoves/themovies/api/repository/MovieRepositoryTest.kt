@@ -38,14 +38,17 @@ class MovieRepositoryTest {
     private val movieDao = mock<MovieDao>()
     private val service = mock<MovieService>()
 
-    @Rule @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+    @Rule
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {
         repository = MovieRepository(service, movieDao)
     }
 
-    @Test fun loadKeywordListFromNetwork() {
+    @Test
+    fun loadKeywordListFromNetwork() {
         val loadFromDB = mockMovie()
         whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
@@ -66,7 +69,8 @@ class MovieRepositoryTest {
         verify(movieDao).updateMovie(updatedMovie)
     }
 
-    @Test fun loadVideoListFromNetwork() {
+    @Test
+    fun loadVideoListFromNetwork() {
         val loadFromDB = mockMovie()
         whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
@@ -87,11 +91,12 @@ class MovieRepositoryTest {
         verify(movieDao).updateMovie(updatedMovie)
     }
 
-    @Test fun loadReviewListFromNetwork() {
+    @Test
+    fun loadReviewListFromNetwork() {
         val loadFromDB = mockMovie()
         whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
-        val mockResponse = ReviewListResponse(123, 1, mockReviewList(),100, 100)
+        val mockResponse = ReviewListResponse(123, 1, mockReviewList(), 100, 100)
         val call = successCall(mockResponse)
         whenever(service.fetchReviews(123)).thenReturn(call)
 

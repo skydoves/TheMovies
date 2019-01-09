@@ -1,9 +1,9 @@
 package com.skydoves.themovies.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.skydoves.themovies.api.ApiResponse
 import com.skydoves.themovies.mappers.NetworkResponseMapper
 import com.skydoves.themovies.models.NetworkResponseModel
@@ -15,7 +15,7 @@ import timber.log.Timber
  * Copyright (c) 2018 skydoves All rights reserved.
  */
 
-abstract class NetworkBoundRepository<ResultType, RequestType: NetworkResponseModel, Mapper: NetworkResponseMapper<RequestType>>
+abstract class NetworkBoundRepository<ResultType, RequestType : NetworkResponseModel, Mapper : NetworkResponseMapper<RequestType>>
 internal constructor() {
 
     private val result: MediatorLiveData<Resource<ResultType>> = MediatorLiveData()
@@ -38,12 +38,13 @@ internal constructor() {
         val apiResponse = fetchService()
         result.addSource(apiResponse) { response ->
             response?.let {
-                when(response.isSuccessful) {
+                when (response.isSuccessful) {
                     true -> {
                         response.body?.let {
                             saveFetchData(it)
                             val loaded = loadFromDb()
-                            result.addSource(loaded) { newData -> newData?.let {
+                            result.addSource(loaded) { newData ->
+                                newData?.let {
                                     setValue(Resource.success(newData, mapper().onLastPage(response.body)))
                                 }
                             }
@@ -53,8 +54,7 @@ internal constructor() {
                         result.removeSource(loadedFromDB)
                         onFetchFailed(response.message)
                         response.message?.let {
-                            result.addSource<ResultType>(loadedFromDB) {
-                                newData -> setValue(Resource.error(it, newData)) }
+                            result.addSource<ResultType>(loadedFromDB) { newData -> setValue(Resource.error(it, newData)) }
                         }
                     }
                 }

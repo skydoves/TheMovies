@@ -1,16 +1,16 @@
 package com.skydoves.themovies.view.ui.details.person
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.core.view.ViewCompat
-import androidx.appcompat.app.AppCompatActivity
-import android.view.View
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -60,7 +60,7 @@ class PersonDetailActivity : AppCompatActivity() {
         getPersonFromIntent().profile_path?.let {
             Glide.with(this).load(Api.getPosterPath(it))
                     .apply(RequestOptions().circleCrop())
-                    .listener(object: RequestListener<Drawable> {
+                    .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                             supportStartPostponedEnterTransition()
                             observeViewModel()
@@ -79,24 +79,25 @@ class PersonDetailActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        observeLiveData(viewModel.getPersonObservable()) { updatePersonDetail(it)}
+        observeLiveData(viewModel.getPersonObservable()) { updatePersonDetail(it) }
         viewModel.postPersonId(getPersonFromIntent().id)
     }
 
     private fun updatePersonDetail(resource: Resource<PersonDetail>) {
-        when(resource.status) {
+        when (resource.status) {
             Status.SUCCESS -> {
                 resource.data?.let {
                     person_detail_biography.text = it.biography
                     detail_person_tags.tags = it.also_known_as
 
-                    if(it.also_known_as.isNotEmpty()) {
+                    if (it.also_known_as.isNotEmpty()) {
                         detail_person_tags.visible()
                     }
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> { }
+            Status.LOADING -> {
+            }
         }
     }
 

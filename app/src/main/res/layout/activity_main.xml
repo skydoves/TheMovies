@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background"
+    android:orientation="vertical"
     tools:context=".view.ui.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,25 +15,25 @@
 
         <include
             android:id="@+id/main_toolbar"
-            layout="@layout/toolbar_home"/>
+            layout="@layout/toolbar_home" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <devlight.io.library.ntb.NavigationTabBar
         android:id="@+id/main_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        app:ntb_bg_color="@color/colorPrimaryDark"
         app:ntb_animation_duration="300"
-        app:ntb_scaled="true"
-        app:ntb_title_mode="all"
-        app:ntb_titled="true"
+        app:ntb_bg_color="@color/colorPrimaryDark"
         app:ntb_inactive_color="@color/white"
-        app:ntb_swiped="true"/>
+        app:ntb_scaled="true"
+        app:ntb_swiped="true"
+        app:ntb_title_mode="all"
+        app:ntb_titled="true" />
 
 </LinearLayout>

@@ -26,7 +26,8 @@ import java.nio.charset.StandardCharsets
 @RunWith(JUnit4::class)
 abstract class ApiAbstract<T> {
     @Rule
-    @JvmField val instantExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
+    @JvmField
+    val instantExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var mockWebServer: MockWebServer
 

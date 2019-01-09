@@ -1,4 +1,3 @@
-
 package com.skydoves.themovies.models
 
 import com.google.gson.Gson
@@ -62,7 +61,7 @@ class Resource<out T>(val status: Status, val data: T?, val message: String?, va
 
     companion object {
         fun <T> success(data: T?, onLastPage: Boolean): Resource<T> {
-            return Resource(status = Status.SUCCESS, data =  data, message =  null, onLastPage = false)
+            return Resource(status = Status.SUCCESS, data = data, message = null, onLastPage = false)
         }
 
         fun <T> error(msg: String, data: T?): Resource<T> {

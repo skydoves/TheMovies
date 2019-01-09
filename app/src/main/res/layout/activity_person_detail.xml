@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/toolbar_default"/>
+        <include layout="@layout/toolbar_default" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
@@ -46,27 +45,27 @@
                         android:layout_marginTop="20dp"
                         android:transitionName="@string/transition_profile"
                         tools:src="@drawable/ic_live_tv_white_24dp"
-                        tools:targetApi="LOLLIPOP"/>
+                        tools:targetApi="LOLLIPOP" />
 
                     <TextView
                         android:id="@+id/person_detail_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="23sp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="7dp"/>
+                        android:layout_marginTop="7dp"
+                        android:textColor="@color/white"
+                        android:textSize="23sp" />
 
                     <TextView
                         android:id="@+id/person_detail_biography"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:padding="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -74,21 +73,21 @@
                 android:id="@+id/detail_person_tags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_marginTop="10dp"
-                app:container_border_radius="6dp"
-                app:container_enable_drag="false"
-                app:tag_text_color="@color/white"
-                app:tag_horizontal_padding="5dp"
-                app:tag_vertical_padding="6dp"
-                app:tag_clickable="false"
-                app:tag_theme="none"
-                app:tag_background_color="@color/colorPrimary"
-                app:tag_border_color="@color/colorPrimary"
+                android:padding="10dp"
+                android:visibility="gone"
                 app:container_background_color="@color/background800"
                 app:container_border_color="@color/background800"
-                android:visibility="gone"
-                tools:visibility="visible"/>
+                app:container_border_radius="6dp"
+                app:container_enable_drag="false"
+                app:tag_background_color="@color/colorPrimary"
+                app:tag_border_color="@color/colorPrimary"
+                app:tag_clickable="false"
+                app:tag_horizontal_padding="5dp"
+                app:tag_text_color="@color/white"
+                app:tag_theme="none"
+                app:tag_vertical_padding="6dp"
+                tools:visibility="visible" />
 
         </LinearLayout>
     </ScrollView>

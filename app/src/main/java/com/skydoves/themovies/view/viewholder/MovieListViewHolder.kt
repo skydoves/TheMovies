@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_poster.view.*
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MovieListViewHolder(view: View, private val delegate: Delegate): BaseViewHolder(view) {
+class MovieListViewHolder(view: View, private val delegate: Delegate) : BaseViewHolder(view) {
 
     interface Delegate {
         fun onItemClick(movie: Movie)
@@ -24,7 +24,7 @@ class MovieListViewHolder(view: View, private val delegate: Delegate): BaseViewH
 
     @Throws(Exception::class)
     override fun bindData(data: Any) {
-        if(data is Movie) {
+        if (data is Movie) {
             movie = data
             drawItem()
         }

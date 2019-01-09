@@ -1,14 +1,14 @@
 package com.skydoves.themovies.view.ui.main
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.extension.observeLiveData
@@ -20,8 +20,6 @@ import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
@@ -29,9 +27,10 @@ import javax.inject.Inject
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class TvListFragment: Fragment(), TvListViewHolder.Delegate {
+class TvListFragment : Fragment(), TvListViewHolder.Delegate {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: MainActivityViewModel
 
     private val adapter = TvListAdapter(this)
@@ -72,10 +71,13 @@ class TvListFragment: Fragment(), TvListViewHolder.Delegate {
     }
 
     private fun updateTvList(resource: Resource<List<Tv>>) {
-        when(resource.status) {
-            Status.SUCCESS -> { adapter.addTvList(resource) }
+        when (resource.status) {
+            Status.SUCCESS -> {
+                adapter.addTvList(resource)
+            }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> { }
+            Status.LOADING -> {
+            }
         }
     }
 

@@ -13,16 +13,18 @@ import java.io.IOException
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class TheDiscoverServiceTest: ApiAbstract<TheDiscoverService>() {
+class TheDiscoverServiceTest : ApiAbstract<TheDiscoverService>() {
 
     private lateinit var service: TheDiscoverService
 
-    @Before fun initService() {
+    @Before
+    fun initService() {
         this.service = createService(TheDiscoverService::class.java)
     }
 
     @Throws(IOException::class)
-    @Test fun fetchMovieListTest() {
+    @Test
+    fun fetchMovieListTest() {
         enqueueResponse("/tmdb_movie.json")
         val response = LiveDataTestUtil.getValue(service.fetchDiscoverMovie(1))
         assertThat(response.body?.results?.get(0)?.id, `is`(164558))
@@ -31,7 +33,8 @@ class TheDiscoverServiceTest: ApiAbstract<TheDiscoverService>() {
     }
 
     @Throws(IOException::class)
-    @Test fun fetchTvListTest() {
+    @Test
+    fun fetchTvListTest() {
         enqueueResponse("/tmdb_tv.json")
         val response = LiveDataTestUtil.getValue(service.fetchDiscoverTv(1))
         assertThat(response.body?.results?.get(0)?.id, `is`(61889))

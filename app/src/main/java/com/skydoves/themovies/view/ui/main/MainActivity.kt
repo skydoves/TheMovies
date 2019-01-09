@@ -1,8 +1,8 @@
 package com.skydoves.themovies.view.ui.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.skydoves.themovies.R
 import com.skydoves.themovies.utils.MainNavigationUtil
 import dagger.android.AndroidInjection

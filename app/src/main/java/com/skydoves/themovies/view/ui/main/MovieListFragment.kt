@@ -1,14 +1,14 @@
 package com.skydoves.themovies.view.ui.main
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.extension.observeLiveData
@@ -20,8 +20,6 @@ import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
 import com.skydoves.themovies.view.viewholder.MovieListViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
@@ -31,7 +29,8 @@ import javax.inject.Inject
 
 class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: MainActivityViewModel
 
     private val adapter = MovieListAdapter(this)
@@ -61,7 +60,7 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
                 recyclerView = recyclerView,
                 isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
                 loadMore = { loadMore(it) },
-                onLast =  { viewModel.getMovieListValues()?.onLastPage!! }
+                onLast = { viewModel.getMovieListValues()?.onLastPage!! }
         )
         paginator.currentPage = 1
     }
@@ -72,10 +71,11 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
     }
 
     private fun updateMovieList(resource: Resource<List<Movie>>) {
-        when(resource.status) {
+        when (resource.status) {
             Status.SUCCESS -> adapter.addMovieList(resource)
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> { }
+            Status.LOADING -> {
+            }
         }
     }
 

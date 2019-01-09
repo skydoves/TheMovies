@@ -7,7 +7,7 @@ import android.app.Application
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class TestTheMoviesApplication: Application() {
+class TestTheMoviesApplication : Application() {
     override fun onCreate() {
         super.onCreate()
     }

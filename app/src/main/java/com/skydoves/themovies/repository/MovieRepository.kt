@@ -26,14 +26,14 @@ import javax.inject.Singleton
 
 @Singleton
 class MovieRepository @Inject
-constructor(val service: MovieService, val movieDao: MovieDao): Repository {
+constructor(val service: MovieService, val movieDao: MovieDao) : Repository {
 
     init {
         Timber.d("Injection MovieRepository")
     }
 
     fun loadKeywordList(id: Int): LiveData<Resource<List<Keyword>>> {
-        return object: NetworkBoundRepository<List<Keyword>, KeywordListResponse, KeywordResponseMapper>() {
+        return object : NetworkBoundRepository<List<Keyword>, KeywordListResponse, KeywordResponseMapper>() {
             override fun saveFetchData(items: KeywordListResponse) {
                 val movie = movieDao.getMovie(id_ = id)
                 movie.keywords = items.keywords
@@ -99,7 +99,7 @@ constructor(val service: MovieService, val movieDao: MovieDao): Repository {
     }
 
     fun loadReviewsList(id: Int): LiveData<Resource<List<Review>>> {
-        return object: NetworkBoundRepository<List<Review>, ReviewListResponse, ReviewResponseMapper>() {
+        return object : NetworkBoundRepository<List<Review>, ReviewListResponse, ReviewResponseMapper>() {
             override fun saveFetchData(items: ReviewListResponse) {
                 val movie = movieDao.getMovie(id_ = id)
                 movie.reviews = items.results

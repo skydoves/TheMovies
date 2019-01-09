@@ -25,18 +25,21 @@ class MockTestUtil {
             keywords.add(Keyword(102, "keyword2"))
             return keywords
         }
+
         fun mockVideoList(): List<Video> {
             val videos = ArrayList<Video>()
             videos.add(Video("123", "video0", "", "", 0, ""))
             videos.add(Video("123", "video0", "", "", 0, ""))
             return videos
         }
+
         fun mockReviewList(): List<Review> {
             val reviews = ArrayList<Review>()
             reviews.add(Review("123", "", "", ""))
             reviews.add(Review("123", "", "", ""))
             return reviews
         }
+
         fun mockPersonDetail(): PersonDetail {
             return PersonDetail("", "", "", emptyList(), "")
         }

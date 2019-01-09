@@ -1,8 +1,8 @@
 package com.skydoves.themovies.models.entity
 
-import androidx.room.Entity
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.Entity
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video

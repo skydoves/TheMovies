@@ -8,7 +8,7 @@ import timber.log.Timber
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MovieResponseMapper: NetworkResponseMapper<DiscoverMovieResponse> {
+class MovieResponseMapper : NetworkResponseMapper<DiscoverMovieResponse> {
     override fun onLastPage(response: DiscoverMovieResponse): Boolean {
         Timber.d("loadPage : ${response.page}/${response.total_pages}")
         return response.page > response.total_pages
