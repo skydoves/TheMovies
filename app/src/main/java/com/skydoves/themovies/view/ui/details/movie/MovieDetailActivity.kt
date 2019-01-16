@@ -93,8 +93,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 
@@ -109,8 +108,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 
@@ -125,8 +123,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 

@@ -20,6 +20,8 @@ import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
 import com.skydoves.themovies.view.viewholder.MovieListViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
+import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
@@ -74,8 +76,7 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
         when (resource.status) {
             Status.SUCCESS -> adapter.addMovieList(resource)
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 

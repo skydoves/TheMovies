@@ -20,6 +20,8 @@ import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
+import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
@@ -76,8 +78,7 @@ class TvListFragment : Fragment(), TvListViewHolder.Delegate {
                 adapter.addTvList(resource)
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 

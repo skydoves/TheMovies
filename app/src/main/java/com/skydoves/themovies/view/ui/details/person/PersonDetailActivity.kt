@@ -96,8 +96,7 @@ class PersonDetailActivity : AppCompatActivity() {
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 

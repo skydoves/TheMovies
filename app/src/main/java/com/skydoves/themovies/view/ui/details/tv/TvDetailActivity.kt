@@ -94,8 +94,7 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 
@@ -110,8 +109,7 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 
@@ -126,8 +124,7 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
                 }
             }
             Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> {
-            }
+            Status.LOADING -> Unit
         }
     }
 
