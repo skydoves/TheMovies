@@ -14,7 +14,7 @@ def getProperty(String filename, String propName) {
         if (props[propName] != null) {
             return props[propName]
         } else {
-            print("No such property " + propName + " in file " + filename);
+            print("No such property " + propName + " in file " + filename)
         }
     } else {
         print(filename + " does not exist!")
