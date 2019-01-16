@@ -26,3 +26,5 @@ cache:
     
 script:
   - chmod +x ./gradlew
+  - ./gradlew spotlessApply
+  - ./gradlew test
