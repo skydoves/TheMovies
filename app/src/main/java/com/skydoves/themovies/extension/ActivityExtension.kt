@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.skydoves.themovies.extension
 
 import android.app.Activity

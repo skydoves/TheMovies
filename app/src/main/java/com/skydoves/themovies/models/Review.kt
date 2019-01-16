@@ -8,6 +8,7 @@ import android.os.Parcelable
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 data class Review(val id: String,
                   val author: String,
                   val content: String,

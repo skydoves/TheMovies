@@ -5,6 +5,7 @@ package com.skydoves.themovies.models
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("unused")
 data class ResponseModel(val page: Int,
                          val results: Any,
                          val total_results: Int,

@@ -38,6 +38,7 @@ import javax.inject.Inject
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("MemberVisibilityCanBePrivate")
 class PersonDetailActivity : AppCompatActivity() {
 
     @Inject

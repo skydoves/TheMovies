@@ -9,6 +9,7 @@ import java.io.IOException
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("MemberVisibilityCanBePrivate")
 class ApiResponse<T> {
     val code: Int
     val body: T?

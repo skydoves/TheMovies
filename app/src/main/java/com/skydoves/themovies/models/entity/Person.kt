@@ -11,6 +11,7 @@ import com.skydoves.themovies.models.network.PersonDetail
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 @Entity(tableName = "People", primaryKeys = ["id"])
 data class Person(var page: Int,
                   @Embedded var personDetail: PersonDetail? = null,

@@ -1,5 +1,6 @@
 package com.skydoves.themovies.view.ui.details.movie
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -48,6 +49,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
         observeViewModel()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initializeUI() {
         applyToolbarMargin(movie_detail_toolbar)
         simpleToolbarWithHome(movie_detail_toolbar, getMovieFromIntent().title)

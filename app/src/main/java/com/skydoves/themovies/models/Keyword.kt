@@ -8,6 +8,7 @@ import android.os.Parcelable
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 data class Keyword(val id: Int,
                    val name: String) : Parcelable {
     constructor(source: Parcel) : this(

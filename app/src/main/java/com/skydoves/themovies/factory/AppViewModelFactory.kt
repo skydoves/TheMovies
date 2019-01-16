@@ -11,6 +11,7 @@ import javax.inject.Singleton
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("UNCHECKED_CAST")
 @Singleton
 class AppViewModelFactory @Inject
 constructor(private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>) : ViewModelProvider.Factory {

@@ -13,6 +13,7 @@ import com.skydoves.themovies.models.network.ErrorEnvelope
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
+@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE", "LiftReturnOrAssignment", "RedundantOverride", "SpellCheckingInspection")
 class Resource<out T>(val status: Status, val data: T?, val message: String?, val onLastPage: Boolean) {
 
     var errorEnvelope: ErrorEnvelope? = null
@@ -52,11 +53,11 @@ class Resource<out T>(val status: Status, val data: T?, val message: String?, va
     }
 
     override fun toString(): String {
-        return "Resource{" +
-                "status=" + status +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}'
+        return "Resource[" +
+                "status=" + status + '\'' +
+                ",message='" + message + '\'' +
+                ",data=" + data +
+                ']'
     }
 
     companion object {

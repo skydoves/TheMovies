@@ -12,6 +12,7 @@ import com.skydoves.themovies.models.Video
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 @Entity(primaryKeys = [("id")])
 data class Tv(var page: Int,
               var keywords: List<Keyword>? = ArrayList(),

@@ -29,6 +29,7 @@ import javax.inject.Inject
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
+@Suppress("SpellCheckingInspection")
 class TvListFragment : Fragment(), TvListViewHolder.Delegate {
 
     @Inject
