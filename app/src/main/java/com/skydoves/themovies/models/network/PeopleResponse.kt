@@ -8,7 +8,9 @@ import com.skydoves.themovies.models.entity.Person
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-data class PeopleResponse(val page: Int,
-                          val results: List<Person>,
-                          val total_results: Int,
-                          val total_pages: Int) : NetworkResponseModel
+data class PeopleResponse(
+    val page: Int,
+    val results: List<Person>,
+    val total_results: Int,
+    val total_pages: Int
+) : NetworkResponseModel

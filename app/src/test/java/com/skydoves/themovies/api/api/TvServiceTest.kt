@@ -33,7 +33,6 @@ class TvServiceTest : ApiAbstract<TvService>() {
         assertThat(response.body?.keywords?.get(0)?.name, `is`("support group"))
     }
 
-
     @Throws(IOException::class)
     @Test
     fun fetchTvVideosTest() {

@@ -99,6 +99,5 @@ class DiscoverRepositoryTest {
 
         updateData.postValue(mockResponse.results)
         verify(observer).onChanged(Resource.success(mockResponse.results, false))
-
     }
 }

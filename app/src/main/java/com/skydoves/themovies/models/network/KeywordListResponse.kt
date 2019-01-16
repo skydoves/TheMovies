@@ -8,5 +8,7 @@ import com.skydoves.themovies.models.NetworkResponseModel
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-data class KeywordListResponse(val id: Int,
-                               val keywords: List<Keyword>) : NetworkResponseModel
+data class KeywordListResponse(
+    val id: Int,
+    val keywords: List<Keyword>
+) : NetworkResponseModel

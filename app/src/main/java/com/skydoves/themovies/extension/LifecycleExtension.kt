@@ -14,4 +14,3 @@ inline fun <T> LifecycleOwner.observeLiveData(data: LiveData<T>, crossinline onC
         it?.let { value -> onChanged(value) }
     })
 }
-

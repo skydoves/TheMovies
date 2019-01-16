@@ -13,13 +13,15 @@ import com.skydoves.themovies.models.network.PersonDetail
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 @Entity(tableName = "People", primaryKeys = ["id"])
-data class Person(var page: Int,
-                  @Embedded var personDetail: PersonDetail? = null,
-                  val profile_path: String?,
-                  val adult: Boolean,
-                  val id: Int,
-                  val name: String,
-                  val popularity: Float) : Parcelable {
+data class Person(
+    var page: Int,
+    @Embedded var personDetail: PersonDetail? = null,
+    val profile_path: String?,
+    val adult: Boolean,
+    val id: Int,
+    val name: String,
+    val popularity: Float
+) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
             source.readParcelable<PersonDetail>(PersonDetail::class.java.classLoader),

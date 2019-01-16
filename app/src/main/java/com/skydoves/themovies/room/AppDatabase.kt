@@ -6,7 +6,11 @@ import androidx.room.TypeConverters
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
-import com.skydoves.themovies.utils.*
+import com.skydoves.themovies.utils.StringListConverter
+import com.skydoves.themovies.utils.IntegerListConverter
+import com.skydoves.themovies.utils.KeywordListConverter
+import com.skydoves.themovies.utils.VideoListConverter
+import com.skydoves.themovies.utils.ReviewListConverter
 
 /**
  * Developed by skydoves on 2018-08-09.

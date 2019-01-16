@@ -8,7 +8,9 @@ import com.skydoves.themovies.models.entity.Tv
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-data class DiscoverTvResponse(val page: Int,
-                              val results: List<Tv>,
-                              val total_results: Int,
-                              val total_pages: Int) : NetworkResponseModel
+data class DiscoverTvResponse(
+    val page: Int,
+    val results: List<Tv>,
+    val total_results: Int,
+    val total_pages: Int
+) : NetworkResponseModel

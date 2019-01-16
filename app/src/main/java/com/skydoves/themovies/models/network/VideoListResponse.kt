@@ -8,5 +8,7 @@ import com.skydoves.themovies.models.Video
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-data class VideoListResponse(val id: Int,
-                             val results: List<Video>) : NetworkResponseModel
+data class VideoListResponse(
+    val id: Int,
+    val results: List<Video>
+) : NetworkResponseModel

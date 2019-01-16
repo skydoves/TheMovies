@@ -14,23 +14,25 @@ import com.skydoves.themovies.models.Video
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 @Entity(primaryKeys = [("id")])
-data class Tv(var page: Int,
-              var keywords: List<Keyword>? = ArrayList(),
-              var videos: List<Video>? = ArrayList(),
-              var reviews: List<Review>? = ArrayList(),
-              val poster_path: String,
-              val popularity: Float,
-              val id: Int,
-              val backdrop_path: String?,
-              val vote_average: Float,
-              val overview: String,
-              val first_air_date: String,
-              val origin_country: List<String>,
-              val genre_ids: List<Int>,
-              val original_language: String,
-              val vote_count: Int,
-              val name: String,
-              val original_name: String) : Parcelable {
+data class Tv(
+    var page: Int,
+    var keywords: List<Keyword>? = ArrayList(),
+    var videos: List<Video>? = ArrayList(),
+    var reviews: List<Review>? = ArrayList(),
+    val poster_path: String,
+    val popularity: Float,
+    val id: Int,
+    val backdrop_path: String?,
+    val vote_average: Float,
+    val overview: String,
+    val first_air_date: String,
+    val origin_country: List<String>,
+    val genre_ids: List<Int>,
+    val original_language: String,
+    val vote_count: Int,
+    val name: String,
+    val original_name: String
+) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
             ArrayList<Keyword>().apply { source.readList(this, Keyword::class.java.classLoader) },

@@ -48,5 +48,4 @@ interface TvService {
      */
     @GET("/3/tv/{tv_id}/reviews")
     fun fetchReviews(@Path("tv_id") id: Int): LiveData<ApiResponse<ReviewListResponse>>
-
 }

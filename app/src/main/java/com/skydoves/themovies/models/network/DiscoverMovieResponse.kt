@@ -8,7 +8,9 @@ import com.skydoves.themovies.models.entity.Movie
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-data class DiscoverMovieResponse(val page: Int,
-                                 val results: List<Movie>,
-                                 val total_results: Int,
-                                 val total_pages: Int) : NetworkResponseModel
+data class DiscoverMovieResponse(
+    val page: Int,
+    val results: List<Movie>,
+    val total_results: Int,
+    val total_pages: Int
+) : NetworkResponseModel

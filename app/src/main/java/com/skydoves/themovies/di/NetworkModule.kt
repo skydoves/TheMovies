@@ -2,7 +2,12 @@ package com.skydoves.themovies.di
 
 import androidx.annotation.NonNull
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.skydoves.themovies.api.*
+import com.skydoves.themovies.api.RequestInterceptor
+import com.skydoves.themovies.api.LiveDataCallAdapterFactory
+import com.skydoves.themovies.api.TheDiscoverService
+import com.skydoves.themovies.api.PeopleService
+import com.skydoves.themovies.api.MovieService
+import com.skydoves.themovies.api.TvService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
