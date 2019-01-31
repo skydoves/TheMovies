@@ -30,6 +30,7 @@ buildscript {
         mockWebServerVersion = '3.9.0'
         mockitoKotlinVersion = '2.0.0-RC1'
         junitVersion = '4.12'
+        espressoVersion = '3.1.1'
         jacocoVersion = '0.8.1'
         spotlessVersion = '3.16.0'
     }
