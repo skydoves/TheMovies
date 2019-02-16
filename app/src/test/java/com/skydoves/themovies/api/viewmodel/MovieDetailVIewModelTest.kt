@@ -36,91 +36,91 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class MovieDetailVIewModelTest {
 
-    private lateinit var viewModel: MovieDetailViewModel
+  private lateinit var viewModel: MovieDetailViewModel
 
-    private lateinit var repository: MovieRepository
-    private val movieDao = mock<MovieDao>()
+  private lateinit var repository: MovieRepository
+  private val movieDao = mock<MovieDao>()
 
-    private val service = mock<MovieService>()
+  private val service = mock<MovieService>()
 
-    @Rule
-    @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
+  @Rule
+  @JvmField
+  val instantExecutorRule = InstantTaskExecutorRule()
 
-    @Before
-    fun init() {
-        repository = MovieRepository(service, movieDao)
-        viewModel = MovieDetailViewModel(repository)
-    }
+  @Before
+  fun init() {
+    repository = MovieRepository(service, movieDao)
+    viewModel = MovieDetailViewModel(repository)
+  }
 
-    @Test
-    fun loadKeywordList() {
-        val loadFromDB = mockMovie()
-        whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
+  @Test
+  fun loadKeywordList() {
+    val loadFromDB = mockMovie()
+    whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
-        val mockResponse = KeywordListResponse(123, mockKeywordList())
-        val call = successCall(mockResponse)
-        whenever(service.fetchKeywords(123)).thenReturn(call)
+    val mockResponse = KeywordListResponse(123, mockKeywordList())
+    val call = successCall(mockResponse)
+    whenever(service.fetchKeywords(123)).thenReturn(call)
 
-        val data = repository.loadKeywordList(123)
-        val observer = mock<Observer<Resource<List<Keyword>>>>()
-        data.observeForever(observer)
+    val data = repository.loadKeywordList(123)
+    val observer = mock<Observer<Resource<List<Keyword>>>>()
+    data.observeForever(observer)
 
-        viewModel.postKeywordId(123)
-        verify(movieDao, times(3)).getMovie(123)
-        verify(observer).onChanged(
-                Resource.success(mockKeywordList(), true))
+    viewModel.postKeywordId(123)
+    verify(movieDao, times(3)).getMovie(123)
+    verify(observer).onChanged(
+        Resource.success(mockKeywordList(), true))
 
-        val updatedMovie = mockMovie()
-        updatedMovie.keywords = mockKeywordList()
-        verify(movieDao).updateMovie(updatedMovie)
-    }
+    val updatedMovie = mockMovie()
+    updatedMovie.keywords = mockKeywordList()
+    verify(movieDao).updateMovie(updatedMovie)
+  }
 
-    @Test
-    fun loadVideoList() {
-        val loadFromDB = mockMovie()
-        whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
+  @Test
+  fun loadVideoList() {
+    val loadFromDB = mockMovie()
+    whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
-        val mockResponse = VideoListResponse(123, mockVideoList())
-        val call = successCall(mockResponse)
-        whenever(service.fetchVideos(123)).thenReturn(call)
+    val mockResponse = VideoListResponse(123, mockVideoList())
+    val call = successCall(mockResponse)
+    whenever(service.fetchVideos(123)).thenReturn(call)
 
-        val data = repository.loadVideoList(123)
-        val observer = mock<Observer<Resource<List<Video>>>>()
-        data.observeForever(observer)
+    val data = repository.loadVideoList(123)
+    val observer = mock<Observer<Resource<List<Video>>>>()
+    data.observeForever(observer)
 
-        viewModel.postVideoId(123)
-        verify(movieDao, times(3)).getMovie(123)
-        verify(observer).onChanged(
-                Resource.success(mockVideoList(), true)
-        )
+    viewModel.postVideoId(123)
+    verify(movieDao, times(3)).getMovie(123)
+    verify(observer).onChanged(
+        Resource.success(mockVideoList(), true)
+    )
 
-        val updatedMovie = mockMovie()
-        updatedMovie.videos = mockVideoList()
-        verify(movieDao).updateMovie(updatedMovie)
-    }
+    val updatedMovie = mockMovie()
+    updatedMovie.videos = mockVideoList()
+    verify(movieDao).updateMovie(updatedMovie)
+  }
 
-    @Test
-    fun loadReviewList() {
-        val loadFromDB = mockMovie()
-        whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
+  @Test
+  fun loadReviewList() {
+    val loadFromDB = mockMovie()
+    whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
-        val mockResponse = ReviewListResponse(123, 1, mockReviewList(), 100, 100)
-        val call = successCall(mockResponse)
-        whenever(service.fetchReviews(123)).thenReturn(call)
+    val mockResponse = ReviewListResponse(123, 1, mockReviewList(), 100, 100)
+    val call = successCall(mockResponse)
+    whenever(service.fetchReviews(123)).thenReturn(call)
 
-        val data = repository.loadReviewsList(123)
-        val observer = mock<Observer<Resource<List<Review>>>>()
-        data.observeForever(observer)
+    val data = repository.loadReviewsList(123)
+    val observer = mock<Observer<Resource<List<Review>>>>()
+    data.observeForever(observer)
 
-        viewModel.postReviewId(123)
-        verify(movieDao, times(3)).getMovie(123)
-        verify(observer).onChanged(
-                Resource.success(mockReviewList(), true)
-        )
+    viewModel.postReviewId(123)
+    verify(movieDao, times(3)).getMovie(123)
+    verify(observer).onChanged(
+        Resource.success(mockReviewList(), true)
+    )
 
-        val updatedMovie = mockMovie()
-        updatedMovie.reviews = mockReviewList()
-        verify(movieDao).updateMovie(updatedMovie)
-    }
+    val updatedMovie = mockMovie()
+    updatedMovie.reviews = mockReviewList()
+    verify(movieDao).updateMovie(updatedMovie)
+  }
 }

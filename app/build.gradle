@@ -107,6 +107,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.ext:junit:1.1.0"
     androidTestImplementation "androidx.test:rules:1.1.2-alpha01"
+    androidTestImplementation "androidx.test:core:1.1.0"
 }
 
 apply from: '../spotless.gradle'

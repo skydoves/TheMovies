@@ -30,42 +30,42 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class PersonDetailViewModelTest {
 
-    private lateinit var viewModel: PersonDetailViewModel
+  private lateinit var viewModel: PersonDetailViewModel
 
-    private lateinit var repository: PeopleRepository
-    private val peopleDao = mock<PeopleDao>()
-    private val service = mock<PeopleService>()
+  private lateinit var repository: PeopleRepository
+  private val peopleDao = mock<PeopleDao>()
+  private val service = mock<PeopleService>()
 
-    @Rule
-    @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
+  @Rule
+  @JvmField
+  val instantExecutorRule = InstantTaskExecutorRule()
 
-    @Before
-    fun init() {
-        repository = PeopleRepository(service, peopleDao)
-        viewModel = PersonDetailViewModel(repository)
-    }
+  @Before
+  fun init() {
+    repository = PeopleRepository(service, peopleDao)
+    viewModel = PersonDetailViewModel(repository)
+  }
 
-    @Test
-    fun loadPersonDetail() {
-        val loadFromDB = mockPerson()
-        whenever(peopleDao.getPerson(123)).thenReturn(loadFromDB)
+  @Test
+  fun loadPersonDetail() {
+    val loadFromDB = mockPerson()
+    whenever(peopleDao.getPerson(123)).thenReturn(loadFromDB)
 
-        val mockResponse = mockPersonDetail()
-        val call = ApiUtil.successCall(mockResponse)
-        whenever(service.fetchPersonDetail(123)).thenReturn(call)
+    val mockResponse = mockPersonDetail()
+    val call = ApiUtil.successCall(mockResponse)
+    whenever(service.fetchPersonDetail(123)).thenReturn(call)
 
-        val data = repository.loadPersonDetail(123)
-        val observer = mock<Observer<Resource<PersonDetail>>>()
-        data.observeForever(observer)
+    val data = repository.loadPersonDetail(123)
+    val observer = mock<Observer<Resource<PersonDetail>>>()
+    data.observeForever(observer)
 
-        viewModel.postPersonId(123)
-        verify(peopleDao, times(3)).getPerson(123)
-        verify(observer).onChanged(
-                Resource.success(MockTestUtil.mockPersonDetail(), true))
+    viewModel.postPersonId(123)
+    verify(peopleDao, times(3)).getPerson(123)
+    verify(observer).onChanged(
+        Resource.success(MockTestUtil.mockPersonDetail(), true))
 
-        val updatedPerson = MockTestUtil.mockPerson()
-        updatedPerson.personDetail = MockTestUtil.mockPersonDetail()
-        verify(peopleDao).updatePerson(updatedPerson)
-    }
+    val updatedPerson = MockTestUtil.mockPerson()
+    updatedPerson.personDetail = MockTestUtil.mockPersonDetail()
+    verify(peopleDao).updatePerson(updatedPerson)
+  }
 }

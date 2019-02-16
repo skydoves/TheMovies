@@ -17,32 +17,32 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class PeopleDaoTest : DbTest() {
 
-    @Test
-    fun insertAndRead() {
-        val people = ArrayList<Person>()
-        val mockPerson = mockPerson()
-        people.add(mockPerson)
+  @Test
+  fun insertAndRead() {
+    val people = ArrayList<Person>()
+    val mockPerson = mockPerson()
+    people.add(mockPerson)
 
-        db.peopleDao().insertPeople(people)
-        val loadFromDB = LiveDataTestUtil.getValue(db.peopleDao().getPeople(1))[0]
-        assertThat(loadFromDB.page, `is`(1))
-        assertThat(loadFromDB.id, `is`(123))
-    }
+    db.peopleDao().insertPeople(people)
+    val loadFromDB = LiveDataTestUtil.getValue(db.peopleDao().getPeople(1))[0]
+    assertThat(loadFromDB.page, `is`(1))
+    assertThat(loadFromDB.id, `is`(123))
+  }
 
-    @Test
-    fun updateAndRead() {
-        val people = ArrayList<Person>()
-        val mockPerson = mockPerson()
-        people.add(mockPerson)
-        db.peopleDao().insertPeople(people)
+  @Test
+  fun updateAndRead() {
+    val people = ArrayList<Person>()
+    val mockPerson = mockPerson()
+    people.add(mockPerson)
+    db.peopleDao().insertPeople(people)
 
-        val loadFromDB = db.peopleDao().getPerson(mockPerson.id)
-        assertThat(loadFromDB.page, `is`(1))
+    val loadFromDB = db.peopleDao().getPerson(mockPerson.id)
+    assertThat(loadFromDB.page, `is`(1))
 
-        mockPerson.page = 10
-        db.peopleDao().updatePerson(mockPerson)
+    mockPerson.page = 10
+    db.peopleDao().updatePerson(mockPerson)
 
-        val updated = db.peopleDao().getPerson(mockPerson.id)
-        assertThat(updated.page, `is`(10))
-    }
+    val updated = db.peopleDao().getPerson(mockPerson.id)
+    assertThat(updated.page, `is`(10))
+  }
 }

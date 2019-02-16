@@ -1,8 +1,8 @@
 package com.skydoves.themovies.db
 
 import androidx.room.Room
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.skydoves.themovies.room.AppDatabase
 import org.junit.After
 import org.junit.Before
@@ -15,16 +15,16 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 abstract class DbTest {
-    lateinit var db: AppDatabase
+  lateinit var db: AppDatabase
 
-    @Before
-    fun initDB() {
-        db = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
-                AppDatabase::class.java).build()
-    }
+  @Before
+  fun initDB() {
+    db = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context,
+        AppDatabase::class.java).build()
+  }
 
-    @After
-    fun closeDB() {
-        db.close()
-    }
+  @After
+  fun closeDB() {
+    db.close()
+  }
 }

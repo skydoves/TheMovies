@@ -31,66 +31,66 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class PeopleRepositoryTest {
 
-    private lateinit var repository: PeopleRepository
-    private val peopleDao = mock<PeopleDao>()
-    private val service = mock<PeopleService>()
+  private lateinit var repository: PeopleRepository
+  private val peopleDao = mock<PeopleDao>()
+  private val service = mock<PeopleService>()
 
-    @Rule
-    @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
+  @Rule
+  @JvmField
+  val instantExecutorRule = InstantTaskExecutorRule()
 
-    @Before
-    fun init() {
-        repository = PeopleRepository(service, peopleDao)
-    }
+  @Before
+  fun init() {
+    repository = PeopleRepository(service, peopleDao)
+  }
 
-    @Test
-    fun loadPeopleFromNetwork() {
-        val loadFromDB = MutableLiveData<List<Person>>()
-        whenever(peopleDao.getPeople(1)).thenReturn(loadFromDB)
+  @Test
+  fun loadPeopleFromNetwork() {
+    val loadFromDB = MutableLiveData<List<Person>>()
+    whenever(peopleDao.getPeople(1)).thenReturn(loadFromDB)
 
-        val mockResponse = PeopleResponse(1, emptyList(), 100, 10)
-        val call = successCall(mockResponse)
-        whenever(service.fetchPopularPeople(1)).thenReturn(call)
+    val mockResponse = PeopleResponse(1, emptyList(), 100, 10)
+    val call = successCall(mockResponse)
+    whenever(service.fetchPopularPeople(1)).thenReturn(call)
 
-        val data = repository.loadPeople(1)
-        verify(peopleDao).getPeople(1)
-        verifyNoMoreInteractions(service)
+    val data = repository.loadPeople(1)
+    verify(peopleDao).getPeople(1)
+    verifyNoMoreInteractions(service)
 
-        val observer = mock<Observer<Resource<List<Person>>>>()
-        data.observeForever(observer)
-        verifyNoMoreInteractions(service)
-        val updatedData = MutableLiveData<List<Person>>()
-        whenever(peopleDao.getPeople(1)).thenReturn(updatedData)
+    val observer = mock<Observer<Resource<List<Person>>>>()
+    data.observeForever(observer)
+    verifyNoMoreInteractions(service)
+    val updatedData = MutableLiveData<List<Person>>()
+    whenever(peopleDao.getPeople(1)).thenReturn(updatedData)
 
-        loadFromDB.postValue(null)
-        verify(observer).onChanged(Resource.loading(null))
-        verify(service).fetchPopularPeople(1)
-        verify(peopleDao).insertPeople(mockResponse.results)
+    loadFromDB.postValue(null)
+    verify(observer).onChanged(Resource.loading(null))
+    verify(service).fetchPopularPeople(1)
+    verify(peopleDao).insertPeople(mockResponse.results)
 
-        updatedData.postValue(mockResponse.results)
-        verify(observer).onChanged(Resource.success(mockResponse.results, false))
-    }
+    updatedData.postValue(mockResponse.results)
+    verify(observer).onChanged(Resource.success(mockResponse.results, false))
+  }
 
-    @Test
-    fun loadPersonDetailFromNetwork() {
-        val loadFromDB = mockPerson()
-        whenever(peopleDao.getPerson(123)).thenReturn(loadFromDB)
+  @Test
+  fun loadPersonDetailFromNetwork() {
+    val loadFromDB = mockPerson()
+    whenever(peopleDao.getPerson(123)).thenReturn(loadFromDB)
 
-        val mockResponse = mockPersonDetail()
-        val call = successCall(mockResponse)
-        whenever(service.fetchPersonDetail(123)).thenReturn(call)
+    val mockResponse = mockPersonDetail()
+    val call = successCall(mockResponse)
+    whenever(service.fetchPersonDetail(123)).thenReturn(call)
 
-        val data = repository.loadPersonDetail(123)
-        verify(peopleDao).getPerson(123)
-        verifyNoMoreInteractions(service)
+    val data = repository.loadPersonDetail(123)
+    verify(peopleDao).getPerson(123)
+    verifyNoMoreInteractions(service)
 
-        val observer = mock<Observer<Resource<PersonDetail>>>()
-        data.observeForever(observer)
-        verify(observer).onChanged(Resource.success(mockPersonDetail(), true))
+    val observer = mock<Observer<Resource<PersonDetail>>>()
+    data.observeForever(observer)
+    verify(observer).onChanged(Resource.success(mockPersonDetail(), true))
 
-        val updatedPerson = mockPerson()
-        updatedPerson.personDetail = mockPersonDetail()
-        verify(peopleDao).updatePerson(updatedPerson)
-    }
+    val updatedPerson = mockPerson()
+    updatedPerson.personDetail = mockPersonDetail()
+    verify(peopleDao).updatePerson(updatedPerson)
+  }
 }
