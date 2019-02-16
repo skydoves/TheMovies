@@ -32,60 +32,60 @@ import javax.inject.Inject
 @Suppress("SpellCheckingInspection")
 class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var viewModel: MainActivityViewModel
+  @Inject
+  lateinit var viewModelFactory: ViewModelProvider.Factory
+  private lateinit var viewModel: MainActivityViewModel
 
-    private val adapter = MovieListAdapter(this)
-    private lateinit var paginator: RecyclerViewPaginator
+  private val adapter = MovieListAdapter(this)
+  private lateinit var paginator: RecyclerViewPaginator
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.main_fragment_movie, container, false)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    return inflater.inflate(R.layout.main_fragment_movie, container, false)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initializeUI()
+  }
+
+  override fun onAttach(context: Context) {
+    AndroidSupportInjection.inject(this)
+    super.onAttach(context)
+
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
+    observeViewModel()
+  }
+
+  private fun initializeUI() {
+    recyclerView.adapter = adapter
+    recyclerView.layoutManager = GridLayoutManager(context, 2)
+    paginator = RecyclerViewPaginator(
+        recyclerView = recyclerView,
+        isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
+        loadMore = { loadMore(it) },
+        onLast = { viewModel.getMovieListValues()?.onLastPage!! }
+    )
+    paginator.currentPage = 1
+  }
+
+  private fun observeViewModel() {
+    observeLiveData(viewModel.getMovieListObservable()) { updateMovieList(it) }
+    viewModel.postMoviePage(1)
+  }
+
+  private fun updateMovieList(resource: Resource<List<Movie>>) {
+    when (resource.status) {
+      Status.LOADING -> Unit
+      Status.SUCCESS -> adapter.addMovieList(resource)
+      Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
     }
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initializeUI()
-    }
+  private fun loadMore(page: Int) {
+    viewModel.postMoviePage(page)
+  }
 
-    override fun onAttach(context: Context?) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
-        observeViewModel()
-    }
-
-    private fun initializeUI() {
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        paginator = RecyclerViewPaginator(
-                recyclerView = recyclerView,
-                isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
-                loadMore = { loadMore(it) },
-                onLast = { viewModel.getMovieListValues()?.onLastPage!! }
-        )
-        paginator.currentPage = 1
-    }
-
-    private fun observeViewModel() {
-        observeLiveData(viewModel.getMovieListObservable()) { updateMovieList(it) }
-        viewModel.postMoviePage(1)
-    }
-
-    private fun updateMovieList(resource: Resource<List<Movie>>) {
-        when (resource.status) {
-            Status.SUCCESS -> adapter.addMovieList(resource)
-            Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> Unit
-        }
-    }
-
-    private fun loadMore(page: Int) {
-        viewModel.postMoviePage(page)
-    }
-
-    override fun onItemClick(movie: Movie) {
-        startActivity<MovieDetailActivity>("movie" to movie)
-    }
+  override fun onItemClick(movie: Movie) {
+    startActivity<MovieDetailActivity>("movie" to movie)
+  }
 }

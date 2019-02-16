@@ -41,84 +41,83 @@ import javax.inject.Inject
 @Suppress("MemberVisibilityCanBePrivate")
 class PersonDetailActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+  @Inject
+  lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(PersonDetailViewModel::class.java) }
+  private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(PersonDetailViewModel::class.java) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_person_detail)
-        supportPostponeEnterTransition()
+  override fun onCreate(savedInstanceState: Bundle?) {
+    AndroidInjection.inject(this)
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_person_detail)
+    supportPostponeEnterTransition()
 
-        initializeUI()
-    }
+    initializeUI()
+  }
 
-    private fun initializeUI() {
-        toolbar_home.setOnClickListener { onBackPressed() }
-        toolbar_title.text = getPersonFromIntent().name
-        getPersonFromIntent().profile_path?.let {
-            Glide.with(this).load(Api.getPosterPath(it))
-                    .apply(RequestOptions().circleCrop())
-                    .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                            supportStartPostponedEnterTransition()
-                            observeViewModel()
-                            return false
-                        }
-
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                            supportStartPostponedEnterTransition()
-                            observeViewModel()
-                            return false
-                        }
-                    })
-                    .into(person_detail_profile)
-        }
-        person_detail_name.text = getPersonFromIntent().name
-    }
-
-    private fun observeViewModel() {
-        observeLiveData(viewModel.getPersonObservable()) { updatePersonDetail(it) }
-        viewModel.postPersonId(getPersonFromIntent().id)
-    }
-
-    private fun updatePersonDetail(resource: Resource<PersonDetail>) {
-        when (resource.status) {
-            Status.SUCCESS -> {
-                resource.data?.let {
-                    person_detail_biography.text = it.biography
-                    detail_person_tags.tags = it.also_known_as
-
-                    if (it.also_known_as.isNotEmpty()) {
-                        detail_person_tags.visible()
-                    }
-                }
+  private fun initializeUI() {
+    toolbar_home.setOnClickListener { onBackPressed() }
+    toolbar_title.text = getPersonFromIntent().name
+    getPersonFromIntent().profile_path?.let {
+      Glide.with(this).load(Api.getPosterPath(it))
+          .apply(RequestOptions().circleCrop())
+          .listener(object : RequestListener<Drawable> {
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+              supportStartPostponedEnterTransition()
+              observeViewModel()
+              return false
             }
-            Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> Unit
-        }
-    }
 
-    private fun getPersonFromIntent(): Person {
-        return intent.getParcelableExtra("person") as Person
-    }
-
-    companion object {
-        const val intent_requestCode = 1000
-
-        fun startActivity(fragment: Fragment, activity: FragmentActivity, person: Person, view: View) {
-            if (activity.checkIsMaterialVersion()) {
-                val intent = Intent(activity, PersonDetailActivity::class.java)
-                ViewCompat.getTransitionName(view)?.let {
-                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)
-                    intent.putExtra("person", person)
-                    activity.startActivityFromFragment(fragment, intent, intent_requestCode, options.toBundle())
-                }
-            } else {
-                activity.startActivityForResult<PersonDetailActivity>(intent_requestCode, "person" to person)
+            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+              supportStartPostponedEnterTransition()
+              observeViewModel()
+              return false
             }
-        }
+          })
+          .into(person_detail_profile)
     }
+    person_detail_name.text = getPersonFromIntent().name
+  }
+
+  private fun observeViewModel() {
+    observeLiveData(viewModel.getPersonObservable()) { updatePersonDetail(it) }
+    viewModel.postPersonId(getPersonFromIntent().id)
+  }
+
+  private fun updatePersonDetail(resource: Resource<PersonDetail>) {
+    when (resource.status) {
+      Status.LOADING -> Unit
+      Status.SUCCESS -> {
+        resource.data?.let {
+          person_detail_biography.text = it.biography
+          detail_person_tags.tags = it.also_known_as
+          if (it.also_known_as.isNotEmpty()) {
+            detail_person_tags.visible()
+          }
+        }
+      }
+      Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
+    }
+  }
+
+  private fun getPersonFromIntent(): Person {
+    return intent.getParcelableExtra("person") as Person
+  }
+
+  companion object {
+    const val intent_requestCode = 1000
+
+    fun startActivity(fragment: Fragment, activity: FragmentActivity, person: Person, view: View) {
+      if (activity.checkIsMaterialVersion()) {
+        val intent = Intent(activity, PersonDetailActivity::class.java)
+        ViewCompat.getTransitionName(view)?.let {
+          val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)
+          intent.putExtra("person", person)
+          activity.startActivityFromFragment(fragment, intent, intent_requestCode, options.toBundle())
+        }
+      } else {
+        activity.startActivityForResult<PersonDetailActivity>(intent_requestCode, "person" to person)
+      }
+    }
+  }
 }

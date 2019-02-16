@@ -15,15 +15,15 @@ import dagger.android.ContributesAndroidInjector
 @Suppress("unused")
 @Module
 abstract class ActivityModule {
-    @ContributesAndroidInjector(modules = [MainActivityFragmentModule::class])
-    internal abstract fun contributeMainActivity(): MainActivity
+  @ContributesAndroidInjector(modules = [MainActivityFragmentModule::class])
+  internal abstract fun contributeMainActivity(): MainActivity
 
-    @ContributesAndroidInjector
-    internal abstract fun contributeMovieDetailActivity(): MovieDetailActivity
+  @ContributesAndroidInjector
+  internal abstract fun contributeMovieDetailActivity(): MovieDetailActivity
 
-    @ContributesAndroidInjector
-    internal abstract fun contributeTvDetailActivity(): TvDetailActivity
+  @ContributesAndroidInjector
+  internal abstract fun contributeTvDetailActivity(): TvDetailActivity
 
-    @ContributesAndroidInjector
-    internal abstract fun contributePersonDetailActivity(): PersonDetailActivity
+  @ContributesAndroidInjector
+  internal abstract fun contributePersonDetailActivity(): PersonDetailActivity
 }

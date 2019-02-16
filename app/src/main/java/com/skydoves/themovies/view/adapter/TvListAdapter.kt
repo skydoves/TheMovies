@@ -15,24 +15,24 @@ import com.skydoves.themovies.view.viewholder.TvListViewHolder
  */
 
 class TvListAdapter(private val delegate: TvListViewHolder.Delegate)
-    : BaseAdapter() {
+  : BaseAdapter() {
 
-    init {
-        addSection(ArrayList<Tv>())
-    }
+  init {
+    addSection(ArrayList<Tv>())
+  }
 
-    fun addTvList(resource: Resource<List<Tv>>) {
-        resource.data?.let {
-            sections[0].addAll(it)
-            notifyDataSetChanged()
-        }
+  fun addTvList(resource: Resource<List<Tv>>) {
+    resource.data?.let {
+      sections[0].addAll(it)
+      notifyDataSetChanged()
     }
+  }
 
-    override fun layout(sectionRow: SectionRow): Int {
-        return R.layout.item_poster
-    }
+  override fun layout(sectionRow: SectionRow): Int {
+    return R.layout.item_poster
+  }
 
-    override fun viewHolder(layout: Int, view: View): BaseViewHolder {
-        return TvListViewHolder(view, delegate)
-    }
+  override fun viewHolder(layout: Int, view: View): BaseViewHolder {
+    return TvListViewHolder(view, delegate)
+  }
 }

@@ -32,62 +32,60 @@ import javax.inject.Inject
 @Suppress("SpellCheckingInspection")
 class TvListFragment : Fragment(), TvListViewHolder.Delegate {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var viewModel: MainActivityViewModel
+  @Inject
+  lateinit var viewModelFactory: ViewModelProvider.Factory
+  private lateinit var viewModel: MainActivityViewModel
 
-    private val adapter = TvListAdapter(this)
-    private lateinit var paginator: RecyclerViewPaginator
+  private val adapter = TvListAdapter(this)
+  private lateinit var paginator: RecyclerViewPaginator
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.main_fragment_tv, container, false)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    return inflater.inflate(R.layout.main_fragment_tv, container, false)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initializeUI()
+  }
+
+  override fun onAttach(context: Context) {
+    AndroidSupportInjection.inject(this)
+    super.onAttach(context)
+
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
+    observeViewModel()
+  }
+
+  private fun initializeUI() {
+    recyclerView.adapter = adapter
+    recyclerView.layoutManager = GridLayoutManager(context, 2)
+    paginator = RecyclerViewPaginator(
+        recyclerView = recyclerView,
+        isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
+        loadMore = { loadMore(it) },
+        onLast = { viewModel.getTvListValues()?.onLastPage!! }
+    )
+    paginator.currentPage = 1
+  }
+
+  private fun observeViewModel() {
+    observeLiveData(viewModel.getTvListObservable()) { updateTvList(it) }
+    viewModel.postTvPage(1)
+  }
+
+  private fun updateTvList(resource: Resource<List<Tv>>) {
+    when (resource.status) {
+      Status.LOADING -> Unit
+      Status.SUCCESS -> adapter.addTvList(resource)
+      Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
     }
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initializeUI()
-    }
+  private fun loadMore(page: Int) {
+    viewModel.postTvPage(page)
+  }
 
-    override fun onAttach(context: Context?) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
-        observeViewModel()
-    }
-
-    private fun initializeUI() {
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        paginator = RecyclerViewPaginator(
-                recyclerView = recyclerView,
-                isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
-                loadMore = { loadMore(it) },
-                onLast = { viewModel.getTvListValues()?.onLastPage!! }
-        )
-        paginator.currentPage = 1
-    }
-
-    private fun observeViewModel() {
-        observeLiveData(viewModel.getTvListObservable()) { updateTvList(it) }
-        viewModel.postTvPage(1)
-    }
-
-    private fun updateTvList(resource: Resource<List<Tv>>) {
-        when (resource.status) {
-            Status.SUCCESS -> {
-                adapter.addTvList(resource)
-            }
-            Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-            Status.LOADING -> Unit
-        }
-    }
-
-    private fun loadMore(page: Int) {
-        viewModel.postTvPage(page)
-    }
-
-    override fun onItemClick(tv: Tv) {
-        startActivity<TvDetailActivity>("tv" to tv)
-    }
+  override fun onItemClick(tv: Tv) {
+    startActivity<TvDetailActivity>("tv" to tv)
+  }
 }

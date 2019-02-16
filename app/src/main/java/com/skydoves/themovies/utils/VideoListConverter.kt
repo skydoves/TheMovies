@@ -11,15 +11,15 @@ import com.skydoves.themovies.models.Video
  */
 
 open class VideoListConverter {
-    @TypeConverter
-    fun fromString(value: String): List<Video>? {
-        val listType = object : TypeToken<List<Video>>() {}.type
-        return Gson().fromJson<List<Video>>(value, listType)
-    }
+  @TypeConverter
+  fun fromString(value: String): List<Video>? {
+    val listType = object : TypeToken<List<Video>>() {}.type
+    return Gson().fromJson<List<Video>>(value, listType)
+  }
 
-    @TypeConverter
-    fun fromList(list: List<Video>?): String {
-        val gson = Gson()
-        return gson.toJson(list)
-    }
+  @TypeConverter
+  fun fromList(list: List<Video>?): String {
+    val gson = Gson()
+    return gson.toJson(list)
+  }
 }

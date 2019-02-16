@@ -14,22 +14,22 @@ import timber.log.Timber
 @Suppress("unused")
 class TheMoviesApplication : DaggerApplication() {
 
-    private val appComponent = DaggerAppComponent.builder()
-            .application(this)
-            .build()
+  private val appComponent = DaggerAppComponent.builder()
+      .application(this)
+      .build()
 
-    override fun onCreate() {
-        super.onCreate()
-        appComponent.inject(this)
+  override fun onCreate() {
+    super.onCreate()
+    appComponent.inject(this)
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
-
-        Stetho.initializeWithDefaults(this)
+    if (BuildConfig.DEBUG) {
+      Timber.plant(Timber.DebugTree())
     }
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return appComponent
-    }
+    Stetho.initializeWithDefaults(this)
+  }
+
+  override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+    return appComponent
+  }
 }

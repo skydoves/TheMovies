@@ -19,24 +19,24 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+  @Inject
+  lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    AndroidInjection.inject(this)
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
 
-        initializeUI()
-    }
+    initializeUI()
+  }
 
-    private fun initializeUI() {
-        main_viewpager.adapter = MainPagerAdapter(supportFragmentManager)
-        main_viewpager.offscreenPageLimit = 3
-        MainNavigationUtil.setComponents(this, main_viewpager, main_bottom_navigation)
-    }
+  private fun initializeUI() {
+    main_viewpager.adapter = MainPagerAdapter(supportFragmentManager)
+    main_viewpager.offscreenPageLimit = 3
+    MainNavigationUtil.setComponents(this, main_viewpager, main_bottom_navigation)
+  }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return fragmentInjector
-    }
+  override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+    return fragmentInjector
+  }
 }

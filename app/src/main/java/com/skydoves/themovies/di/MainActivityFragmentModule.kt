@@ -15,12 +15,12 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class MainActivityFragmentModule {
 
-    @ContributesAndroidInjector
-    abstract fun contributeMovieListFragment(): MovieListFragment
+  @ContributesAndroidInjector
+  abstract fun contributeMovieListFragment(): MovieListFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeTvListFragment(): TvListFragment
+  @ContributesAndroidInjector
+  abstract fun contributeTvListFragment(): TvListFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributePersonListFragment(): PersonListFragment
+  @ContributesAndroidInjector
+  abstract fun contributePersonListFragment(): PersonListFragment
 }

@@ -11,13 +11,13 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment {
-        when (position) {
-            0 -> return MovieListFragment()
-            1 -> return TvListFragment()
-            else -> return PersonListFragment()
-        }
+  override fun getItem(position: Int): Fragment {
+    when (position) {
+      0 -> return MovieListFragment()
+      1 -> return TvListFragment()
+      else -> return PersonListFragment()
     }
+  }
 
-    override fun getCount() = 3
+  override fun getCount() = 3
 }

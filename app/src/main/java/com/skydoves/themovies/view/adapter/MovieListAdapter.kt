@@ -15,24 +15,24 @@ import com.skydoves.themovies.view.viewholder.MovieListViewHolder
  */
 
 class MovieListAdapter(private val delegate: MovieListViewHolder.Delegate)
-    : BaseAdapter() {
+  : BaseAdapter() {
 
-    init {
-        addSection(ArrayList<Movie>())
-    }
+  init {
+    addSection(ArrayList<Movie>())
+  }
 
-    fun addMovieList(resource: Resource<List<Movie>>) {
-        resource.data?.let {
-            sections[0].addAll(it)
-            notifyDataSetChanged()
-        }
+  fun addMovieList(resource: Resource<List<Movie>>) {
+    resource.data?.let {
+      sections[0].addAll(it)
+      notifyDataSetChanged()
     }
+  }
 
-    override fun layout(sectionRow: SectionRow): Int {
-        return R.layout.item_poster
-    }
+  override fun layout(sectionRow: SectionRow): Int {
+    return R.layout.item_poster
+  }
 
-    override fun viewHolder(layout: Int, view: View): BaseViewHolder {
-        return MovieListViewHolder(view, delegate)
-    }
+  override fun viewHolder(layout: Int, view: View): BaseViewHolder {
+    return MovieListViewHolder(view, delegate)
+  }
 }

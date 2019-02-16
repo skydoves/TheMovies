@@ -8,7 +8,7 @@ import com.skydoves.themovies.models.network.VideoListResponse
  */
 
 class VideoResponseMapper : NetworkResponseMapper<VideoListResponse> {
-    override fun onLastPage(response: VideoListResponse): Boolean {
-        return true
-    }
+  override fun onLastPage(response: VideoListResponse): Boolean {
+    return true
+  }
 }

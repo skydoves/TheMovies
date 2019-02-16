@@ -15,24 +15,24 @@ import com.skydoves.themovies.view.viewholder.PeopleViewHolder
  */
 
 class PeopleAdapter(val delegate: PeopleViewHolder.Delegate)
-    : BaseAdapter() {
+  : BaseAdapter() {
 
-    init {
-        addSection(ArrayList<Person>())
-    }
+  init {
+    addSection(ArrayList<Person>())
+  }
 
-    fun addPeople(resource: Resource<List<Person>>) {
-        resource.data?.let {
-            sections[0].addAll(resource.data)
-            notifyDataSetChanged()
-        }
+  fun addPeople(resource: Resource<List<Person>>) {
+    resource.data?.let {
+      sections[0].addAll(resource.data)
+      notifyDataSetChanged()
     }
+  }
 
-    override fun layout(sectionRow: SectionRow): Int {
-        return R.layout.item_person
-    }
+  override fun layout(sectionRow: SectionRow): Int {
+    return R.layout.item_person
+  }
 
-    override fun viewHolder(layout: Int, view: View): BaseViewHolder {
-        return PeopleViewHolder(view, delegate)
-    }
+  override fun viewHolder(layout: Int, view: View): BaseViewHolder {
+    return PeopleViewHolder(view, delegate)
+  }
 }

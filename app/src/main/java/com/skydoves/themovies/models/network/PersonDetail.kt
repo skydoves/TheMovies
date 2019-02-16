@@ -17,29 +17,29 @@ data class PersonDetail(
   val also_known_as: List<String>,
   val biography: String
 ) : Parcelable, NetworkResponseModel {
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.createStringArrayList(),
-            source.readString()
-    )
+  constructor(source: Parcel) : this(
+      source.readString(),
+      source.readString(),
+      source.readString(),
+      source.createStringArrayList(),
+      source.readString()
+  )
 
-    override fun describeContents() = 0
+  override fun describeContents() = 0
 
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeString(birthday)
-        writeString(known_for_department)
-        writeString(place_of_birth)
-        writeStringList(also_known_as)
-        writeString(biography)
+  override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+    writeString(birthday)
+    writeString(known_for_department)
+    writeString(place_of_birth)
+    writeStringList(also_known_as)
+    writeString(biography)
+  }
+
+  companion object {
+    @JvmField
+    val CREATOR: Parcelable.Creator<PersonDetail> = object : Parcelable.Creator<PersonDetail> {
+      override fun createFromParcel(source: Parcel): PersonDetail = PersonDetail(source)
+      override fun newArray(size: Int): Array<PersonDetail?> = arrayOfNulls(size)
     }
-
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<PersonDetail> = object : Parcelable.Creator<PersonDetail> {
-            override fun createFromParcel(source: Parcel): PersonDetail = PersonDetail(source)
-            override fun newArray(size: Int): Array<PersonDetail?> = arrayOfNulls(size)
-        }
-    }
+  }
 }

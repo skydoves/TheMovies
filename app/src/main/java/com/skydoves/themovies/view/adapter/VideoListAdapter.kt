@@ -15,24 +15,24 @@ import com.skydoves.themovies.view.viewholder.VideoListViewHolder
  */
 
 class VideoListAdapter(private val delegate: VideoListViewHolder.Delegate)
-    : BaseAdapter() {
+  : BaseAdapter() {
 
-    init {
-        addSection(ArrayList<Video>())
-    }
+  init {
+    addSection(ArrayList<Video>())
+  }
 
-    fun addVideoList(resource: Resource<List<Video>>) {
-        resource.data?.let {
-            sections[0].addAll(it)
-        }
-        notifyDataSetChanged()
+  fun addVideoList(resource: Resource<List<Video>>) {
+    resource.data?.let {
+      sections[0].addAll(it)
     }
+    notifyDataSetChanged()
+  }
 
-    override fun layout(sectionRow: SectionRow): Int {
-        return R.layout.item_video
-    }
+  override fun layout(sectionRow: SectionRow): Int {
+    return R.layout.item_video
+  }
 
-    override fun viewHolder(layout: Int, view: View): BaseViewHolder {
-        return VideoListViewHolder(view, delegate)
-    }
+  override fun viewHolder(layout: Int, view: View): BaseViewHolder {
+    return VideoListViewHolder(view, delegate)
+  }
 }

@@ -22,33 +22,33 @@ data class Person(
   val name: String,
   val popularity: Float
 ) : Parcelable {
-    constructor(source: Parcel) : this(
-            source.readInt(),
-            source.readParcelable<PersonDetail>(PersonDetail::class.java.classLoader),
-            source.readString(),
-            1 == source.readInt(),
-            source.readInt(),
-            source.readString(),
-            source.readFloat()
-    )
+  constructor(source: Parcel) : this(
+      source.readInt(),
+      source.readParcelable<PersonDetail>(PersonDetail::class.java.classLoader),
+      source.readString(),
+      1 == source.readInt(),
+      source.readInt(),
+      source.readString(),
+      source.readFloat()
+  )
 
-    override fun describeContents() = 0
+  override fun describeContents() = 0
 
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeInt(page)
-        writeParcelable(personDetail, 0)
-        writeString(profile_path)
-        writeInt((if (adult) 1 else 0))
-        writeInt(id)
-        writeString(name)
-        writeFloat(popularity)
+  override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+    writeInt(page)
+    writeParcelable(personDetail, 0)
+    writeString(profile_path)
+    writeInt((if (adult) 1 else 0))
+    writeInt(id)
+    writeString(name)
+    writeFloat(popularity)
+  }
+
+  companion object {
+    @JvmField
+    val CREATOR: Parcelable.Creator<Person> = object : Parcelable.Creator<Person> {
+      override fun createFromParcel(source: Parcel): Person = Person(source)
+      override fun newArray(size: Int): Array<Person?> = arrayOfNulls(size)
     }
-
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<Person> = object : Parcelable.Creator<Person> {
-            override fun createFromParcel(source: Parcel): Person = Person(source)
-            override fun newArray(size: Int): Array<Person?> = arrayOfNulls(size)
-        }
-    }
+  }
 }

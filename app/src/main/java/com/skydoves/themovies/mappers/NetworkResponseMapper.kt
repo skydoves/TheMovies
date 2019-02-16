@@ -8,5 +8,5 @@ import com.skydoves.themovies.models.NetworkResponseModel
  */
 
 interface NetworkResponseMapper<in FROM : NetworkResponseModel> {
-    fun onLastPage(response: FROM): Boolean
+  fun onLastPage(response: FROM): Boolean
 }

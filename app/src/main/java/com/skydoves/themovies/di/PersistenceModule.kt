@@ -19,27 +19,27 @@ import javax.inject.Singleton
 @Module
 class PersistenceModule {
 
-    @Provides
-    @Singleton
-    fun provideDatabase(@NonNull application: Application): AppDatabase {
-        return Room.databaseBuilder(application, AppDatabase::class.java, "TheMovies.db").allowMainThreadQueries().build()
-    }
+  @Provides
+  @Singleton
+  fun provideDatabase(@NonNull application: Application): AppDatabase {
+    return Room.databaseBuilder(application, AppDatabase::class.java, "TheMovies.db").allowMainThreadQueries().build()
+  }
 
-    @Provides
-    @Singleton
-    fun provideMovieDao(@NonNull database: AppDatabase): MovieDao {
-        return database.movieDao()
-    }
+  @Provides
+  @Singleton
+  fun provideMovieDao(@NonNull database: AppDatabase): MovieDao {
+    return database.movieDao()
+  }
 
-    @Provides
-    @Singleton
-    fun provideTvDao(@NonNull database: AppDatabase): TvDao {
-        return database.tvDao()
-    }
+  @Provides
+  @Singleton
+  fun provideTvDao(@NonNull database: AppDatabase): TvDao {
+    return database.tvDao()
+  }
 
-    @Provides
-    @Singleton
-    fun providePeopleDao(@NonNull database: AppDatabase): PeopleDao {
-        return database.peopleDao()
-    }
+  @Provides
+  @Singleton
+  fun providePeopleDao(@NonNull database: AppDatabase): PeopleDao {
+    return database.peopleDao()
+  }
 }

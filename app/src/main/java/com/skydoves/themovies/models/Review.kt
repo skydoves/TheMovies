@@ -15,27 +15,27 @@ data class Review(
   val content: String,
   val url: String
 ) : Parcelable {
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString()
-    )
+  constructor(source: Parcel) : this(
+      source.readString(),
+      source.readString(),
+      source.readString(),
+      source.readString()
+  )
 
-    override fun describeContents() = 0
+  override fun describeContents() = 0
 
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeString(id)
-        writeString(author)
-        writeString(content)
-        writeString(url)
+  override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+    writeString(id)
+    writeString(author)
+    writeString(content)
+    writeString(url)
+  }
+
+  companion object {
+    @JvmField
+    val CREATOR: Parcelable.Creator<Review> = object : Parcelable.Creator<Review> {
+      override fun createFromParcel(source: Parcel): Review = Review(source)
+      override fun newArray(size: Int): Array<Review?> = arrayOfNulls(size)
     }
-
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<Review> = object : Parcelable.Creator<Review> {
-            override fun createFromParcel(source: Parcel): Review = Review(source)
-            override fun newArray(size: Int): Array<Review?> = arrayOfNulls(size)
-        }
-    }
+  }
 }

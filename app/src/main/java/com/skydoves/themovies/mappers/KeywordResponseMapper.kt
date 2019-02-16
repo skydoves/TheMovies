@@ -8,7 +8,7 @@ import com.skydoves.themovies.models.network.KeywordListResponse
  */
 
 class KeywordResponseMapper : NetworkResponseMapper<KeywordListResponse> {
-    override fun onLastPage(response: KeywordListResponse): Boolean {
-        return true
-    }
+  override fun onLastPage(response: KeywordListResponse): Boolean {
+    return true
+  }
 }

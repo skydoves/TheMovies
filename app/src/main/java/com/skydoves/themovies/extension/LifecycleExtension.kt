@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
  */
 
 inline fun <T> LifecycleOwner.observeLiveData(data: LiveData<T>, crossinline onChanged: (T) -> Unit) {
-    data.observe(this, Observer {
-        it?.let { value -> onChanged(value) }
-    })
+  data.observe(this, Observer {
+    it?.let { value -> onChanged(value) }
+  })
 }
