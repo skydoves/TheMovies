@@ -10,12 +10,12 @@ import android.os.Parcelable
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 data class Video(
-    val id: String,
-    val name: String,
-    val site: String,
-    val key: String,
-    val size: Int,
-    val type: String
+  val id: String,
+  val name: String,
+  val site: String,
+  val key: String,
+  val size: Int,
+  val type: String
 ) : Parcelable {
     constructor(source: Parcel) : this(
             source.readString(),

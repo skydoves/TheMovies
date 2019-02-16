@@ -6,7 +6,7 @@ package com.skydoves.themovies.models.network
  */
 
 data class ErrorEnvelope(
-    val status_code: Int,
-    val status_message: String,
-    val success: Boolean
+  val status_code: Int,
+  val status_message: String,
+  val success: Boolean
 )

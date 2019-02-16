@@ -6,18 +6,19 @@ import androidx.room.TypeConverters
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
-import com.skydoves.themovies.utils.StringListConverter
 import com.skydoves.themovies.utils.IntegerListConverter
 import com.skydoves.themovies.utils.KeywordListConverter
-import com.skydoves.themovies.utils.VideoListConverter
 import com.skydoves.themovies.utils.ReviewListConverter
+import com.skydoves.themovies.utils.StringListConverter
+import com.skydoves.themovies.utils.VideoListConverter
 
 /**
  * Developed by skydoves on 2018-08-09.
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-@Database(entities = [(Movie::class), (Tv::class), (Person::class)], version = 3, exportSchema = false)
+@Database(entities = [(Movie::class), (Tv::class), (Person::class)],
+    version = 3, exportSchema = false)
 @TypeConverters(value = [(StringListConverter::class), (IntegerListConverter::class),
     (KeywordListConverter::class), (VideoListConverter::class), (ReviewListConverter::class)])
 abstract class AppDatabase : RoomDatabase() {

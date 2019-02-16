@@ -14,7 +14,8 @@ import com.skydoves.themovies.view.viewholder.TvListViewHolder
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class TvListAdapter(private val delegate: TvListViewHolder.Delegate) : BaseAdapter() {
+class TvListAdapter(private val delegate: TvListViewHolder.Delegate)
+    : BaseAdapter() {
 
     init {
         addSection(ArrayList<Tv>())

@@ -9,6 +9,6 @@ import com.skydoves.themovies.models.Video
  */
 
 data class VideoListResponse(
-    val id: Int,
-    val results: List<Video>
+  val id: Int,
+  val results: List<Video>
 ) : NetworkResponseModel

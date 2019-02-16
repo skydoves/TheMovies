@@ -23,7 +23,11 @@ import javax.inject.Singleton
 
 @Singleton
 class DiscoverRepository @Inject
-constructor(val discoverService: TheDiscoverService, val movieDao: MovieDao, val tvDao: TvDao)
+constructor(
+  val discoverService: TheDiscoverService,
+  val movieDao: MovieDao,
+  val tvDao: TvDao
+)
     : Repository {
 
     init {

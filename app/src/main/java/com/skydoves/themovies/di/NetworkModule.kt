@@ -22,6 +22,7 @@ import javax.inject.Singleton
 
 @Module
 class NetworkModule {
+
     @Provides
     @Singleton
     fun provideHttpClient(): OkHttpClient {

@@ -14,7 +14,8 @@ import com.skydoves.themovies.view.viewholder.VideoListViewHolder
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class VideoListAdapter(private val delegate: VideoListViewHolder.Delegate) : BaseAdapter() {
+class VideoListAdapter(private val delegate: VideoListViewHolder.Delegate)
+    : BaseAdapter() {
 
     init {
         addSection(ArrayList<Video>())

@@ -26,7 +26,8 @@ import javax.inject.Singleton
 
 @Singleton
 class MovieRepository @Inject
-constructor(val service: MovieService, val movieDao: MovieDao) : Repository {
+constructor(val service: MovieService, val movieDao: MovieDao)
+    : Repository {
 
     init {
         Timber.d("Injection MovieRepository")

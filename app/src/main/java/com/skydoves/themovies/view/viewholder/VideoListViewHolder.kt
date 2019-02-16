@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.item_video.view.*
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class VideoListViewHolder(val view: View, private val delegate: Delegate) : BaseViewHolder(view) {
+class VideoListViewHolder(val view: View, private val delegate: Delegate)
+    : BaseViewHolder(view) {
 
     interface Delegate {
         fun onItemClicked(video: Video)

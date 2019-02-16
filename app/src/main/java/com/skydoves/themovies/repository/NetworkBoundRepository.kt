@@ -15,7 +15,9 @@ import timber.log.Timber
  * Copyright (c) 2018 skydoves All rights reserved.
  */
 
-abstract class NetworkBoundRepository<ResultType, RequestType : NetworkResponseModel, Mapper : NetworkResponseMapper<RequestType>>
+abstract class NetworkBoundRepository<ResultType,
+    RequestType : NetworkResponseModel,
+    Mapper : NetworkResponseMapper<RequestType>>
 internal constructor() {
 
     private val result: MediatorLiveData<Resource<ResultType>> = MediatorLiveData()
@@ -29,7 +31,9 @@ internal constructor() {
                 result.postValue(Resource.loading(null))
                 fetchFromNetwork(loadedFromDB)
             } else {
-                result.addSource<ResultType>(loadedFromDB) { newData -> setValue(Resource.success(newData, false)) }
+                result.addSource<ResultType>(loadedFromDB) {
+                    newData -> setValue(Resource.success(newData, false))
+                }
             }
         }
     }
@@ -54,7 +58,9 @@ internal constructor() {
                         result.removeSource(loadedFromDB)
                         onFetchFailed(response.message)
                         response.message?.let {
-                            result.addSource<ResultType>(loadedFromDB) { newData -> setValue(Resource.error(it, newData)) }
+                            result.addSource<ResultType>(loadedFromDB) {
+                                newData -> setValue(Resource.error(it, newData))
+                            }
                         }
                     }
                 }

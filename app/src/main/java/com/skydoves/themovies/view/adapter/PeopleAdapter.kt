@@ -14,7 +14,8 @@ import com.skydoves.themovies.view.viewholder.PeopleViewHolder
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class PeopleAdapter(val delegate: PeopleViewHolder.Delegate) : BaseAdapter() {
+class PeopleAdapter(val delegate: PeopleViewHolder.Delegate)
+    : BaseAdapter() {
 
     init {
         addSection(ArrayList<Person>())

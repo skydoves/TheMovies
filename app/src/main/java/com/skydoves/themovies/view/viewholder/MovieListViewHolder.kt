@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.item_poster.view.*
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MovieListViewHolder(view: View, private val delegate: Delegate) : BaseViewHolder(view) {
+class MovieListViewHolder(view: View, private val delegate: Delegate)
+    : BaseViewHolder(view) {
 
     interface Delegate {
         fun onItemClick(movie: Movie)

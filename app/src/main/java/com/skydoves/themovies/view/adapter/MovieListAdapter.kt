@@ -14,7 +14,8 @@ import com.skydoves.themovies.view.viewholder.MovieListViewHolder
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MovieListAdapter(private val delegate: MovieListViewHolder.Delegate) : BaseAdapter() {
+class MovieListAdapter(private val delegate: MovieListViewHolder.Delegate)
+    : BaseAdapter() {
 
     init {
         addSection(ArrayList<Movie>())

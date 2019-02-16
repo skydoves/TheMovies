@@ -80,8 +80,8 @@ class MovieDetailActivityTest {
     }
 
     private fun childAtPosition(
-        parentMatcher: Matcher<View>,
-        position: Int
+      parentMatcher: Matcher<View>,
+      position: Int
     ): Matcher<View> {
 
         return object : TypeSafeMatcher<View>() {

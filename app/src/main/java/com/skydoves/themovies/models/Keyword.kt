@@ -10,8 +10,8 @@ import android.os.Parcelable
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 data class Keyword(
-    val id: Int,
-    val name: String
+  val id: Int,
+  val name: String
 ) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),

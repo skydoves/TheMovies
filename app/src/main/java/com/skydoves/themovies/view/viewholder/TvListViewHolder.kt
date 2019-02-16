@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.item_poster.view.*
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class TvListViewHolder(val view: View, private val delegate: Delegate) : BaseViewHolder(view) {
+class TvListViewHolder(val view: View, private val delegate: Delegate)
+    : BaseViewHolder(view) {
 
     interface Delegate {
         fun onItemClick(tv: Tv)

@@ -10,10 +10,10 @@ import android.os.Parcelable
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 data class Review(
-    val id: String,
-    val author: String,
-    val content: String,
-    val url: String
+  val id: String,
+  val author: String,
+  val content: String,
+  val url: String
 ) : Parcelable {
     constructor(source: Parcel) : this(
             source.readString(),
