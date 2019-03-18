@@ -22,7 +22,7 @@ class ReviewListAdapter : BaseAdapter() {
 
   fun addReviewList(resource: Resource<List<Review>>) {
     resource.data?.let {
-      sections[0].addAll(it)
+      sections()[0].addAll(it)
     }
     notifyDataSetChanged()
   }

@@ -23,7 +23,7 @@ class PeopleAdapter(val delegate: PeopleViewHolder.Delegate)
 
   fun addPeople(resource: Resource<List<Person>>) {
     resource.data?.let {
-      sections[0].addAll(resource.data)
+      sections()[0].addAll(resource.data)
       notifyDataSetChanged()
     }
   }

@@ -23,7 +23,7 @@ class TvListAdapter(private val delegate: TvListViewHolder.Delegate)
 
   fun addTvList(resource: Resource<List<Tv>>) {
     resource.data?.let {
-      sections[0].addAll(it)
+      sections()[0].addAll(it)
       notifyDataSetChanged()
     }
   }

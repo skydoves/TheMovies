@@ -23,7 +23,7 @@ class MovieListAdapter(private val delegate: MovieListViewHolder.Delegate)
 
   fun addMovieList(resource: Resource<List<Movie>>) {
     resource.data?.let {
-      sections[0].addAll(it)
+      sections()[0].addAll(it)
       notifyDataSetChanged()
     }
   }

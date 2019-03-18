@@ -23,7 +23,7 @@ class VideoListAdapter(private val delegate: VideoListViewHolder.Delegate)
 
   fun addVideoList(resource: Resource<List<Video>>) {
     resource.data?.let {
-      sections[0].addAll(it)
+      sections()[0].addAll(it)
     }
     notifyDataSetChanged()
   }
