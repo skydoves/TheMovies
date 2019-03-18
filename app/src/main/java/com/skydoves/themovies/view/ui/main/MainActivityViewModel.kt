@@ -20,7 +20,10 @@ import javax.inject.Inject
  */
 
 class MainActivityViewModel @Inject
-constructor(private val discoverRepository: DiscoverRepository, private val peopleRepository: PeopleRepository) : ViewModel() {
+constructor(private val discoverRepository: DiscoverRepository,
+            private val peopleRepository: PeopleRepository)
+  : ViewModel()
+{
 
   private var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
   private val movieListLiveData: LiveData<Resource<List<Movie>>>
