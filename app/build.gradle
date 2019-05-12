@@ -57,7 +57,7 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.palette:palette:$androidxVersion"
     implementation "androidx.cardview:cardview:$androidxVersion"
-    implementation "androidx.recyclerview:recyclerview:$androidxVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerVersion"
 
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -65,6 +65,8 @@ dependencies {
 
     // architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$archCompomentVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataKtx"
+
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     testImplementation "androidx.arch.core:core-testing:$archCompomentVersion"
