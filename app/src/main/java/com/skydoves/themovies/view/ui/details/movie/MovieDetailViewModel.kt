@@ -2,8 +2,8 @@ package com.skydoves.themovies.view.ui.details.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
@@ -33,16 +33,16 @@ constructor(private val repository: MovieRepository) : ViewModel() {
   init {
     Timber.d("Injection MovieDetailViewModel")
 
-    keywordListLiveData = Transformations.switchMap(keywordIdLiveData) {
+    keywordListLiveData = keywordIdLiveData.switchMap {
       keywordIdLiveData.value?.let { repository.loadKeywordList(it) }
           ?: AbsentLiveData.create()
     }
 
-    videoListLiveData = Transformations.switchMap(videoIdLiveData) {
+    videoListLiveData = videoIdLiveData.switchMap {
       videoIdLiveData.value?.let { repository.loadVideoList(it) } ?: AbsentLiveData.create()
     }
 
-    reviewListLiveData = Transformations.switchMap(reviewIdLiveData) {
+    reviewListLiveData = reviewIdLiveData.switchMap {
       reviewIdLiveData.value?.let { repository.loadReviewsList(it) }
           ?: AbsentLiveData.create()
     }
