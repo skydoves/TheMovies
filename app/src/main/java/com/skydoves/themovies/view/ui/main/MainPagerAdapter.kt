@@ -9,7 +9,8 @@ import androidx.fragment.app.FragmentPagerAdapter
  * Copyright (c) 2018 skydoves rights reserved.
  */
 
-class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class MainPagerAdapter(fm: FragmentManager)
+  : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
   override fun getItem(position: Int): Fragment {
     return when (position) {

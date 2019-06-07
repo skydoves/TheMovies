@@ -10,7 +10,6 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -22,6 +21,7 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.extension.checkIsMaterialVersion
 import com.skydoves.themovies.extension.observeLiveData
 import com.skydoves.themovies.extension.visible
+import com.skydoves.themovies.extension.vm
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.entity.Person
@@ -43,8 +43,7 @@ class PersonDetailActivity : AppCompatActivity() {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-
-  private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(PersonDetailViewModel::class.java) }
+  private val viewModel by lazy { vm(viewModelFactory, PersonDetailViewModel::class) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
@@ -101,22 +100,23 @@ class PersonDetailActivity : AppCompatActivity() {
   }
 
   private fun getPersonFromIntent(): Person {
-    return intent.getParcelableExtra("person") as Person
+    return intent.getParcelableExtra(personId) as Person
   }
 
   companion object {
     const val intent_requestCode = 1000
+    const val personId = "person"
 
     fun startActivity(fragment: Fragment, activity: FragmentActivity, person: Person, view: View) {
       if (activity.checkIsMaterialVersion()) {
         val intent = Intent(activity, PersonDetailActivity::class.java)
         ViewCompat.getTransitionName(view)?.let {
           val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)
-          intent.putExtra("person", person)
+          intent.putExtra(personId, person)
           activity.startActivityFromFragment(fragment, intent, intent_requestCode, options.toBundle())
         }
       } else {
-        activity.startActivityForResult<PersonDetailActivity>(intent_requestCode, "person" to person)
+        activity.startActivityForResult<PersonDetailActivity>(intent_requestCode, personId to person)
       }
     }
   }

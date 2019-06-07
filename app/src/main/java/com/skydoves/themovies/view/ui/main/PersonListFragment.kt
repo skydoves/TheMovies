@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.extension.observeLiveData
+import com.skydoves.themovies.extension.vm
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.entity.Person
@@ -34,7 +34,7 @@ class PersonListFragment : Fragment(), PeopleViewHolder.Delegate {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-  private lateinit var viewModel: MainActivityViewModel
+  private val viewModel by lazy { vm(viewModelFactory, MainActivityViewModel::class) }
 
   private val adapter = PeopleAdapter(this)
   private lateinit var paginator: RecyclerViewPaginator
@@ -51,8 +51,6 @@ class PersonListFragment : Fragment(), PeopleViewHolder.Delegate {
   override fun onAttach(context: Context) {
     AndroidSupportInjection.inject(this)
     super.onAttach(context)
-
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
     observeViewModel()
   }
 

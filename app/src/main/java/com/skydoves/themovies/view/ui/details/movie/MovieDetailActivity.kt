@@ -1,13 +1,13 @@
 package com.skydoves.themovies.view.ui.details.movie
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.skydoves.themovies.R
@@ -17,6 +17,7 @@ import com.skydoves.themovies.extension.observeLiveData
 import com.skydoves.themovies.extension.requestGlideListener
 import com.skydoves.themovies.extension.simpleToolbarWithHome
 import com.skydoves.themovies.extension.visible
+import com.skydoves.themovies.extension.vm
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
@@ -31,6 +32,7 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.android.synthetic.main.layout_detail_body.*
 import kotlinx.android.synthetic.main.layout_detail_header.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
@@ -43,7 +45,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(MovieDetailViewModel::class.java) }
+  private val viewModel by lazy { vm(viewModelFactory, MovieDetailViewModel::class) }
 
   private val videoAdapter by lazy { VideoListAdapter(this) }
   private val reviewAdapter by lazy { ReviewListAdapter() }
@@ -137,7 +139,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
   }
 
   private fun getMovieFromIntent(): Movie {
-    return intent.getParcelableExtra("movie") as Movie
+    return intent.getParcelableExtra(movieId) as Movie
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -148,5 +150,12 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
   override fun onItemClicked(video: Video) {
     val playVideoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Api.getYoutubeVideoPath(video.key)))
     startActivity(playVideoIntent)
+  }
+
+  companion object {
+    private const val movieId = "movie"
+    fun startActivityModel(context: Context?, movie: Movie) {
+      context?.startActivity<MovieDetailActivity>(movieId to movie)
+    }
   }
 }
