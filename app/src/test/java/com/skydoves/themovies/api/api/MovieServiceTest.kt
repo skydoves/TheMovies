@@ -31,11 +31,6 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-/**
- * Developed by skydoves on 2018-08-17.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class MovieServiceTest : ApiAbstract<MovieService>() {
 
   private lateinit var service: MovieService

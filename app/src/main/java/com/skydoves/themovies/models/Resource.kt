@@ -28,11 +28,6 @@ import com.google.gson.JsonSyntaxException
 import com.skydoves.themovies.models.network.ErrorEnvelope
 
 /**
- * Developed by skydoves on 2018-08-09.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
-/**
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */

@@ -39,11 +39,6 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * Developed by skydoves on 2018-08-09.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Singleton
 class DiscoverRepository @Inject
 constructor(

@@ -29,11 +29,6 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import timber.log.Timber
 
-/**
- * Developed by skydoves on 2018-08-07.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Suppress("unused")
 class TheMoviesApplication : DaggerApplication() {
 

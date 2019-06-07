@@ -32,11 +32,6 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.Video
 import kotlinx.android.synthetic.main.item_video.view.*
 
-/**
- * Developed by skydoves on 2018-08-19.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class VideoListViewHolder(val view: View, private val delegate: Delegate)
   : BaseViewHolder(view) {
 

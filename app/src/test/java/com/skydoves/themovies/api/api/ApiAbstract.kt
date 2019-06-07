@@ -41,11 +41,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 
-/**
- * Developed by skydoves on 2018-08-07.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @RunWith(JUnit4::class)
 abstract class ApiAbstract<T> {
   @Rule

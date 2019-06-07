@@ -36,11 +36,6 @@ import com.skydoves.themovies.utils.AbsentLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
-/**
- * Developed by skydoves on 2018-08-21.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class TvDetailViewModel @Inject
 constructor(private val repository: TvRepository) : ViewModel() {
 

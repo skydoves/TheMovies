@@ -32,11 +32,6 @@ import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.view.viewholder.PeopleViewHolder
 
-/**
- * Developed by skydoves on 2018-08-15.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class PeopleAdapter(val delegate: PeopleViewHolder.Delegate)
   : BaseAdapter() {
 

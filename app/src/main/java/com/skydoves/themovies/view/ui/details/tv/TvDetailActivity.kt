@@ -59,11 +59,6 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-/**
- * Developed by skydoves on 2018-08-16.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
 
   @Inject

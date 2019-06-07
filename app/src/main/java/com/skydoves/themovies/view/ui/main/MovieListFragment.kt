@@ -45,11 +45,6 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
 import javax.inject.Inject
 
-/**
- * Developed by skydoves on 2018-08-11.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Suppress("SpellCheckingInspection")
 class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
 

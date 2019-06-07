@@ -31,11 +31,6 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-/**
- * Developed by skydoves on 2018-08-15.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class PeopleServiceTest : ApiAbstract<PeopleService>() {
 
   private lateinit var service: PeopleService

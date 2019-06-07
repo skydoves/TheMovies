@@ -37,11 +37,6 @@ import com.skydoves.themovies.utils.AbsentLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
-/**
- * Developed by skydoves on 2018-08-07.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class MainActivityViewModel @Inject
 constructor(
   private val discoverRepository: DiscoverRepository,

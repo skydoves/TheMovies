@@ -35,11 +35,6 @@ import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-/**
- * Developed by skydoves on 2018-08-07.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
   @Inject

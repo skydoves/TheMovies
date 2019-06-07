@@ -28,11 +28,6 @@ import androidx.lifecycle.MutableLiveData
 import com.skydoves.themovies.api.ApiResponse
 import retrofit2.Response
 
-/**
- * Developed by skydoves on 2018-08-10.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 object ApiUtil {
   fun <T : Any> successCall(data: T) = createCall(Response.success(data))
 

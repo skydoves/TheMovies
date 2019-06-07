@@ -32,11 +32,6 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-/**
- * Developed by skydoves on 2018-08-20.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class TvServiceTest : ApiAbstract<TvService>() {
 
   private lateinit var service: TvService

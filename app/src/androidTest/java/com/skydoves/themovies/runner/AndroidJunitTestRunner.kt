@@ -28,11 +28,6 @@ import android.content.Context
 import androidx.test.runner.AndroidJUnitRunner
 import com.skydoves.themovies.TestTheMoviesApplication
 
-/**
- * Developed by skydoves on 2018-08-10.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Suppress("unused")
 class AndroidJunitTestRunner : AndroidJUnitRunner() {
   @Throws(InstantiationException::class, IllegalAccessException::class, ClassNotFoundException::class)

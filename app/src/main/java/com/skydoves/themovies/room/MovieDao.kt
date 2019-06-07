@@ -31,11 +31,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.skydoves.themovies.models.entity.Movie
 
-/**
- * Developed by skydoves on 2018-08-09.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Dao
 interface MovieDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)

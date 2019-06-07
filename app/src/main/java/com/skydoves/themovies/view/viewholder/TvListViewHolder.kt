@@ -32,11 +32,6 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.entity.Tv
 import kotlinx.android.synthetic.main.item_poster.view.*
 
-/**
- * Developed by skydoves on 2018-08-13.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class TvListViewHolder(val view: View, private val delegate: Delegate)
   : BaseViewHolder(view) {
 

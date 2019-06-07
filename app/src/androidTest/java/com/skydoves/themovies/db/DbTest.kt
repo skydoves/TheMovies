@@ -31,11 +31,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.runner.RunWith
 
-/**
- * Developed by skydoves on 2018-08-10.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @RunWith(AndroidJUnit4::class)
 abstract class DbTest {
   lateinit var db: AppDatabase

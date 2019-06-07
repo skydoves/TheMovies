@@ -29,11 +29,6 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import com.skydoves.themovies.models.network.PersonDetail
 
-/**
- * Developed by skydoves on 2018-08-15.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 @Entity(tableName = "People", primaryKeys = ["id"])
 data class Person(

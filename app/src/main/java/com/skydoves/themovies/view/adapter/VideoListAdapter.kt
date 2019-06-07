@@ -32,11 +32,6 @@ import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.view.viewholder.VideoListViewHolder
 
-/**
- * Developed by skydoves on 2018-08-19.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class VideoListAdapter(private val delegate: VideoListViewHolder.Delegate)
   : BaseAdapter() {
 

@@ -45,11 +45,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-/**
- * Developed by skydoves on 2018-08-22.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @RunWith(JUnit4::class)
 class PersonDetailViewModelTest {
 

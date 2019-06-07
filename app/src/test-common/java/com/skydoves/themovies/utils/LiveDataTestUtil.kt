@@ -29,11 +29,6 @@ import androidx.lifecycle.Observer
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-/**
- * Developed by skydoves on 2018-08-07.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 object LiveDataTestUtil {
   @Suppress("UNCHECKED_CAST")
   @Throws(InterruptedException::class)

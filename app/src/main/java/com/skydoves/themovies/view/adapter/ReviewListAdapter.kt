@@ -32,11 +32,6 @@ import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.view.viewholder.ReviewListViewHolder
 
-/**
- * Developed by skydoves on 2018-08-20.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class ReviewListAdapter : BaseAdapter() {
 
   init {

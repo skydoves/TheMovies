@@ -56,11 +56,6 @@ import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-/**
- * Developed by skydoves on 2018-08-16.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Suppress("MemberVisibilityCanBePrivate")
 class PersonDetailActivity : AppCompatActivity() {
 

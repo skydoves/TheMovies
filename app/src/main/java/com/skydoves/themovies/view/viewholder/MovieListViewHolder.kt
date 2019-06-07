@@ -32,11 +32,6 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.entity.Movie
 import kotlinx.android.synthetic.main.item_poster.view.*
 
-/**
- * Developed by skydoves on 2018-08-12.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class MovieListViewHolder(view: View, private val delegate: Delegate)
   : BaseViewHolder(view) {
 

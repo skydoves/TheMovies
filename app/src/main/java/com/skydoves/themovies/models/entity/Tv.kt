@@ -30,11 +30,6 @@ import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 
-/**
- * Developed by skydoves on 2018-08-07.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 @Entity(primaryKeys = [("id")])
 data class Tv(

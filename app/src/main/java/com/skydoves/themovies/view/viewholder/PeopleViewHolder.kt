@@ -31,11 +31,6 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.entity.Person
 import kotlinx.android.synthetic.main.item_person.view.*
 
-/**
- * Developed by skydoves on 2018-08-15.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class PeopleViewHolder(val view: View, private val delegate: Delegate)
   : BaseViewHolder(view) {
 

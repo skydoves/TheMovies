@@ -27,11 +27,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.skydoves.themovies.models.NetworkResponseModel
 
-/**
- * Developed by skydoves on 2018-08-22.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 data class PersonDetail(
   val birthday: String,

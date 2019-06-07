@@ -30,11 +30,6 @@ import androidx.viewpager.widget.ViewPager
 import com.skydoves.themovies.R
 import devlight.io.library.ntb.NavigationTabBar
 
-/**
- * Developed by skydoves on 2018-08-11.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 object MainNavigationUtil {
 
   private fun getNavigationModels(context: Context): ArrayList<NavigationTabBar.Model> {

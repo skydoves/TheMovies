@@ -26,11 +26,6 @@ package com.skydoves.themovies.models
 import android.os.Parcel
 import android.os.Parcelable
 
-/**
- * Developed by skydoves on 2018-08-16.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "unused")
 data class Keyword(
   val id: Int,

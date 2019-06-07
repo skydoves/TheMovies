@@ -32,11 +32,6 @@ import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
 
-/**
- * Developed by skydoves on 2018-08-13.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class TvListAdapter(private val delegate: TvListViewHolder.Delegate)
   : BaseAdapter() {
 

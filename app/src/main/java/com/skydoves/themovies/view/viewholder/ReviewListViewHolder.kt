@@ -28,11 +28,6 @@ import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.themovies.models.Review
 import kotlinx.android.synthetic.main.item_review.view.*
 
-/**
- * Developed by skydoves on 2018-08-20.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 class ReviewListViewHolder(val view: View) : BaseViewHolder(view) {
 
   private lateinit var review: Review

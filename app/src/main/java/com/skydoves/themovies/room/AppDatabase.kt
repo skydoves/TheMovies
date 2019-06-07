@@ -35,11 +35,6 @@ import com.skydoves.themovies.utils.ReviewListConverter
 import com.skydoves.themovies.utils.StringListConverter
 import com.skydoves.themovies.utils.VideoListConverter
 
-/**
- * Developed by skydoves on 2018-08-09.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Database(entities = [(Movie::class), (Tv::class), (Person::class)],
   version = 3, exportSchema = false)
 @TypeConverters(value = [(StringListConverter::class), (IntegerListConverter::class),

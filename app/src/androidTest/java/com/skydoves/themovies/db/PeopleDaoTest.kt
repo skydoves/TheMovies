@@ -32,11 +32,6 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * Developed by skydoves on 2018-08-15.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @RunWith(AndroidJUnit4::class)
 class PeopleDaoTest : DbTest() {
 

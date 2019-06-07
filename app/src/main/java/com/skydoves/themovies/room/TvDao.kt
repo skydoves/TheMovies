@@ -31,11 +31,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.skydoves.themovies.models.entity.Tv
 
-/**
- * Developed by skydoves on 2018-08-09.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
 @Dao
 interface TvDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
