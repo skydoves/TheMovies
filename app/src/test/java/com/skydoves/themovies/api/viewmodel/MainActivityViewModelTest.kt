@@ -1,3 +1,26 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Designed and developed by 2018 skydoves (Jaewoong Eum)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.skydoves.themovies.api.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -65,7 +88,7 @@ class MainActivityViewModelTest {
     val call = ApiUtil.successCall(mockResponse)
     whenever(discoverService.fetchDiscoverMovie(1)).thenReturn(call)
 
-    val data = viewModel.getMovieListObservable()
+    val data = viewModel.movieListLiveData
     val observer = mock<Observer<Resource<List<Movie>>>>()
     data.observeForever(observer)
 
@@ -86,7 +109,7 @@ class MainActivityViewModelTest {
     val loadFromDB = MutableLiveData<List<Tv>>()
     whenever(tvDao.getTvList(1)).thenReturn(loadFromDB)
 
-    val data = viewModel.getTvListObservable()
+    val data = viewModel.tvListLiveData
     val observer = mock<Observer<Resource<List<Tv>>>>()
     data.observeForever(observer)
 
@@ -107,7 +130,7 @@ class MainActivityViewModelTest {
     val loadFromDB = MutableLiveData<List<Person>>()
     whenever(peopleDao.getPeople(1)).thenReturn(loadFromDB)
 
-    val data = viewModel.getPeopleObservable()
+    val data = viewModel.peopleLiveData
     val observer = mock<Observer<Resource<List<Person>>>>()
     data.observeForever(observer)
 

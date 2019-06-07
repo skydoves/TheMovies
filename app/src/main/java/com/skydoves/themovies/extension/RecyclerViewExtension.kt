@@ -21,24 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.utils
+package com.skydoves.themovies.extension
 
-import com.skydoves.themovies.models.Keyword
+import androidx.recyclerview.widget.RecyclerView
+import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.Status
+import org.jetbrains.anko.toast
 
-/**
- * Developed by skydoves on 2018-08-19.
- * Copyright (c) 2018 skydoves rights reserved.
- */
-
-object KeywordListMapper {
-  fun mapToStringList(keywords: List<Keyword>): List<String> {
-    var list: MutableList<String> = ArrayList()
-    for (keyword in keywords) {
-      list.add(keyword.name)
+fun RecyclerView.bindResource(resource: Resource<Any>?, onSuccess: () -> Unit) {
+  if (resource != null) {
+    when (resource.status) {
+      Status.LOADING -> Unit
+      Status.SUCCESS -> onSuccess()
+      Status.ERROR -> this.context.toast(resource.errorEnvelope?.status_message.toString())
     }
-    if (list.size > 7) {
-      list = list.subList(0, 6)
-    }
-    return list
   }
 }

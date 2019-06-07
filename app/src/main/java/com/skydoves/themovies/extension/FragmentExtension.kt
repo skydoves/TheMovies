@@ -21,24 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.utils
+package com.skydoves.themovies.extension
 
-import com.skydoves.themovies.models.Keyword
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import kotlin.reflect.KClass
 
-/**
- * Developed by skydoves on 2018-08-19.
- * Copyright (c) 2018 skydoves rights reserved.
- */
+fun <T : ViewModel> Fragment.vm(factory: ViewModelProvider.Factory, model: KClass<T>): T {
+  return ViewModelProviders.of(this, factory).get(model.java)
+}
 
-object KeywordListMapper {
-  fun mapToStringList(keywords: List<Keyword>): List<String> {
-    var list: MutableList<String> = ArrayList()
-    for (keyword in keywords) {
-      list.add(keyword.name)
-    }
-    if (list.size > 7) {
-      list = list.subList(0, 6)
-    }
-    return list
-  }
+fun <T : ViewModel> FragmentActivity.vm(factory: ViewModelProvider.Factory, model: KClass<T>): T {
+  return ViewModelProviders.of(this, factory).get(model.java)
 }

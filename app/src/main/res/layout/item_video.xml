@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
-    android:layout_height="100dp"
-    android:layout_margin="4dp"
-    android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="4dp">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="150dp"
+  android:layout_height="100dp"
+  android:layout_margin="4dp"
+  android:foreground="?attr/selectableItemBackground"
+  app:cardCornerRadius="4dp"
+  app:cardElevation="4dp">
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+      android:id="@+id/item_video_cover"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop" />
+
+    <ImageView
+      android:layout_width="30dp"
+      android:layout_height="20dp"
+      android:layout_centerInParent="true"
+      android:scaleType="fitXY"
+      android:src="@drawable/icon_youtube" />
 
     <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="25dp"
+      android:layout_alignParentBottom="true"
+      android:orientation="vertical"
+      tools:background="@color/colorPrimaryDark">
+
+      <LinearLayout
+        android:id="@+id/item_video_palette"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:orientation="vertical" />
 
-        <ImageView
-            android:id="@+id/item_video_cover"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_youtube" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical"
-            tools:background="@color/colorPrimaryDark">
-
-            <LinearLayout
-                android:id="@+id/item_video_palette"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.7"
-                android:orientation="vertical" />
-
-            <TextView
-                android:id="@+id/item_video_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:text="title" />
-        </RelativeLayout>
+      <TextView
+        android:id="@+id/item_video_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="3dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="title" />
     </RelativeLayout>
+  </RelativeLayout>
 </androidx.cardview.widget.CardView>
