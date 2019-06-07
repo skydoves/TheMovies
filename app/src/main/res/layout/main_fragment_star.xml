@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recyclerView"
+  <data>
+
+    <variable
+      name="viewModel"
+      type="com.skydoves.themovies.view.ui.main.MainActivityViewModel" />
+  </data>
+
+  <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    tools:listitem="@layout/item_person" />
+    android:layout_height="match_parent">
 
-</RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      app:adapterPersonList="@{viewModel.peopleLiveData}"
+      tools:listitem="@layout/item_person" />
+  </RelativeLayout>
+</layout>

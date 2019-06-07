@@ -26,13 +26,13 @@ constructor(
 ) : ViewModel() {
 
   private var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
-  private val movieListLiveData: LiveData<Resource<List<Movie>>>
+  val movieListLiveData: LiveData<Resource<List<Movie>>>
 
   private var tvPageLiveData: MutableLiveData<Int> = MutableLiveData()
-  private val tvListLiveData: LiveData<Resource<List<Tv>>>
+  val tvListLiveData: LiveData<Resource<List<Tv>>>
 
   private var peoplePageLiveData: MutableLiveData<Int> = MutableLiveData()
-  private val peopleLiveData: LiveData<Resource<List<Person>>>
+  val peopleLiveData: LiveData<Resource<List<Person>>>
 
   init {
     Timber.d("injection MainActivityViewModel")
@@ -52,15 +52,12 @@ constructor(
     }
   }
 
-  fun getMovieListObservable() = movieListLiveData
-  fun getMovieListValues() = getMovieListObservable().value
+  fun getMovieListValues() = movieListLiveData.value
   fun postMoviePage(page: Int) = moviePageLiveData.postValue(page)
 
-  fun getTvListObservable() = tvListLiveData
-  fun getTvListValues() = getTvListObservable().value
+  fun getTvListValues() = tvListLiveData.value
   fun postTvPage(page: Int) = tvPageLiveData.postValue(page)
 
-  fun getPeopleObservable() = peopleLiveData
-  fun getPeopleValues() = getPeopleObservable().value
+  fun getPeopleValues() = peopleLiveData.value
   fun postPeoplePage(page: Int) = peoplePageLiveData.postValue(page)
 }

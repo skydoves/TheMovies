@@ -107,16 +107,18 @@ class PersonDetailActivity : AppCompatActivity() {
     const val intent_requestCode = 1000
     const val personId = "person"
 
-    fun startActivity(fragment: Fragment, activity: FragmentActivity, person: Person, view: View) {
-      if (activity.checkIsMaterialVersion()) {
-        val intent = Intent(activity, PersonDetailActivity::class.java)
-        ViewCompat.getTransitionName(view)?.let {
-          val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)
-          intent.putExtra(personId, person)
-          activity.startActivityFromFragment(fragment, intent, intent_requestCode, options.toBundle())
+    fun startActivity(fragment: Fragment, activity: FragmentActivity?, person: Person, view: View) {
+      if (activity != null) {
+        if (activity.checkIsMaterialVersion()) {
+          val intent = Intent(activity, PersonDetailActivity::class.java)
+          ViewCompat.getTransitionName(view)?.let {
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)
+            intent.putExtra(personId, person)
+            activity.startActivityFromFragment(fragment, intent, intent_requestCode, options.toBundle())
+          }
+        } else {
+          activity.startActivityForResult<PersonDetailActivity>(intent_requestCode, personId to person)
         }
-      } else {
-        activity.startActivityForResult<PersonDetailActivity>(intent_requestCode, personId to person)
       }
     }
   }
