@@ -12,10 +12,10 @@ import androidx.fragment.app.FragmentPagerAdapter
 class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
   override fun getItem(position: Int): Fragment {
-    when (position) {
-      0 -> return MovieListFragment()
-      1 -> return TvListFragment()
-      else -> return PersonListFragment()
+    return when (position) {
+      0 -> MovieListFragment()
+      1 -> TvListFragment()
+      else -> PersonListFragment()
     }
   }
 
