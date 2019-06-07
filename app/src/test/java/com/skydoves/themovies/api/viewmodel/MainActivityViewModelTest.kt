@@ -88,7 +88,7 @@ class MainActivityViewModelTest {
     val call = ApiUtil.successCall(mockResponse)
     whenever(discoverService.fetchDiscoverMovie(1)).thenReturn(call)
 
-    val data = viewModel.getMovieListObservable()
+    val data = viewModel.movieListLiveData
     val observer = mock<Observer<Resource<List<Movie>>>>()
     data.observeForever(observer)
 
@@ -109,7 +109,7 @@ class MainActivityViewModelTest {
     val loadFromDB = MutableLiveData<List<Tv>>()
     whenever(tvDao.getTvList(1)).thenReturn(loadFromDB)
 
-    val data = viewModel.getTvListObservable()
+    val data = viewModel.tvListLiveData
     val observer = mock<Observer<Resource<List<Tv>>>>()
     data.observeForever(observer)
 
@@ -130,7 +130,7 @@ class MainActivityViewModelTest {
     val loadFromDB = MutableLiveData<List<Person>>()
     whenever(peopleDao.getPeople(1)).thenReturn(loadFromDB)
 
-    val data = viewModel.getPeopleObservable()
+    val data = viewModel.peopleLiveData
     val observer = mock<Observer<Resource<List<Person>>>>()
     data.observeForever(observer)
 
