@@ -32,6 +32,7 @@ Based on mvvm architecture and repository pattern.<br><br>
 - 100% Kotlin based, [anko](https://github.com/Kotlin/anko)
 - MVVM Architecture
 - Architecture Components (Lifecycle, LiveData, ViewModel, Room Persistence)
+- DataBinding
 - Material Design & Animations
 - The Movie DB API
 - [Dagger2](https://github.com/google/dagger) for dependency injection
