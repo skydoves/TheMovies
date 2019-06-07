@@ -18,7 +18,7 @@ import com.skydoves.themovies.utils.VideoListConverter
  */
 
 @Database(entities = [(Movie::class), (Tv::class), (Person::class)],
-    version = 3, exportSchema = false)
+  version = 3, exportSchema = false)
 @TypeConverters(value = [(StringListConverter::class), (IntegerListConverter::class),
   (KeywordListConverter::class), (VideoListConverter::class), (ReviewListConverter::class)])
 abstract class AppDatabase : RoomDatabase() {

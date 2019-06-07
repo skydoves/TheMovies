@@ -27,20 +27,20 @@ class NetworkModule {
   @Singleton
   fun provideHttpClient(): OkHttpClient {
     return OkHttpClient.Builder()
-        .addInterceptor(RequestInterceptor())
-        .addNetworkInterceptor(StethoInterceptor())
-        .build()
+      .addInterceptor(RequestInterceptor())
+      .addNetworkInterceptor(StethoInterceptor())
+      .build()
   }
 
   @Provides
   @Singleton
   fun provideRetrofit(@NonNull okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
-        .client(okHttpClient)
-        .baseUrl("https://api.themoviedb.org/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(LiveDataCallAdapterFactory())
-        .build()
+      .client(okHttpClient)
+      .baseUrl("https://api.themoviedb.org/")
+      .addConverterFactory(GsonConverterFactory.create())
+      .addCallAdapterFactory(LiveDataCallAdapterFactory())
+      .build()
   }
 
   @Provides

@@ -35,7 +35,7 @@ constructor(private val repository: MovieRepository) : ViewModel() {
 
     keywordListLiveData = keywordIdLiveData.switchMap {
       keywordIdLiveData.value?.let { repository.loadKeywordList(it) }
-          ?: AbsentLiveData.create()
+        ?: AbsentLiveData.create()
     }
 
     videoListLiveData = videoIdLiveData.switchMap {
@@ -44,7 +44,7 @@ constructor(private val repository: MovieRepository) : ViewModel() {
 
     reviewListLiveData = reviewIdLiveData.switchMap {
       reviewIdLiveData.value?.let { repository.loadReviewsList(it) }
-          ?: AbsentLiveData.create()
+        ?: AbsentLiveData.create()
     }
   }
 

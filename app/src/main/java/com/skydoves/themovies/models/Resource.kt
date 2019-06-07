@@ -54,10 +54,10 @@ class Resource<out T>(val status: Status, val data: T?, val message: String?, va
 
   override fun toString(): String {
     return "Resource[" +
-        "status=" + status + '\'' +
-        ",message='" + message + '\'' +
-        ",data=" + data +
-        ']'
+      "status=" + status + '\'' +
+      ",message='" + message + '\'' +
+      ",data=" + data +
+      ']'
   }
 
   companion object {

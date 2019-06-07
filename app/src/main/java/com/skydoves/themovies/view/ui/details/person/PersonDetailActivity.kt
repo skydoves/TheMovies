@@ -60,21 +60,21 @@ class PersonDetailActivity : AppCompatActivity() {
     toolbar_title.text = getPersonFromIntent().name
     getPersonFromIntent().profile_path?.let {
       Glide.with(this).load(Api.getPosterPath(it))
-          .apply(RequestOptions().circleCrop())
-          .listener(object : RequestListener<Drawable> {
-            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-              supportStartPostponedEnterTransition()
-              observeViewModel()
-              return false
-            }
+        .apply(RequestOptions().circleCrop())
+        .listener(object : RequestListener<Drawable> {
+          override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+            supportStartPostponedEnterTransition()
+            observeViewModel()
+            return false
+          }
 
-            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-              supportStartPostponedEnterTransition()
-              observeViewModel()
-              return false
-            }
-          })
-          .into(person_detail_profile)
+          override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+            supportStartPostponedEnterTransition()
+            observeViewModel()
+            return false
+          }
+        })
+        .into(person_detail_profile)
     }
     person_detail_name.text = getPersonFromIntent().name
   }

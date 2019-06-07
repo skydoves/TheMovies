@@ -35,9 +35,9 @@ class PeopleViewHolder(val view: View, private val delegate: Delegate)
       item_person_name.text = person.name
       person.profile_path?.let {
         Glide.with(context)
-            .load(Api.getPosterPath(it))
-            .apply(RequestOptions().circleCrop())
-            .into(item_person_profile)
+          .load(Api.getPosterPath(it))
+          .apply(RequestOptions().circleCrop())
+          .into(item_person_profile)
       }
     }
   }

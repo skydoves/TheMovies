@@ -16,8 +16,8 @@ import timber.log.Timber
  */
 
 abstract class NetworkBoundRepository<ResultType,
-    RequestType : NetworkResponseModel,
-    Mapper : NetworkResponseMapper<RequestType>>
+  RequestType : NetworkResponseModel,
+  Mapper : NetworkResponseMapper<RequestType>>
 internal constructor() {
 
   private val result: MediatorLiveData<Resource<ResultType>> = MediatorLiveData()

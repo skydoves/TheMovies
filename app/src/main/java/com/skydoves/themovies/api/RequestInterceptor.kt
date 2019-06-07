@@ -14,8 +14,8 @@ internal class RequestInterceptor : Interceptor {
     val originalRequest = chain.request()
     val originalUrl = originalRequest.url()
     val url = originalUrl.newBuilder()
-        .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
-        .build()
+      .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
+      .build()
 
     val requestBuilder = originalRequest.newBuilder().url(url)
     val request = requestBuilder.build()

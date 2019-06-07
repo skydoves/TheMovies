@@ -34,23 +34,23 @@ data class Tv(
   val original_name: String
 ) : Parcelable {
   constructor(source: Parcel) : this(
-      source.readInt(),
-      ArrayList<Keyword>().apply { source.readList(this, Keyword::class.java.classLoader) },
-      ArrayList<Video>().apply { source.readList(this, Video::class.java.classLoader) },
-      ArrayList<Review>().apply { source.readList(this, Review::class.java.classLoader) },
-      source.readString(),
-      source.readFloat(),
-      source.readInt(),
-      source.readString(),
-      source.readFloat(),
-      source.readString(),
-      source.readString(),
-      source.createStringArrayList(),
-      ArrayList<Int>().apply { source.readList(this, Int::class.java.classLoader) },
-      source.readString(),
-      source.readInt(),
-      source.readString(),
-      source.readString()
+    source.readInt(),
+    ArrayList<Keyword>().apply { source.readList(this, Keyword::class.java.classLoader) },
+    ArrayList<Video>().apply { source.readList(this, Video::class.java.classLoader) },
+    ArrayList<Review>().apply { source.readList(this, Review::class.java.classLoader) },
+    source.readString(),
+    source.readFloat(),
+    source.readInt(),
+    source.readString(),
+    source.readFloat(),
+    source.readString(),
+    source.readString(),
+    source.createStringArrayList(),
+    ArrayList<Int>().apply { source.readList(this, Int::class.java.classLoader) },
+    source.readString(),
+    source.readInt(),
+    source.readString(),
+    source.readString()
   )
 
   override fun describeContents() = 0

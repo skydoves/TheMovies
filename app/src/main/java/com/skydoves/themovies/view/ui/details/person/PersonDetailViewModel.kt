@@ -27,7 +27,7 @@ constructor(private val repository: PeopleRepository) : ViewModel() {
 
     personLiveData = personIdLiveData.switchMap {
       personIdLiveData.value?.let { repository.loadPersonDetail(it) }
-          ?: AbsentLiveData.create()
+        ?: AbsentLiveData.create()
     }
   }
 

@@ -63,12 +63,12 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     simpleToolbarWithHome(movie_detail_toolbar, getMovieFromIntent().title)
     getMovieFromIntent().backdrop_path?.let {
       Glide.with(this).load(Api.getBackdropPath(it))
-          .listener(requestGlideListener(movie_detail_poster))
-          .into(movie_detail_poster)
+        .listener(requestGlideListener(movie_detail_poster))
+        .into(movie_detail_poster)
     } ?: let {
       Glide.with(this).load(Api.getBackdropPath(getMovieFromIntent().poster_path!!))
-          .listener(requestGlideListener(movie_detail_poster))
-          .into(movie_detail_poster)
+        .listener(requestGlideListener(movie_detail_poster))
+        .into(movie_detail_poster)
     }
     detail_header_title.text = getMovieFromIntent().title
     detail_header_release.text = "Release Date : ${getMovieFromIntent().release_date}"

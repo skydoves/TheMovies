@@ -23,8 +23,7 @@ class MainActivityViewModel @Inject
 constructor(
   private val discoverRepository: DiscoverRepository,
   private val peopleRepository: PeopleRepository
-)
-  : ViewModel() {
+) : ViewModel() {
 
   private var moviePageLiveData: MutableLiveData<Int> = MutableLiveData()
   private val movieListLiveData: LiveData<Resource<List<Movie>>>
@@ -40,7 +39,7 @@ constructor(
 
     movieListLiveData = moviePageLiveData.switchMap {
       moviePageLiveData.value?.let { discoverRepository.loadMovies(it) }
-          ?: AbsentLiveData.create()
+        ?: AbsentLiveData.create()
     }
 
     tvListLiveData = tvPageLiveData.switchMap {
@@ -49,7 +48,7 @@ constructor(
 
     peopleLiveData = peoplePageLiveData.switchMap {
       peoplePageLiveData.value?.let { peopleRepository.loadPeople(it) }
-          ?: AbsentLiveData.create()
+        ?: AbsentLiveData.create()
     }
   }
 

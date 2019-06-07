@@ -60,10 +60,10 @@ class TvListFragment : Fragment(), TvListViewHolder.Delegate {
     recyclerView.adapter = adapter
     recyclerView.layoutManager = GridLayoutManager(context, 2)
     paginator = RecyclerViewPaginator(
-        recyclerView = recyclerView,
-        isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
-        loadMore = { loadMore(it) },
-        onLast = { viewModel.getTvListValues()?.onLastPage!! }
+      recyclerView = recyclerView,
+      isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
+      loadMore = { loadMore(it) },
+      onLast = { viewModel.getTvListValues()?.onLastPage!! }
     )
     paginator.currentPage = 1
   }

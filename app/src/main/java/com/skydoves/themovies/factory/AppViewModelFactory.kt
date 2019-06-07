@@ -18,8 +18,8 @@ constructor(private val viewModels: MutableMap<Class<out ViewModel>, Provider<Vi
 
   override fun <T : ViewModel> create(modelClass: Class<T>): T {
     val creator = viewModels[modelClass]
-        ?: viewModels.asIterable().firstOrNull { modelClass.isAssignableFrom(it.key) }?.value
-        ?: throw IllegalArgumentException("unknown model class $modelClass")
+      ?: viewModels.asIterable().firstOrNull { modelClass.isAssignableFrom(it.key) }?.value
+      ?: throw IllegalArgumentException("unknown model class $modelClass")
     return try {
       creator.get() as T
     } catch (e: Exception) {

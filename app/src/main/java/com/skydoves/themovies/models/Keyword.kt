@@ -14,8 +14,8 @@ data class Keyword(
   val name: String
 ) : Parcelable {
   constructor(source: Parcel) : this(
-      source.readInt(),
-      source.readString()
+    source.readInt(),
+    source.readString()
   )
 
   override fun describeContents() = 0

@@ -60,10 +60,10 @@ class MovieListFragment : Fragment(), MovieListViewHolder.Delegate {
     recyclerView.adapter = adapter
     recyclerView.layoutManager = GridLayoutManager(context, 2)
     paginator = RecyclerViewPaginator(
-        recyclerView = recyclerView,
-        isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
-        loadMore = { loadMore(it) },
-        onLast = { viewModel.getMovieListValues()?.onLastPage!! }
+      recyclerView = recyclerView,
+      isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
+      loadMore = { loadMore(it) },
+      onLast = { viewModel.getMovieListValues()?.onLastPage!! }
     )
     paginator.currentPage = 1
   }

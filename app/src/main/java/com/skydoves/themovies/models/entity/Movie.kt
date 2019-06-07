@@ -35,24 +35,24 @@ data class Movie(
   val vote_average: Float
 ) : Parcelable {
   constructor(source: Parcel) : this(
-      source.readInt(),
-      ArrayList<Keyword>().apply { source.readList(this, Keyword::class.java.classLoader) },
-      ArrayList<Video>().apply { source.readList(this, Video::class.java.classLoader) },
-      ArrayList<Review>().apply { source.readList(this, Review::class.java.classLoader) },
-      source.readString(),
-      1 == source.readInt(),
-      source.readString(),
-      source.readString(),
-      ArrayList<Int>().apply { source.readList(this, Int::class.java.classLoader) },
-      source.readInt(),
-      source.readString(),
-      source.readString(),
-      source.readString(),
-      source.readString(),
-      source.readFloat(),
-      source.readInt(),
-      1 == source.readInt(),
-      source.readFloat()
+    source.readInt(),
+    ArrayList<Keyword>().apply { source.readList(this, Keyword::class.java.classLoader) },
+    ArrayList<Video>().apply { source.readList(this, Video::class.java.classLoader) },
+    ArrayList<Review>().apply { source.readList(this, Review::class.java.classLoader) },
+    source.readString(),
+    1 == source.readInt(),
+    source.readString(),
+    source.readString(),
+    ArrayList<Int>().apply { source.readList(this, Int::class.java.classLoader) },
+    source.readInt(),
+    source.readString(),
+    source.readString(),
+    source.readString(),
+    source.readString(),
+    source.readFloat(),
+    source.readInt(),
+    1 == source.readInt(),
+    source.readFloat()
   )
 
   override fun describeContents() = 0

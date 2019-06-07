@@ -18,11 +18,11 @@ data class PersonDetail(
   val biography: String
 ) : Parcelable, NetworkResponseModel {
   constructor(source: Parcel) : this(
-      source.readString(),
-      source.readString(),
-      source.readString(),
-      source.createStringArrayList(),
-      source.readString()
+    source.readString(),
+    source.readString(),
+    source.readString(),
+    source.createStringArrayList(),
+    source.readString()
   )
 
   override fun describeContents() = 0

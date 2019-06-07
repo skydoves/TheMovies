@@ -1,7 +1,6 @@
 package com.skydoves.themovies
 
 import com.facebook.stetho.Stetho
-import com.skydoves.themovies.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import timber.log.Timber
@@ -15,8 +14,8 @@ import timber.log.Timber
 class TheMoviesApplication : DaggerApplication() {
 
   private val appComponent = DaggerAppComponent.builder()
-      .application(this)
-      .build()
+    .application(this)
+    .build()
 
   override fun onCreate() {
     super.onCreate()

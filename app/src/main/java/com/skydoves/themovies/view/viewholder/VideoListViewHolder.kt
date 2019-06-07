@@ -34,12 +34,12 @@ class VideoListViewHolder(val view: View, private val delegate: Delegate)
     itemView.run {
       item_video_title.text = video.name
       Glide.with(context)
-          .load(Api.getYoutubeThumbnailPath(video.key))
-          .listener(GlidePalette.with(Api.getYoutubeThumbnailPath(video.key))
-              .use(BitmapPalette.Profile.VIBRANT)
-              .intoBackground(item_video_palette)
-              .crossfade(true))
-          .into(item_video_cover)
+        .load(Api.getYoutubeThumbnailPath(video.key))
+        .listener(GlidePalette.with(Api.getYoutubeThumbnailPath(video.key))
+          .use(BitmapPalette.Profile.VIBRANT)
+          .intoBackground(item_video_palette)
+          .crossfade(true))
+        .into(item_video_cover)
     }
   }
 

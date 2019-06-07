@@ -63,12 +63,12 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     simpleToolbarWithHome(tv_detail_toolbar, getTvFromIntent().name)
     getTvFromIntent().backdrop_path?.let {
       Glide.with(this).load(Api.getBackdropPath(it))
-          .listener(requestGlideListener(tv_detail_poster))
-          .into(tv_detail_poster)
+        .listener(requestGlideListener(tv_detail_poster))
+        .into(tv_detail_poster)
     } ?: let {
       Glide.with(this).load(Api.getBackdropPath(getTvFromIntent().poster_path))
-          .listener(requestGlideListener(tv_detail_poster))
-          .into(tv_detail_poster)
+        .listener(requestGlideListener(tv_detail_poster))
+        .into(tv_detail_poster)
     }
 
     detail_header_title.text = getTvFromIntent().name

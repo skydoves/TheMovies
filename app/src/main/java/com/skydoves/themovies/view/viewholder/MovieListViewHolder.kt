@@ -36,12 +36,12 @@ class MovieListViewHolder(view: View, private val delegate: Delegate)
       item_poster_title.text = movie.title
       movie.poster_path?.let {
         Glide.with(context)
-            .load(Api.getPosterPath(it))
-            .listener(GlidePalette.with(Api.getPosterPath(it))
-                .use(BitmapPalette.Profile.VIBRANT)
-                .intoBackground(item_poster_palette)
-                .crossfade(true))
-            .into(item_poster_post)
+          .load(Api.getPosterPath(it))
+          .listener(GlidePalette.with(Api.getPosterPath(it))
+            .use(BitmapPalette.Profile.VIBRANT)
+            .intoBackground(item_poster_palette)
+            .crossfade(true))
+          .into(item_poster_post)
       }
     }
   }

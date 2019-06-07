@@ -23,13 +23,13 @@ data class Person(
   val popularity: Float
 ) : Parcelable {
   constructor(source: Parcel) : this(
-      source.readInt(),
-      source.readParcelable<PersonDetail>(PersonDetail::class.java.classLoader),
-      source.readString(),
-      1 == source.readInt(),
-      source.readInt(),
-      source.readString(),
-      source.readFloat()
+    source.readInt(),
+    source.readParcelable<PersonDetail>(PersonDetail::class.java.classLoader),
+    source.readString(),
+    1 == source.readInt(),
+    source.readInt(),
+    source.readString(),
+    source.readFloat()
   )
 
   override fun describeContents() = 0

@@ -60,10 +60,10 @@ class PersonListFragment : Fragment(), PeopleViewHolder.Delegate {
     recyclerView.adapter = adapter
     recyclerView.layoutManager = GridLayoutManager(context, 2)
     paginator = RecyclerViewPaginator(
-        recyclerView = recyclerView,
-        isLoading = { viewModel.getPeopleValues()?.status == Status.LOADING },
-        loadMore = { loadMore(it) },
-        onLast = { viewModel.getPeopleValues()?.onLastPage!! })
+      recyclerView = recyclerView,
+      isLoading = { viewModel.getPeopleValues()?.status == Status.LOADING },
+      loadMore = { loadMore(it) },
+      onLast = { viewModel.getPeopleValues()?.onLastPage!! })
   }
 
   private fun observeViewModel() {
