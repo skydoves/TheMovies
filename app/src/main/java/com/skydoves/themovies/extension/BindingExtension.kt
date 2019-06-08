@@ -23,12 +23,12 @@
  */
 package com.skydoves.themovies.extension
 
-import androidx.recyclerview.widget.RecyclerView
+import android.view.View
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import org.jetbrains.anko.toast
 
-fun RecyclerView.bindResource(resource: Resource<Any>?, onSuccess: () -> Unit) {
+fun View.bindResource(resource: Resource<Any>?, onSuccess: () -> Unit) {
   if (resource != null) {
     when (resource.status) {
       Status.LOADING -> Unit

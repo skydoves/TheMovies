@@ -40,13 +40,13 @@ class MovieDetailViewModel @Inject
 constructor(private val repository: MovieRepository) : ViewModel() {
 
   private val keywordIdLiveData: MutableLiveData<Int> = MutableLiveData()
-  private val keywordListLiveData: LiveData<Resource<List<Keyword>>>
+  val keywordListLiveData: LiveData<Resource<List<Keyword>>>
 
   private val videoIdLiveData: MutableLiveData<Int> = MutableLiveData()
-  private val videoListLiveData: LiveData<Resource<List<Video>>>
+  val videoListLiveData: LiveData<Resource<List<Video>>>
 
   private val reviewIdLiveData: MutableLiveData<Int> = MutableLiveData()
-  private val reviewListLiveData: LiveData<Resource<List<Review>>>
+  val reviewListLiveData: LiveData<Resource<List<Review>>>
 
   init {
     Timber.d("Injection MovieDetailViewModel")
@@ -66,12 +66,7 @@ constructor(private val repository: MovieRepository) : ViewModel() {
     }
   }
 
-  fun getKeywordListObservable() = keywordListLiveData
   fun postKeywordId(id: Int) = keywordIdLiveData.postValue(id)
-
-  fun getVideoListObservable() = videoListLiveData
   fun postVideoId(id: Int) = videoIdLiveData.postValue(id)
-
-  fun getReviewListObservable() = reviewListLiveData
   fun postReviewId(id: Int) = reviewIdLiveData.postValue(id)
 }

@@ -40,7 +40,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.skydoves.themovies.R
 
-fun Activity.checkIsMaterialVersion() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+fun checkIsMaterialVersion() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
 fun Activity.circularRevealedAtCenter(view: View) {
   val cx = (view.left + view.right) / 2

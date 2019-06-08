@@ -127,7 +127,7 @@ class PersonDetailActivity : AppCompatActivity() {
 
     fun startActivity(fragment: Fragment, activity: FragmentActivity?, person: Person, view: View) {
       if (activity != null) {
-        if (activity.checkIsMaterialVersion()) {
+        if (checkIsMaterialVersion()) {
           val intent = Intent(activity, PersonDetailActivity::class.java)
           ViewCompat.getTransitionName(view)?.let {
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)

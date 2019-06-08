@@ -26,13 +26,18 @@ package com.skydoves.themovies.binding
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.themovies.extension.bindResource
+import com.skydoves.themovies.extension.visible
 import com.skydoves.themovies.models.Resource
+import com.skydoves.themovies.models.Review
+import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.MovieListAdapter
 import com.skydoves.themovies.view.adapter.PeopleAdapter
+import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.TvListAdapter
+import com.skydoves.themovies.view.adapter.VideoListAdapter
 
 @BindingAdapter("adapterMovieList")
 fun bindAdapterMovieList(view: RecyclerView, resource: Resource<List<Movie>>?) {
@@ -60,6 +65,32 @@ fun bindAdapterTvList(view: RecyclerView, resource: Resource<List<Tv>>?) {
     if (resource != null) {
       val adapter = view.adapter as? TvListAdapter
       adapter?.addTvList(resource)
+    }
+  }
+}
+
+@BindingAdapter("adapterVideoList")
+fun bindAdapterVideoList(view: RecyclerView, resource: Resource<List<Video>>?) {
+  view.bindResource(resource) {
+    if (resource != null) {
+      val adapter = view.adapter as? VideoListAdapter
+      adapter?.addVideoList(resource)
+      if (resource.data?.isNotEmpty()!!) {
+        view.visible()
+      }
+    }
+  }
+}
+
+@BindingAdapter("adapterReviewList")
+fun bindAdapterReviewList(view: RecyclerView, resource: Resource<List<Review>>?) {
+  view.bindResource(resource) {
+    if (resource != null) {
+      val adapter = view.adapter as? ReviewListAdapter
+      adapter?.addReviewList(resource)
+      if (resource.data?.isNotEmpty()!!) {
+        view.visible()
+      }
     }
   }
 }
