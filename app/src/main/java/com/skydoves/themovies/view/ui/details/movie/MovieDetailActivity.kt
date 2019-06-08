@@ -56,9 +56,6 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
   private val viewModel by lazy { vm(viewModelFactory, MovieDetailViewModel::class) }
   private lateinit var binding: ActivityMovieDetailBinding
 
-  private val videoAdapter by lazy { VideoListAdapter(this) }
-  private val reviewAdapter by lazy { ReviewListAdapter() }
-
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
@@ -78,9 +75,9 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     applyToolbarMargin(movie_detail_toolbar)
     simpleToolbarWithHome(movie_detail_toolbar, getMovieFromIntent().title)
     detail_body_recyclerView_trailers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-    detail_body_recyclerView_trailers.adapter = videoAdapter
+    detail_body_recyclerView_trailers.adapter = VideoListAdapter(this)
     detail_body_recyclerView_reviews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-    detail_body_recyclerView_reviews.adapter = reviewAdapter
+    detail_body_recyclerView_reviews.adapter = ReviewListAdapter()
     detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)
   }
