@@ -68,7 +68,7 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     binding.lifecycleOwner = this
 
     initializeUI()
-    postViewModel()
+    postDataToViewModel()
   }
 
   private fun initializeUI() {
@@ -82,10 +82,8 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     detail_body_recyclerView_reviews.setHasFixedSize(true)
   }
 
-  private fun postViewModel() {
-    viewModel.postKeywordId(getMovieFromIntent().id)
-    viewModel.postVideoId(getMovieFromIntent().id)
-    viewModel.postReviewId(getMovieFromIntent().id)
+  private fun postDataToViewModel() {
+    viewModel.postMovieId(getMovieFromIntent().id)
   }
 
   private fun getMovieFromIntent(): Movie {

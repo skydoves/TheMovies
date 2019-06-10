@@ -39,38 +39,32 @@ import javax.inject.Inject
 class TvDetailViewModel @Inject
 constructor(private val repository: TvRepository) : ViewModel() {
 
-  private val keywordIdLiveData: MutableLiveData<Int> = MutableLiveData()
+  private val tvIdLiveData: MutableLiveData<Int> = MutableLiveData()
   val keywordListLiveData: LiveData<Resource<List<Keyword>>>
-
-  private val videoIdLiveData: MutableLiveData<Int> = MutableLiveData()
   val videoListLiveData: LiveData<Resource<List<Video>>>
-
-  private val reviewIdLiveData: MutableLiveData<Int> = MutableLiveData()
   val reviewListLiveData: LiveData<Resource<List<Review>>>
 
   init {
     Timber.d("Injection TvDetailViewModel")
 
-    keywordListLiveData = keywordIdLiveData.switchMap {
-      keywordIdLiveData.value?.let {
+    this.keywordListLiveData = tvIdLiveData.switchMap {
+      tvIdLiveData.value?.let {
         repository.loadKeywordList(it)
       } ?: AbsentLiveData.create()
     }
 
-    videoListLiveData = videoIdLiveData.switchMap {
-      videoIdLiveData.value?.let {
+    this.videoListLiveData = tvIdLiveData.switchMap {
+      tvIdLiveData.value?.let {
         repository.loadVideoList(it)
       } ?: AbsentLiveData.create()
     }
 
-    reviewListLiveData = reviewIdLiveData.switchMap {
-      reviewIdLiveData.value?.let {
+    this.reviewListLiveData = tvIdLiveData.switchMap {
+      tvIdLiveData.value?.let {
         repository.loadReviewsList(it)
       } ?: AbsentLiveData.create()
     }
   }
 
-  fun postKeywordId(id: Int) = keywordIdLiveData.postValue(id)
-  fun postVideoId(id: Int) = videoIdLiveData.postValue(id)
-  fun postReviewId(id: Int) = reviewIdLiveData.postValue(id)
+  fun postTvId(id: Int) = tvIdLiveData.postValue(id)
 }
