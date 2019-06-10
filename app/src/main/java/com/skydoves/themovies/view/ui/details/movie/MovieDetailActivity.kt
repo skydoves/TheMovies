@@ -45,7 +45,7 @@ import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.themovies.view.viewholder.VideoListViewHolder
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_movie_detail.*
-import kotlinx.android.synthetic.main.layout_detail_body.*
+import kotlinx.android.synthetic.main.layout_movie_detail_body.*
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 

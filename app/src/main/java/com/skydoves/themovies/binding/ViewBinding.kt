@@ -37,6 +37,7 @@ import com.skydoves.themovies.extension.visible
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Movie
+import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.utils.KeywordListMapper
 
 @BindingAdapter("visibilityByResource")
@@ -64,6 +65,13 @@ fun bindReleaseDate(view: TextView, movie: Movie) {
   view.text = "Release Date : ${movie.release_date}"
 }
 
+@SuppressLint("SetTextI18n")
+@BindingAdapter("bindAirDate")
+fun bindAirDate(view: TextView, tv: Tv) {
+  view.text = "First Air Date : ${tv.first_air_date}"
+}
+
+
 @BindingAdapter("bindBackDrop")
 fun bindBackDrop(view: ImageView, movie: Movie) {
   if (movie.backdrop_path != null) {
@@ -72,6 +80,19 @@ fun bindBackDrop(view: ImageView, movie: Movie) {
       .into(view)
   } else {
     Glide.with(view.context).load(Api.getBackdropPath(movie.poster_path!!))
+      .listener(view.requestGlideListener())
+      .into(view)
+  }
+}
+
+@BindingAdapter("bindBackDrop")
+fun bindBackDrop(view: ImageView, tv: Tv) {
+  if (tv.backdrop_path != null) {
+    Glide.with(view.context).load(Api.getBackdropPath(tv.backdrop_path))
+      .listener(view.requestGlideListener())
+      .into(view)
+  } else {
+    Glide.with(view.context).load(Api.getBackdropPath(tv.poster_path))
       .listener(view.requestGlideListener())
       .into(view)
   }

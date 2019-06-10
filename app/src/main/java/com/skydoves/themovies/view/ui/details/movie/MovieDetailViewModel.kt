@@ -52,17 +52,21 @@ constructor(private val repository: MovieRepository) : ViewModel() {
     Timber.d("Injection MovieDetailViewModel")
 
     keywordListLiveData = keywordIdLiveData.switchMap {
-      keywordIdLiveData.value?.let { repository.loadKeywordList(it) }
-        ?: AbsentLiveData.create()
+      keywordIdLiveData.value?.let {
+        repository.loadKeywordList(it)
+      } ?: AbsentLiveData.create()
     }
 
     videoListLiveData = videoIdLiveData.switchMap {
-      videoIdLiveData.value?.let { repository.loadVideoList(it) } ?: AbsentLiveData.create()
+      videoIdLiveData.value?.let {
+        repository.loadVideoList(it)
+      } ?: AbsentLiveData.create()
     }
 
     reviewListLiveData = reviewIdLiveData.switchMap {
-      reviewIdLiveData.value?.let { repository.loadReviewsList(it) }
-        ?: AbsentLiveData.create()
+      reviewIdLiveData.value?.let {
+        repository.loadReviewsList(it)
+      } ?: AbsentLiveData.create()
     }
   }
 

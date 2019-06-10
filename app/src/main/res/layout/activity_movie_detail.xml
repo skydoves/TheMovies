@@ -66,11 +66,11 @@
 
         <include
           android:id="@+id/detail_header"
-          layout="@layout/layout_detail_header" />
+          layout="@layout/layout_movie_detail_header" />
 
         <include
           android:id="@+id/detail_body"
-          layout="@layout/layout_detail_body" />
+          layout="@layout/layout_movie_detail_body" />
 
       </LinearLayout>
     </androidx.core.widget.NestedScrollView>

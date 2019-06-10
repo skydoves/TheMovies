@@ -23,40 +23,30 @@
  */
 package com.skydoves.themovies.view.ui.details.tv
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.skydoves.themovies.R
 import com.skydoves.themovies.api.Api
+import com.skydoves.themovies.databinding.ActivityTvDetailBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
-import com.skydoves.themovies.extension.observeLiveData
-import com.skydoves.themovies.extension.requestGlideListener
 import com.skydoves.themovies.extension.simpleToolbarWithHome
-import com.skydoves.themovies.extension.visible
 import com.skydoves.themovies.extension.vm
-import com.skydoves.themovies.models.Keyword
-import com.skydoves.themovies.models.Resource
-import com.skydoves.themovies.models.Review
-import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Tv
-import com.skydoves.themovies.utils.KeywordListMapper
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.themovies.view.viewholder.VideoListViewHolder
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_tv_detail.*
-import kotlinx.android.synthetic.main.layout_detail_body.*
-import kotlinx.android.synthetic.main.layout_detail_header.*
+import kotlinx.android.synthetic.main.layout_tv_detail_body.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
@@ -64,95 +54,38 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
   private val viewModel by lazy { vm(viewModelFactory, TvDetailViewModel::class) }
-
-  private val videoAdapter by lazy { VideoListAdapter(this) }
-  private val reviewAdapter by lazy { ReviewListAdapter() }
+  private lateinit var binding: ActivityTvDetailBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_tv_detail)
+    binding = DataBindingUtil.setContentView(this, R.layout.activity_tv_detail)
+    binding.viewModel = viewModel
+    binding.detailBody.viewModel = viewModel
+    binding.tv = getTvFromIntent()
+    binding.detailHeader.tv = getTvFromIntent()
+    binding.detailBody.tv = getTvFromIntent()
+    binding.lifecycleOwner = this
 
     initializeUI()
-    observeViewModel()
+    postViewModel()
   }
 
-  @SuppressLint("SetTextI18n")
   private fun initializeUI() {
     applyToolbarMargin(tv_detail_toolbar)
     simpleToolbarWithHome(tv_detail_toolbar, getTvFromIntent().name)
-    getTvFromIntent().backdrop_path?.let {
-      Glide.with(this).load(Api.getBackdropPath(it))
-        .listener(requestGlideListener(tv_detail_poster))
-        .into(tv_detail_poster)
-    } ?: let {
-      Glide.with(this).load(Api.getBackdropPath(getTvFromIntent().poster_path))
-        .listener(requestGlideListener(tv_detail_poster))
-        .into(tv_detail_poster)
-    }
-
-    detail_header_title.text = getTvFromIntent().name
-    detail_header_release.text = "First Air Date : ${getTvFromIntent().first_air_date}"
-    detail_header_star.rating = getTvFromIntent().vote_average / 2
     detail_body_recyclerView_trailers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-    detail_body_recyclerView_trailers.adapter = videoAdapter
-    detail_body_summary.text = getTvFromIntent().overview
+    detail_body_recyclerView_trailers.adapter = VideoListAdapter(this)
     detail_body_recyclerView_reviews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-    detail_body_recyclerView_reviews.adapter = reviewAdapter
+    detail_body_recyclerView_reviews.adapter = ReviewListAdapter()
     detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)
   }
 
-  private fun observeViewModel() {
-    observeLiveData(viewModel.getKeywordListObservable()) { updateKeywordList(it) }
+  private fun postViewModel() {
     viewModel.postKeywordId(getTvFromIntent().id)
-
-    observeLiveData(viewModel.getVideoListObservable()) { updateVideoList(it) }
     viewModel.postVideoId(getTvFromIntent().id)
-
-    observeLiveData(viewModel.getReviewListObservable()) { updateReviewList(it) }
     viewModel.postReviewId(getTvFromIntent().id)
-  }
-
-  private fun updateKeywordList(resource: Resource<List<Keyword>>) {
-    when (resource.status) {
-      Status.LOADING -> Unit
-      Status.SUCCESS -> {
-        detail_body_tags.tags = KeywordListMapper.mapToStringList(resource.data!!)
-        if (resource.data.isNotEmpty()) {
-          detail_body_tags.visible()
-        }
-      }
-      Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-    }
-  }
-
-  private fun updateVideoList(resource: Resource<List<Video>>) {
-    when (resource.status) {
-      Status.LOADING -> Unit
-      Status.SUCCESS -> {
-        videoAdapter.addVideoList(resource)
-        if (resource.data?.isNotEmpty()!!) {
-          detail_body_trailers.visible()
-          detail_body_recyclerView_trailers.visible()
-        }
-      }
-      Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-    }
-  }
-
-  private fun updateReviewList(resource: Resource<List<Review>>) {
-    when (resource.status) {
-      Status.LOADING -> Unit
-      Status.SUCCESS -> {
-        reviewAdapter.addReviewList(resource)
-        if (resource.data?.isNotEmpty()!!) {
-          detail_body_reviews.visible()
-          detail_body_recyclerView_reviews.visible()
-        }
-      }
-      Status.ERROR -> toast(resource.errorEnvelope?.status_message.toString())
-    }
   }
 
   private fun getTvFromIntent(): Tv {
