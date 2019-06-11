@@ -38,17 +38,17 @@ class PersonDetailViewModel @Inject
 constructor(private val repository: PeopleRepository) : ViewModel() {
 
   private val personIdLiveData: MutableLiveData<Int> = MutableLiveData()
-  private val personLiveData: LiveData<Resource<PersonDetail>>
+  val personLiveData: LiveData<Resource<PersonDetail>>
 
   init {
     Timber.d("Injection : PersonDetailViewModel")
 
     personLiveData = personIdLiveData.switchMap {
-      personIdLiveData.value?.let { repository.loadPersonDetail(it) }
-        ?: AbsentLiveData.create()
+      personIdLiveData.value?.let {
+        repository.loadPersonDetail(it)
+      } ?: AbsentLiveData.create()
     }
   }
 
-  fun getPersonObservable() = personLiveData
   fun postPersonId(id: Int) = personIdLiveData.postValue(id)
 }

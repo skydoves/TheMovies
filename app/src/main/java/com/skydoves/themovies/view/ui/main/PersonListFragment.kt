@@ -87,6 +87,6 @@ class PersonListFragment : Fragment(), PeopleViewHolder.Delegate {
   }
 
   override fun onItemClick(person: Person, view: View) {
-    PersonDetailActivity.startActivity(this, activity, person, view)
+    PersonDetailActivity.startActivity(activity, person, view)
   }
 }

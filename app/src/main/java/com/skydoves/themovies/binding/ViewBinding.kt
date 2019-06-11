@@ -30,6 +30,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import co.lujun.androidtagview.TagContainerLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.extension.bindResource
 import com.skydoves.themovies.extension.requestGlideListener
@@ -37,7 +38,9 @@ import com.skydoves.themovies.extension.visible
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Movie
+import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
+import com.skydoves.themovies.models.network.PersonDetail
 import com.skydoves.themovies.utils.KeywordListMapper
 
 @BindingAdapter("visibilityByResource")
@@ -54,6 +57,23 @@ fun bindMapKeywordList(view: TagContainerLayout, resource: Resource<List<Keyword
   view.bindResource(resource) {
     view.tags = KeywordListMapper.mapToStringList(resource?.data!!)
     if (resource.data.isNotEmpty()) {
+      view.visible()
+    }
+  }
+}
+
+@BindingAdapter("biography")
+fun bindBiography(view: TextView, resource: Resource<PersonDetail>?) {
+  view.bindResource(resource) {
+    view.text = resource?.data?.biography
+  }
+}
+
+@BindingAdapter("nameTags")
+fun bindTags(view: TagContainerLayout, resource: Resource<PersonDetail>?) {
+  view.bindResource(resource) {
+    view.tags = resource?.data?.also_known_as
+    if (resource?.data?.also_known_as?.isNotEmpty()!!) {
       view.visible()
     }
   }
@@ -93,6 +113,15 @@ fun bindBackDrop(view: ImageView, tv: Tv) {
   } else {
     Glide.with(view.context).load(Api.getBackdropPath(tv.poster_path))
       .listener(view.requestGlideListener())
+      .into(view)
+  }
+}
+
+@BindingAdapter("bindBackDrop")
+fun bindBackDrop(view: ImageView, person: Person) {
+  if (person.profile_path != null) {
+    Glide.with(view.context).load(Api.getBackdropPath(person.profile_path))
+      .apply(RequestOptions().circleCrop())
       .into(view)
   }
 }
