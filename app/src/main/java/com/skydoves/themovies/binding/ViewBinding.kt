@@ -71,7 +71,6 @@ fun bindAirDate(view: TextView, tv: Tv) {
   view.text = "First Air Date : ${tv.first_air_date}"
 }
 
-
 @BindingAdapter("bindBackDrop")
 fun bindBackDrop(view: ImageView, movie: Movie) {
   if (movie.backdrop_path != null) {

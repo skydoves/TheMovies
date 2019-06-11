@@ -82,7 +82,7 @@ class TvDetailViewModelTest {
     val observer = mock<Observer<Resource<List<Keyword>>>>()
     data.observeForever(observer)
 
-    viewModel.postKeywordId(123)
+    viewModel.postTvId(123)
     verify(tvDao, times(3)).getTv(123)
     verify(observer).onChanged(
         Resource.success(MockTestUtil.mockKeywordList(), true))
@@ -105,7 +105,7 @@ class TvDetailViewModelTest {
     val observer = mock<Observer<Resource<List<Video>>>>()
     data.observeForever(observer)
 
-    viewModel.postVideoId(123)
+    viewModel.postTvId(123)
     verify(tvDao, times(3)).getTv(123)
     verify(observer).onChanged(
         Resource.success(MockTestUtil.mockVideoList(), true)
@@ -129,7 +129,7 @@ class TvDetailViewModelTest {
     val observer = mock<Observer<Resource<List<Review>>>>()
     data.observeForever(observer)
 
-    viewModel.postReviewId(123)
+    viewModel.postTvId(123)
     verify(tvDao, times(3)).getTv(123)
     verify(observer).onChanged(
         Resource.success(MockTestUtil.mockReviewList(), true)

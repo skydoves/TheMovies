@@ -84,7 +84,7 @@ class MovieDetailVIewModelTest {
     val observer = mock<Observer<Resource<List<Keyword>>>>()
     data.observeForever(observer)
 
-    viewModel.postKeywordId(123)
+    viewModel.postMovieId(123)
     verify(movieDao, times(3)).getMovie(123)
     verify(observer).onChanged(
         Resource.success(mockKeywordList(), true))
@@ -107,7 +107,7 @@ class MovieDetailVIewModelTest {
     val observer = mock<Observer<Resource<List<Video>>>>()
     data.observeForever(observer)
 
-    viewModel.postVideoId(123)
+    viewModel.postMovieId(123)
     verify(movieDao, times(3)).getMovie(123)
     verify(observer).onChanged(
         Resource.success(mockVideoList(), true)
@@ -131,7 +131,7 @@ class MovieDetailVIewModelTest {
     val observer = mock<Observer<Resource<List<Review>>>>()
     data.observeForever(observer)
 
-    viewModel.postReviewId(123)
+    viewModel.postMovieId(123)
     verify(movieDao, times(3)).getMovie(123)
     verify(observer).onChanged(
         Resource.success(mockReviewList(), true)
