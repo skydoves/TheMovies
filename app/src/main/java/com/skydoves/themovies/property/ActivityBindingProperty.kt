@@ -21,27 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api
+package com.skydoves.themovies.property
 
-object Api {
-  private const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
-  private const val BASE_BACKDROP_PATH = "https://image.tmdb.org/t/p/w780"
-  private const val YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v="
-  private const val YOUTUBE_THUMBNAIL_URL = "https://img.youtube.com/vi/"
+import android.app.Activity
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
-  fun getPosterPath(posterPath: String): String {
-    return BASE_POSTER_PATH + posterPath
-  }
+class ActivityBindingProperty<out T : ViewDataBinding>(
+  @LayoutRes private val resId: Int
+) : ReadOnlyProperty<Activity, T> {
 
-  fun getBackdropPath(backdropPath: String): String {
-    return BASE_BACKDROP_PATH + backdropPath
-  }
+  private var binding: T? = null
 
-  fun getYoutubeVideoPath(videoPath: String): String {
-    return YOUTUBE_VIDEO_URL + videoPath
-  }
+  override operator fun getValue(
+    thisRef: Activity,
+    property: KProperty<*>
+  ): T = binding ?: createBinding(thisRef).also { binding = it }
 
-  fun getYoutubeThumbnailPath(thumbnailPath: String): String {
-    return "$YOUTUBE_THUMBNAIL_URL$thumbnailPath/default.jpg"
-  }
+  private fun createBinding(
+    activity: Activity
+  ): T = DataBindingUtil.setContentView(activity, resId)
 }

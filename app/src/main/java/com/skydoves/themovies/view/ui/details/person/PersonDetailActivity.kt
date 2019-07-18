@@ -30,10 +30,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.skydoves.themovies.R
 import com.skydoves.themovies.databinding.ActivityPersonDetailBinding
+import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.checkIsMaterialVersion
 import com.skydoves.themovies.extension.vm
 import com.skydoves.themovies.models.entity.Person
@@ -49,16 +49,16 @@ class PersonDetailActivity : AppCompatActivity() {
   lateinit var viewModelFactory: ViewModelProvider.Factory
   private val viewModel by lazy { vm(viewModelFactory, PersonDetailViewModel::class) }
 
-  private lateinit var binding: ActivityPersonDetailBinding
+  private val binding by activityBinding<ActivityPersonDetailBinding>(R.layout.activity_person_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_person_detail)
-    binding.person = getPersonFromIntent()
-    binding.viewModel = viewModel
-    binding.lifecycleOwner = this
-
+    with(binding) {
+      lifecycleOwner = this@PersonDetailActivity
+      viewModel = this@PersonDetailActivity.viewModel
+      person = getPersonFromIntent()
+    }
     initializeUI()
     postDataToViewModel()
   }

@@ -29,12 +29,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.themovies.R
 import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.databinding.ActivityMovieDetailBinding
+import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
 import com.skydoves.themovies.extension.vm
@@ -54,19 +55,19 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
   private val viewModel by lazy { vm(viewModelFactory, MovieDetailViewModel::class) }
-  private lateinit var binding: ActivityMovieDetailBinding
+  private val binding by activityBinding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
+    AndroidInjection.inject(this@MovieDetailActivity)
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail)
-    binding.viewModel = viewModel
-    binding.detailBody.viewModel = viewModel
-    binding.movie = getMovieFromIntent()
-    binding.detailHeader.movie = getMovieFromIntent()
-    binding.detailBody.movie = getMovieFromIntent()
-    binding.lifecycleOwner = this
-
+    with(binding) {
+      lifecycleOwner = this@MovieDetailActivity
+      viewModel = this@MovieDetailActivity.viewModel
+      detailBody.viewModel = this@MovieDetailActivity.viewModel
+      movie = getMovieFromIntent()
+      detailHeader.movie = getMovieFromIntent()
+      detailBody.movie = getMovieFromIntent()
+    }
     initializeUI()
     postDataToViewModel()
   }
@@ -74,9 +75,9 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
   private fun initializeUI() {
     applyToolbarMargin(movie_detail_toolbar)
     simpleToolbarWithHome(movie_detail_toolbar, getMovieFromIntent().title)
-    detail_body_recyclerView_trailers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    detail_body_recyclerView_trailers.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     detail_body_recyclerView_trailers.adapter = VideoListAdapter(this)
-    detail_body_recyclerView_reviews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    detail_body_recyclerView_reviews.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     detail_body_recyclerView_reviews.adapter = ReviewListAdapter()
     detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)

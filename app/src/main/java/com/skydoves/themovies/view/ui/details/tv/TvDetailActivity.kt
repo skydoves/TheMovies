@@ -29,12 +29,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.themovies.R
 import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.databinding.ActivityTvDetailBinding
+import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
 import com.skydoves.themovies.extension.vm
@@ -54,18 +55,19 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
   private val viewModel by lazy { vm(viewModelFactory, TvDetailViewModel::class) }
-  private lateinit var binding: ActivityTvDetailBinding
+  private val binding by activityBinding<ActivityTvDetailBinding>(R.layout.activity_tv_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_tv_detail)
-    binding.viewModel = viewModel
-    binding.detailBody.viewModel = viewModel
-    binding.tv = getTvFromIntent()
-    binding.detailHeader.tv = getTvFromIntent()
-    binding.detailBody.tv = getTvFromIntent()
-    binding.lifecycleOwner = this
+    with(binding) {
+      lifecycleOwner = this@TvDetailActivity
+      viewModel = this@TvDetailActivity.viewModel
+      detailBody.viewModel = this@TvDetailActivity.viewModel
+      tv = getTvFromIntent()
+      detailHeader.tv = getTvFromIntent()
+      detailBody.tv = getTvFromIntent()
+    }
 
     initializeUI()
     postDataToViewModel()
@@ -74,9 +76,9 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
   private fun initializeUI() {
     applyToolbarMargin(tv_detail_toolbar)
     simpleToolbarWithHome(tv_detail_toolbar, getTvFromIntent().name)
-    detail_body_recyclerView_trailers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    detail_body_recyclerView_trailers.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     detail_body_recyclerView_trailers.adapter = VideoListAdapter(this)
-    detail_body_recyclerView_reviews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    detail_body_recyclerView_reviews.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     detail_body_recyclerView_reviews.adapter = ReviewListAdapter()
     detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)
