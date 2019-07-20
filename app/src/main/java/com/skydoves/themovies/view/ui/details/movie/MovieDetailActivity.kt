@@ -38,7 +38,8 @@ import com.skydoves.themovies.databinding.ActivityMovieDetailBinding
 import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
-import com.skydoves.themovies.extension.vm
+import com.skydoves.themovies.extension.viewModel
+import com.skydoves.themovies.extension.vmDelegate
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
@@ -54,22 +55,23 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val viewModel by lazy { vm(viewModelFactory, MovieDetailViewModel::class) }
+  private val vmDelegate by vmDelegate(MovieDetailViewModel::class)
   private val binding by activityBinding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this@MovieDetailActivity)
     super.onCreate(savedInstanceState)
+    val vm = viewModel(vmDelegate, viewModelFactory)
+    vm.postMovieId(getMovieFromIntent().id)
     with(binding) {
       lifecycleOwner = this@MovieDetailActivity
-      viewModel = this@MovieDetailActivity.viewModel
-      detailBody.viewModel = this@MovieDetailActivity.viewModel
+      viewModel = vm
+      detailBody.viewModel = vm
       movie = getMovieFromIntent()
       detailHeader.movie = getMovieFromIntent()
       detailBody.movie = getMovieFromIntent()
     }
     initializeUI()
-    postDataToViewModel()
   }
 
   private fun initializeUI() {
@@ -81,10 +83,6 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     detail_body_recyclerView_reviews.adapter = ReviewListAdapter()
     detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)
-  }
-
-  private fun postDataToViewModel() {
-    viewModel.postMovieId(getMovieFromIntent().id)
   }
 
   private fun getMovieFromIntent(): Movie {

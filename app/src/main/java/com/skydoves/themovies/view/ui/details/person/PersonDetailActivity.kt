@@ -35,7 +35,8 @@ import com.skydoves.themovies.R
 import com.skydoves.themovies.databinding.ActivityPersonDetailBinding
 import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.checkIsMaterialVersion
-import com.skydoves.themovies.extension.vm
+import com.skydoves.themovies.extension.viewModel
+import com.skydoves.themovies.extension.vmDelegate
 import com.skydoves.themovies.models.entity.Person
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.toolbar_default.*
@@ -47,29 +48,25 @@ class PersonDetailActivity : AppCompatActivity() {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val viewModel by lazy { vm(viewModelFactory, PersonDetailViewModel::class) }
-
+  private val vmDelegate by vmDelegate(PersonDetailViewModel::class)
   private val binding by activityBinding<ActivityPersonDetailBinding>(R.layout.activity_person_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
+    val vm = viewModel(vmDelegate, viewModelFactory)
+    vm.postPersonId(getPersonFromIntent().id)
     with(binding) {
       lifecycleOwner = this@PersonDetailActivity
-      viewModel = this@PersonDetailActivity.viewModel
+      viewModel = vm
       person = getPersonFromIntent()
     }
     initializeUI()
-    postDataToViewModel()
   }
 
   private fun initializeUI() {
     toolbar_home.setOnClickListener { onBackPressed() }
     toolbar_title.text = getPersonFromIntent().name
-  }
-
-  private fun postDataToViewModel() {
-    viewModel.postPersonId(getPersonFromIntent().id)
   }
 
   private fun getPersonFromIntent(): Person {

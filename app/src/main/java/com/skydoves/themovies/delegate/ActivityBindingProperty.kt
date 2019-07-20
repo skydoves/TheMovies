@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.property
+package com.skydoves.themovies.delegate
 
 import android.app.Activity
 import androidx.annotation.LayoutRes

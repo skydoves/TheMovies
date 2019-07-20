@@ -38,7 +38,8 @@ import com.skydoves.themovies.databinding.ActivityTvDetailBinding
 import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
-import com.skydoves.themovies.extension.vm
+import com.skydoves.themovies.extension.viewModel
+import com.skydoves.themovies.extension.vmDelegate
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
@@ -54,23 +55,24 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val viewModel by lazy { vm(viewModelFactory, TvDetailViewModel::class) }
+  private val vmDelegate by vmDelegate(TvDetailViewModel::class)
   private val binding by activityBinding<ActivityTvDetailBinding>(R.layout.activity_tv_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
+    val vm = viewModel(vmDelegate, viewModelFactory)
+    vm.postTvId(getTvFromIntent().id)
     with(binding) {
       lifecycleOwner = this@TvDetailActivity
-      viewModel = this@TvDetailActivity.viewModel
-      detailBody.viewModel = this@TvDetailActivity.viewModel
+      viewModel = vm
+      detailBody.viewModel = vm
       tv = getTvFromIntent()
       detailHeader.tv = getTvFromIntent()
       detailBody.tv = getTvFromIntent()
     }
 
     initializeUI()
-    postDataToViewModel()
   }
 
   private fun initializeUI() {
@@ -82,10 +84,6 @@ class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
     detail_body_recyclerView_reviews.adapter = ReviewListAdapter()
     detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)
-  }
-
-  private fun postDataToViewModel() {
-    viewModel.postTvId(getTvFromIntent().id)
   }
 
   private fun getTvFromIntent(): Tv {
