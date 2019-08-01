@@ -69,7 +69,7 @@ abstract class ApiAbstract<T> {
 
   @Throws(IOException::class)
   private fun enqueueResponse(fileName: String, headers: Map<String, String>) {
-    val inputStream = javaClass.classLoader.getResourceAsStream("api-response/$fileName")
+    val inputStream = javaClass.classLoader!!.getResourceAsStream("api-response/$fileName")
     val source = Okio.buffer(Okio.source(inputStream))
     val mockResponse = MockResponse()
     for ((key, value) in headers) {
