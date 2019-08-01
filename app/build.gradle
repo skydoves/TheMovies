@@ -104,7 +104,6 @@ dependencies {
     implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
 
     // custom view
-    implementation "devlight.io:navigationtabbar:$navigationBarVersion"
     implementation "co.lujun:androidtagview:$androidTagViewVersion"
     implementation "com.ms-square:expandableTextView:$expandableTextViewVersion"
 

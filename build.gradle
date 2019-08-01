@@ -26,7 +26,6 @@ buildscript {
         glideVersion = '4.9.0'
         glidePaletteVersion = '2.1.2'
         baseAdapterVersion = '0.1.3'
-        navigationBarVersion = '1.2.5'
         androidTagViewVersion = '1.1.4'
         expandableTextViewVersion = '0.1.4'
         mockWebServerVersion = '3.9.0'

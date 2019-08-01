@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/action_one"
+    android:enabled="true"
+    android:icon="@drawable/ic_movie_filter_white_24dp"
+    android:title="@string/menu_movie"
+    app:showAsAction="ifRoom" />
+  <item
+    android:id="@+id/action_two"
+    android:enabled="true"
+    android:icon="@drawable/ic_live_tv_white_24dp"
+    android:title="@string/menu_tv"
+    app:showAsAction="ifRoom" />
+  <item
+    android:id="@+id/action_three"
+    android:enabled="true"
+    android:icon="@drawable/ic_star_white_24dp"
+    android:title="@string/menu_star"
+    app:showAsAction="ifRoom" />
+</menu>

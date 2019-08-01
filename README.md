@@ -44,8 +44,7 @@ Based on mvvm architecture and repository pattern.<br><br>
 - [Timber](https://github.com/JakeWharton/timber) for logging
 - [Stetho](https://github.com/facebook/stetho) for debugging persistence data & network packets
 - Ripple animation, Shared element transition
-- Custom Views [NavigationTabBar](https://github.com/Devlight/NavigationTabBar), [AndroidTagView](https://github.com/whilu/AndroidTagView),
-[ExpandableTextView](https://github.com/Manabu-GT/ExpandableTextView)
+- Custom Views [AndroidTagView](https://github.com/whilu/AndroidTagView), [ExpandableTextView](https://github.com/Manabu-GT/ExpandableTextView)
 
 ## Posting
 [Medium - Android MVVM Architecture Components using The Movie Database API](https://medium.com/@skydoves/android-mvvm-architecture-components-using-the-movie-database-api-8fbab128d7)

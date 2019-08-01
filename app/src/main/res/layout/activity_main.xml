@@ -22,18 +22,16 @@
     android:id="@+id/main_viewpager"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-  <devlight.io.library.ntb.NavigationTabBar
+  <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/main_bottom_navigation"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
-    app:ntb_animation_duration="300"
-    app:ntb_bg_color="@color/colorPrimaryDark"
-    app:ntb_inactive_color="@color/white"
-    app:ntb_scaled="true"
-    app:ntb_swiped="true"
-    app:ntb_title_mode="all"
-    app:ntb_titled="true" />
-
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    app:itemBackground="@color/colorPrimary"
+    app:itemIconTint="@color/white"
+    app:itemTextColor="@color/white"
+    app:menu="@menu/menus" />
 </LinearLayout>

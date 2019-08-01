@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">TheMovies</string>
-    <string name="menu_movie">Movie</string>
-    <string name="menu_tv">Tv</string>
-    <string name="menu_star">Star</string>
-    <string name="transition_profile">transition_profile</string>
+  <string name="app_name">TheMovies</string>
+  <string name="menu_movie">Movie</string>
+  <string name="menu_tv">Tv</string>
+  <string name="menu_star">Star</string>
+  <string name="transition_profile">transition_profile</string>
 </resources>
