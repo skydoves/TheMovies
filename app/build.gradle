@@ -38,6 +38,9 @@ android {
     dataBinding {
         enabled = true
     }
+    androidExtensions {
+        experimental = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -69,7 +72,6 @@ dependencies {
     // architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$archCompomentVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataKtx"
-
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     testImplementation "androidx.arch.core:core-testing:$archCompomentVersion"
