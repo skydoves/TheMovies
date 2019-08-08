@@ -28,6 +28,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,8 +39,6 @@ import com.skydoves.themovies.databinding.ActivityMovieDetailBinding
 import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
-import com.skydoves.themovies.extension.viewModel
-import com.skydoves.themovies.extension.vmDelegate
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
@@ -55,13 +54,12 @@ class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val vmDelegate by vmDelegate(MovieDetailViewModel::class)
+  private val vm by viewModels<MovieDetailViewModel> { viewModelFactory }
   private val binding by activityBinding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this@MovieDetailActivity)
     super.onCreate(savedInstanceState)
-    val vm = viewModel(vmDelegate, viewModelFactory)
     vm.postMovieId(getMovieFromIntent().id)
     with(binding) {
       lifecycleOwner = this@MovieDetailActivity

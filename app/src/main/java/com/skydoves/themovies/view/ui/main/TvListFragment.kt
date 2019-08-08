@@ -30,12 +30,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.databinding.MainFragmentTvBinding
-import com.skydoves.themovies.extension.vm
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.TvListAdapter
@@ -50,7 +50,7 @@ class TvListFragment : Fragment(), TvListViewHolder.Delegate {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val viewModel by lazy { vm(viewModelFactory, MainActivityViewModel::class) }
+  private val viewModel by viewModels<MainActivityViewModel> { viewModelFactory }
   private lateinit var binding: MainFragmentTvBinding
   private lateinit var paginator: RecyclerViewPaginator
 

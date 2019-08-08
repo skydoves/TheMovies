@@ -32,6 +32,13 @@ android {
         testInstrumentationRunner "com.skydoves.themovies.runner.AndroidJunitTestRunner"
         buildConfigField "String", "TMDB_API_KEY", "\"${getProperty("local.properties", "tmdb_api_key")}\""
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     kapt {
         correctErrorTypes = true
     }
@@ -40,16 +47,6 @@ android {
     }
     androidExtensions {
         experimental = true
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
     sourceSets {
         androidTest.java.srcDirs += "src/test-common/java"
@@ -60,6 +57,10 @@ android {
 dependencies {
     // support library
     implementation "androidx.appcompat:appcompat:$accompatVersion"
+    implementation "androidx.activity:activity:$androidActivity"
+    implementation "androidx.activity:activity-ktx:$androidActivity"
+    implementation "androidx.fragment:fragment:$androidFragment"
+    implementation "androidx.fragment:fragment-ktx:$androidFragment"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.palette:palette:$androidxVersion"
     implementation "androidx.cardview:cardview:$androidxVersion"
@@ -70,8 +71,8 @@ dependencies {
     implementation "org.jetbrains.anko:anko:$ankoVersion"
 
     // architecture components
-    implementation "androidx.lifecycle:lifecycle-extensions:$archCompomentVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataKtx"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     testImplementation "androidx.arch.core:core-testing:$archCompomentVersion"
