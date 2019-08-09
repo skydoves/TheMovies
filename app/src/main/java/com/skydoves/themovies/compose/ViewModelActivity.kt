@@ -21,32 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.di
+package com.skydoves.themovies.compose
 
-import android.app.Application
-import dagger.BindsInstance
-import dagger.Component
-import dagger.android.AndroidInjectionModule
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import javax.inject.Singleton
+import android.annotation.SuppressLint
+import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
-@Singleton
-@Component(modules = [
-  AndroidInjectionModule::class,
-  ComposeModule::class,
-  ActivityModule::class,
-  ViewModelModule::class,
-  NetworkModule::class,
-  PersistenceModule::class])
-interface AppComponent : AndroidInjector<DaggerApplication> {
-  @Component.Builder
-  interface Builder {
-    @BindsInstance
-    fun application(application: Application): Builder
+@SuppressLint("Registered")
+open class ViewModelActivity : AppCompatActivity() {
 
-    fun build(): AppComponent
+  @Inject
+  lateinit var viewModelFactory: ViewModelProvider.Factory
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    AndroidInjection.inject(this)
+    super.onCreate(savedInstanceState)
   }
 
-  override fun inject(instance: DaggerApplication)
+  protected inline fun <reified VM : ViewModel>
+    viewModel(): Lazy<VM> = viewModels { viewModelFactory }
+
+  protected inline fun <reified T : ViewDataBinding> binding(resId: Int): Lazy<T> =
+    lazy { DataBindingUtil.setContentView<T>(this, resId) }
 }

@@ -21,32 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.di
+package com.skydoves.themovies.compose
 
-import android.app.Application
-import dagger.BindsInstance
-import dagger.Component
-import dagger.android.AndroidInjectionModule
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import javax.inject.Singleton
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
-@Singleton
-@Component(modules = [
-  AndroidInjectionModule::class,
-  ComposeModule::class,
-  ActivityModule::class,
-  ViewModelModule::class,
-  NetworkModule::class,
-  PersistenceModule::class])
-interface AppComponent : AndroidInjector<DaggerApplication> {
-  @Component.Builder
-  interface Builder {
-    @BindsInstance
-    fun application(application: Application): Builder
+open class ViewModelFragment : Fragment() {
 
-    fun build(): AppComponent
+  @Inject
+  lateinit var viewModelFactory: ViewModelProvider.Factory
+
+  override fun onAttach(context: Context) {
+    AndroidSupportInjection.inject(this)
+    super.onAttach(context)
   }
 
-  override fun inject(instance: DaggerApplication)
+  protected inline fun <reified VM : ViewModel>
+    viewModel(): Lazy<VM> = viewModels { viewModelFactory }
+
+  protected inline fun <reified T : ViewDataBinding> binding(
+    inflater: LayoutInflater,
+    resId: Int,
+    container: ViewGroup?
+  ): T = DataBindingUtil.inflate<T>(inflater, resId, container, false)
 }

@@ -40,7 +40,10 @@ class PersistenceModule {
   @Provides
   @Singleton
   fun provideDatabase(@NonNull application: Application): AppDatabase {
-    return Room.databaseBuilder(application, AppDatabase::class.java, "TheMovies.db").allowMainThreadQueries().build()
+    return Room
+      .databaseBuilder(application, AppDatabase::class.java, "TheMovies.db")
+      .allowMainThreadQueries()
+      .build()
   }
 
   @Provides
