@@ -27,31 +27,23 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
-import androidx.lifecycle.ViewModelProvider
 import com.skydoves.themovies.R
+import com.skydoves.themovies.compose.ViewModelActivity
 import com.skydoves.themovies.databinding.ActivityPersonDetailBinding
-import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.checkIsMaterialVersion
 import com.skydoves.themovies.models.entity.Person
-import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.toolbar_default.*
 import org.jetbrains.anko.startActivity
-import javax.inject.Inject
 
 @Suppress("MemberVisibilityCanBePrivate")
-class PersonDetailActivity : AppCompatActivity() {
+class PersonDetailActivity : ViewModelActivity() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val vm by viewModels<PersonDetailViewModel> { viewModelFactory }
-  private val binding by activityBinding<ActivityPersonDetailBinding>(R.layout.activity_person_detail)
+  private val vm by viewModel<PersonDetailViewModel>()
+  private val binding by binding<ActivityPersonDetailBinding>(R.layout.activity_person_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
     vm.postPersonId(getPersonFromIntent().id)
     with(binding) {

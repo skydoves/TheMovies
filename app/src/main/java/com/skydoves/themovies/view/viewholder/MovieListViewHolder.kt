@@ -32,8 +32,10 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.entity.Movie
 import kotlinx.android.synthetic.main.item_poster.view.*
 
-class MovieListViewHolder(view: View, private val delegate: Delegate)
-  : BaseViewHolder(view) {
+class MovieListViewHolder(
+  val view: View,
+  private val delegate: Delegate
+) : BaseViewHolder(view) {
 
   interface Delegate {
     fun onItemClick(movie: Movie)

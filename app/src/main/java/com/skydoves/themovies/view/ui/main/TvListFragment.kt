@@ -28,34 +28,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
+import com.skydoves.themovies.compose.ViewModelFragment
 import com.skydoves.themovies.databinding.MainFragmentTvBinding
 import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.TvListAdapter
 import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment_movie.*
-import javax.inject.Inject
 
 @Suppress("SpellCheckingInspection")
-class TvListFragment : Fragment(), TvListViewHolder.Delegate {
+class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val viewModel by viewModels<MainActivityViewModel> { viewModelFactory }
+  private val viewModel by viewModel<MainActivityViewModel>()
   private lateinit var binding: MainFragmentTvBinding
-  private lateinit var paginator: RecyclerViewPaginator
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment_tv, container, false)
+    binding = binding(inflater, R.layout.main_fragment_tv, container)
     binding.viewModel = viewModel
     binding.lifecycleOwner = this
     return binding.root
@@ -67,7 +59,6 @@ class TvListFragment : Fragment(), TvListViewHolder.Delegate {
   }
 
   override fun onAttach(context: Context) {
-    AndroidSupportInjection.inject(this)
     super.onAttach(context)
     loadMore(page = 1)
   }
@@ -75,7 +66,7 @@ class TvListFragment : Fragment(), TvListViewHolder.Delegate {
   private fun initializeUI() {
     recyclerView.adapter = TvListAdapter(this)
     recyclerView.layoutManager = GridLayoutManager(context, 2)
-    paginator = RecyclerViewPaginator(
+    val paginator = RecyclerViewPaginator(
       recyclerView = recyclerView,
       isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
       loadMore = { loadMore(it) },

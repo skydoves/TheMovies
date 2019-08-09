@@ -31,8 +31,10 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.entity.Person
 import kotlinx.android.synthetic.main.item_person.view.*
 
-class PeopleViewHolder(val view: View, private val delegate: Delegate)
-  : BaseViewHolder(view) {
+class PeopleViewHolder(
+  val view: View,
+  private val delegate: Delegate
+) : BaseViewHolder(view) {
 
   interface Delegate {
     fun onItemClick(person: Person, view: View)

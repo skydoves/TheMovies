@@ -28,15 +28,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.themovies.R
 import com.skydoves.themovies.api.Api
+import com.skydoves.themovies.compose.ViewModelActivity
 import com.skydoves.themovies.databinding.ActivityTvDetailBinding
-import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
 import com.skydoves.themovies.models.Video
@@ -48,14 +45,11 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_tv_detail.*
 import kotlinx.android.synthetic.main.layout_tv_detail_body.*
 import org.jetbrains.anko.startActivity
-import javax.inject.Inject
 
-class TvDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
+class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val vm by viewModels<TvDetailViewModel> { viewModelFactory }
-  private val binding by activityBinding<ActivityTvDetailBinding>(R.layout.activity_tv_detail)
+  private val vm by viewModel<TvDetailViewModel>()
+  private val binding by binding<ActivityTvDetailBinding>(R.layout.activity_tv_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)

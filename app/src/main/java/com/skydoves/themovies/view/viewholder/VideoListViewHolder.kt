@@ -32,8 +32,10 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.Video
 import kotlinx.android.synthetic.main.item_video.view.*
 
-class VideoListViewHolder(val view: View, private val delegate: Delegate)
-  : BaseViewHolder(view) {
+class VideoListViewHolder(
+  val view: View,
+  private val delegate: Delegate
+) : BaseViewHolder(view) {
 
   interface Delegate {
     fun onItemClicked(video: Video)

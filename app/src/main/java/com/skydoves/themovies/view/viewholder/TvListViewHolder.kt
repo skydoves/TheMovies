@@ -32,8 +32,10 @@ import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.entity.Tv
 import kotlinx.android.synthetic.main.item_poster.view.*
 
-class TvListViewHolder(val view: View, private val delegate: Delegate)
-  : BaseViewHolder(view) {
+class TvListViewHolder(
+  val view: View,
+  private val delegate: Delegate
+) : BaseViewHolder(view) {
 
   interface Delegate {
     fun onItemClick(tv: Tv)

@@ -46,8 +46,7 @@ class ReviewListViewHolder(val view: View) : BaseViewHolder(view) {
     }
   }
 
-  override fun onClick(v: View?) {
-  }
+  override fun onClick(v: View?) = Unit
 
   override fun onLongClick(v: View?) = false
 }

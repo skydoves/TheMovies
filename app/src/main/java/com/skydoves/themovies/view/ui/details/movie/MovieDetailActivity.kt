@@ -28,15 +28,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.themovies.R
 import com.skydoves.themovies.api.Api
+import com.skydoves.themovies.compose.ViewModelActivity
 import com.skydoves.themovies.databinding.ActivityMovieDetailBinding
-import com.skydoves.themovies.extension.activityBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
 import com.skydoves.themovies.models.Video
@@ -44,21 +41,16 @@ import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.themovies.view.viewholder.VideoListViewHolder
-import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.android.synthetic.main.layout_movie_detail_body.*
 import org.jetbrains.anko.startActivity
-import javax.inject.Inject
 
-class MovieDetailActivity : AppCompatActivity(), VideoListViewHolder.Delegate {
+class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelProvider.Factory
-  private val vm by viewModels<MovieDetailViewModel> { viewModelFactory }
-  private val binding by activityBinding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail)
+  private val vm by viewModel<MovieDetailViewModel>()
+  private val binding by binding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this@MovieDetailActivity)
     super.onCreate(savedInstanceState)
     vm.postMovieId(getMovieFromIntent().id)
     with(binding) {
