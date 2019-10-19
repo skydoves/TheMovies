@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.viewmodel
+
+package com.skydoves.themovies.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -30,9 +31,9 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
+import com.skydoves.themovies.api.ApiUtil
 import com.skydoves.themovies.api.PeopleService
 import com.skydoves.themovies.api.TheDiscoverService
-import com.skydoves.themovies.api.api.ApiUtil
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
@@ -100,7 +101,7 @@ class MainActivityViewModelTest {
     mockMovieList.add(mockMovie())
     loadFromDB.postValue(mockMovieList)
     verify(observer).onChanged(
-        Resource.success(viewModel.getMovieListValues()!!.data, false)
+      Resource.success(viewModel.getMovieListValues()!!.data, false)
     )
   }
 
@@ -121,7 +122,7 @@ class MainActivityViewModelTest {
     mockTvList.add(mockTv())
     loadFromDB.postValue(mockTvList)
     verify(observer).onChanged(
-        Resource.success(viewModel.getTvListValues()!!.data, false)
+      Resource.success(viewModel.getTvListValues()!!.data, false)
     )
   }
 
@@ -142,7 +143,7 @@ class MainActivityViewModelTest {
     mockPeople.add(mockPerson())
     loadFromDB.postValue(mockPeople)
     verify(observer).onChanged(
-        Resource.success(viewModel.getPeopleValues()!!.data, false)
+      Resource.success(viewModel.getPeopleValues()!!.data, false)
     )
   }
 }

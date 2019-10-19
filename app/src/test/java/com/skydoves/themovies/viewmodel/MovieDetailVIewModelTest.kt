@@ -21,16 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.repository
+
+package com.skydoves.themovies.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
+import com.skydoves.themovies.api.ApiUtil.successCall
 import com.skydoves.themovies.api.MovieService
-import com.skydoves.themovies.api.api.ApiUtil.successCall
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
@@ -44,6 +45,7 @@ import com.skydoves.themovies.utils.MockTestUtil.Companion.mockKeywordList
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockMovie
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockReviewList
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockVideoList
+import com.skydoves.themovies.view.ui.details.movie.MovieDetailViewModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -51,9 +53,13 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class MovieRepositoryTest {
+class MovieDetailVIewModelTest {
+
+  private lateinit var viewModel: MovieDetailViewModel
+
   private lateinit var repository: MovieRepository
   private val movieDao = mock<MovieDao>()
+
   private val service = mock<MovieService>()
 
   @Rule
@@ -63,10 +69,11 @@ class MovieRepositoryTest {
   @Before
   fun init() {
     repository = MovieRepository(service, movieDao)
+    viewModel = MovieDetailViewModel(repository)
   }
 
   @Test
-  fun loadKeywordListFromNetwork() {
+  fun loadKeywordList() {
     val loadFromDB = mockMovie()
     whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
@@ -75,12 +82,13 @@ class MovieRepositoryTest {
     whenever(service.fetchKeywords(123)).thenReturn(call)
 
     val data = repository.loadKeywordList(123)
-    verify(movieDao).getMovie(123)
-    verifyNoMoreInteractions(service)
-
     val observer = mock<Observer<Resource<List<Keyword>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(mockKeywordList(), true))
+
+    viewModel.postMovieId(123)
+    verify(movieDao, times(3)).getMovie(123)
+    verify(observer).onChanged(
+      Resource.success(mockKeywordList(), true))
 
     val updatedMovie = mockMovie()
     updatedMovie.keywords = mockKeywordList()
@@ -88,7 +96,7 @@ class MovieRepositoryTest {
   }
 
   @Test
-  fun loadVideoListFromNetwork() {
+  fun loadVideoList() {
     val loadFromDB = mockMovie()
     whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
@@ -97,12 +105,14 @@ class MovieRepositoryTest {
     whenever(service.fetchVideos(123)).thenReturn(call)
 
     val data = repository.loadVideoList(123)
-    verify(movieDao).getMovie(123)
-    verifyNoMoreInteractions(service)
-
     val observer = mock<Observer<Resource<List<Video>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(mockVideoList(), true))
+
+    viewModel.postMovieId(123)
+    verify(movieDao, times(3)).getMovie(123)
+    verify(observer).onChanged(
+      Resource.success(mockVideoList(), true)
+    )
 
     val updatedMovie = mockMovie()
     updatedMovie.videos = mockVideoList()
@@ -110,7 +120,7 @@ class MovieRepositoryTest {
   }
 
   @Test
-  fun loadReviewListFromNetwork() {
+  fun loadReviewList() {
     val loadFromDB = mockMovie()
     whenever(movieDao.getMovie(123)).thenReturn(loadFromDB)
 
@@ -119,12 +129,14 @@ class MovieRepositoryTest {
     whenever(service.fetchReviews(123)).thenReturn(call)
 
     val data = repository.loadReviewsList(123)
-    verify(movieDao).getMovie(123)
-    verifyNoMoreInteractions(service)
-
     val observer = mock<Observer<Resource<List<Review>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(mockReviewList(), true))
+
+    viewModel.postMovieId(123)
+    verify(movieDao, times(3)).getMovie(123)
+    verify(observer).onChanged(
+      Resource.success(mockReviewList(), true)
+    )
 
     val updatedMovie = mockMovie()
     updatedMovie.reviews = mockReviewList()

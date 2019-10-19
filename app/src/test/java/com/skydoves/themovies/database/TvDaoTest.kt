@@ -21,42 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.api
 
-import com.skydoves.themovies.api.TheDiscoverService
+package com.skydoves.themovies.database
+
+import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.utils.LiveDataTestUtil
+import com.skydoves.themovies.utils.MockTestUtil.Companion.mockTv
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.Before
 import org.junit.Test
-import java.io.IOException
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
-class TheDiscoverServiceTest : ApiAbstract<TheDiscoverService>() {
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [21])
+class TvDaoTest : LocalDatabase() {
 
-  private lateinit var service: TheDiscoverService
+  @Test
+  fun insertAndRead() {
+    val tvList = ArrayList<Tv>()
+    val tv = mockTv()
+    tvList.add(tv)
 
-  @Before
-  fun initService() {
-    this.service = createService(TheDiscoverService::class.java)
+    db.tvDao().insertTv(tvList)
+    val loadFromDB = LiveDataTestUtil.getValue(db.tvDao().getTvList(tv.page))[0]
+    assertThat(loadFromDB.page, `is`(1))
+    assertThat(loadFromDB.id, `is`(123))
   }
 
-  @Throws(IOException::class)
   @Test
-  fun fetchMovieListTest() {
-    enqueueResponse("/tmdb_movie.json")
-    val response = LiveDataTestUtil.getValue(service.fetchDiscoverMovie(1))
-    assertThat(response.body?.results?.get(0)?.id, `is`(164558))
-    assertThat(response.body?.total_results, `is`(61))
-    assertThat(response.body?.total_pages, `is`(4))
-  }
+  fun updateAndReadTest() {
+    val tvList = ArrayList<Tv>()
+    val tv = mockTv()
+    tvList.add(tv)
+    db.tvDao().insertTv(tvList)
 
-  @Throws(IOException::class)
-  @Test
-  fun fetchTvListTest() {
-    enqueueResponse("/tmdb_tv.json")
-    val response = LiveDataTestUtil.getValue(service.fetchDiscoverTv(1))
-    assertThat(response.body?.results?.get(0)?.id, `is`(61889))
-    assertThat(response.body?.total_results, `is`(61470))
-    assertThat(response.body?.total_pages, `is`(3074))
+    val loadFromDB = db.tvDao().getTv(tv.id)
+    assertThat(loadFromDB.page, `is`(1))
+
+    tv.page = 10
+    db.tvDao().updateTv(tv)
+
+    val updated = db.tvDao().getTv(tv.id)
+    assertThat(updated.page, `is`(10))
   }
 }

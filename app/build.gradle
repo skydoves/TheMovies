@@ -52,6 +52,11 @@ android {
         androidTest.java.srcDirs += "src/test-common/java"
         test.java.srcDirs += "src/test-common/java"
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -110,10 +115,11 @@ dependencies {
 
     // unit test
     testImplementation "junit:junit:$junitVersion"
+    testImplementation "androidx.test:core:$androidxTest"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxTest"
-    androidTestImplementation "androidx.test:core:$androidxTest"
     androidTestImplementation "androidx.test:rules:$androidxTestRules"
 }
 

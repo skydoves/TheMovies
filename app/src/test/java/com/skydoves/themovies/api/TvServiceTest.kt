@@ -21,38 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.api
 
-import com.skydoves.themovies.api.MovieService
+package com.skydoves.themovies.api
+
 import com.skydoves.themovies.utils.LiveDataTestUtil
+import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-class MovieServiceTest : ApiAbstract<MovieService>() {
+class TvServiceTest : ApiAbstract<TvService>() {
 
-  private lateinit var service: MovieService
+  private lateinit var service: TvService
 
   @Before
   fun initService() {
-    this.service = createService(MovieService::class.java)
+    this.service = createService(TvService::class.java)
   }
 
   @Throws(IOException::class)
   @Test
-  fun fetchMovieKeywordsTest() {
+  fun fetchTvKeywordsTest() {
     enqueueResponse("/tmdb_movie_keywords.json")
     val response = LiveDataTestUtil.getValue(service.fetchKeywords(1))
-    assertThat(response.body?.id, `is`(550))
+    assertThat(response.body?.id, CoreMatchers.`is`(550))
     assertThat(response.body?.keywords?.get(0)?.id, `is`(825))
     assertThat(response.body?.keywords?.get(0)?.name, `is`("support group"))
   }
 
   @Throws(IOException::class)
   @Test
-  fun fetchMovieVideosTest() {
+  fun fetchTvVideosTest() {
     enqueueResponse("/tmdb_movie_videos.json")
     val response = LiveDataTestUtil.getValue(service.fetchVideos(1))
     assertThat(response.body?.id, `is`(550))
@@ -62,7 +63,7 @@ class MovieServiceTest : ApiAbstract<MovieService>() {
 
   @Throws(IOException::class)
   @Test
-  fun fetchMovieReviewsTest() {
+  fun fetchTvReviewsTest() {
     enqueueResponse("/tmdb_movie_reviews.json")
     val response = LiveDataTestUtil.getValue(service.fetchReviews(1))
     assertThat(response.body?.id, `is`(297761))

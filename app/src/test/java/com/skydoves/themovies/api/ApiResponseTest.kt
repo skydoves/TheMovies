@@ -21,48 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.db
 
-import com.skydoves.themovies.models.entity.Tv
-import com.skydoves.themovies.utils.LiveDataTestUtil
-import com.skydoves.themovies.utils.MockTestUtil.Companion.mockTv
+package com.skydoves.themovies.api
+
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import retrofit2.Response
 
 @RunWith(JUnit4::class)
-class TvDaoTest : DbTest() {
+class ApiResponseTest {
 
   @Test
-  fun insertAndRead() {
-    val tvList = ArrayList<Tv>()
-    val tv = mockTv()
-    tvList.add(tv)
-
-    db.tvDao().insertTv(tvList)
-    val loadFromDB = LiveDataTestUtil.getValue(db.tvDao().getTvList(tv.page))[0]
-    MatcherAssert.assertThat(loadFromDB.page, CoreMatchers.`is`(1))
-    MatcherAssert.assertThat(loadFromDB.id, CoreMatchers.`is`(123))
+  fun exception() {
+    val exception = Exception("foo")
+    val apiResponse = ApiResponse<String>(exception)
+    assertThat(apiResponse.isSuccessful, `is`(false))
+    assertThat<String>(apiResponse.body, CoreMatchers.nullValue())
+    assertThat(apiResponse.code, `is`(500))
+    assertThat(apiResponse.message, `is`("foo"))
   }
 
   @Test
-  fun updateAndReadTest() {
-    val tvList = ArrayList<Tv>()
-    val tv = mockTv()
-    tvList.add(tv)
-    db.tvDao().insertTv(tvList)
-
-    val loadFromDB = db.tvDao().getTv(tv.id)
-    assertThat(loadFromDB.page, `is`(1))
-
-    tv.page = 10
-    db.tvDao().updateTv(tv)
-
-    val updated = db.tvDao().getTv(tv.id)
-    assertThat(updated.page, `is`(10))
+  fun success() {
+    val apiResponse = ApiResponse(Response.success("foo"))
+    assertThat(apiResponse.isSuccessful, `is`(true))
+    assertThat(apiResponse.code, `is`(200))
+    assertThat<String>(apiResponse.body, `is`("foo"))
+    assertThat(apiResponse.message, CoreMatchers.nullValue())
   }
 }

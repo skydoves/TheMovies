@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.repository
+
+package com.skydoves.themovies.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -30,16 +31,15 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
-import com.skydoves.themovies.api.TheDiscoverService
-import com.skydoves.themovies.api.api.ApiUtil.successCall
+import com.skydoves.themovies.api.ApiUtil.successCall
+import com.skydoves.themovies.api.PeopleService
 import com.skydoves.themovies.models.Resource
-import com.skydoves.themovies.models.entity.Movie
-import com.skydoves.themovies.models.entity.Tv
-import com.skydoves.themovies.models.network.DiscoverMovieResponse
-import com.skydoves.themovies.models.network.DiscoverTvResponse
-import com.skydoves.themovies.repository.DiscoverRepository
-import com.skydoves.themovies.room.MovieDao
-import com.skydoves.themovies.room.TvDao
+import com.skydoves.themovies.models.entity.Person
+import com.skydoves.themovies.models.network.PeopleResponse
+import com.skydoves.themovies.models.network.PersonDetail
+import com.skydoves.themovies.room.PeopleDao
+import com.skydoves.themovies.utils.MockTestUtil.Companion.mockPerson
+import com.skydoves.themovies.utils.MockTestUtil.Companion.mockPersonDetail
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -47,12 +47,11 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class DiscoverRepositoryTest {
+class PeopleRepositoryTest {
 
-  private lateinit var repository: DiscoverRepository
-  private val movieDao = mock<MovieDao>()
-  private val tvDao = mock<TvDao>()
-  private val service = mock<TheDiscoverService>()
+  private lateinit var repository: PeopleRepository
+  private val peopleDao = mock<PeopleDao>()
+  private val service = mock<PeopleService>()
 
   @Rule
   @JvmField
@@ -60,62 +59,56 @@ class DiscoverRepositoryTest {
 
   @Before
   fun init() {
-    repository = DiscoverRepository(service, movieDao, tvDao)
+    repository = PeopleRepository(service, peopleDao)
   }
 
   @Test
-  fun loadMovieListFromNetwork() {
-    val loadFromDB = MutableLiveData<List<Movie>>()
-    whenever(movieDao.getMovieList(1)).thenReturn(loadFromDB)
+  fun loadPeopleFromNetwork() {
+    val loadFromDB = MutableLiveData<List<Person>>()
+    whenever(peopleDao.getPeople(1)).thenReturn(loadFromDB)
 
-    val mockResponse = DiscoverMovieResponse(1, emptyList(), 100, 10)
+    val mockResponse = PeopleResponse(1, emptyList(), 100, 10)
     val call = successCall(mockResponse)
-    whenever(service.fetchDiscoverMovie(1)).thenReturn(call)
+    whenever(service.fetchPopularPeople(1)).thenReturn(call)
 
-    val data = repository.loadMovies(1)
-    verify(movieDao).getMovieList(1)
+    val data = repository.loadPeople(1)
+    verify(peopleDao).getPeople(1)
     verifyNoMoreInteractions(service)
 
-    val observer = mock<Observer<Resource<List<Movie>>>>()
+    val observer = mock<Observer<Resource<List<Person>>>>()
     data.observeForever(observer)
     verifyNoMoreInteractions(service)
-    val updatedData = MutableLiveData<List<Movie>>()
-    whenever(movieDao.getMovieList(1)).thenReturn(updatedData)
+    val updatedData = MutableLiveData<List<Person>>()
+    whenever(peopleDao.getPeople(1)).thenReturn(updatedData)
 
     loadFromDB.postValue(null)
     verify(observer).onChanged(Resource.loading(null))
-    verify(service).fetchDiscoverMovie(1)
-    verify(movieDao).insertMovieList(mockResponse.results)
+    verify(service).fetchPopularPeople(1)
+    verify(peopleDao).insertPeople(mockResponse.results)
 
     updatedData.postValue(mockResponse.results)
     verify(observer).onChanged(Resource.success(mockResponse.results, false))
   }
 
   @Test
-  fun loadTvListFromNetwork() {
-    val loadFromDb = MutableLiveData<List<Tv>>()
-    whenever(tvDao.getTvList(1)).thenReturn(loadFromDb)
+  fun loadPersonDetailFromNetwork() {
+    val loadFromDB = mockPerson()
+    whenever(peopleDao.getPerson(123)).thenReturn(loadFromDB)
 
-    val mockResponse = DiscoverTvResponse(1, emptyList(), 100, 10)
+    val mockResponse = mockPersonDetail()
     val call = successCall(mockResponse)
-    whenever(service.fetchDiscoverTv(1)).thenReturn(call)
+    whenever(service.fetchPersonDetail(123)).thenReturn(call)
 
-    val data = repository.loadTvs(1)
-    verify(tvDao).getTvList(1)
+    val data = repository.loadPersonDetail(123)
+    verify(peopleDao).getPerson(123)
     verifyNoMoreInteractions(service)
 
-    val observer = mock<Observer<Resource<List<Tv>>>>()
+    val observer = mock<Observer<Resource<PersonDetail>>>()
     data.observeForever(observer)
-    verifyNoMoreInteractions(service)
-    val updateData = MutableLiveData<List<Tv>>()
-    whenever(tvDao.getTvList(1)).thenReturn(updateData)
+    verify(observer).onChanged(Resource.success(mockPersonDetail(), true))
 
-    loadFromDb.postValue(null)
-    verify(observer).onChanged(Resource.loading(null))
-    verify(service).fetchDiscoverTv(1)
-    verify(tvDao).insertTv(mockResponse.results)
-
-    updateData.postValue(mockResponse.results)
-    verify(observer).onChanged(Resource.success(mockResponse.results, false))
+    val updatedPerson = mockPerson()
+    updatedPerson.personDetail = mockPersonDetail()
+    verify(peopleDao).updatePerson(updatedPerson)
   }
 }
