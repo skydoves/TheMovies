@@ -42,11 +42,13 @@ import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.models.network.PersonDetail
 import com.skydoves.themovies.utils.KeywordListMapper
+import com.skydoves.whatif.whatIfNotNull
+import com.skydoves.whatif.whatIfNotNullOrEmpty
 
 @BindingAdapter("visibilityByResource")
 fun bindVisibilityByResource(view: View, resource: Resource<List<Any>>?) {
   view.bindResource(resource) {
-    if (resource?.data?.isNotEmpty()!!) {
+    it.data.whatIfNotNull {
       view.visible()
     }
   }
@@ -55,8 +57,8 @@ fun bindVisibilityByResource(view: View, resource: Resource<List<Any>>?) {
 @BindingAdapter("mapKeywordList")
 fun bindMapKeywordList(view: TagContainerLayout, resource: Resource<List<Keyword>>?) {
   view.bindResource(resource) {
-    view.tags = KeywordListMapper.mapToStringList(resource?.data!!)
-    if (resource.data.isNotEmpty()) {
+    it.data.whatIfNotNullOrEmpty { keywords ->
+      view.tags = KeywordListMapper.mapToStringList(keywords)
       view.visible()
     }
   }
@@ -65,15 +67,15 @@ fun bindMapKeywordList(view: TagContainerLayout, resource: Resource<List<Keyword
 @BindingAdapter("biography")
 fun bindBiography(view: TextView, resource: Resource<PersonDetail>?) {
   view.bindResource(resource) {
-    view.text = resource?.data?.biography
+    view.text = it.data?.biography
   }
 }
 
 @BindingAdapter("nameTags")
 fun bindTags(view: TagContainerLayout, resource: Resource<PersonDetail>?) {
   view.bindResource(resource) {
-    view.tags = resource?.data?.also_known_as
-    if (resource?.data?.also_known_as?.isNotEmpty()!!) {
+    it.data?.also_known_as.whatIfNotNullOrEmpty { knows ->
+      view.tags = knows
       view.visible()
     }
   }

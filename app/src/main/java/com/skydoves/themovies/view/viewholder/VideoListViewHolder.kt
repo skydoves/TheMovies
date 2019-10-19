@@ -63,9 +63,7 @@ class VideoListViewHolder(
     }
   }
 
-  override fun onClick(v: View?) {
-    delegate.onItemClicked(video)
-  }
+  override fun onClick(v: View?) = delegate.onItemClicked(video)
 
   override fun onLongClick(v: View?) = false
 }

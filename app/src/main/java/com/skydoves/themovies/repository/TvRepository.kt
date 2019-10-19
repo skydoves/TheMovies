@@ -44,8 +44,8 @@ import javax.inject.Singleton
 
 @Singleton
 class TvRepository @Inject
-constructor(val service: TvService, val tvDao: TvDao)
-  : Repository {
+constructor(val service: TvService, val tvDao: TvDao) :
+  Repository {
 
   init {
     Timber.d("Injection TvRepository")

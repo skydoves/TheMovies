@@ -38,46 +38,39 @@ import com.skydoves.themovies.view.adapter.PeopleAdapter
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.TvListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
+import com.skydoves.whatif.whatIfNotNullOrEmpty
 
 @BindingAdapter("adapterMovieList")
 fun bindAdapterMovieList(view: RecyclerView, resource: Resource<List<Movie>>?) {
   view.bindResource(resource) {
-    if (resource != null) {
-      val adapter = view.adapter as? MovieListAdapter
-      adapter?.addMovieList(resource)
-    }
+    val adapter = view.adapter as? MovieListAdapter
+    adapter?.addMovieList(it)
   }
 }
 
 @BindingAdapter("adapterPersonList")
 fun bindAdapterPersonList(view: RecyclerView, resource: Resource<List<Person>>?) {
   view.bindResource(resource) {
-    if (resource != null) {
-      val adapter = view.adapter as? PeopleAdapter
-      adapter?.addPeople(resource)
-    }
+    val adapter = view.adapter as? PeopleAdapter
+    adapter?.addPeople(it)
   }
 }
 
 @BindingAdapter("adapterTvList")
 fun bindAdapterTvList(view: RecyclerView, resource: Resource<List<Tv>>?) {
   view.bindResource(resource) {
-    if (resource != null) {
-      val adapter = view.adapter as? TvListAdapter
-      adapter?.addTvList(resource)
-    }
+    val adapter = view.adapter as? TvListAdapter
+    adapter?.addTvList(it)
   }
 }
 
 @BindingAdapter("adapterVideoList")
 fun bindAdapterVideoList(view: RecyclerView, resource: Resource<List<Video>>?) {
   view.bindResource(resource) {
-    if (resource != null) {
-      val adapter = view.adapter as? VideoListAdapter
-      adapter?.addVideoList(resource)
-      if (resource.data?.isNotEmpty()!!) {
-        view.visible()
-      }
+    val adapter = view.adapter as? VideoListAdapter
+    adapter?.addVideoList(it)
+    it.data.whatIfNotNullOrEmpty {
+      view.visible()
     }
   }
 }
@@ -85,12 +78,10 @@ fun bindAdapterVideoList(view: RecyclerView, resource: Resource<List<Video>>?) {
 @BindingAdapter("adapterReviewList")
 fun bindAdapterReviewList(view: RecyclerView, resource: Resource<List<Review>>?) {
   view.bindResource(resource) {
-    if (resource != null) {
-      val adapter = view.adapter as? ReviewListAdapter
-      adapter?.addReviewList(resource)
-      if (resource.data?.isNotEmpty()!!) {
-        view.visible()
-      }
+    val adapter = view.adapter as? ReviewListAdapter
+    adapter?.addReviewList(it)
+    it.data.whatIfNotNullOrEmpty {
+      view.visible()
     }
   }
 }

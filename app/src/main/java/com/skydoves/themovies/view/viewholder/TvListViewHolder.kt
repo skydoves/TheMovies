@@ -66,9 +66,7 @@ class TvListViewHolder(
     }
   }
 
-  override fun onClick(v: View?) {
-    delegate.onItemClick(tv)
-  }
+  override fun onClick(v: View?) = delegate.onItemClick(tv)
 
   override fun onLongClick(p0: View?) = false
 }

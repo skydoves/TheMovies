@@ -33,11 +33,6 @@ import com.skydoves.themovies.models.NetworkResponseModel
 import com.skydoves.themovies.models.Resource
 import timber.log.Timber
 
-/**
- * Created by skydoves on 2018. 8. 9.
- * Copyright (c) 2018 skydoves All rights reserved.
- */
-
 abstract class NetworkBoundRepository<ResultType,
   RequestType : NetworkResponseModel,
   Mapper : NetworkResponseMapper<RequestType>>

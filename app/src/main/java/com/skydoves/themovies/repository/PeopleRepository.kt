@@ -40,8 +40,8 @@ import javax.inject.Singleton
 
 @Singleton
 class PeopleRepository @Inject
-constructor(val peopleService: PeopleService, val peopleDao: PeopleDao)
-  : Repository {
+constructor(val peopleService: PeopleService, val peopleDao: PeopleDao) :
+  Repository {
 
   init {
     Timber.d("Injection PeopleRepository")

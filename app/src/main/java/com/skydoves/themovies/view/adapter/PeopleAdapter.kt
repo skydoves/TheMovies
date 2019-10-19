@@ -25,32 +25,28 @@ package com.skydoves.themovies.view.adapter
 
 import android.view.View
 import com.skydoves.baserecyclerviewadapter.BaseAdapter
-import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.baserecyclerviewadapter.SectionRow
 import com.skydoves.themovies.R
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.view.viewholder.PeopleViewHolder
+import com.skydoves.whatif.whatIfNotNull
 
-class PeopleAdapter(val delegate: PeopleViewHolder.Delegate)
-  : BaseAdapter() {
+class PeopleAdapter(val delegate: PeopleViewHolder.Delegate) :
+  BaseAdapter() {
 
   init {
     addSection(ArrayList<Person>())
   }
 
   fun addPeople(resource: Resource<List<Person>>) {
-    resource.data?.let {
-      sections()[0].addAll(resource.data)
+    resource.data.whatIfNotNull {
+      sections()[0].addAll(it)
       notifyDataSetChanged()
     }
   }
 
-  override fun layout(sectionRow: SectionRow): Int {
-    return R.layout.item_person
-  }
+  override fun layout(sectionRow: SectionRow) = R.layout.item_person
 
-  override fun viewHolder(layout: Int, view: View): BaseViewHolder {
-    return PeopleViewHolder(view, delegate)
-  }
+  override fun viewHolder(layout: Int, view: View) = PeopleViewHolder(view, delegate)
 }
