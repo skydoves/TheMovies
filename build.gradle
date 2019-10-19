@@ -8,25 +8,23 @@ buildscript {
 
         // application dependencies
         androidxVersion = '1.0.0'
-        accompatVersion = '1.1.0-rc01'
-        androidActivity = '1.1.0-alpha02'
-        androidFragment = '1.2.0-alpha02'
-        materialVersion = '1.1.0-alpha09'
-        recyclerVersion = '1.1.0-beta01'
-        kotlinVersion = '1.3.41'
+        androidActivity = '1.1.0-beta01'
+        androidFragment = '1.2.0-beta01'
+        materialVersion = '1.1.0-beta01'
+        kotlinVersion = '1.3.50'
         ankoVersion = '0.10.8'
         archCompomentVersion = '2.0.0'
-        roomVersion = '2.2.0-alpha01'
-        lifecycleVersion = '2.2.0-alpha03'
-        daggerVersion = '2.23.1'
+        roomVersion = '2.2.0'
+        lifecycleVersion = '2.2.0-beta01'
+        daggerVersion = '2.23.2'
         retrofitVersion = '2.3.0'
         okhttpVersion = '3.11.0'
         gsonVersion = '2.8.2'
         timberVersion = '4.7.1'
-        memoryLeakVersion = '1.5.4'
         stethoVersion = '1.5.1'
         glideVersion = '4.9.0'
         glidePaletteVersion = '2.1.2'
+        whatIfVersion = '1.0.4'
         baseAdapterVersion = '0.1.3'
         androidTagViewVersion = '1.1.4'
         expandableTextViewVersion = '0.1.4'
@@ -37,16 +35,14 @@ buildscript {
         jacocoVersion = '0.8.1'
         androidxTest = '1.1.0'
         androidxTestRules = '1.2.0-alpha04'
-        spotlessVersion = '3.22.0'
+        spotlessVersion = '3.24.1'
     }
-
     repositories {
         google()
         jcenter()
     }
-
     dependencies {
-        classpath "com.android.tools.build:gradle:3.4.2"
+        classpath "com.android.tools.build:gradle:3.5.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "com.diffplug.spotless:spotless-plugin-gradle:$spotlessVersion"
         classpath "org.jacoco:org.jacoco.core:$jacocoVersion"

@@ -56,15 +56,12 @@ android {
 
 dependencies {
     // support library
-    implementation "androidx.appcompat:appcompat:$accompatVersion"
     implementation "androidx.activity:activity:$androidActivity"
     implementation "androidx.activity:activity-ktx:$androidActivity"
     implementation "androidx.fragment:fragment:$androidFragment"
     implementation "androidx.fragment:fragment-ktx:$androidFragment"
-    implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.palette:palette:$androidxVersion"
-    implementation "androidx.cardview:cardview:$androidxVersion"
-    implementation "androidx.recyclerview:recyclerview:$recyclerVersion"
+    implementation "com.google.android.material:material:$materialVersion"
 
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -98,6 +95,9 @@ dependencies {
 
     // adapter
     implementation "com.github.skydoves:baserecyclerviewadapter:$baseAdapterVersion"
+
+    // whatIf
+    implementation "com.github.skydoves:whatif:$whatIfVersion"
 
     // debugging
     implementation "com.jakewharton.timber:timber:$timberVersion"
