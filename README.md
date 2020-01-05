@@ -57,8 +57,8 @@ Support it by joining __[stargazers](https://github.com/skydoves/TheMovies/starg
 And __[follow](https://github.com/skydoves)__ me for my next creations! 🤩
 
 ## Supports :coffee:
-If you feel like support me a coffee for my efforts, I would greatly appreciate it. <br><br>
-<a href="https://www.buymeacoffee.com/skydoves" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+If you feel like support me a coffee for my efforts, I would greatly appreciate it. <br>
+<a href="https://www.buymeacoffee.com/skydoves" target="_blank"><img src="https://skydoves.github.io/sponsor.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
 # License
 ```xml
