@@ -36,7 +36,7 @@ import com.skydoves.themovies.databinding.ActivityPersonDetailBinding
 import com.skydoves.themovies.extension.checkIsMaterialVersion
 import com.skydoves.themovies.models.entity.Person
 import kotlinx.android.synthetic.main.toolbar_default.*
-import org.jetbrains.anko.startActivity
+import splitties.activities.start
 
 @Suppress("MemberVisibilityCanBePrivate")
 class PersonDetailActivity : ViewModelActivity() {
@@ -78,7 +78,7 @@ class PersonDetailActivity : ViewModelActivity() {
             activity.startActivityForResult(intent, intent_requestCode, options.toBundle())
           }
         } else {
-          activity.startActivity<PersonDetailActivity>(personId to person)
+          activity.start<PersonDetailActivity>{putExtra(personId,person)}
         }
       }
     }

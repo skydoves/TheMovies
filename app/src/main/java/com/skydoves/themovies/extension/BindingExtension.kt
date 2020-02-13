@@ -27,7 +27,7 @@ package com.skydoves.themovies.extension
 import android.view.View
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
-import org.jetbrains.anko.toast
+import splitties.toast.toast
 
 inline fun <reified T> View.bindResource(resource: Resource<T>?, onSuccess: (Resource<T>) -> Unit) {
   if (resource != null) {

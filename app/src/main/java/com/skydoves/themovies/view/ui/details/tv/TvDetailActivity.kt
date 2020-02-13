@@ -45,7 +45,7 @@ import com.skydoves.themovies.view.viewholder.VideoListViewHolder
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_tv_detail.*
 import kotlinx.android.synthetic.main.layout_tv_detail_body.*
-import org.jetbrains.anko.startActivity
+import splitties.activities.start
 
 class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
@@ -96,7 +96,7 @@ class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
   companion object {
     private const val tvId = "tv"
     fun startActivityModel(context: Context?, tv: Tv) {
-      context?.startActivity<TvDetailActivity>(tvId to tv)
+      context?.start<TvDetailActivity>{putExtra(tvId,tv)}
     }
   }
 }

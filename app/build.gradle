@@ -70,7 +70,8 @@ dependencies {
 
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    implementation "org.jetbrains.anko:anko:$ankoVersion"
+    implementation "com.louiscad.splitties:splitties-toast:$splitties_version"
+    implementation "com.louiscad.splitties:splitties-activities:$splitties_version"
 
     // architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
