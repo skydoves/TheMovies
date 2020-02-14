@@ -11,7 +11,7 @@
     android:id="@+id/item_poster_post"
     android:layout_width="match_parent"
     android:layout_height="240dp"
-    android:scaleType="fitXY"
+    android:scaleType="centerCrop"
     tools:src="@drawable/ic_star_white_24dp" />
 
   <RelativeLayout

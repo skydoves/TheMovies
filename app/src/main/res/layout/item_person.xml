@@ -22,7 +22,7 @@
         android:layout_height="90dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:transitionName="@string/transition_profile"
         tools:src="@drawable/ic_live_tv_white_24dp"
         tools:targetApi="LOLLIPOP" />
