@@ -12,6 +12,14 @@
     <variable
       name="viewModel"
       type="com.skydoves.themovies.view.ui.details.movie.MovieDetailViewModel" />
+
+    <variable
+      name="videoAdapter"
+      type="com.skydoves.themovies.view.adapter.VideoListAdapter" />
+
+    <variable
+      name="reviewAdapter"
+      type="com.skydoves.themovies.view.adapter.ReviewListAdapter" />
   </data>
 
   <LinearLayout
@@ -39,8 +47,11 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="12dp"
+      android:orientation="horizontal"
       android:visibility="gone"
+      app:adapter="@{videoAdapter}"
       app:adapterVideoList="@{viewModel.videoListLiveData}"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
       tools:visibility="visible" />
 
     <TextView
@@ -100,8 +111,11 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="12dp"
+      android:orientation="vertical"
       android:visibility="gone"
+      app:adapter="@{reviewAdapter}"
       app:adapterReviewList="@{viewModel.reviewListLiveData}"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
       tools:visibility="visible" />
   </LinearLayout>
 </layout>

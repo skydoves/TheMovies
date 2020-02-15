@@ -37,8 +37,9 @@ import com.skydoves.themovies.utils.AbsentLiveData
 import javax.inject.Inject
 import timber.log.Timber
 
-class TvDetailViewModel @Inject
-constructor(private val repository: TvRepository) : ViewModel() {
+class TvDetailViewModel @Inject constructor(
+  private val repository: TvRepository
+) : ViewModel() {
 
   private val tvIdLiveData: MutableLiveData<Int> = MutableLiveData()
   val keywordListLiveData: LiveData<Resource<List<Keyword>>>

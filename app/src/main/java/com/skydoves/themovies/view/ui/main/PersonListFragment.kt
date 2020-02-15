@@ -29,7 +29,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.compose.ViewModelFragment
@@ -39,18 +38,23 @@ import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.view.adapter.PeopleAdapter
 import com.skydoves.themovies.view.ui.details.person.PersonDetailActivity
 import com.skydoves.themovies.view.viewholder.PeopleViewHolder
-import kotlinx.android.synthetic.main.main_fragment_movie.*
+import kotlinx.android.synthetic.main.main_fragment_star.recyclerView
 
 class PersonListFragment : ViewModelFragment(), PeopleViewHolder.Delegate {
 
-  private val viewModel by viewModel<MainActivityViewModel>()
-  private lateinit var binding: MainFragmentStarBinding
+  private val viewModel: MainActivityViewModel by viewModel()
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    binding = binding(inflater, R.layout.main_fragment_star, container)
-    binding.viewModel = viewModel
-    binding.lifecycleOwner = this
-    return binding.root
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    return binding<MainFragmentStarBinding>(inflater, R.layout.main_fragment_star, container)
+      .apply {
+        viewModel = this@PersonListFragment.viewModel
+        lifecycleOwner = this@PersonListFragment
+        adapter = PeopleAdapter(this@PersonListFragment)
+      }.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,8 +68,6 @@ class PersonListFragment : ViewModelFragment(), PeopleViewHolder.Delegate {
   }
 
   private fun initializeUI() {
-    recyclerView.adapter = PeopleAdapter(this)
-    recyclerView.layoutManager = GridLayoutManager(context, 2)
     RecyclerViewPaginator(
       recyclerView = recyclerView,
       isLoading = { viewModel.getPeopleValues()?.status == Status.LOADING },
@@ -73,11 +75,8 @@ class PersonListFragment : ViewModelFragment(), PeopleViewHolder.Delegate {
       onLast = { viewModel.getPeopleValues()?.onLastPage!! })
   }
 
-  private fun loadMore(page: Int) {
-    viewModel.postPeoplePage(page)
-  }
+  private fun loadMore(page: Int) = viewModel.postPeoplePage(page)
 
-  override fun onItemClick(person: Person, view: View) {
+  override fun onItemClick(person: Person, view: View) =
     PersonDetailActivity.startActivity(activity, person, view)
-  }
 }

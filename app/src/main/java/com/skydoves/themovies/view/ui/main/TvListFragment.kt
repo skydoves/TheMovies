@@ -29,7 +29,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.compose.ViewModelFragment
@@ -39,19 +38,24 @@ import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.TvListAdapter
 import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
-import kotlinx.android.synthetic.main.main_fragment_movie.*
+import kotlinx.android.synthetic.main.main_fragment_tv.recyclerView
 
 @Suppress("SpellCheckingInspection")
 class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
 
-  private val viewModel by viewModel<MainActivityViewModel>()
-  private lateinit var binding: MainFragmentTvBinding
+  private val viewModel: MainActivityViewModel by viewModel()
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    binding = binding(inflater, R.layout.main_fragment_tv, container)
-    binding.viewModel = viewModel
-    binding.lifecycleOwner = this
-    return binding.root
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    return binding<MainFragmentTvBinding>(inflater, R.layout.main_fragment_tv, container)
+      .apply {
+        viewModel = this@TvListFragment.viewModel
+        lifecycleOwner = this@TvListFragment
+        adapter = TvListAdapter(this@TvListFragment)
+      }.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,22 +69,18 @@ class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
   }
 
   private fun initializeUI() {
-    recyclerView.adapter = TvListAdapter(this)
-    recyclerView.layoutManager = GridLayoutManager(context, 2)
-    val paginator = RecyclerViewPaginator(
+    RecyclerViewPaginator(
       recyclerView = recyclerView,
       isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
       loadMore = { loadMore(it) },
       onLast = { viewModel.getTvListValues()?.onLastPage!! }
-    )
-    paginator.currentPage = 1
+    ).apply {
+      currentPage = 1
+    }
   }
 
-  private fun loadMore(page: Int) {
-    viewModel.postTvPage(page)
-  }
+  private fun loadMore(page: Int) = viewModel.postTvPage(page)
 
-  override fun onItemClick(tv: Tv) {
+  override fun onItemClick(tv: Tv) =
     TvDetailActivity.startActivityModel(context, tv)
-  }
 }

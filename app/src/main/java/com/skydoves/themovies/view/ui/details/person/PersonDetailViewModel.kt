@@ -35,8 +35,9 @@ import com.skydoves.themovies.utils.AbsentLiveData
 import javax.inject.Inject
 import timber.log.Timber
 
-class PersonDetailViewModel @Inject
-constructor(private val repository: PeopleRepository) : ViewModel() {
+class PersonDetailViewModel @Inject constructor(
+  private val repository: PeopleRepository
+) : ViewModel() {
 
   private val personIdLiveData: MutableLiveData<Int> = MutableLiveData()
   val personLiveData: LiveData<Resource<PersonDetail>>
