@@ -34,9 +34,13 @@ import com.skydoves.themovies.models.network.PersonDetail
 
 class MockTestUtil {
   companion object {
-    fun mockMovie() = Movie(1, emptyList(), emptyList(), emptyList(), "", false, "", "", ArrayList(), 123, "", "", "", "", 0f, 0, false, 0f)
-    fun mockTv() = Tv(1, emptyList(), emptyList(), emptyList(), "", 0f, 123, "", 0f, "", "", ArrayList(), ArrayList(), "", 1, "", "")
-    fun mockPerson() = Person(1, mockPersonDetail(), "", false, 123, "", 0f)
+    fun mockMovie() = Movie(1, 0, emptyList(), emptyList(), emptyList(), "", false, "", "",
+      ArrayList(), "", "", "", "", 0f, 0, false, 0f)
+
+    fun mockTv() = Tv(1, 0, emptyList(), emptyList(), emptyList(), "", 0f, "", 0f, "", "",
+      ArrayList(), ArrayList(), "", 1, "", "")
+
+    fun mockPerson() = Person(1, mockPersonDetail(), 0, "", false, "", 0f)
     fun mockMovieList(): List<Movie> {
       val movies = ArrayList<Movie>()
       movies.add(mockMovie())

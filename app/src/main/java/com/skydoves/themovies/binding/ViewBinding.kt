@@ -24,15 +24,15 @@
 
 package com.skydoves.themovies.binding
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import co.lujun.androidtagview.TagContainerLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.chip.ChipGroup
 import com.skydoves.themovies.api.Api
+import com.skydoves.themovies.extension.addPrimaryChip
 import com.skydoves.themovies.extension.bindResource
 import com.skydoves.themovies.extension.requestGlideListener
 import com.skydoves.themovies.extension.visible
@@ -42,7 +42,6 @@ import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.models.network.PersonDetail
-import com.skydoves.themovies.utils.KeywordListMapper
 import com.skydoves.whatif.whatIfNotNull
 import com.skydoves.whatif.whatIfNotNullOrEmpty
 
@@ -56,11 +55,11 @@ fun bindVisibilityByResource(view: View, resource: Resource<List<Any>>?) {
 }
 
 @BindingAdapter("mapKeywordList")
-fun bindMapKeywordList(view: TagContainerLayout, resource: Resource<List<Keyword>>?) {
+fun bindMapKeywordList(view: ChipGroup, resource: Resource<List<Keyword>>?) {
   view.bindResource(resource) {
     it.data.whatIfNotNullOrEmpty { keywords ->
-      view.tags = KeywordListMapper.mapToStringList(keywords)
       view.visible()
+      keywords.forEach { keyword -> view.addPrimaryChip(keyword.name) }
     }
   }
 }
@@ -73,22 +72,20 @@ fun bindBiography(view: TextView, resource: Resource<PersonDetail>?) {
 }
 
 @BindingAdapter("nameTags")
-fun bindTags(view: TagContainerLayout, resource: Resource<PersonDetail>?) {
+fun bindTags(view: ChipGroup, resource: Resource<PersonDetail>?) {
   view.bindResource(resource) {
     it.data?.also_known_as.whatIfNotNullOrEmpty { knows ->
-      view.tags = knows
+      knows.forEach { know -> view.addPrimaryChip(know) }
       view.visible()
     }
   }
 }
 
-@SuppressLint("SetTextI18n")
 @BindingAdapter("bindReleaseDate")
 fun bindReleaseDate(view: TextView, movie: Movie) {
   view.text = "Release Date : ${movie.release_date}"
 }
 
-@SuppressLint("SetTextI18n")
 @BindingAdapter("bindAirDate")
 fun bindAirDate(view: TextView, tv: Tv) {
   view.text = "First Air Date : ${tv.first_air_date}"

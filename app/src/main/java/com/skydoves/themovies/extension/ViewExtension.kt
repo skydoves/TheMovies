@@ -32,6 +32,8 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.skydoves.themovies.R
 
 fun View.visible() {
@@ -48,11 +50,22 @@ fun View.gone() {
 
 fun View.requestGlideListener(): RequestListener<Drawable> {
   return object : RequestListener<Drawable> {
-    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+    override fun onLoadFailed(
+      e: GlideException?,
+      model: Any?,
+      target: Target<Drawable>?,
+      isFirstResource: Boolean
+    ): Boolean {
       return false
     }
 
-    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+    override fun onResourceReady(
+      resource: Drawable?,
+      model: Any?,
+      target: Target<Drawable>?,
+      dataSource: DataSource?,
+      isFirstResource: Boolean
+    ): Boolean {
       circularRevealedAtCenter()
       return false
     }
@@ -72,4 +85,14 @@ fun View.circularRevealedAtCenter() {
     anim.duration = 550
     anim.start()
   }
+}
+
+fun ChipGroup.addPrimaryChip(chipText: String) {
+  addView(
+    Chip(context).apply {
+      text = chipText
+      isCheckable = false
+      setTextAppearanceResource(R.style.ChipTextStyle)
+      setChipBackgroundColorResource(R.color.colorPrimary)
+    })
 }
