@@ -24,6 +24,8 @@
 
 package com.skydoves.themovies.view.viewholder
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import com.bumptech.glide.Glide
 import com.github.florent37.glidepalette.BitmapPalette
@@ -31,16 +33,13 @@ import com.github.florent37.glidepalette.GlidePalette
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.Video
-import kotlinx.android.synthetic.main.item_video.view.*
+import kotlinx.android.synthetic.main.item_video.view.item_video_cover
+import kotlinx.android.synthetic.main.item_video.view.item_video_palette
+import kotlinx.android.synthetic.main.item_video.view.item_video_title
 
-class VideoListViewHolder(
-  val view: View,
-  private val delegate: Delegate
+class VideoListViewHolder constructor(
+  val view: View
 ) : BaseViewHolder(view) {
-
-  interface Delegate {
-    fun onItemClicked(video: Video)
-  }
 
   private lateinit var video: Video
 
@@ -64,7 +63,9 @@ class VideoListViewHolder(
     }
   }
 
-  override fun onClick(v: View?) = delegate.onItemClicked(video)
+  override fun onClick(v: View?) =
+    context().startActivity(
+      Intent(Intent.ACTION_VIEW, Uri.parse(Api.getYoutubeVideoPath(video.key))))
 
   override fun onLongClick(v: View?) = false
 }

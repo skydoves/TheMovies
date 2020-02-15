@@ -33,8 +33,7 @@ import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.viewholder.MovieListViewHolder
 import com.skydoves.whatif.whatIfNotNull
 
-class MovieListAdapter(private val delegate: MovieListViewHolder.Delegate) :
-  BaseAdapter() {
+class MovieListAdapter : BaseAdapter() {
 
   init {
     addSection(ArrayList<Movie>())
@@ -49,5 +48,5 @@ class MovieListAdapter(private val delegate: MovieListViewHolder.Delegate) :
 
   override fun layout(sectionRow: SectionRow) = R.layout.item_poster
 
-  override fun viewHolder(layout: Int, view: View) = MovieListViewHolder(view, delegate)
+  override fun viewHolder(layout: Int, view: View) = MovieListViewHolder(view)
 }

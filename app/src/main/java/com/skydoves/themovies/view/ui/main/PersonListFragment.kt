@@ -32,12 +32,9 @@ import android.view.ViewGroup
 import com.skydoves.themovies.R
 import com.skydoves.themovies.compose.ViewModelFragment
 import com.skydoves.themovies.databinding.MainFragmentStarBinding
-import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.view.adapter.PeopleAdapter
-import com.skydoves.themovies.view.ui.details.person.PersonDetailActivity
-import com.skydoves.themovies.view.viewholder.PeopleViewHolder
 
-class PersonListFragment : ViewModelFragment(), PeopleViewHolder.Delegate {
+class PersonListFragment : ViewModelFragment() {
 
   private val viewModel: MainActivityViewModel by injectActivityVIewModels()
 
@@ -50,7 +47,7 @@ class PersonListFragment : ViewModelFragment(), PeopleViewHolder.Delegate {
       .apply {
         viewModel = this@PersonListFragment.viewModel
         lifecycleOwner = this@PersonListFragment
-        adapter = PeopleAdapter(this@PersonListFragment)
+        adapter = PeopleAdapter()
       }.root
   }
 
@@ -58,7 +55,4 @@ class PersonListFragment : ViewModelFragment(), PeopleViewHolder.Delegate {
     super.onAttach(context)
     viewModel.postPeoplePage(1)
   }
-
-  override fun onItemClick(person: Person, view: View) =
-    PersonDetailActivity.startActivity(activity, person, view)
 }

@@ -33,8 +33,7 @@ import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
 import com.skydoves.whatif.whatIfNotNull
 
-class TvListAdapter(private val delegate: TvListViewHolder.Delegate) :
-  BaseAdapter() {
+class TvListAdapter : BaseAdapter() {
 
   init {
     addSection(ArrayList<Tv>())
@@ -49,5 +48,5 @@ class TvListAdapter(private val delegate: TvListViewHolder.Delegate) :
 
   override fun layout(sectionRow: SectionRow) = R.layout.item_poster
 
-  override fun viewHolder(layout: Int, view: View) = TvListViewHolder(view, delegate)
+  override fun viewHolder(layout: Int, view: View) = TvListViewHolder(view)
 }

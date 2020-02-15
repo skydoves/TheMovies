@@ -32,12 +32,9 @@ import android.view.ViewGroup
 import com.skydoves.themovies.R
 import com.skydoves.themovies.compose.ViewModelFragment
 import com.skydoves.themovies.databinding.MainFragmentTvBinding
-import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.TvListAdapter
-import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
-import com.skydoves.themovies.view.viewholder.TvListViewHolder
 
-class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
+class TvListFragment : ViewModelFragment() {
 
   private val viewModel: MainActivityViewModel by injectActivityVIewModels()
 
@@ -50,7 +47,7 @@ class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
       .apply {
         viewModel = this@TvListFragment.viewModel
         lifecycleOwner = this@TvListFragment
-        adapter = TvListAdapter(this@TvListFragment)
+        adapter = TvListAdapter()
       }.root
   }
 
@@ -58,7 +55,4 @@ class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
     super.onAttach(context)
     viewModel.postTvPage(1)
   }
-
-  override fun onItemClick(tv: Tv) =
-    TvDetailActivity.startActivityModel(context, tv)
 }

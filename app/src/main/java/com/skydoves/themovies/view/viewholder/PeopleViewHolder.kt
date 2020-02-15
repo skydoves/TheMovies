@@ -30,16 +30,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.entity.Person
-import kotlinx.android.synthetic.main.item_person.view.*
+import com.skydoves.themovies.view.ui.details.person.PersonDetailActivity
+import kotlinx.android.synthetic.main.item_person.view.item_person_name
+import kotlinx.android.synthetic.main.item_person.view.item_person_profile
 
-class PeopleViewHolder(
-  val view: View,
-  private val delegate: Delegate
+class PeopleViewHolder constructor(
+  val view: View
 ) : BaseViewHolder(view) {
-
-  interface Delegate {
-    fun onItemClick(person: Person, view: View)
-  }
 
   private lateinit var person: Person
 
@@ -63,7 +60,8 @@ class PeopleViewHolder(
     }
   }
 
-  override fun onClick(p0: View?) = delegate.onItemClick(person, itemView.item_person_profile)
+  override fun onClick(p0: View?) =
+    PersonDetailActivity.startActivity(context(), person, itemView.item_person_profile)
 
   override fun onLongClick(p0: View?) = false
 }

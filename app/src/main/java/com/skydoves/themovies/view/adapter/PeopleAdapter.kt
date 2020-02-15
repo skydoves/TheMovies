@@ -33,8 +33,7 @@ import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.view.viewholder.PeopleViewHolder
 import com.skydoves.whatif.whatIfNotNull
 
-class PeopleAdapter(val delegate: PeopleViewHolder.Delegate) :
-  BaseAdapter() {
+class PeopleAdapter : BaseAdapter() {
 
   init {
     addSection(ArrayList<Person>())
@@ -49,5 +48,5 @@ class PeopleAdapter(val delegate: PeopleViewHolder.Delegate) :
 
   override fun layout(sectionRow: SectionRow) = R.layout.item_person
 
-  override fun viewHolder(layout: Int, view: View) = PeopleViewHolder(view, delegate)
+  override fun viewHolder(layout: Int, view: View) = PeopleViewHolder(view)
 }

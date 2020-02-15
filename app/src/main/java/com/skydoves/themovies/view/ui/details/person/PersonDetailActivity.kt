@@ -25,6 +25,7 @@
 package com.skydoves.themovies.view.ui.details.person
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -64,17 +65,17 @@ class PersonDetailActivity : ViewModelActivity() {
     const val personId = "person"
     private const val intent_requestCode = 1000
 
-    fun startActivity(activity: Activity?, person: Person, view: View) {
-      if (activity != null) {
-        val intent = Intent(activity, PersonDetailActivity::class.java)
+    fun startActivity(context: Context?, person: Person, view: View) {
+      if (context is Activity) {
+        val intent = Intent(context, PersonDetailActivity::class.java)
         intent.putExtra(personId, person)
         if (checkIsMaterialVersion()) {
           ViewCompat.getTransitionName(view)?.let {
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)
-            activity.startActivityForResult(intent, intent_requestCode, options.toBundle())
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, view, it)
+            context.startActivityForResult(intent, intent_requestCode, options.toBundle())
           }
         } else {
-          activity.startActivity(intent)
+          context.startActivity(intent)
         }
       }
     }

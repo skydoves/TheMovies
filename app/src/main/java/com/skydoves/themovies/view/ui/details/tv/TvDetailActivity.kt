@@ -26,25 +26,21 @@ package com.skydoves.themovies.view.ui.details.tv
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import com.skydoves.themovies.R
-import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.compose.ViewModelActivity
 import com.skydoves.themovies.databinding.ActivityTvDetailBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
-import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
-import com.skydoves.themovies.view.viewholder.VideoListViewHolder
 import com.skydoves.whatif.whatIfNotNull
 import kotlinx.android.synthetic.main.activity_tv_detail.tv_detail_toolbar
 import kotlinx.android.synthetic.main.layout_tv_detail_body.detail_body_recyclerView_reviews
 
-class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
+class TvDetailActivity : ViewModelActivity() {
 
   private val viewModel: TvDetailViewModel by injectViewModels()
 
@@ -55,7 +51,7 @@ class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
       lifecycleOwner = this@TvDetailActivity
       viewModel = this@TvDetailActivity.viewModel
       tv = getTvFromIntent()
-      videoAdapter = VideoListAdapter(this@TvDetailActivity)
+      videoAdapter = VideoListAdapter()
       reviewAdapter = ReviewListAdapter()
     }
     initializeUI()
@@ -73,9 +69,6 @@ class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
     if (item?.itemId == android.R.id.home) onBackPressed()
     return false
   }
-
-  override fun onItemClicked(video: Video) =
-    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Api.getYoutubeVideoPath(video.key))))
 
   companion object {
     private const val tvId = "tv"

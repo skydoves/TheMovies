@@ -26,25 +26,21 @@ package com.skydoves.themovies.view.ui.details.movie
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import com.skydoves.themovies.R
-import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.compose.ViewModelActivity
 import com.skydoves.themovies.databinding.ActivityMovieDetailBinding
 import com.skydoves.themovies.extension.applyToolbarMargin
 import com.skydoves.themovies.extension.simpleToolbarWithHome
-import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
-import com.skydoves.themovies.view.viewholder.VideoListViewHolder
 import com.skydoves.whatif.whatIfNotNull
 import kotlinx.android.synthetic.main.activity_movie_detail.movie_detail_toolbar
 import kotlinx.android.synthetic.main.layout_movie_detail_body.detail_body_recyclerView_reviews
 
-class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
+class MovieDetailActivity : ViewModelActivity() {
 
   private val viewModel: MovieDetailViewModel by injectViewModels()
 
@@ -55,7 +51,7 @@ class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
       lifecycleOwner = this@MovieDetailActivity
       viewModel = this@MovieDetailActivity.viewModel
       movie = getMovieFromIntent()
-      videoAdapter = VideoListAdapter(this@MovieDetailActivity)
+      videoAdapter = VideoListAdapter()
       reviewAdapter = ReviewListAdapter()
     }
     initializeUI()
@@ -73,9 +69,6 @@ class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
     if (item?.itemId == android.R.id.home) onBackPressed()
     return false
   }
-
-  override fun onItemClicked(video: Video) =
-    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Api.getYoutubeVideoPath(video.key))))
 
   companion object {
     private const val movieId = "movie"

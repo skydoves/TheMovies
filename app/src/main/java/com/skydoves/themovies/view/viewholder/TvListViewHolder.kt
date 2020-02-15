@@ -31,16 +31,14 @@ import com.github.florent37.glidepalette.GlidePalette
 import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.models.entity.Tv
-import kotlinx.android.synthetic.main.item_poster.view.*
+import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
+import kotlinx.android.synthetic.main.item_poster.view.item_poster_palette
+import kotlinx.android.synthetic.main.item_poster.view.item_poster_post
+import kotlinx.android.synthetic.main.item_poster.view.item_poster_title
 
-class TvListViewHolder(
-  val view: View,
-  private val delegate: Delegate
+class TvListViewHolder constructor(
+  val view: View
 ) : BaseViewHolder(view) {
-
-  interface Delegate {
-    fun onItemClick(tv: Tv)
-  }
 
   private lateinit var tv: Tv
 
@@ -67,7 +65,7 @@ class TvListViewHolder(
     }
   }
 
-  override fun onClick(v: View?) = delegate.onItemClick(tv)
+  override fun onClick(v: View?) = TvDetailActivity.startActivityModel(context(), tv)
 
   override fun onLongClick(p0: View?) = false
 }

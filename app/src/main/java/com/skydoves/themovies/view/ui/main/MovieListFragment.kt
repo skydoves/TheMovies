@@ -32,12 +32,9 @@ import android.view.ViewGroup
 import com.skydoves.themovies.R
 import com.skydoves.themovies.compose.ViewModelFragment
 import com.skydoves.themovies.databinding.MainFragmentMovieBinding
-import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.MovieListAdapter
-import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
-import com.skydoves.themovies.view.viewholder.MovieListViewHolder
 
-class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
+class MovieListFragment : ViewModelFragment() {
 
   private val viewModel: MainActivityViewModel by injectActivityVIewModels()
 
@@ -50,7 +47,7 @@ class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
       .apply {
         viewModel = this@MovieListFragment.viewModel
         lifecycleOwner = this@MovieListFragment
-        adapter = MovieListAdapter(this@MovieListFragment)
+        adapter = MovieListAdapter()
       }.root
   }
 
@@ -58,7 +55,4 @@ class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
     super.onAttach(context)
     viewModel.postMoviePage(1)
   }
-
-  override fun onItemClick(movie: Movie) =
-    MovieDetailActivity.startActivityModel(context, movie)
 }
