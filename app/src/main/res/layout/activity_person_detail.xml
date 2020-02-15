@@ -61,7 +61,7 @@
               tools:src="@drawable/ic_live_tv_white_24dp"
               tools:targetApi="LOLLIPOP" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
               android:id="@+id/person_detail_name"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
               android:textColor="@color/white"
               android:textSize="23sp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
               android:id="@+id/person_detail_biography"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"

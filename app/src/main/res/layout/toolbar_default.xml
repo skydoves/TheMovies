@@ -5,13 +5,13 @@
   android:layout_height="wrap_content"
   android:background="@color/colorPrimary">
 
-  <ImageView
+  <androidx.appcompat.widget.AppCompatImageView
     android:id="@+id/toolbar_home"
     android:layout_width="32dp"
     android:layout_height="32dp"
     android:src="@drawable/ic_arrow_back_white_24dp" />
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/toolbar_title"
     style="@style/TextStyle"
     android:layout_width="wrap_content"

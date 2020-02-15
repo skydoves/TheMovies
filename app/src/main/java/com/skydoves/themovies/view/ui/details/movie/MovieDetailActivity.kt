@@ -38,7 +38,6 @@ import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.whatif.whatIfNotNull
 import kotlinx.android.synthetic.main.activity_movie_detail.movie_detail_toolbar
-import kotlinx.android.synthetic.main.layout_movie_detail_body.detail_body_recyclerView_reviews
 
 class MovieDetailActivity : ViewModelActivity() {
 
@@ -60,7 +59,6 @@ class MovieDetailActivity : ViewModelActivity() {
   private fun initializeUI() {
     applyToolbarMargin(movie_detail_toolbar)
     simpleToolbarWithHome(movie_detail_toolbar, getMovieFromIntent().title)
-    detail_body_recyclerView_reviews.setHasFixedSize(true)
   }
 
   private fun getMovieFromIntent() = intent.getParcelableExtra(movieId) as Movie

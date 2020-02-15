@@ -14,20 +14,15 @@
       type="com.skydoves.themovies.view.adapter.MovieListAdapter" />
   </data>
 
-  <RelativeLayout
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/recyclerView"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:clipToPadding="false"
-      app:adapter="@{adapter}"
-      app:adapterMovieList="@{viewModel.movieListLiveData}"
-      app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-      app:moviePagination="@{viewModel}"
-      app:spanCount="2"
-      tools:listitem="@layout/item_poster" />
-  </RelativeLayout>
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    app:adapter="@{adapter}"
+    app:adapterMovieList="@{viewModel.movieListLiveData}"
+    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    app:moviePagination="@{viewModel}"
+    app:spanCount="2"
+    tools:listitem="@layout/item_poster" />
 </layout>

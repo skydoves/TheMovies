@@ -14,20 +14,15 @@
       type="com.skydoves.themovies.view.adapter.TvListAdapter" />
   </data>
 
-  <RelativeLayout
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/recyclerView"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:clipToPadding="false"
-      app:adapter="@{adapter}"
-      app:adapterTvList="@{viewModel.tvListLiveData}"
-      app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-      app:spanCount="2"
-      tools:listitem="@layout/item_poster" />
-
-  </RelativeLayout>
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    app:adapter="@{adapter}"
+    app:adapterTvList="@{viewModel.tvListLiveData}"
+    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    app:spanCount="2"
+    app:tvPagination="@{viewModel}"
+    tools:listitem="@layout/item_poster" />
 </layout>

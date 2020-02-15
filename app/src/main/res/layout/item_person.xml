@@ -16,7 +16,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-      <ImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/item_person_profile"
         android:layout_width="90dp"
         android:layout_height="90dp"
@@ -27,7 +27,7 @@
         tools:src="@drawable/ic_live_tv_white_24dp"
         tools:targetApi="LOLLIPOP" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/item_person_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

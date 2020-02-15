@@ -128,6 +128,7 @@ fun bindAdapterReviewList(view: RecyclerView, resource: Resource<List<Review>>?)
     adapter?.addReviewList(it)
     it.data.whatIfNotNullOrEmpty {
       view.visible()
+      view.setHasFixedSize(true)
     }
   }
 }

@@ -13,13 +13,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/item_video_cover"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:scaleType="centerCrop" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:layout_width="30dp"
       android:layout_height="20dp"
       android:layout_centerInParent="true"
@@ -40,7 +40,7 @@
         android:alpha="0.7"
         android:orientation="vertical" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/item_video_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -44,7 +44,7 @@
         app:expandedTitleTextAppearance="@style/CollapsedExpandedTitleText"
         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
           android:id="@+id/tv_detail_poster"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
