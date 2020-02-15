@@ -38,29 +38,30 @@ import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.TvListAdapter
 import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
-import kotlinx.android.synthetic.main.main_fragment_tv.recyclerView
 
 class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
 
-  private val viewModel: MainActivityViewModel by viewModel()
+  private val viewModel: MainActivityViewModel by injectActivityVIewModels()
+  private lateinit var binding: MainFragmentTvBinding
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return binding<MainFragmentTvBinding>(inflater, R.layout.main_fragment_tv, container)
+    binding = binding<MainFragmentTvBinding>(inflater, R.layout.main_fragment_tv, container)
       .apply {
         viewModel = this@TvListFragment.viewModel
         lifecycleOwner = this@TvListFragment
         adapter = TvListAdapter(this@TvListFragment)
-      }.root
+      }
+    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     RecyclerViewPaginator(
-      recyclerView = recyclerView,
+      recyclerView = binding.recyclerView,
       isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
       loadMore = { loadMore(it) },
       onLast = { viewModel.getTvListValues()?.onLastPage!! }

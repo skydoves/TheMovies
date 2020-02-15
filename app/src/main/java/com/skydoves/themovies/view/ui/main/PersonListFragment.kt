@@ -38,29 +38,30 @@ import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.view.adapter.PeopleAdapter
 import com.skydoves.themovies.view.ui.details.person.PersonDetailActivity
 import com.skydoves.themovies.view.viewholder.PeopleViewHolder
-import kotlinx.android.synthetic.main.main_fragment_star.recyclerView
 
 class PersonListFragment : ViewModelFragment(), PeopleViewHolder.Delegate {
 
-  private val viewModel: MainActivityViewModel by viewModel()
+  private val viewModel: MainActivityViewModel by injectActivityVIewModels()
+  private lateinit var binding: MainFragmentStarBinding
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return binding<MainFragmentStarBinding>(inflater, R.layout.main_fragment_star, container)
+    binding = binding<MainFragmentStarBinding>(inflater, R.layout.main_fragment_star, container)
       .apply {
         viewModel = this@PersonListFragment.viewModel
         lifecycleOwner = this@PersonListFragment
         adapter = PeopleAdapter(this@PersonListFragment)
-      }.root
+      }
+    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     RecyclerViewPaginator(
-      recyclerView = recyclerView,
+      recyclerView = binding.recyclerView,
       isLoading = { viewModel.getPeopleValues()?.status == Status.LOADING },
       loadMore = { loadMore(it) },
       onLast = { viewModel.getPeopleValues()?.onLastPage!! }

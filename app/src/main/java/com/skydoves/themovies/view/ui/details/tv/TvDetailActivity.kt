@@ -46,12 +46,12 @@ import kotlinx.android.synthetic.main.layout_tv_detail_body.detail_body_recycler
 
 class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
-  private val viewModel: TvDetailViewModel by viewModel()
+  private val viewModel: TvDetailViewModel by injectViewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     viewModel.postTvId(getTvFromIntent().id)
-    with(binding<ActivityTvDetailBinding>(R.layout.activity_tv_detail)) {
+    binding<ActivityTvDetailBinding>(R.layout.activity_tv_detail).run {
       lifecycleOwner = this@TvDetailActivity
       viewModel = this@TvDetailActivity.viewModel
       tv = getTvFromIntent()

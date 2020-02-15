@@ -38,29 +38,30 @@ import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.MovieListAdapter
 import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
 import com.skydoves.themovies.view.viewholder.MovieListViewHolder
-import kotlinx.android.synthetic.main.main_fragment_movie.recyclerView
 
 class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
 
-  private val viewModel: MainActivityViewModel by viewModel()
+  private val viewModel: MainActivityViewModel by injectActivityVIewModels()
+  private lateinit var binding: MainFragmentMovieBinding
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return binding<MainFragmentMovieBinding>(inflater, R.layout.main_fragment_movie, container)
+    binding = binding<MainFragmentMovieBinding>(inflater, R.layout.main_fragment_movie, container)
       .apply {
         viewModel = this@MovieListFragment.viewModel
         lifecycleOwner = this@MovieListFragment
         adapter = MovieListAdapter(this@MovieListFragment)
-      }.root
+      }
+    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     RecyclerViewPaginator(
-      recyclerView = recyclerView,
+      recyclerView = binding.recyclerView,
       isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
       loadMore = { loadMore(it) },
       onLast = { viewModel.getMovieListValues()?.onLastPage!! }

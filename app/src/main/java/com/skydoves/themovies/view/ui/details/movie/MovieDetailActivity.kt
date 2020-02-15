@@ -46,12 +46,12 @@ import kotlinx.android.synthetic.main.layout_movie_detail_body.detail_body_recyc
 
 class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
-  private val viewModel: MovieDetailViewModel by viewModel()
+  private val viewModel: MovieDetailViewModel by injectViewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     viewModel.postMovieId(getMovieFromIntent().id)
-    with(binding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail)) {
+    binding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail).run {
       lifecycleOwner = this@MovieDetailActivity
       viewModel = this@MovieDetailActivity.viewModel
       movie = getMovieFromIntent()

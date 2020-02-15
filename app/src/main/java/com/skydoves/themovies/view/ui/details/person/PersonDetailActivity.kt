@@ -40,12 +40,12 @@ import kotlinx.android.synthetic.main.toolbar_default.toolbar_title
 
 class PersonDetailActivity : ViewModelActivity() {
 
-  private val viewModel: PersonDetailViewModel by viewModel()
+  private val viewModel: PersonDetailViewModel by injectViewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     viewModel.postPersonId(getPersonFromIntent().id)
-    with(binding<ActivityPersonDetailBinding>(R.layout.activity_person_detail)) {
+    binding<ActivityPersonDetailBinding>(R.layout.activity_person_detail).run {
       lifecycleOwner = this@PersonDetailActivity
       viewModel = this@PersonDetailActivity.viewModel
       person = getPersonFromIntent()
@@ -62,7 +62,7 @@ class PersonDetailActivity : ViewModelActivity() {
 
   companion object {
     const val personId = "person"
-    const val intent_requestCode = 1000
+    private const val intent_requestCode = 1000
 
     fun startActivity(activity: Activity?, person: Person, view: View) {
       if (activity != null) {
