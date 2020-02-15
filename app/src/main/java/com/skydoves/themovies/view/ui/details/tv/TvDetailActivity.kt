@@ -29,8 +29,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.themovies.R
 import com.skydoves.themovies.api.Api
 import com.skydoves.themovies.compose.ViewModelActivity
@@ -44,54 +42,40 @@ import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.themovies.view.viewholder.VideoListViewHolder
 import kotlinx.android.synthetic.main.activity_tv_detail.tv_detail_toolbar
 import kotlinx.android.synthetic.main.layout_tv_detail_body.detail_body_recyclerView_reviews
-import kotlinx.android.synthetic.main.layout_tv_detail_body.detail_body_recyclerView_trailers
 import org.jetbrains.anko.startActivity
 
 class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
-  private val vm by viewModel<TvDetailViewModel>()
+  private val viewModel by viewModel<TvDetailViewModel>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    vm.postTvId(getTvFromIntent().id)
+    viewModel.postTvId(getTvFromIntent().id)
     with(binding<ActivityTvDetailBinding>(R.layout.activity_tv_detail)) {
       lifecycleOwner = this@TvDetailActivity
-      viewModel = vm
-      detailBody.viewModel = vm
+      viewModel = this@TvDetailActivity.viewModel
       tv = getTvFromIntent()
-      detailHeader.tv = getTvFromIntent()
-      detailBody.tv = getTvFromIntent()
+      videoAdapter = VideoListAdapter(this@TvDetailActivity)
+      reviewAdapter = ReviewListAdapter()
     }
-
     initializeUI()
   }
 
   private fun initializeUI() {
     applyToolbarMargin(tv_detail_toolbar)
     simpleToolbarWithHome(tv_detail_toolbar, getTvFromIntent().name)
-    detail_body_recyclerView_trailers.layoutManager =
-      LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-    detail_body_recyclerView_trailers.adapter = VideoListAdapter(this)
-    detail_body_recyclerView_reviews.layoutManager =
-      LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-    detail_body_recyclerView_reviews.adapter = ReviewListAdapter()
-    detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)
   }
 
-  private fun getTvFromIntent(): Tv {
-    return intent.getParcelableExtra(tvId) as Tv
-  }
+  private fun getTvFromIntent() = intent.getParcelableExtra(tvId) as Tv
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     if (item?.itemId == android.R.id.home) onBackPressed()
     return false
   }
 
-  override fun onItemClicked(video: Video) {
-    val playVideoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Api.getYoutubeVideoPath(video.key)))
-    startActivity(playVideoIntent)
-  }
+  override fun onItemClicked(video: Video) =
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Api.getYoutubeVideoPath(video.key))))
 
   companion object {
     private const val tvId = "tv"

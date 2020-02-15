@@ -12,6 +12,14 @@
     <variable
       name="viewModel"
       type="com.skydoves.themovies.view.ui.details.tv.TvDetailViewModel" />
+
+    <variable
+      name="videoAdapter"
+      type="com.skydoves.themovies.view.adapter.VideoListAdapter" />
+
+    <variable
+      name="reviewAdapter"
+      type="com.skydoves.themovies.view.adapter.ReviewListAdapter" />
   </data>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -66,11 +74,16 @@
 
         <include
           android:id="@+id/detail_header"
-          layout="@layout/layout_tv_detail_header" />
+          layout="@layout/layout_tv_detail_header"
+          app:tv="@{tv}" />
 
         <include
           android:id="@+id/detail_body"
-          layout="@layout/layout_tv_detail_body" />
+          layout="@layout/layout_tv_detail_body"
+          app:reviewAdapter="@{reviewAdapter}"
+          app:tv="@{tv}"
+          app:videoAdapter="@{videoAdapter}"
+          app:viewModel="@{viewModel}" />
       </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

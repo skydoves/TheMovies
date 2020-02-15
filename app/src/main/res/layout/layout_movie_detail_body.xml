@@ -52,6 +52,7 @@
       app:adapter="@{videoAdapter}"
       app:adapterVideoList="@{viewModel.videoListLiveData}"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:listitem="@layout/item_video"
       tools:visibility="visible" />
 
     <TextView
@@ -117,6 +118,7 @@
       app:adapter="@{reviewAdapter}"
       app:adapterReviewList="@{viewModel.reviewListLiveData}"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:listitem="@layout/item_review"
       tools:targetApi="lollipop"
       tools:visibility="visible" />
   </LinearLayout>
