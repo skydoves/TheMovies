@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+  <issue id="CheckResult" severity="ignore" />
+  <issue id="SetTextI18n" severity="ignore" />
+  <issue id="SimpleDateFormat" severity="ignore" />
+  <issue id="SimpleDateFormat" severity="ignore" />
+  <issue id="SpellCheckingInspection" severity="ignore" />
+</lint>
