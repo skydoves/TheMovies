@@ -22,32 +22,10 @@
  * THE SOFTWARE.
  */
 
-package com.skydoves.themovies.di
+package com.skydoves.themovies.di.annotations
 
-import com.skydoves.themovies.di.annotations.ActivityScope
-import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
-import com.skydoves.themovies.view.ui.details.person.PersonDetailActivity
-import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
-import com.skydoves.themovies.view.ui.main.MainActivity
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import javax.inject.Scope
 
-@Module
-abstract class ActivityModule {
-
-  @ActivityScope
-  @ContributesAndroidInjector(modules = [MainActivityFragmentModule::class])
-  internal abstract fun contributeMainActivity(): MainActivity
-
-  @ActivityScope
-  @ContributesAndroidInjector
-  internal abstract fun contributeMovieDetailActivity(): MovieDetailActivity
-
-  @ActivityScope
-  @ContributesAndroidInjector
-  internal abstract fun contributeTvDetailActivity(): TvDetailActivity
-
-  @ActivityScope
-  @ContributesAndroidInjector
-  internal abstract fun contributePersonDetailActivity(): PersonDetailActivity
-}
+@Scope
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+annotation class ActivityScope

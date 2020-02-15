@@ -26,15 +26,19 @@ package com.skydoves.themovies.di
 
 import com.skydoves.themovies.compose.ViewModelActivity
 import com.skydoves.themovies.compose.ViewModelFragment
+import com.skydoves.themovies.di.annotations.ActivityScope
+import com.skydoves.themovies.di.annotations.FragmentScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ComposeModule {
 
+  @ActivityScope
   @ContributesAndroidInjector
   internal abstract fun contributeViewModelActivity(): ViewModelActivity
 
+  @FragmentScope
   @ContributesAndroidInjector
   internal abstract fun contributeViewModelFragment(): ViewModelFragment
 }
