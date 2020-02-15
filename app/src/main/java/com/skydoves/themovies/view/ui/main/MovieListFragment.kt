@@ -29,11 +29,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.compose.ViewModelFragment
 import com.skydoves.themovies.databinding.MainFragmentMovieBinding
-import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.MovieListAdapter
 import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
@@ -42,40 +40,24 @@ import com.skydoves.themovies.view.viewholder.MovieListViewHolder
 class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
 
   private val viewModel: MainActivityViewModel by injectActivityVIewModels()
-  private lateinit var binding: MainFragmentMovieBinding
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    binding = binding<MainFragmentMovieBinding>(inflater, R.layout.main_fragment_movie, container)
+    return binding<MainFragmentMovieBinding>(inflater, R.layout.main_fragment_movie, container)
       .apply {
         viewModel = this@MovieListFragment.viewModel
         lifecycleOwner = this@MovieListFragment
         adapter = MovieListAdapter(this@MovieListFragment)
-      }
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    RecyclerViewPaginator(
-      recyclerView = binding.recyclerView,
-      isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
-      loadMore = { loadMore(it) },
-      onLast = { viewModel.getMovieListValues()?.onLastPage!! }
-    ).run {
-      currentPage = 1
-    }
+      }.root
   }
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
-    loadMore(page = 1)
+    viewModel.postMoviePage(1)
   }
-
-  private fun loadMore(page: Int) = viewModel.postMoviePage(page)
 
   override fun onItemClick(movie: Movie) =
     MovieDetailActivity.startActivityModel(context, movie)

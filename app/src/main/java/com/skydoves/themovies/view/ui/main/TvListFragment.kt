@@ -29,11 +29,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.compose.ViewModelFragment
 import com.skydoves.themovies.databinding.MainFragmentTvBinding
-import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.TvListAdapter
 import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
@@ -42,40 +40,24 @@ import com.skydoves.themovies.view.viewholder.TvListViewHolder
 class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
 
   private val viewModel: MainActivityViewModel by injectActivityVIewModels()
-  private lateinit var binding: MainFragmentTvBinding
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    binding = binding<MainFragmentTvBinding>(inflater, R.layout.main_fragment_tv, container)
+    return binding<MainFragmentTvBinding>(inflater, R.layout.main_fragment_tv, container)
       .apply {
         viewModel = this@TvListFragment.viewModel
         lifecycleOwner = this@TvListFragment
         adapter = TvListAdapter(this@TvListFragment)
-      }
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    RecyclerViewPaginator(
-      recyclerView = binding.recyclerView,
-      isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
-      loadMore = { loadMore(it) },
-      onLast = { viewModel.getTvListValues()?.onLastPage!! }
-    ).apply {
-      currentPage = 1
-    }
+      }.root
   }
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
-    loadMore(page = 1)
+    viewModel.postTvPage(1)
   }
-
-  private fun loadMore(page: Int) = viewModel.postTvPage(page)
 
   override fun onItemClick(tv: Tv) =
     TvDetailActivity.startActivityModel(context, tv)

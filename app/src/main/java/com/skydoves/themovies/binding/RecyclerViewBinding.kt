@@ -27,10 +27,12 @@ package com.skydoves.themovies.binding
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.baserecyclerviewadapter.BaseAdapter
+import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.extension.bindResource
 import com.skydoves.themovies.extension.visible
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
+import com.skydoves.themovies.models.Status
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
@@ -40,6 +42,7 @@ import com.skydoves.themovies.view.adapter.PeopleAdapter
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.TvListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
+import com.skydoves.themovies.view.ui.main.MainActivityViewModel
 import com.skydoves.whatif.whatIfNotNullOrEmpty
 
 @BindingAdapter("adapter")
@@ -55,6 +58,18 @@ fun bindAdapterMovieList(view: RecyclerView, resource: Resource<List<Movie>>?) {
   }
 }
 
+@BindingAdapter("moviePagination")
+fun bindMoviePagination(view: RecyclerView, viewModel: MainActivityViewModel) {
+  RecyclerViewPaginator(
+    recyclerView = view,
+    isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
+    loadMore = { viewModel.postMoviePage(it) },
+    onLast = { viewModel.getTvListValues()?.onLastPage!! }
+  ).run {
+    currentPage = 1
+  }
+}
+
 @BindingAdapter("adapterPersonList")
 fun bindAdapterPersonList(view: RecyclerView, resource: Resource<List<Person>>?) {
   view.bindResource(resource) {
@@ -63,11 +78,35 @@ fun bindAdapterPersonList(view: RecyclerView, resource: Resource<List<Person>>?)
   }
 }
 
+@BindingAdapter("personPagination")
+fun bindPersonPagination(view: RecyclerView, viewModel: MainActivityViewModel) {
+  RecyclerViewPaginator(
+    recyclerView = view,
+    isLoading = { viewModel.getPeopleValues()?.status == Status.LOADING },
+    loadMore = { viewModel.postPeoplePage(it) },
+    onLast = { viewModel.getPeopleValues()?.onLastPage!! }
+  ).run {
+    currentPage = 1
+  }
+}
+
 @BindingAdapter("adapterTvList")
 fun bindAdapterTvList(view: RecyclerView, resource: Resource<List<Tv>>?) {
   view.bindResource(resource) {
     val adapter = view.adapter as? TvListAdapter
     adapter?.addTvList(it)
+  }
+}
+
+@BindingAdapter("tvPagination")
+fun bindTvPagination(view: RecyclerView, viewModel: MainActivityViewModel) {
+  RecyclerViewPaginator(
+    recyclerView = view,
+    isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
+    loadMore = { viewModel.postTvPage(it) },
+    onLast = { viewModel.getTvListValues()?.onLastPage!! }
+  ).run {
+    currentPage = 1
   }
 }
 
