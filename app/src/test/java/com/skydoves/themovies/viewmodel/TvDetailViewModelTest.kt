@@ -21,16 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.repository
+
+package com.skydoves.themovies.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
+import com.skydoves.themovies.api.ApiUtil
 import com.skydoves.themovies.api.TvService
-import com.skydoves.themovies.api.api.ApiUtil
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
@@ -41,8 +42,8 @@ import com.skydoves.themovies.models.network.VideoListResponse
 import com.skydoves.themovies.repository.TvRepository
 import com.skydoves.themovies.room.TvDao
 import com.skydoves.themovies.utils.MockTestUtil
-import com.skydoves.themovies.utils.MockTestUtil.Companion.mockKeywordList
 import com.skydoves.themovies.utils.MockTestUtil.Companion.mockTv
+import com.skydoves.themovies.view.ui.details.tv.TvDetailViewModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -50,10 +51,13 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class TvRepositoryTest {
+class TvDetailViewModelTest {
+
+  private lateinit var viewModel: TvDetailViewModel
 
   private lateinit var repository: TvRepository
   private val tvDao = mock<TvDao>()
+
   private val service = mock<TvService>()
 
   @Rule
@@ -63,10 +67,11 @@ class TvRepositoryTest {
   @Before
   fun init() {
     repository = TvRepository(service, tvDao)
+    viewModel = TvDetailViewModel(repository)
   }
 
   @Test
-  fun loadKeywordListFromNetwork() {
+  fun loadKeywordList() {
     val loadFromDB = mockTv()
     whenever(tvDao.getTv(123)).thenReturn(loadFromDB)
 
@@ -75,20 +80,21 @@ class TvRepositoryTest {
     whenever(service.fetchKeywords(123)).thenReturn(call)
 
     val data = repository.loadKeywordList(123)
-    verify(tvDao).getTv(123)
-    verifyNoMoreInteractions(service)
-
     val observer = mock<Observer<Resource<List<Keyword>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(MockTestUtil.mockKeywordList(), true))
+
+    viewModel.postTvId(123)
+    verify(tvDao, times(3)).getTv(123)
+    verify(observer).onChanged(
+      Resource.success(MockTestUtil.mockKeywordList(), true))
 
     val updatedTv = mockTv()
-    updatedTv.keywords = mockKeywordList()
+    updatedTv.keywords = MockTestUtil.mockKeywordList()
     verify(tvDao).updateTv(updatedTv)
   }
 
   @Test
-  fun loadVideoListFromNetwork() {
+  fun loadVideoList() {
     val loadFromDB = mockTv()
     whenever(tvDao.getTv(123)).thenReturn(loadFromDB)
 
@@ -97,12 +103,14 @@ class TvRepositoryTest {
     whenever(service.fetchVideos(123)).thenReturn(call)
 
     val data = repository.loadVideoList(123)
-    verify(tvDao).getTv(123)
-    verifyNoMoreInteractions(service)
-
     val observer = mock<Observer<Resource<List<Video>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(MockTestUtil.mockVideoList(), false))
+
+    viewModel.postTvId(123)
+    verify(tvDao, times(3)).getTv(123)
+    verify(observer).onChanged(
+      Resource.success(MockTestUtil.mockVideoList(), true)
+    )
 
     val updatedTv = mockTv()
     updatedTv.videos = MockTestUtil.mockVideoList()
@@ -110,7 +118,7 @@ class TvRepositoryTest {
   }
 
   @Test
-  fun loadReviewListFromNetwork() {
+  fun loadReviewList() {
     val loadFromDB = mockTv()
     whenever(tvDao.getTv(123)).thenReturn(loadFromDB)
 
@@ -119,12 +127,14 @@ class TvRepositoryTest {
     whenever(service.fetchReviews(123)).thenReturn(call)
 
     val data = repository.loadReviewsList(123)
-    verify(tvDao).getTv(123)
-    verifyNoMoreInteractions(service)
-
     val observer = mock<Observer<Resource<List<Review>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(MockTestUtil.mockReviewList(), false))
+
+    viewModel.postTvId(123)
+    verify(tvDao, times(3)).getTv(123)
+    verify(observer).onChanged(
+      Resource.success(MockTestUtil.mockReviewList(), true)
+    )
 
     val updatedTv = mockTv()
     updatedTv.reviews = MockTestUtil.mockReviewList()

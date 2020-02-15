@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies.repository
 
 import androidx.lifecycle.LiveData
@@ -40,8 +41,8 @@ import javax.inject.Singleton
 
 @Singleton
 class PeopleRepository @Inject
-constructor(val peopleService: PeopleService, val peopleDao: PeopleDao)
-  : Repository {
+constructor(val peopleService: PeopleService, val peopleDao: PeopleDao) :
+  Repository {
 
   init {
     Timber.d("Injection PeopleRepository")

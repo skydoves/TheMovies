@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies.repository
 
 import androidx.lifecycle.LiveData
@@ -44,8 +45,8 @@ import javax.inject.Singleton
 
 @Singleton
 class MovieRepository @Inject
-constructor(val service: MovieService, val movieDao: MovieDao)
-  : Repository {
+constructor(val service: MovieService, val movieDao: MovieDao) :
+  Repository {
 
   init {
     Timber.d("Injection MovieRepository")

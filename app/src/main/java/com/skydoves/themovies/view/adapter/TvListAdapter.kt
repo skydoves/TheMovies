@@ -21,36 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies.view.adapter
 
 import android.view.View
 import com.skydoves.baserecyclerviewadapter.BaseAdapter
-import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.baserecyclerviewadapter.SectionRow
 import com.skydoves.themovies.R
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
+import com.skydoves.whatif.whatIfNotNull
 
-class TvListAdapter(private val delegate: TvListViewHolder.Delegate)
-  : BaseAdapter() {
+class TvListAdapter(private val delegate: TvListViewHolder.Delegate) :
+  BaseAdapter() {
 
   init {
     addSection(ArrayList<Tv>())
   }
 
   fun addTvList(resource: Resource<List<Tv>>) {
-    resource.data?.let {
+    resource.data.whatIfNotNull {
       sections()[0].addAll(it)
       notifyDataSetChanged()
     }
   }
 
-  override fun layout(sectionRow: SectionRow): Int {
-    return R.layout.item_poster
-  }
+  override fun layout(sectionRow: SectionRow) = R.layout.item_poster
 
-  override fun viewHolder(layout: Int, view: View): BaseViewHolder {
-    return TvListViewHolder(view, delegate)
-  }
+  override fun viewHolder(layout: Int, view: View) = TvListViewHolder(view, delegate)
 }

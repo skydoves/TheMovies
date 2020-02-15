@@ -21,16 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies.view.adapter
 
 import android.view.View
 import com.skydoves.baserecyclerviewadapter.BaseAdapter
-import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import com.skydoves.baserecyclerviewadapter.SectionRow
 import com.skydoves.themovies.R
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.view.viewholder.ReviewListViewHolder
+import com.skydoves.whatif.whatIfNotNull
 
 class ReviewListAdapter : BaseAdapter() {
 
@@ -39,17 +40,13 @@ class ReviewListAdapter : BaseAdapter() {
   }
 
   fun addReviewList(resource: Resource<List<Review>>) {
-    resource.data?.let {
+    resource.data.whatIfNotNull {
       sections()[0].addAll(it)
+      notifyDataSetChanged()
     }
-    notifyDataSetChanged()
   }
 
-  override fun layout(sectionRow: SectionRow): Int {
-    return R.layout.item_review
-  }
+  override fun layout(sectionRow: SectionRow) = R.layout.item_review
 
-  override fun viewHolder(layout: Int, view: View): BaseViewHolder {
-    return ReviewListViewHolder(view)
-  }
+  override fun viewHolder(layout: Int, view: View) = ReviewListViewHolder(view)
 }

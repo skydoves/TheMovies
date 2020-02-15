@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies.view.viewholder
 
 import android.view.View
@@ -66,9 +67,7 @@ class TvListViewHolder(
     }
   }
 
-  override fun onClick(v: View?) {
-    delegate.onItemClick(tv)
-  }
+  override fun onClick(v: View?) = delegate.onItemClick(tv)
 
   override fun onLongClick(p0: View?) = false
 }

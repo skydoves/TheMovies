@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.viewmodel
+
+package com.skydoves.themovies.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -29,8 +30,8 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.skydoves.themovies.api.ApiUtil
 import com.skydoves.themovies.api.PeopleService
-import com.skydoves.themovies.api.api.ApiUtil
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.network.PersonDetail
 import com.skydoves.themovies.repository.PeopleRepository
@@ -80,7 +81,7 @@ class PersonDetailViewModelTest {
     viewModel.postPersonId(123)
     verify(peopleDao, times(3)).getPerson(123)
     verify(observer).onChanged(
-        Resource.success(MockTestUtil.mockPersonDetail(), true))
+      Resource.success(MockTestUtil.mockPersonDetail(), true))
 
     val updatedPerson = MockTestUtil.mockPerson()
     updatedPerson.personDetail = MockTestUtil.mockPersonDetail()

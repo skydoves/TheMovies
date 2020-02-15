@@ -1,6 +1,9 @@
 # TheMovies
 ![license](https://img.shields.io/badge/license-MIT%20License-blue.svg) 
-[![Build Status](https://travis-ci.org/skydoves/TheMovies.svg?branch=master)](https://travis-ci.org/skydoves/TheMovies) <br>
+[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
+[![Build Status](https://travis-ci.org/skydoves/TheMovies.svg?branch=master)](https://travis-ci.org/skydoves/TheMovies) 
+<a href="https://github.com/skydoves"><img alt="License" src="https://img.shields.io/static/v1?label=GitHub&message=skydoves&color=C51162"/></a><br>
+
 
 A simple project for [The Movie DB](https://www.themoviedb.org) based on Kotlin MVVM clean architecture and material design & animations.<br>
 
@@ -50,11 +53,12 @@ Based on mvvm architecture and repository pattern.<br><br>
 [Medium - Android MVVM Architecture Components using The Movie Database API](https://medium.com/@skydoves/android-mvvm-architecture-components-using-the-movie-database-api-8fbab128d7)
 
 ## Find this library useful? :heart:
-Support it by joining __[stargazers](https://github.com/skydoves/TheMovies/stargazers)__ for this repository. :star:
+Support it by joining __[stargazers](https://github.com/skydoves/TheMovies/stargazers)__ for this repository. :star: <br>
+And __[follow](https://github.com/skydoves)__ me for my next creations! 🤩
 
 ## Supports :coffee:
-If you feel like support me a coffee for my efforts, I would greatly appreciate it. <br><br>
-<a href="https://www.buymeacoffee.com/skydoves" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+If you feel like support me a coffee for my efforts, I would greatly appreciate it. <br>
+<a href="https://www.buymeacoffee.com/skydoves" target="_blank"><img src="https://skydoves.github.io/sponsor.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
 # License
 ```xml

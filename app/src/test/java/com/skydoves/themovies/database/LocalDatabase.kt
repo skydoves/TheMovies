@@ -21,17 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.api
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.skydoves.themovies.api.ApiResponse
-import retrofit2.Response
+package com.skydoves.themovies.database
 
-object ApiUtil {
-  fun <T : Any> successCall(data: T) = createCall(Response.success(data))
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
+import com.skydoves.themovies.room.AppDatabase
+import org.junit.After
+import org.junit.Before
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
-  private fun <T : Any> createCall(response: Response<T>) = MutableLiveData<ApiResponse<T>>().apply {
-    value = ApiResponse(response)
-  } as LiveData<ApiResponse<T>>
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [21])
+abstract class LocalDatabase {
+  lateinit var db: AppDatabase
+
+  @Before
+  fun initDB() {
+    db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase::class.java)
+      .allowMainThreadQueries()
+      .build()
+  }
+
+  @After
+  fun closeDB() {
+    db.close()
+  }
 }

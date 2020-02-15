@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies.api
 
 /*
@@ -53,12 +54,8 @@ class LiveDataCallAdapterFactory : CallAdapter.Factory() {
     }
     val observableType = getParameterUpperBound(0, returnType as ParameterizedType)
     val rawObservableType = getRawType(observableType)
-    if (rawObservableType != ApiResponse::class.java) {
-      throw IllegalArgumentException("type must be a resource")
-    }
-    if (observableType !is ParameterizedType) {
-      throw IllegalArgumentException("resource must be parameterized")
-    }
+    require(rawObservableType == ApiResponse::class.java) { "type must be a resource" }
+    require(observableType is ParameterizedType) { "resource must be parameterized" }
     val bodyType = getParameterUpperBound(0, observableType)
     return LiveDataCallAdapter<Type>(bodyType)
   }

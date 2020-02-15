@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies.extension
 
 import android.view.View
@@ -28,11 +29,11 @@ import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
 import org.jetbrains.anko.toast
 
-fun View.bindResource(resource: Resource<Any>?, onSuccess: () -> Unit) {
+inline fun <reified T> View.bindResource(resource: Resource<T>?, onSuccess: (Resource<T>) -> Unit) {
   if (resource != null) {
     when (resource.status) {
       Status.LOADING -> Unit
-      Status.SUCCESS -> onSuccess()
+      Status.SUCCESS -> onSuccess(resource)
       Status.ERROR -> this.context.toast(resource.errorEnvelope?.status_message.toString())
     }
   }

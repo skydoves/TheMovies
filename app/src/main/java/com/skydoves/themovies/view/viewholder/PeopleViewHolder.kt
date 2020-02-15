@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies.view.viewholder
 
 import android.view.View
@@ -62,9 +63,7 @@ class PeopleViewHolder(
     }
   }
 
-  override fun onClick(p0: View?) {
-    delegate.onItemClick(person, itemView.item_person_profile)
-  }
+  override fun onClick(p0: View?) = delegate.onItemClick(person, itemView.item_person_profile)
 
   override fun onLongClick(p0: View?) = false
 }

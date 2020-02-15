@@ -21,8 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.skydoves.themovies
 
+import android.os.Build.FINGERPRINT
 import com.facebook.stetho.Stetho
 import com.skydoves.themovies.di.DaggerAppComponent
 import dagger.android.DaggerApplication
@@ -40,7 +42,13 @@ class TheMoviesApplication : DaggerApplication() {
       Timber.plant(Timber.DebugTree())
     }
 
-    Stetho.initializeWithDefaults(this)
+    if (!isRobolectricUnitTest()) {
+      Stetho.initializeWithDefaults(this)
+    }
+  }
+
+  private fun isRobolectricUnitTest(): Boolean {
+    return "robolectric" == FINGERPRINT
   }
 
   override fun applicationInjector() = appComponent

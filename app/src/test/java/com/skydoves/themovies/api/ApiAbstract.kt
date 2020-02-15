@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.skydoves.themovies.api.api
+
+package com.skydoves.themovies.api
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.skydoves.themovies.api.LiveDataCallAdapterFactory
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
@@ -80,11 +80,11 @@ abstract class ApiAbstract<T> {
 
   fun createService(clazz: Class<T>): T {
     return Retrofit.Builder()
-        .baseUrl(mockWebServer.url("/"))
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(LiveDataCallAdapterFactory())
-        .build()
-        .create(clazz)
+      .baseUrl(mockWebServer.url("/"))
+      .addConverterFactory(GsonConverterFactory.create())
+      .addCallAdapterFactory(LiveDataCallAdapterFactory())
+      .build()
+      .create(clazz)
   }
 
   fun assertRequestPath(path: String) {
