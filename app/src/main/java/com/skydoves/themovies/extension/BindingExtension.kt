@@ -25,16 +25,18 @@
 package com.skydoves.themovies.extension
 
 import android.view.View
+import android.widget.Toast
 import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.Status
-import org.jetbrains.anko.toast
 
 inline fun <reified T> View.bindResource(resource: Resource<T>?, onSuccess: (Resource<T>) -> Unit) {
   if (resource != null) {
     when (resource.status) {
       Status.LOADING -> Unit
       Status.SUCCESS -> onSuccess(resource)
-      Status.ERROR -> context.toast(resource.errorEnvelope?.status_message.toString())
+      Status.ERROR ->
+        Toast.makeText(context,
+          resource.errorEnvelope?.status_message.toString(), Toast.LENGTH_SHORT).show()
     }
   }
 }

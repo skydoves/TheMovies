@@ -59,15 +59,6 @@ class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    initializeUI()
-  }
-
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-    loadMore(page = 1)
-  }
-
-  private fun initializeUI() {
     RecyclerViewPaginator(
       recyclerView = recyclerView,
       isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
@@ -76,6 +67,11 @@ class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
     ).run {
       currentPage = 1
     }
+  }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    loadMore(page = 1)
   }
 
   private fun loadMore(page: Int) = viewModel.postMoviePage(page)

@@ -40,9 +40,9 @@ import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.themovies.view.viewholder.VideoListViewHolder
+import com.skydoves.whatif.whatIfNotNull
 import kotlinx.android.synthetic.main.activity_movie_detail.movie_detail_toolbar
 import kotlinx.android.synthetic.main.layout_movie_detail_body.detail_body_recyclerView_reviews
-import org.jetbrains.anko.startActivity
 
 class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
@@ -80,7 +80,10 @@ class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
   companion object {
     private const val movieId = "movie"
     fun startActivityModel(context: Context?, movie: Movie) {
-      context?.startActivity<MovieDetailActivity>(movieId to movie)
+      context.whatIfNotNull {
+        val intent = Intent(it, MovieDetailActivity::class.java).apply { putExtra(movieId, movie) }
+        it.startActivity(intent)
+      }
     }
   }
 }

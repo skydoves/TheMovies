@@ -32,7 +32,7 @@ Based on mvvm architecture and repository pattern.<br><br>
 
 ## Specs & Open-source libraries
 - Minimum SDK 16
-- 100% Kotlin based, [anko](https://github.com/Kotlin/anko)
+- 100% Kotlin based
 - MVVM Architecture
 - Architecture Components (Lifecycle, LiveData, ViewModel, Room Persistence)
 - DataBinding

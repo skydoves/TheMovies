@@ -59,15 +59,6 @@ class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    initializeUI()
-  }
-
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-    loadMore(page = 1)
-  }
-
-  private fun initializeUI() {
     RecyclerViewPaginator(
       recyclerView = recyclerView,
       isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
@@ -76,6 +67,11 @@ class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
     ).apply {
       currentPage = 1
     }
+  }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    loadMore(page = 1)
   }
 
   private fun loadMore(page: Int) = viewModel.postTvPage(page)

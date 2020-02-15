@@ -62,7 +62,6 @@ android {
 dependencies {
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    implementation "org.jetbrains.anko:anko:$ankoVersion"
 
     // support library
     implementation "com.google.android.material:material:$materialVersion"

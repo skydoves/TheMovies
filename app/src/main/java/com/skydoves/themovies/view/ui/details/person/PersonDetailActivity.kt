@@ -37,7 +37,6 @@ import com.skydoves.themovies.extension.checkIsMaterialVersion
 import com.skydoves.themovies.models.entity.Person
 import kotlinx.android.synthetic.main.toolbar_default.toolbar_home
 import kotlinx.android.synthetic.main.toolbar_default.toolbar_title
-import org.jetbrains.anko.startActivity
 
 class PersonDetailActivity : ViewModelActivity() {
 
@@ -67,15 +66,15 @@ class PersonDetailActivity : ViewModelActivity() {
 
     fun startActivity(activity: Activity?, person: Person, view: View) {
       if (activity != null) {
+        val intent = Intent(activity, PersonDetailActivity::class.java)
+        intent.putExtra(personId, person)
         if (checkIsMaterialVersion()) {
-          val intent = Intent(activity, PersonDetailActivity::class.java)
           ViewCompat.getTransitionName(view)?.let {
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, it)
-            intent.putExtra(personId, person)
             activity.startActivityForResult(intent, intent_requestCode, options.toBundle())
           }
         } else {
-          activity.startActivity<PersonDetailActivity>(personId to person)
+          activity.startActivity(intent)
         }
       }
     }
