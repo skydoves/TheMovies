@@ -46,15 +46,14 @@ import org.jetbrains.anko.startActivity
 
 class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
-  private val vm: MovieDetailViewModel by viewModel()
-  private val binding: ActivityMovieDetailBinding by binding(R.layout.activity_movie_detail)
+  private val viewModel: MovieDetailViewModel by viewModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    vm.postMovieId(getMovieFromIntent().id)
-    with(binding) {
+    viewModel.postMovieId(getMovieFromIntent().id)
+    with(binding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail)) {
       lifecycleOwner = this@MovieDetailActivity
-      viewModel = vm
+      viewModel = this@MovieDetailActivity.viewModel
       movie = getMovieFromIntent()
       videoAdapter = VideoListAdapter(this@MovieDetailActivity)
       reviewAdapter = ReviewListAdapter()
@@ -65,7 +64,6 @@ class MovieDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
   private fun initializeUI() {
     applyToolbarMargin(movie_detail_toolbar)
     simpleToolbarWithHome(movie_detail_toolbar, getMovieFromIntent().title)
-    detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)
   }
 

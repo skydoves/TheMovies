@@ -40,7 +40,6 @@ import com.skydoves.themovies.view.ui.details.tv.TvDetailActivity
 import com.skydoves.themovies.view.viewholder.TvListViewHolder
 import kotlinx.android.synthetic.main.main_fragment_tv.recyclerView
 
-@Suppress("SpellCheckingInspection")
 class TvListFragment : ViewModelFragment(), TvListViewHolder.Delegate {
 
   private val viewModel: MainActivityViewModel by viewModel()

@@ -72,7 +72,10 @@ class PersonListFragment : ViewModelFragment(), PeopleViewHolder.Delegate {
       recyclerView = recyclerView,
       isLoading = { viewModel.getPeopleValues()?.status == Status.LOADING },
       loadMore = { loadMore(it) },
-      onLast = { viewModel.getPeopleValues()?.onLastPage!! })
+      onLast = { viewModel.getPeopleValues()?.onLastPage!! }
+    ).apply {
+      currentPage = 1
+    }
   }
 
   private fun loadMore(page: Int) = viewModel.postPeoplePage(page)

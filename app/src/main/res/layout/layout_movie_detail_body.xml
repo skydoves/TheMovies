@@ -111,11 +111,13 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="12dp"
+      android:nestedScrollingEnabled="false"
       android:orientation="vertical"
       android:visibility="gone"
       app:adapter="@{reviewAdapter}"
       app:adapterReviewList="@{viewModel.reviewListLiveData}"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:targetApi="lollipop"
       tools:visibility="visible" />
   </LinearLayout>
 </layout>

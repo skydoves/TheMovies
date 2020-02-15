@@ -42,21 +42,19 @@ import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.themovies.view.viewholder.VideoListViewHolder
-import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_tv_detail.*
-import kotlinx.android.synthetic.main.layout_tv_detail_body.*
+import kotlinx.android.synthetic.main.activity_tv_detail.tv_detail_toolbar
+import kotlinx.android.synthetic.main.layout_tv_detail_body.detail_body_recyclerView_reviews
+import kotlinx.android.synthetic.main.layout_tv_detail_body.detail_body_recyclerView_trailers
 import org.jetbrains.anko.startActivity
 
 class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
   private val vm by viewModel<TvDetailViewModel>()
-  private val binding by binding<ActivityTvDetailBinding>(R.layout.activity_tv_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
     vm.postTvId(getTvFromIntent().id)
-    with(binding) {
+    with(binding<ActivityTvDetailBinding>(R.layout.activity_tv_detail)) {
       lifecycleOwner = this@TvDetailActivity
       viewModel = vm
       detailBody.viewModel = vm
@@ -71,9 +69,11 @@ class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
   private fun initializeUI() {
     applyToolbarMargin(tv_detail_toolbar)
     simpleToolbarWithHome(tv_detail_toolbar, getTvFromIntent().name)
-    detail_body_recyclerView_trailers.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+    detail_body_recyclerView_trailers.layoutManager =
+      LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     detail_body_recyclerView_trailers.adapter = VideoListAdapter(this)
-    detail_body_recyclerView_reviews.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+    detail_body_recyclerView_reviews.layoutManager =
+      LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     detail_body_recyclerView_reviews.adapter = ReviewListAdapter()
     detail_body_recyclerView_reviews.isNestedScrollingEnabled = false
     detail_body_recyclerView_reviews.setHasFixedSize(true)

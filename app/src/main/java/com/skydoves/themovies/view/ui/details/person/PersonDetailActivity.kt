@@ -35,21 +35,20 @@ import com.skydoves.themovies.compose.ViewModelActivity
 import com.skydoves.themovies.databinding.ActivityPersonDetailBinding
 import com.skydoves.themovies.extension.checkIsMaterialVersion
 import com.skydoves.themovies.models.entity.Person
-import kotlinx.android.synthetic.main.toolbar_default.*
+import kotlinx.android.synthetic.main.toolbar_default.toolbar_home
+import kotlinx.android.synthetic.main.toolbar_default.toolbar_title
 import org.jetbrains.anko.startActivity
 
-@Suppress("MemberVisibilityCanBePrivate")
 class PersonDetailActivity : ViewModelActivity() {
 
-  private val vm by viewModel<PersonDetailViewModel>()
-  private val binding by binding<ActivityPersonDetailBinding>(R.layout.activity_person_detail)
+  private val viewModel: PersonDetailViewModel by viewModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    vm.postPersonId(getPersonFromIntent().id)
-    with(binding) {
+    viewModel.postPersonId(getPersonFromIntent().id)
+    with(binding<ActivityPersonDetailBinding>(R.layout.activity_person_detail)) {
       lifecycleOwner = this@PersonDetailActivity
-      viewModel = vm
+      viewModel = this@PersonDetailActivity.viewModel
       person = getPersonFromIntent()
     }
     initializeUI()
@@ -60,9 +59,7 @@ class PersonDetailActivity : ViewModelActivity() {
     toolbar_title.text = getPersonFromIntent().name
   }
 
-  private fun getPersonFromIntent(): Person {
-    return intent.getParcelableExtra(personId) as Person
-  }
+  private fun getPersonFromIntent() = intent.getParcelableExtra(personId) as Person
 
   companion object {
     const val personId = "person"
