@@ -27,17 +27,18 @@ package com.skydoves.themovies.models.entity
 import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.skydoves.themovies.models.network.PersonDetail
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "People", primaryKeys = ["id"])
+@Entity(tableName = "People")
 data class Person(
-  var page: Int,
+  @PrimaryKey val id: Int,
   @Embedded var personDetail: PersonDetail? = null,
+  var page: Int,
   val profile_path: String?,
   val adult: Boolean,
-  val id: Int,
   val name: String,
   val popularity: Float
 ) : Parcelable

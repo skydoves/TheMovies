@@ -41,8 +41,7 @@ import javax.inject.Singleton
 import timber.log.Timber
 
 @Singleton
-class DiscoverRepository @Inject
-constructor(
+class DiscoverRepository @Inject constructor(
   val discoverService: TheDiscoverService,
   val movieDao: MovieDao,
   val tvDao: TvDao

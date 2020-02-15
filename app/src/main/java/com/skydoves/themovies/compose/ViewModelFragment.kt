@@ -53,5 +53,5 @@ open class ViewModelFragment : Fragment() {
     inflater: LayoutInflater,
     resId: Int,
     container: ViewGroup?
-  ): T = DataBindingUtil.inflate<T>(inflater, resId, container, false)
+  ): T = DataBindingUtil.inflate(inflater, resId, container, false)
 }

@@ -34,7 +34,7 @@ inline fun <reified T> View.bindResource(resource: Resource<T>?, onSuccess: (Res
     when (resource.status) {
       Status.LOADING -> Unit
       Status.SUCCESS -> onSuccess(resource)
-      Status.ERROR -> this.context.toast(resource.errorEnvelope?.status_message.toString())
+      Status.ERROR -> context.toast(resource.errorEnvelope?.status_message.toString())
     }
   }
 }

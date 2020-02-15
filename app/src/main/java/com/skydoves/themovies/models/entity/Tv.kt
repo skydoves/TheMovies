@@ -26,21 +26,22 @@ package com.skydoves.themovies.models.entity
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(primaryKeys = [("id")])
+@Entity
 data class Tv(
+  @PrimaryKey val id: Int,
   var page: Int,
   var keywords: List<Keyword>? = ArrayList(),
   var videos: List<Video>? = ArrayList(),
   var reviews: List<Review>? = ArrayList(),
   val poster_path: String,
   val popularity: Float,
-  val id: Int,
   val backdrop_path: String?,
   val vote_average: Float,
   val overview: String,

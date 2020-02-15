@@ -26,14 +26,16 @@ package com.skydoves.themovies.models.entity
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.skydoves.themovies.models.Keyword
 import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(primaryKeys = [("id")])
+@Entity
 data class Movie(
+  @PrimaryKey val id: Int,
   var page: Int,
   var keywords: List<Keyword>? = ArrayList(),
   var videos: List<Video>? = ArrayList(),
@@ -43,7 +45,6 @@ data class Movie(
   val overview: String,
   val release_date: String,
   val genre_ids: List<Int>,
-  val id: Int,
   val original_title: String,
   val original_language: String,
   val title: String,

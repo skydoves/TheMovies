@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.skydoves.themovies.di
+package com.skydoves.themovies.di.annotations
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

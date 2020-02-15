@@ -30,7 +30,6 @@ import com.skydoves.themovies.view.ui.main.TvListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Suppress("unused")
 @Module
 abstract class MainActivityFragmentModule {
 

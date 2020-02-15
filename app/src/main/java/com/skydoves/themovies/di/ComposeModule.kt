@@ -29,7 +29,6 @@ import com.skydoves.themovies.compose.ViewModelFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Suppress("unused")
 @Module
 abstract class ComposeModule {
 

@@ -26,6 +26,7 @@ package com.skydoves.themovies.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.skydoves.themovies.di.annotations.ViewModelKey
 import com.skydoves.themovies.view.ui.details.movie.MovieDetailViewModel
 import com.skydoves.themovies.view.ui.details.person.PersonDetailViewModel
 import com.skydoves.themovies.view.ui.details.tv.TvDetailViewModel
@@ -34,7 +35,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
-@Suppress("unused")
 @Module
 internal abstract class ViewModelModule {
 

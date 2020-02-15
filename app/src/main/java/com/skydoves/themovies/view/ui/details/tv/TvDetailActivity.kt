@@ -46,7 +46,7 @@ import org.jetbrains.anko.startActivity
 
 class TvDetailActivity : ViewModelActivity(), VideoListViewHolder.Delegate {
 
-  private val viewModel by viewModel<TvDetailViewModel>()
+  private val viewModel: TvDetailViewModel by viewModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
