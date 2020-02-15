@@ -30,11 +30,11 @@ import androidx.room.TypeConverters
 import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.entity.Tv
-import com.skydoves.themovies.utils.IntegerListConverter
-import com.skydoves.themovies.utils.KeywordListConverter
-import com.skydoves.themovies.utils.ReviewListConverter
-import com.skydoves.themovies.utils.StringListConverter
-import com.skydoves.themovies.utils.VideoListConverter
+import com.skydoves.themovies.room.converters.IntegerListConverter
+import com.skydoves.themovies.room.converters.KeywordListConverter
+import com.skydoves.themovies.room.converters.ReviewListConverter
+import com.skydoves.themovies.room.converters.StringListConverter
+import com.skydoves.themovies.room.converters.VideoListConverter
 
 @Database(entities = [(Movie::class), (Tv::class), (Person::class)],
   version = 3, exportSchema = false)

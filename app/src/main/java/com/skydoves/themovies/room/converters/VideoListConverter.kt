@@ -22,21 +22,22 @@
  * THE SOFTWARE.
  */
 
-package com.skydoves.themovies.utils
+package com.skydoves.themovies.room.converters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.skydoves.themovies.models.Video
 
-open class StringListConverter {
+open class VideoListConverter {
   @TypeConverter
-  fun fromString(value: String): List<String>? {
-    val listType = object : TypeToken<List<String>>() {}.type
-    return Gson().fromJson<List<String>>(value, listType)
+  fun fromString(value: String): List<Video>? {
+    val listType = object : TypeToken<List<Video>>() {}.type
+    return Gson().fromJson<List<Video>>(value, listType)
   }
 
   @TypeConverter
-  fun fromList(list: List<String>?): String {
+  fun fromList(list: List<Video>?): String {
     val gson = Gson()
     return gson.toJson(list)
   }

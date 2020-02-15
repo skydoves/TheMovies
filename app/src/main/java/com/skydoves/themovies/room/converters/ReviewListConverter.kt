@@ -22,19 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.skydoves.themovies.utils
+package com.skydoves.themovies.room.converters
 
-import com.skydoves.themovies.models.Keyword
+import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.skydoves.themovies.models.Review
 
-object KeywordListMapper {
-  fun mapToStringList(keywords: List<Keyword>): List<String> {
-    var list: MutableList<String> = ArrayList()
-    for (keyword in keywords) {
-      list.add(keyword.name)
-    }
-    if (list.size > 7) {
-      list = list.subList(0, 6)
-    }
-    return list
+open class ReviewListConverter {
+  @TypeConverter
+  fun fromString(value: String): List<Review>? {
+    val listType = object : TypeToken<List<Review>>() {}.type
+    return Gson().fromJson<List<Review>>(value, listType)
+  }
+
+  @TypeConverter
+  fun fromList(list: List<Review>?): String {
+    val gson = Gson()
+    return gson.toJson(list)
   }
 }
