@@ -55,6 +55,10 @@ android {
 }
 
 dependencies {
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.anko:anko:$ankoVersion"
+
     // support library
     implementation "androidx.appcompat:appcompat:$accompatVersion"
     implementation "androidx.activity:activity:$androidActivity"
@@ -65,10 +69,6 @@ dependencies {
     implementation "androidx.palette:palette:$androidxVersion"
     implementation "androidx.cardview:cardview:$androidxVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerVersion"
-
-    // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    implementation "org.jetbrains.anko:anko:$ankoVersion"
 
     // architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"

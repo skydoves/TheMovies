@@ -39,13 +39,14 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.skydoves.themovies.R
+import kotlin.math.max
 
 fun checkIsMaterialVersion() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
 fun Activity.circularRevealedAtCenter(view: View) {
   val cx = (view.left + view.right) / 2
   val cy = (view.top + view.bottom) / 2
-  val finalRadius = Math.max(view.width, view.height)
+  val finalRadius = max(view.width, view.height)
 
   if (checkIsMaterialVersion() && view.isAttachedToWindow) {
     val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, finalRadius.toFloat())
