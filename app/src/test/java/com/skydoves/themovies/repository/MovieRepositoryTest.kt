@@ -80,7 +80,7 @@ class MovieRepositoryTest {
 
     val observer = mock<Observer<Resource<List<Keyword>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(mockKeywordList(), true))
+    verify(observer).onChanged(Resource.success(mockKeywordList()))
 
     val updatedMovie = mockMovie()
     updatedMovie.keywords = mockKeywordList()
@@ -102,7 +102,7 @@ class MovieRepositoryTest {
 
     val observer = mock<Observer<Resource<List<Video>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(mockVideoList(), true))
+    verify(observer).onChanged(Resource.success(mockVideoList()))
 
     val updatedMovie = mockMovie()
     updatedMovie.videos = mockVideoList()
@@ -124,7 +124,7 @@ class MovieRepositoryTest {
 
     val observer = mock<Observer<Resource<List<Review>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(mockReviewList(), true))
+    verify(observer).onChanged(Resource.success(mockReviewList()))
 
     val updatedMovie = mockMovie()
     updatedMovie.reviews = mockReviewList()

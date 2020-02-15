@@ -88,7 +88,7 @@ class DiscoverRepositoryTest {
     verify(movieDao).insertMovieList(mockResponse.results)
 
     updatedData.postValue(mockResponse.results)
-    verify(observer).onChanged(Resource.success(mockResponse.results, false))
+    verify(observer).onChanged(Resource.success(mockResponse.results))
   }
 
   @Test
@@ -116,6 +116,6 @@ class DiscoverRepositoryTest {
     verify(tvDao).insertTv(mockResponse.results)
 
     updateData.postValue(mockResponse.results)
-    verify(observer).onChanged(Resource.success(mockResponse.results, false))
+    verify(observer).onChanged(Resource.success(mockResponse.results))
   }
 }

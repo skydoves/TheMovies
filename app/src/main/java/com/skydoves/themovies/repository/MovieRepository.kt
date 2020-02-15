@@ -39,9 +39,9 @@ import com.skydoves.themovies.models.network.KeywordListResponse
 import com.skydoves.themovies.models.network.ReviewListResponse
 import com.skydoves.themovies.models.network.VideoListResponse
 import com.skydoves.themovies.room.MovieDao
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
+import timber.log.Timber
 
 @Singleton
 class MovieRepository @Inject

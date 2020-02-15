@@ -87,7 +87,7 @@ class PeopleRepositoryTest {
     verify(peopleDao).insertPeople(mockResponse.results)
 
     updatedData.postValue(mockResponse.results)
-    verify(observer).onChanged(Resource.success(mockResponse.results, false))
+    verify(observer).onChanged(Resource.success(mockResponse.results))
   }
 
   @Test
@@ -105,7 +105,7 @@ class PeopleRepositoryTest {
 
     val observer = mock<Observer<Resource<PersonDetail>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(mockPersonDetail(), true))
+    verify(observer).onChanged(Resource.success(mockPersonDetail()))
 
     val updatedPerson = mockPerson()
     updatedPerson.personDetail = mockPersonDetail()

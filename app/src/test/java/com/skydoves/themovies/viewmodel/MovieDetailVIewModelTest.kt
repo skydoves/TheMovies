@@ -88,7 +88,7 @@ class MovieDetailVIewModelTest {
     viewModel.postMovieId(123)
     verify(movieDao, times(3)).getMovie(123)
     verify(observer).onChanged(
-      Resource.success(mockKeywordList(), true))
+      Resource.success(mockKeywordList()))
 
     val updatedMovie = mockMovie()
     updatedMovie.keywords = mockKeywordList()
@@ -111,7 +111,7 @@ class MovieDetailVIewModelTest {
     viewModel.postMovieId(123)
     verify(movieDao, times(3)).getMovie(123)
     verify(observer).onChanged(
-      Resource.success(mockVideoList(), true)
+      Resource.success(mockVideoList())
     )
 
     val updatedMovie = mockMovie()
@@ -135,7 +135,7 @@ class MovieDetailVIewModelTest {
     viewModel.postMovieId(123)
     verify(movieDao, times(3)).getMovie(123)
     verify(observer).onChanged(
-      Resource.success(mockReviewList(), true)
+      Resource.success(mockReviewList())
     )
 
     val updatedMovie = mockMovie()

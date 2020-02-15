@@ -34,11 +34,12 @@ import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.repository.MovieRepository
 import com.skydoves.themovies.utils.AbsentLiveData
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
-class MovieDetailViewModel @Inject
-constructor(private val repository: MovieRepository) : ViewModel() {
+class MovieDetailViewModel @Inject constructor(
+  private val repository: MovieRepository
+) : ViewModel() {
 
   private val movieIdLiveData: MutableLiveData<Int> = MutableLiveData()
   val keywordListLiveData: LiveData<Resource<List<Keyword>>>

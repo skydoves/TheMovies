@@ -86,7 +86,7 @@ class TvDetailViewModelTest {
     viewModel.postTvId(123)
     verify(tvDao, times(3)).getTv(123)
     verify(observer).onChanged(
-      Resource.success(MockTestUtil.mockKeywordList(), true))
+      Resource.success(MockTestUtil.mockKeywordList()))
 
     val updatedTv = mockTv()
     updatedTv.keywords = MockTestUtil.mockKeywordList()
@@ -109,7 +109,7 @@ class TvDetailViewModelTest {
     viewModel.postTvId(123)
     verify(tvDao, times(3)).getTv(123)
     verify(observer).onChanged(
-      Resource.success(MockTestUtil.mockVideoList(), true)
+      Resource.success(MockTestUtil.mockVideoList())
     )
 
     val updatedTv = mockTv()
@@ -133,7 +133,7 @@ class TvDetailViewModelTest {
     viewModel.postTvId(123)
     verify(tvDao, times(3)).getTv(123)
     verify(observer).onChanged(
-      Resource.success(MockTestUtil.mockReviewList(), true)
+      Resource.success(MockTestUtil.mockReviewList())
     )
 
     val updatedTv = mockTv()

@@ -34,10 +34,10 @@ import com.skydoves.themovies.api.TheDiscoverService
 import com.skydoves.themovies.api.TvService
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 class NetworkModule {

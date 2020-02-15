@@ -81,7 +81,7 @@ class PersonDetailViewModelTest {
     viewModel.postPersonId(123)
     verify(peopleDao, times(3)).getPerson(123)
     verify(observer).onChanged(
-      Resource.success(MockTestUtil.mockPersonDetail(), true))
+      Resource.success(MockTestUtil.mockPersonDetail()))
 
     val updatedPerson = MockTestUtil.mockPerson()
     updatedPerson.personDetail = MockTestUtil.mockPersonDetail()

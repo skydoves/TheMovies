@@ -36,9 +36,9 @@ import com.skydoves.themovies.models.network.DiscoverMovieResponse
 import com.skydoves.themovies.models.network.DiscoverTvResponse
 import com.skydoves.themovies.room.MovieDao
 import com.skydoves.themovies.room.TvDao
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
+import timber.log.Timber
 
 @Singleton
 class DiscoverRepository @Inject

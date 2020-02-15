@@ -80,7 +80,7 @@ class TvRepositoryTest {
 
     val observer = mock<Observer<Resource<List<Keyword>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(MockTestUtil.mockKeywordList(), true))
+    verify(observer).onChanged(Resource.success(MockTestUtil.mockKeywordList()))
 
     val updatedTv = mockTv()
     updatedTv.keywords = mockKeywordList()
@@ -102,7 +102,7 @@ class TvRepositoryTest {
 
     val observer = mock<Observer<Resource<List<Video>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(MockTestUtil.mockVideoList(), false))
+    verify(observer).onChanged(Resource.success(MockTestUtil.mockVideoList()))
 
     val updatedTv = mockTv()
     updatedTv.videos = MockTestUtil.mockVideoList()
@@ -124,7 +124,7 @@ class TvRepositoryTest {
 
     val observer = mock<Observer<Resource<List<Review>>>>()
     data.observeForever(observer)
-    verify(observer).onChanged(Resource.success(MockTestUtil.mockReviewList(), false))
+    verify(observer).onChanged(Resource.success(MockTestUtil.mockReviewList()))
 
     val updatedTv = mockTv()
     updatedTv.reviews = MockTestUtil.mockReviewList()

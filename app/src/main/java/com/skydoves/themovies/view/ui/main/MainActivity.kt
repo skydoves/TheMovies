@@ -25,39 +25,45 @@
 package com.skydoves.themovies.view.ui.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.skydoves.themovies.R
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.activity_main.*
+import dagger.android.HasAndroidInjector
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_main.main_bottom_navigation
+import kotlinx.android.synthetic.main.activity_main.main_viewpager
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MainActivity : DaggerAppCompatActivity(), HasAndroidInjector {
 
   @Inject
-  lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+  lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
+
+  override fun androidInjector() = fragmentInjector
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     initializeUI()
   }
 
   private fun initializeUI() {
-    main_viewpager.adapter = MainPagerAdapter(supportFragmentManager)
-    main_viewpager.offscreenPageLimit = 3
-    main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-      override fun onPageScrollStateChanged(state: Int) = Unit
-      override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) = Unit
-      override fun onPageSelected(position: Int) {
-        main_bottom_navigation.menu.getItem(position).isChecked = true
-      }
-    })
+    main_viewpager.run {
+      adapter = MainPagerAdapter(supportFragmentManager)
+      offscreenPageLimit = 3
+      addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        override fun onPageScrollStateChanged(state: Int) = Unit
+        override fun onPageScrolled(
+          position: Int,
+          positionOffset: Float,
+          positionOffsetPixels: Int
+        ) = Unit
+
+        override fun onPageSelected(position: Int) {
+          main_bottom_navigation.menu.getItem(position).isChecked = true
+        }
+      })
+    }
     main_bottom_navigation.setOnNavigationItemSelectedListener {
       when (it.itemId) {
         R.id.action_one -> main_viewpager.currentItem = 0
@@ -66,9 +72,5 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
       }
       true
     }
-  }
-
-  override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-    return fragmentInjector
   }
 }

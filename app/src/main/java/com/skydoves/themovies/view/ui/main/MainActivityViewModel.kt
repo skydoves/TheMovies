@@ -35,11 +35,10 @@ import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.repository.DiscoverRepository
 import com.skydoves.themovies.repository.PeopleRepository
 import com.skydoves.themovies.utils.AbsentLiveData
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
-class MainActivityViewModel @Inject
-constructor(
+class MainActivityViewModel @Inject constructor(
   private val discoverRepository: DiscoverRepository,
   private val peopleRepository: PeopleRepository
 ) : ViewModel() {

@@ -8,6 +8,10 @@
     <variable
       name="viewModel"
       type="com.skydoves.themovies.view.ui.main.MainActivityViewModel" />
+
+    <variable
+      name="adapter"
+      type="com.skydoves.themovies.view.adapter.MovieListAdapter" />
   </data>
 
   <RelativeLayout
@@ -19,7 +23,10 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:clipToPadding="false"
+      app:adapter="@{adapter}"
       app:adapterMovieList="@{viewModel.movieListLiveData}"
+      app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+      app:spanCount="2"
       tools:listitem="@layout/item_poster" />
   </RelativeLayout>
 </layout>

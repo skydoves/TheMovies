@@ -34,8 +34,8 @@ import com.skydoves.themovies.models.Review
 import com.skydoves.themovies.models.Video
 import com.skydoves.themovies.repository.TvRepository
 import com.skydoves.themovies.utils.AbsentLiveData
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 class TvDetailViewModel @Inject
 constructor(private val repository: TvRepository) : ViewModel() {

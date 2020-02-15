@@ -26,6 +26,7 @@ package com.skydoves.themovies.binding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.skydoves.baserecyclerviewadapter.BaseAdapter
 import com.skydoves.themovies.extension.bindResource
 import com.skydoves.themovies.extension.visible
 import com.skydoves.themovies.models.Resource
@@ -40,6 +41,11 @@ import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.TvListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.whatif.whatIfNotNullOrEmpty
+
+@BindingAdapter("adapter")
+fun bindRecyclerViewAdapter(view: RecyclerView, adapter: BaseAdapter) {
+  view.adapter = adapter
+}
 
 @BindingAdapter("adapterMovieList")
 fun bindAdapterMovieList(view: RecyclerView, resource: Resource<List<Movie>>?) {

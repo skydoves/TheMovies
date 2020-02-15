@@ -32,8 +32,8 @@ import com.skydoves.themovies.models.Resource
 import com.skydoves.themovies.models.network.PersonDetail
 import com.skydoves.themovies.repository.PeopleRepository
 import com.skydoves.themovies.utils.AbsentLiveData
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 class PersonDetailViewModel @Inject
 constructor(private val repository: PeopleRepository) : ViewModel() {

@@ -24,9 +24,9 @@
 
 package com.skydoves.themovies.api
 
+import java.io.IOException
 import retrofit2.Response
 import timber.log.Timber
-import java.io.IOException
 
 @Suppress("MemberVisibilityCanBePrivate")
 class ApiResponse<T> {

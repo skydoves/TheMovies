@@ -101,7 +101,7 @@ class MainActivityViewModelTest {
     mockMovieList.add(mockMovie())
     loadFromDB.postValue(mockMovieList)
     verify(observer).onChanged(
-      Resource.success(viewModel.getMovieListValues()!!.data, false)
+      Resource.success(viewModel.getMovieListValues()!!.data)
     )
   }
 
@@ -122,7 +122,7 @@ class MainActivityViewModelTest {
     mockTvList.add(mockTv())
     loadFromDB.postValue(mockTvList)
     verify(observer).onChanged(
-      Resource.success(viewModel.getTvListValues()!!.data, false)
+      Resource.success(viewModel.getTvListValues()!!.data)
     )
   }
 
@@ -143,7 +143,7 @@ class MainActivityViewModelTest {
     mockPeople.add(mockPerson())
     loadFromDB.postValue(mockPeople)
     verify(observer).onChanged(
-      Resource.success(viewModel.getPeopleValues()!!.data, false)
+      Resource.success(viewModel.getPeopleValues()!!.data)
     )
   }
 }

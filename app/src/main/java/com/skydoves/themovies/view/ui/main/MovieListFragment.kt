@@ -29,7 +29,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.themovies.R
 import com.skydoves.themovies.compose.ViewModelFragment
@@ -39,19 +38,23 @@ import com.skydoves.themovies.models.entity.Movie
 import com.skydoves.themovies.view.adapter.MovieListAdapter
 import com.skydoves.themovies.view.ui.details.movie.MovieDetailActivity
 import com.skydoves.themovies.view.viewholder.MovieListViewHolder
-import kotlinx.android.synthetic.main.main_fragment_movie.*
+import kotlinx.android.synthetic.main.main_fragment_movie.recyclerView
 
-@Suppress("SpellCheckingInspection")
 class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
 
-  private val viewModel by viewModel<MainActivityViewModel>()
-  private lateinit var binding: MainFragmentMovieBinding
+  private val viewModel: MainActivityViewModel by viewModel()
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    binding = binding(inflater, R.layout.main_fragment_movie, container)
-    binding.viewModel = viewModel
-    binding.lifecycleOwner = this
-    return binding.root
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    return binding<MainFragmentMovieBinding>(inflater, R.layout.main_fragment_movie, container)
+      .apply {
+        viewModel = this@MovieListFragment.viewModel
+        lifecycleOwner = this@MovieListFragment
+        adapter = MovieListAdapter(this@MovieListFragment)
+      }.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,22 +68,18 @@ class MovieListFragment : ViewModelFragment(), MovieListViewHolder.Delegate {
   }
 
   private fun initializeUI() {
-    recyclerView.adapter = MovieListAdapter(this)
-    recyclerView.layoutManager = GridLayoutManager(context, 2)
-    val paginator = RecyclerViewPaginator(
+    RecyclerViewPaginator(
       recyclerView = recyclerView,
       isLoading = { viewModel.getMovieListValues()?.status == Status.LOADING },
       loadMore = { loadMore(it) },
       onLast = { viewModel.getMovieListValues()?.onLastPage!! }
-    )
-    paginator.currentPage = 1
+    ).run {
+      currentPage = 1
+    }
   }
 
-  private fun loadMore(page: Int) {
-    viewModel.postMoviePage(page)
-  }
+  private fun loadMore(page: Int) = viewModel.postMoviePage(page)
 
-  override fun onItemClick(movie: Movie) {
+  override fun onItemClick(movie: Movie) =
     MovieDetailActivity.startActivityModel(context, movie)
-  }
 }

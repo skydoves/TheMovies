@@ -35,9 +35,9 @@ import com.skydoves.themovies.models.entity.Person
 import com.skydoves.themovies.models.network.PeopleResponse
 import com.skydoves.themovies.models.network.PersonDetail
 import com.skydoves.themovies.room.PeopleDao
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
+import timber.log.Timber
 
 @Singleton
 class PeopleRepository @Inject

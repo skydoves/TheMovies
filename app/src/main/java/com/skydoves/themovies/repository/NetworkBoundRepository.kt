@@ -51,7 +51,7 @@ internal constructor() {
         fetchFromNetwork(loadedFromDB)
       } else {
         result.addSource<ResultType>(loadedFromDB) { newData ->
-          setValue(Resource.success(newData, false))
+          setValue(Resource.success(newData))
         }
       }
     }
@@ -68,7 +68,7 @@ internal constructor() {
               val loaded = loadFromDb()
               result.addSource(loaded) { newData ->
                 newData?.let {
-                  setValue(Resource.success(newData, mapper().onLastPage(response.body)))
+                  setValue(Resource.success(newData))
                 }
               }
             }

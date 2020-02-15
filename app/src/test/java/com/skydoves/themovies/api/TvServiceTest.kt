@@ -25,12 +25,12 @@
 package com.skydoves.themovies.api
 
 import com.skydoves.themovies.utils.LiveDataTestUtil
+import java.io.IOException
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
-import java.io.IOException
 
 class TvServiceTest : ApiAbstract<TvService>() {
 
