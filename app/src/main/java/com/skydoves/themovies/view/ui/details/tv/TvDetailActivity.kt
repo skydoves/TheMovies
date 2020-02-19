@@ -47,8 +47,8 @@ class TvDetailActivity : ViewModelActivity() {
     super.onCreate(savedInstanceState)
     binding<ActivityTvDetailBinding>(R.layout.activity_tv_detail).run {
       lifecycleOwner = this@TvDetailActivity
+      viewModel = this@TvDetailActivity.viewModel.apply { postTvId(getTvFromIntent().id) }
       tv = getTvFromIntent()
-      viewModel = this@TvDetailActivity.viewModel.apply { postTvId(tv.id) }
       videoAdapter = VideoListAdapter()
       reviewAdapter = ReviewListAdapter()
     }

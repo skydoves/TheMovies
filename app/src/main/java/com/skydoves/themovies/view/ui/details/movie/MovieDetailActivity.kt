@@ -47,8 +47,8 @@ class MovieDetailActivity : ViewModelActivity() {
     super.onCreate(savedInstanceState)
     binding<ActivityMovieDetailBinding>(R.layout.activity_movie_detail).run {
       lifecycleOwner = this@MovieDetailActivity
-      movie = getMovieFromIntent()
       viewModel = this@MovieDetailActivity.viewModel.apply { postMovieId(getMovieFromIntent().id) }
+      movie = getMovieFromIntent()
       videoAdapter = VideoListAdapter()
       reviewAdapter = ReviewListAdapter()
     }

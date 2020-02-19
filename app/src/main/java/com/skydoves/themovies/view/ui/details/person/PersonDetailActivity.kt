@@ -46,8 +46,8 @@ class PersonDetailActivity : ViewModelActivity() {
     super.onCreate(savedInstanceState)
     binding<ActivityPersonDetailBinding>(R.layout.activity_person_detail).run {
       lifecycleOwner = this@PersonDetailActivity
+      viewModel = this@PersonDetailActivity.viewModel.apply { postPersonId(getPersonFromIntent().id) }
       person = getPersonFromIntent()
-      viewModel = this@PersonDetailActivity.viewModel.apply { postPersonId(person.id) }
     }
     initializeUI()
   }
