@@ -24,7 +24,6 @@
 
 package com.skydoves.themovies.view.ui.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,14 +44,9 @@ class PersonListFragment : ViewModelFragment() {
   ): View? {
     return binding<MainFragmentStarBinding>(inflater, R.layout.main_fragment_star, container)
       .apply {
-        viewModel = this@PersonListFragment.viewModel
+        viewModel = this@PersonListFragment.viewModel.apply { postPeoplePage(1) }
         lifecycleOwner = this@PersonListFragment
         adapter = PeopleAdapter()
       }.root
-  }
-
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-    viewModel.postPeoplePage(1)
   }
 }

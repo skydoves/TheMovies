@@ -37,7 +37,7 @@ import com.skydoves.themovies.models.entity.Tv
 import com.skydoves.themovies.view.adapter.ReviewListAdapter
 import com.skydoves.themovies.view.adapter.VideoListAdapter
 import com.skydoves.whatif.whatIfNotNull
-import kotlinx.android.synthetic.main.activity_tv_detail.tv_detail_toolbar
+import kotlinx.android.synthetic.main.activity_tv_detail.*
 
 class TvDetailActivity : ViewModelActivity() {
 
@@ -45,11 +45,10 @@ class TvDetailActivity : ViewModelActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    viewModel.postTvId(getTvFromIntent().id)
     binding<ActivityTvDetailBinding>(R.layout.activity_tv_detail).run {
       lifecycleOwner = this@TvDetailActivity
-      viewModel = this@TvDetailActivity.viewModel
       tv = getTvFromIntent()
+      viewModel = this@TvDetailActivity.viewModel.apply { postTvId(tv.id) }
       videoAdapter = VideoListAdapter()
       reviewAdapter = ReviewListAdapter()
     }

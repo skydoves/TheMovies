@@ -46,6 +46,4 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
   interface Factory {
     fun create(@BindsInstance application: Application): AppComponent
   }
-
-  override fun inject(instance: DaggerApplication)
 }

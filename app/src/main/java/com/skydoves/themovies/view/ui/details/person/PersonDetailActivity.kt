@@ -36,8 +36,7 @@ import com.skydoves.themovies.compose.ViewModelActivity
 import com.skydoves.themovies.databinding.ActivityPersonDetailBinding
 import com.skydoves.themovies.extension.checkIsMaterialVersion
 import com.skydoves.themovies.models.entity.Person
-import kotlinx.android.synthetic.main.toolbar_default.toolbar_home
-import kotlinx.android.synthetic.main.toolbar_default.toolbar_title
+import kotlinx.android.synthetic.main.toolbar_default.*
 
 class PersonDetailActivity : ViewModelActivity() {
 
@@ -45,11 +44,10 @@ class PersonDetailActivity : ViewModelActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    viewModel.postPersonId(getPersonFromIntent().id)
     binding<ActivityPersonDetailBinding>(R.layout.activity_person_detail).run {
       lifecycleOwner = this@PersonDetailActivity
-      viewModel = this@PersonDetailActivity.viewModel
       person = getPersonFromIntent()
+      viewModel = this@PersonDetailActivity.viewModel.apply { postPersonId(person.id) }
     }
     initializeUI()
   }

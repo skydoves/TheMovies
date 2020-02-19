@@ -24,7 +24,6 @@
 
 package com.skydoves.themovies.view.ui.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,14 +44,9 @@ class TvListFragment : ViewModelFragment() {
   ): View? {
     return binding<MainFragmentTvBinding>(inflater, R.layout.main_fragment_tv, container)
       .apply {
-        viewModel = this@TvListFragment.viewModel
+        viewModel = this@TvListFragment.viewModel.apply { postTvPage(1) }
         lifecycleOwner = this@TvListFragment
         adapter = TvListAdapter()
       }.root
-  }
-
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-    viewModel.postTvPage(1)
   }
 }
