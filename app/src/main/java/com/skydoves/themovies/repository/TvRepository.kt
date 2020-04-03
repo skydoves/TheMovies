@@ -68,7 +68,7 @@ class TvRepository @Inject constructor(
       override fun loadFromDb(): LiveData<List<Keyword>> {
         val movie = tvDao.getTv(id_ = id)
         val data: MutableLiveData<List<Keyword>> = MutableLiveData()
-        data.value = movie.keywords
+        data.postValue(movie.keywords)
         return data
       }
 
@@ -101,7 +101,7 @@ class TvRepository @Inject constructor(
       override fun loadFromDb(): LiveData<List<Video>> {
         val movie = tvDao.getTv(id_ = id)
         val data: MutableLiveData<List<Video>> = MutableLiveData()
-        data.value = movie.videos
+        data.postValue(movie.videos)
         return data
       }
 
@@ -134,7 +134,7 @@ class TvRepository @Inject constructor(
       override fun loadFromDb(): LiveData<List<Review>> {
         val movie = tvDao.getTv(id_ = id)
         val data: MutableLiveData<List<Review>> = MutableLiveData()
-        data.value = movie.reviews
+        data.postValue(movie.reviews)
         return data
       }
 

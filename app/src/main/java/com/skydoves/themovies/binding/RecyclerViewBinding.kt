@@ -64,7 +64,7 @@ fun bindMoviePagination(view: RecyclerView, viewModel: MainActivityViewModel) {
     recyclerView = view,
     isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
     loadMore = { viewModel.postMoviePage(it) },
-    onLast = { viewModel.getTvListValues()?.onLastPage!! }
+    onLast = { false }
   ).run {
     currentPage = 1
   }
@@ -84,7 +84,7 @@ fun bindPersonPagination(view: RecyclerView, viewModel: MainActivityViewModel) {
     recyclerView = view,
     isLoading = { viewModel.getPeopleValues()?.status == Status.LOADING },
     loadMore = { viewModel.postPeoplePage(it) },
-    onLast = { viewModel.getPeopleValues()?.onLastPage!! }
+    onLast = { false }
   ).run {
     currentPage = 1
   }
@@ -104,7 +104,7 @@ fun bindTvPagination(view: RecyclerView, viewModel: MainActivityViewModel) {
     recyclerView = view,
     isLoading = { viewModel.getTvListValues()?.status == Status.LOADING },
     loadMore = { viewModel.postTvPage(it) },
-    onLast = { viewModel.getTvListValues()?.onLastPage!! }
+    onLast = { false }
   ).run {
     currentPage = 1
   }

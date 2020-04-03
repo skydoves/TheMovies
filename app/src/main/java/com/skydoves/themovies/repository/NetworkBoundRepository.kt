@@ -44,15 +44,19 @@ internal constructor() {
 
   init {
     Timber.d("Injection NetworkBoundRepository")
-    val loadedFromDB = this.loadFromDb()
-    result.addSource(loadedFromDB) { data ->
-      result.removeSource(loadedFromDB)
-      if (shouldFetch(data)) {
-        result.postValue(Resource.loading(null))
-        fetchFromNetwork(loadedFromDB)
-      } else {
-        result.addSource<ResultType>(loadedFromDB) { newData ->
-          setValue(Resource.success(newData))
+    AppExecutors.diskIO().execute {
+      val loadedFromDB = this.loadFromDb()
+      AppExecutors.mainThread().execute {
+        result.addSource(loadedFromDB) { data ->
+          result.removeSource(loadedFromDB)
+          if (shouldFetch(data)) {
+            result.postValue(Resource.loading(null))
+            fetchFromNetwork(loadedFromDB)
+          } else {
+            result.addSource<ResultType>(loadedFromDB) { newData ->
+              setValue(Resource.success(newData))
+            }
+          }
         }
       }
     }
@@ -67,8 +71,8 @@ internal constructor() {
             AppExecutors.diskIO().execute {
               response.body?.let {
                 saveFetchData(it)
+                val loaded = loadFromDb()
                 AppExecutors.mainThread().execute {
-                  val loaded = loadFromDb()
                   result.addSource(loaded) { newData ->
                     newData?.let {
                       setValue(Resource.success(newData))
@@ -103,13 +107,10 @@ internal constructor() {
     return result
   }
 
-  @WorkerThread
-  protected abstract fun saveFetchData(items: RequestType)
-
   @MainThread
   protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-  @MainThread
+  @WorkerThread
   protected abstract fun loadFromDb(): LiveData<ResultType>
 
   @MainThread
@@ -117,6 +118,9 @@ internal constructor() {
 
   @MainThread
   protected abstract fun mapper(): Mapper
+
+  @WorkerThread
+  protected abstract fun saveFetchData(items: RequestType)
 
   @MainThread
   protected abstract fun onFetchFailed(message: String?)

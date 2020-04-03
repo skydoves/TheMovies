@@ -95,7 +95,7 @@ class PeopleRepository @Inject constructor(
       override fun loadFromDb(): LiveData<PersonDetail> {
         val person = peopleDao.getPerson(id_ = id)
         val data: MutableLiveData<PersonDetail> = MutableLiveData()
-        data.value = person.personDetail
+        data.postValue(person.personDetail)
         return data
       }
 
