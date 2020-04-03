@@ -29,6 +29,7 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.skydoves.themovies.api.ApiResponse
+import com.skydoves.themovies.compose.AppExecutors
 import com.skydoves.themovies.mappers.NetworkResponseMapper
 import com.skydoves.themovies.models.NetworkResponseModel
 import com.skydoves.themovies.models.Resource
@@ -63,22 +64,28 @@ internal constructor() {
       response?.let {
         when (response.isSuccessful) {
           true -> {
-            response.body?.let {
-              saveFetchData(it)
-              val loaded = loadFromDb()
-              result.addSource(loaded) { newData ->
-                newData?.let {
-                  setValue(Resource.success(newData))
+            AppExecutors.diskIO().execute {
+              response.body?.let {
+                saveFetchData(it)
+                AppExecutors.mainThread().execute {
+                  val loaded = loadFromDb()
+                  result.addSource(loaded) { newData ->
+                    newData?.let {
+                      setValue(Resource.success(newData))
+                    }
+                  }
                 }
               }
             }
           }
           false -> {
-            result.removeSource(loadedFromDB)
-            onFetchFailed(response.message)
-            response.message?.let {
-              result.addSource<ResultType>(loadedFromDB) { newData ->
-                setValue(Resource.error(it, newData))
+            AppExecutors.mainThread().execute {
+              result.removeSource(loadedFromDB)
+              onFetchFailed(response.message)
+              response.message?.let {
+                result.addSource<ResultType>(loadedFromDB) { newData ->
+                  setValue(Resource.error(it, newData))
+                }
               }
             }
           }
