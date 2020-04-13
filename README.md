@@ -43,6 +43,7 @@ Based on mvvm architecture and repository pattern.<br><br>
 - [OkHttp3](https://github.com/square/okhttp) for implementing interceptor, logging and mocking web server
 - [Glide](https://github.com/bumptech/glide) for loading images
 - [BaseRecyclerViewAdapter](https://github.com/skydoves/BaseRecyclerViewAdapter) for implementing adapters and viewHolders
+- [WhatIf](https://github.com/skydoves/whatif) - checking nullable object and empty collections more fluently
 - [Mockito-kotlin](https://github.com/nhaarman/mockito-kotlin) for Junit mock test
 - [Timber](https://github.com/JakeWharton/timber) for logging
 - [Stetho](https://github.com/facebook/stetho) for debugging persistence data & network packets
