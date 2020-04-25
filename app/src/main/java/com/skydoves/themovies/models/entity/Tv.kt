@@ -40,7 +40,7 @@ data class Tv(
   var keywords: List<Keyword>? = ArrayList(),
   var videos: List<Video>? = ArrayList(),
   var reviews: List<Review>? = ArrayList(),
-  val poster_path: String,
+  val poster_path: String?,
   val popularity: Float,
   val backdrop_path: String?,
   val vote_average: Float,
