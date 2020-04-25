@@ -55,7 +55,7 @@ class TvListViewHolder constructor(
       item_poster_title.text = tv.name
       tv.poster_path.let {
         Glide.with(context)
-          .load(Api.getPosterPath(it))
+          .load(Api.getPosterPath(it!!))
           .listener(GlidePalette.with(Api.getPosterPath(it))
             .use(BitmapPalette.Profile.VIBRANT)
             .intoBackground(item_poster_palette)

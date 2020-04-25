@@ -110,7 +110,7 @@ fun bindBackDrop(view: ImageView, tv: Tv) {
     Glide.with(view.context).load(Api.getBackdropPath(tv.backdrop_path))
       .listener(view.requestGlideListener())
       .into(view)
-  } else {
+  } else if (tv.poster_path != null) {
     Glide.with(view.context).load(Api.getBackdropPath(tv.poster_path))
       .listener(view.requestGlideListener())
       .into(view)
