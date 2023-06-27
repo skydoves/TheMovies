@@ -59,5 +59,31 @@ class MoviesAppBehaviourTest {
             }
     }
 
+    @Test
+    fun applyPopularityFilter() {
+        // Perform an action to apply the popularity filter
+        Espresso.onView(ViewMatchers.withId(R.id.popularity_filter_button))
+            .perform(ViewActions.click())
+
+        // Assume the popularity filter dialog is displayed, select a specific popularity range
+        Espresso.onView(ViewMatchers.withId(R.id.popularity_filter_dialog))
+            .perform(ViewActions.click())
+
+        // Assert that the movie list is updated with the filtered results
+        Espresso.onView(ViewMatchers.withId(R.id.movies_list))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // Assert that the filtered movies meet the specified criteria
+        Espresso.onView(ViewMatchers.withId(R.id.movies_list))
+            .check { view, _ ->
+                // Custom assertions on the filtered movies
+                val movieList = view as RecyclerView
+                val adapter = movieList.adapter as MovieListAdapter
+                for (i in 0 until adapter.itemCount) {
+                    val movie = adapter.getItem(i)
+                    Assert.assertTrue(movie.popularity >= minPopularity && movie.popularity <= maxPopularity)
+                }
+            }
+    }
 
 }
