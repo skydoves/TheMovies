@@ -17,4 +17,18 @@ import com.example.movies.R
 @LargeTest
 class MoviesAppBehaviourTest {
     
+    @Rule
+    @JvmField
+    var mActivityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+
+    @Test
+    fun navigateToMovieDetailsScreen() {
+        // Perform an action to navigate to the details screen
+        Espresso.onView(ViewMatchers.withId(R.id.movies_list))
+                .perform(ViewActions.click())
+
+        // Assert that the details screen is displayed
+        Espresso.onView(ViewMatchers.withId(R.id.movie_details))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
 }
