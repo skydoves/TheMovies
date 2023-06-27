@@ -119,6 +119,9 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxTest"
     androidTestImplementation "androidx.test:rules:$androidxTestRules"
+    //cocoumber
+    androidTestImplementation 'io.cucumber:cucumber-android:7.3.1'
+    androidTestImplementation 'io.cucumber:cucumber-junit:7.3.1'
 }
 
 apply from: '../spotless.gradle'

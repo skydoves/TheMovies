@@ -1,0 +1,16 @@
+Feature: Movies App
+
+  Scenario: Navigate to movie details screen
+    Given I am on the main movies list screen
+    When I tap on a movie
+    Then I should see the movie details screen
+
+  Scenario: Apply year filter
+    Given I am on the main movies list screen
+    When I apply a year filter
+    Then I should see only movies from the selected year
+
+  Scenario: Apply popularity filter
+    Given I am on the main movies list screen
+    When I apply a popularity filter
+    Then I should see only movies within the specified popularity range
