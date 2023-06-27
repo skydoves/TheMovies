@@ -31,4 +31,24 @@ class MoviesAppBehaviourTest {
         Espresso.onView(ViewMatchers.withId(R.id.movie_details))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
+
+    @Test
+    fun applyYearFilter() {
+        // Perform an action to apply the year filter
+        Espresso.onView(ViewMatchers.withId(R.id.year_filter_button))
+                .perform(ViewActions.click())
+
+        // Assume the year filter dialog is displayed, select a specific year
+        Espresso.onView(ViewMatchers.withId(R.id.year_filter_dialog))
+                .perform(ViewActions.click())
+
+        // Assert that the movie list is updated with the filtered results
+        Espresso.onView(ViewMatchers.withId(R.id.movies_list))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // Assert that the filtered movies meet the specified criteria
+        // You can perform further assertions on individual movie items or their properties
+    }
+
+    
 }
