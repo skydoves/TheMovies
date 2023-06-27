@@ -47,8 +47,17 @@ class MoviesAppBehaviourTest {
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
         // Assert that the filtered movies meet the specified criteria
-        // You can perform further assertions on individual movie items or their properties
+        Espresso.onView(ViewMatchers.withId(R.id.movies_list))
+            .check { view, _ ->
+                // Custom assertions on the filtered movies
+                val movieList = view as RecyclerView
+                val adapter = movieList.adapter as MovieListAdapter
+                for (i in 0 until adapter.itemCount) {
+                    val movie = adapter.getItem(i)
+                    Assert.assertTrue(movie.year == selectedYear)
+                }
+            }
     }
 
-    
+
 }
